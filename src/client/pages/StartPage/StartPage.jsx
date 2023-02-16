@@ -1,9 +1,9 @@
-function StartPage() {
+const StartPage = () => {
 
   return (
-    <div>
+    <>
       StartPage.jsx
-    </div>
+    </>
   );
 }
 

@@ -1,24 +1,36 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/client/index.client.js',
   output: {
-    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist'),
+    filename: 'bundle.[fullhash].js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
   devServer: {
     port: 3000,
+    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, '../dist'),
     },
     devMiddleware: {
       writeToDisk: true
     },
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        // prevents "LICENSE.txt" creation (in output folder)
+        extractComments: false,
+      }),
+    ],
   },
   module: {
     rules: [
