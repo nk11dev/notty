@@ -1,15 +1,20 @@
 const path = require('path');
 
+// webpack plugins and well-known modules
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 
+// internal helpers
+const rules = require('./webpack-helpers/module-rules');
+
 const commonConfig = {
   entry: './src/client/index.client.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[fullhash].js',
+    filename: 'js/[name].[fullhash].js',
     publicPath: '/'
   },
   resolve: {
@@ -17,11 +22,7 @@ const commonConfig = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
+      rules.scripts,
     ],
   },
   plugins: [
@@ -38,6 +39,7 @@ const commonConfig = {
 
 const devConfig = {
   mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     port: 3000,
     historyApiFallback: true,
@@ -47,6 +49,11 @@ const devConfig = {
     devMiddleware: {
       writeToDisk: true
     },
+  },
+  module: {
+    rules: [
+      rules.stylesDev,
+    ],
   },
 };
 
@@ -61,6 +68,16 @@ const prodConfig = {
       }),
     ],
   },
+  module: {
+    rules: [
+      rules.stylesProd,
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[fullhash].css'
+    }),
+  ]
 };
 
 module.exports = () => {
