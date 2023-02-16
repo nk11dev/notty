@@ -1,0 +1,36 @@
+{
+  "name": "sandbox-express",
+  "version": "0.0.1",
+  "description": "Sandbox project for playing with Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx webpack serve --mode development --config=configs/webpack.config.client.js",
+    "build": "npx webpack --mode production --config=configs/webpack.config.client.js",
+    "prod": "npx serve dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nk11dev/sandbox-express.git"
+  },
+  "author": "nk11dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nk11dev/sandbox-express/issues"
+  },
+  "homepage": "https://github.com/nk11dev/sandbox-express#readme",
+  "devDependencies": {
+    "webpack-dev-server": "4.11.1"
+  },
+  "dependencies": {
+    "@babel/core": "7.20.12",
+    "@babel/preset-env": "7.20.2",
+    "@babel/preset-react": "7.18.6",
+    "babel-loader": "9.1.2",
+    "clean-webpack-plugin": "4.0.0",
+    "html-webpack-plugin": "5.5.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.1"
+  }
+}
