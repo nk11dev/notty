@@ -1,36 +1,19 @@
 const path = require('path');
+
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { merge } = require('webpack-merge');
 
-module.exports = {
+const commonConfig = {
   entry: './src/client/index.client.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'bundle.[fullhash].js',
+    filename: '[name].[fullhash].js',
     publicPath: '/'
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
-  },
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-    static: {
-      directory: path.join(__dirname, '../dist'),
-    },
-    devMiddleware: {
-      writeToDisk: true
-    },
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        // prevents "LICENSE.txt" creation (in output folder)
-        extractComments: false,
-      }),
-    ],
   },
   module: {
     rules: [
@@ -51,4 +34,42 @@ module.exports = {
       filename: 'index.html',
     }),
   ]
+};
+
+const devConfig = {
+  mode: 'development',
+  devServer: {
+    port: 3000,
+    historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, '../dist'),
+    },
+    devMiddleware: {
+      writeToDisk: true
+    },
+  },
+};
+
+const prodConfig = {
+  mode: 'production',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        // prevents "LICENSE.txt" creation (in output folder)
+        extractComments: false,
+      }),
+    ],
+  },
+};
+
+module.exports = () => {
+  switch (process.env.NODE_ENV) {
+    case 'development':
+      return merge(commonConfig, devConfig);
+    case 'production':
+      return merge(commonConfig, prodConfig);
+    default:
+      throw new Error('No matching webpack client configuration was found!');
+  }
 };
