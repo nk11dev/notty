@@ -26,6 +26,7 @@ const commonConfig = {
     rules: [
       rules.scripts,
       rules.images,
+      rules.fonts,
     ],
   },
   plugins: [

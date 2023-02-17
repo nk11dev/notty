@@ -1,3 +1,4 @@
+import '@/styles/fonts.scss';
 import '@/styles/common.scss';
 
 import React from 'react';

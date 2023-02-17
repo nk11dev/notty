@@ -8,6 +8,7 @@ const aliases = {
   '@/shared': 'client/shared',
   '@/images': 'assets/images',
   '@/styles': 'assets/styles',
+  '@/fonts': 'assets/fonts',
 };
 
 Object.keys(aliases).forEach(
