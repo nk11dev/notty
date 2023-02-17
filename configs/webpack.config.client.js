@@ -34,6 +34,7 @@ const commonConfig = {
       inject: 'body',
       template: path.resolve(__dirname, '../src/client/app/templates/index.template.html'),
       filename: 'index.html',
+      favicon: path.resolve(__dirname, `../src/assets/images/favicon.ico`),
     }),
   ]
 };
