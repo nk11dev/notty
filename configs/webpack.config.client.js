@@ -23,6 +23,7 @@ const commonConfig = {
   module: {
     rules: [
       rules.scripts,
+      rules.images,
     ],
   },
   plugins: [

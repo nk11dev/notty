@@ -1,10 +1,17 @@
 import './StartPage.scss';
 
+import WebLogos from '../../shared/WebLogos';
+
+
 const StartPage = () => {
 
   return (
     <div className="page-title page-title--start">
-      StartPage.jsx
+      <div>
+        StartPage.jsx
+      </div>
+
+      <WebLogos />
     </div>
   );
 }

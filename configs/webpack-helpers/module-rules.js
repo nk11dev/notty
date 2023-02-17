@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const regexes = {
   scripts: /\.(js|jsx)$/,
   styles: /\.(sa|sc|c)ss$/,
+  images: /\.(jpe?g|jpg|png|gif|svg)$/,
 };
 
 module.exports = {
@@ -26,5 +27,12 @@ module.exports = {
       'css-loader',
       'sass-loader'
     ]
+  },
+  images: {
+    test: regexes.images,
+    type: 'asset/resource',
+    generator: {
+      filename: 'assets/images/[name][ext]'
+    }
   },
 };
