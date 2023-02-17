@@ -1,5 +1,5 @@
-import StylesExample from '../../shared/examples/StylesExample';
-import ImagesExample from '../../shared/examples/ImagesExample';
+import StylesExample from '@/shared/examples/StylesExample';
+import ImagesExample from '@/shared/examples/ImagesExample';
 
 
 const ExamplePage = () => {

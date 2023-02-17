@@ -1,10 +1,10 @@
-import '../assets/styles/common.scss';
+import '@/styles/common.scss';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import ExamplePage from './pages/ExamplePage';
-import App from './app/App';
+import App from '@/app/App';
+import ExamplePage from '@/pages/ExamplePage';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

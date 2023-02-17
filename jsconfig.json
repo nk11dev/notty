@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "jsx": "react",
+    "paths": {
+      "@/app/*": [
+        "client/app/*"
+      ],
+      "@/pages/*": [
+        "client/pages/*"
+      ],
+      "@/shared/*": [
+        "client/shared/*"
+      ],
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

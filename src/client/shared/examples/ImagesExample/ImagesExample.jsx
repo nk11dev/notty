@@ -1,5 +1,5 @@
-import NodeLogo from '../../../../assets/images/logo-web-technologies/nodejs-logo.png';
-import ExpressLogo from '../../../../assets/images/logo-web-technologies/express-logo.svg';
+import NodeLogo from '@/images/logo-web-technologies/nodejs-logo.png';
+import ExpressLogo from '@/images/logo-web-technologies/express-logo.svg';
 
 
 const ImagesExample = () => {

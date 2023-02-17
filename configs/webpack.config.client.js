@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 
 // internal helpers
+const aliases = require('./webpack-helpers/aliases');
 const rules = require('./webpack-helpers/module-rules');
 
 const commonConfig = {
@@ -18,7 +19,8 @@ const commonConfig = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.json', '.scss', '.css'],
+    alias: aliases
   },
   module: {
     rules: [
