@@ -1,36 +1,31 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const regexes = {
-  js: /\.(js|jsx)$/,
-  ts: /\.(ts|tsx)$/,
+  scripts: /\.[jt]sx?$/,
   styles: /\.(sa|sc|c)ss$/,
   images: /\.(jpe?g|jpg|png|gif|svg)$/,
   fonts: /\.(ttf|svg|woff|woff2)$/,
 };
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
-  js: {
-    test: regexes.js,
+  scripts: {
+    test: regexes.scripts,
     exclude: /node_modules/,
     loader: 'babel-loader',
+    options: {
+      plugins: [
+        isDevelopment && require.resolve('react-refresh/babel')
+      ].filter(Boolean),
+    },
   },
-  ts: {
-    test: regexes.ts,
-    exclude: /node_modules/,
-    use: ['babel-loader', 'ts-loader'],
-  },
-  stylesDev: {
+  styles: {
     test: regexes.styles,
     use: [
-      'style-loader',
-      'css-loader',
-      'sass-loader'
-    ]
-  },
-  stylesProd: {
-    test: regexes.styles,
-    use: [
-      MiniCssExtractPlugin.loader,
+      (isDevelopment
+        ? 'style-loader'
+        : MiniCssExtractPlugin.loader),
       'css-loader',
       'sass-loader'
     ]

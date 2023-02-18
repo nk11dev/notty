@@ -1,6 +1,7 @@
 const path = require('path');
 
 // webpack plugins and well-known modules
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -25,8 +26,8 @@ const commonConfig = {
   },
   module: {
     rules: [
-      rules.js,
-      rules.ts,
+      rules.scripts,
+      rules.styles,
       rules.images,
       rules.fonts,
     ],
@@ -53,15 +54,11 @@ const devConfig = {
     static: {
       directory: path.join(__dirname, '../dist'),
     },
-    devMiddleware: {
-      writeToDisk: true
-    },
+    hot: true
   },
-  module: {
-    rules: [
-      rules.stylesDev,
-    ],
-  },
+  plugins: [
+    new ReactRefreshWebpackPlugin()
+  ]
 };
 
 const prodConfig = {
@@ -73,11 +70,6 @@ const prodConfig = {
         // prevents "LICENSE.txt" creation (in output folder)
         extractComments: false,
       }),
-    ],
-  },
-  module: {
-    rules: [
-      rules.stylesProd,
     ],
   },
   plugins: [
