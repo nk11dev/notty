@@ -1,7 +1,10 @@
 import React from 'react';
 
-const App = (props) => {
+type Props = {
+  children: React.ReactNode
+};
 
+const App = (props: Props) => {
   console.log('App.jsx');
 
   return (
@@ -9,6 +12,6 @@ const App = (props) => {
       {props.children}
     </React.StrictMode>
   );
-}
+};
 
 export default App;

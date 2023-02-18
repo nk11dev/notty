@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
     "allowJs": true,
+    "noImplicitAny": true,
     // aliases for imports
     "baseUrl": "./src/",
     "paths": {
@@ -19,6 +20,9 @@
       ],
       "@/shared/*": [
         "client/shared/*"
+      ],
+      "@/images/*": [
+        "assets/images/*"
       ],
     }
   },

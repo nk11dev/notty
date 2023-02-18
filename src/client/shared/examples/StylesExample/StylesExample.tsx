@@ -2,13 +2,14 @@ import './StylesExample.scss';
 
 import React from 'react';
 
-const StylesExample = (props) => {
+type Props = {
+  text: string
+};
 
-  return (
-    <div className="example-text">
-      {props.text}
-    </div>
-  );
-}
+const StylesExample = (props: Props) => (
+  <div className="example-text">
+    {props.text}
+  </div>
+);
 
 export default StylesExample;

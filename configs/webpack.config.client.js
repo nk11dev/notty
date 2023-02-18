@@ -18,6 +18,7 @@ const commonConfig = {
     filename: 'js/[name].[fullhash].js',
     publicPath: '/'
   },
+  stats: 'minimal',
   resolve: {
     extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.json', '.scss', '.css'],
     alias: aliases

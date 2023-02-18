@@ -4,9 +4,10 @@
   "description": "Sandbox project for playing with Express",
   "main": "index.client.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
+    "dev": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
     "build": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
-    "prod": "npx serve dist"
+    "start": "npx serve dist",
+    "prod": "npm run build && npm start"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,6 @@
   },
   "homepage": "https://github.com/nk11dev/sandbox-express#readme",
   "devDependencies": {
-    "@types/node": "18.14.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
@@ -41,6 +39,9 @@
     "style-loader": "3.3.1",
     "terser-webpack-plugin": "5.3.6",
     "ts-loader": "9.4.2",
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
     "typescript": "4.9.5",
     "webpack": "5.75.0",
     "webpack-cli": "5.0.1",
