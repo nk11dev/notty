@@ -1,17 +1,23 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const regexes = {
-  scripts: /\.(js|jsx)$/,
+  js: /\.(js|jsx)$/,
+  ts: /\.(ts|tsx)$/,
   styles: /\.(sa|sc|c)ss$/,
   images: /\.(jpe?g|jpg|png|gif|svg)$/,
   fonts: /\.(ttf|svg|woff|woff2)$/,
 };
 
 module.exports = {
-  scripts: {
-    test: regexes.scripts,
+  js: {
+    test: regexes.js,
     exclude: /node_modules/,
     loader: 'babel-loader',
+  },
+  ts: {
+    test: regexes.ts,
+    exclude: /node_modules/,
+    use: ['babel-loader', 'ts-loader'],
   },
   stylesDev: {
     test: regexes.styles,

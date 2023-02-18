@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/",
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es5",
+    "esModuleInterop": true,
     "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist",
+    "allowJs": true,
+    // aliases for imports
+    "baseUrl": "./src/",
     "paths": {
       "@/app/*": [
         "client/app/*"

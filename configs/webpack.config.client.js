@@ -19,12 +19,13 @@ const commonConfig = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.json', '.scss', '.css'],
     alias: aliases
   },
   module: {
     rules: [
-      rules.scripts,
+      rules.js,
+      rules.ts,
       rules.images,
       rules.fonts,
     ],

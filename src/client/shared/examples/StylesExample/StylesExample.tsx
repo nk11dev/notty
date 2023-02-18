@@ -1,5 +1,7 @@
 import './StylesExample.scss';
 
+import React from 'react';
+
 const StylesExample = (props) => {
 
   return (
