@@ -28,6 +28,6 @@ const ImagesExample = () => {
       ))}
     </>
   );
-}
+};
 
 export default ImagesExample;

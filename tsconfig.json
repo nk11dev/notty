@@ -18,6 +18,12 @@
       "@/pages/*": [
         "client/pages/*"
       ],
+      "@/widgets/*": [
+        "client/widgets/*"
+      ],
+      "@/features/*": [
+        "client/features/*"
+      ],
       "@/shared/*": [
         "client/shared/*"
       ],

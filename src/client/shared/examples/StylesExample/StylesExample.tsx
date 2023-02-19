@@ -3,12 +3,12 @@ import './StylesExample.scss';
 import React from 'react';
 
 type Props = {
-  text: string
+  children: React.ReactNode
 };
 
 const StylesExample = (props: Props) => (
-  <div className="example-text">
-    {props.text}
+  <div className="styles-example">
+    {props.children}
   </div>
 );
 

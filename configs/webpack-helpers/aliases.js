@@ -5,6 +5,8 @@ const SRC_PATH = path.resolve(__dirname, '../../src');
 const aliases = {
   '@/app': 'client/app',
   '@/pages': 'client/pages',
+  '@/widgets': 'client/widgets',
+  '@/features': 'client/features',
   '@/shared': 'client/shared',
   '@/images': 'assets/images',
   '@/styles': 'assets/styles',
