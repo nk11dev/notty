@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
     "build": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
-    "start": "npx serve dist",
+    "start": "npx serve -s dist",
     "prod": "npm run build && npm start"
   },
   "repository": {
