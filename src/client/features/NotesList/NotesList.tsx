@@ -1,16 +1,29 @@
 import React from 'react';
 
-const NotesList = () => (
-  <>
-    <div>Notes List:</div>
-    <ul>
-      <li>Note 1</li>
-      <li>Note 2</li>
-      <li>Note 3</li>
-      <li>Note 4</li>
-      <li>Note 5</li>
-    </ul>
-  </>
-);
+type Note = {
+  id: number;
+  text: string;
+};
+
+type Props = {
+  notes: Note[]
+};
+
+const NotesList = (props: Props) => {
+  const { notes } = props;
+
+  return (
+    <>
+      <div>Notes List:</div>
+      <ul>
+        {notes.map((item, index) => (
+          <li key={index}>
+            {item.text}
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
 
 export default NotesList;

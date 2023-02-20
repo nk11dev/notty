@@ -30,6 +30,7 @@ const commonConfig = {
       rules.styles,
       rules.images,
       rules.fonts,
+      rules.json,
     ],
   },
   plugins: [

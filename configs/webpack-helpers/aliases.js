@@ -11,6 +11,7 @@ const aliases = {
   '@/images': 'assets/images',
   '@/styles': 'assets/styles',
   '@/fonts': 'assets/fonts',
+  '@/data': 'data',
 };
 
 Object.keys(aliases).forEach(

@@ -9,6 +9,7 @@
     "outDir": "./dist",
     "allowJs": true,
     "noImplicitAny": true,
+    "resolveJsonModule": true,
     // aliases for imports
     "baseUrl": "./src/",
     "paths": {
@@ -29,6 +30,9 @@
       ],
       "@/images/*": [
         "assets/images/*"
+      ],
+      "@/data/*": [
+        "data/*"
       ],
     }
   },

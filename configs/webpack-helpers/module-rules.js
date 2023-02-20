@@ -46,4 +46,8 @@ module.exports = {
       filename: 'assets/fonts/[name][ext]'
     }
   },
+  json: {
+    test: /\.json$/,
+    type: 'json'
+  }
 };

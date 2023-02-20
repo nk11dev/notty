@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const FoldersList = () => {
+import foldersData from '@/data/folders.json';
 
-  const foldersList = [
-    { id: 1, text: 'Folder 1' },
-    { id: 2, text: 'Folder 2' },
-    { id: 3, text: 'Folder 3' },
-  ];
+const FoldersList = () => {
+  const { list: folders } = foldersData;
 
   return (
     <>
       <div>Folders List:</div>
 
       <ul>
-        {foldersList.map((item, index) => (
+        {folders.map((item, index) => (
           <li key={index}>
             <Link to={`folders/${item.id}`}>
               {item.text}
