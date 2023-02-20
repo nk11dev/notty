@@ -8,6 +8,7 @@ import {
 import ExamplePage from '@/pages/ExamplePage';
 import StartPage from '@/pages/StartPage';
 import FolderPage from '@/pages/FolderPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 import Layout from '@/widgets/Layout';
 
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/" element={<StartPage />} />
           <Route path="/example" element={<ExamplePage />} />
           <Route path="/folders/:folderId" element={<FolderPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
