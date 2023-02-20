@@ -1,0 +1,27 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import '~bootstrap/scss/_functions.scss';
+
+// 2. Include any default variable overrides here
+@import '/src/assets/styles/bootstrap/variables-overrides';
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import '~bootstrap/scss/_variables.scss';
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import '~bootstrap/scss/_maps.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import '~bootstrap/scss/_root.scss';
+
+// 6. Optionally include any other parts as needed
+@import '~bootstrap/scss/_reboot';
+@import '~bootstrap/scss/_utilities';
+@import '~bootstrap/scss/utilities/_api';
+
+@import '~bootstrap/scss/_buttons';
+@import '~bootstrap/scss/_containers';
+@import '~bootstrap/scss/_forms';
+@import '~bootstrap/scss/_grid';
+@import '~bootstrap/scss/_modal';
+@import '~bootstrap/scss/_tables';

@@ -63,6 +63,9 @@ const devConfig = {
 
 const prodConfig = {
   mode: 'production',
+  performance: {
+    maxEntrypointSize: 512000,
+  },
   optimization: {
     minimize: true,
     minimizer: [

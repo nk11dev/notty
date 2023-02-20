@@ -1,0 +1,10 @@
+.header-nav {
+  a {
+    display: block;
+
+    &.active {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}

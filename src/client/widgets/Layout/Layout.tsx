@@ -1,34 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
+import HeaderNav from '@/shared/layout/HeaderNav';
 
 type Props = {
   children: React.ReactNode
 };
 
-const Layout = (props: Props) => {
+const Layout = (props: Props) => (
+  <>
+    <header className="mx-3 my-2">
+      <HeaderNav />
+    </header>
 
-  const navList = [
-    { url: '/', text: 'To start page' },
-    { url: '/example', text: 'To example page' },
-  ];
-
-  return (
-    <>
-      <nav>
-        {navList.map((item, index) => (
-          <div key={index}>
-            <NavLink to={item.url}>
-              {item.text}
-            </NavLink>
-          </div>
-        ))}
-      </nav>
-
-      <main>
-        {props.children}
-      </main>
-    </>
-  );
-};
+    <main className="mx-3 my-2">
+      {props.children}
+    </main>
+  </>
+);
 
 export default Layout;
