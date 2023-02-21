@@ -15,7 +15,7 @@ const rules = require('./webpack-helpers/module-rules');
 const commonConfig = {
   entry: './src/client/index.client.js',
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist/client'),
     filename: 'js/[name].[fullhash].js',
     publicPath: '/'
   },

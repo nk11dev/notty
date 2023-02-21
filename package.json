@@ -6,10 +6,14 @@
   "scripts": {
     "lint": "npx eslint ./** --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint ./** --ext .js,.jsx,.ts,.tsx --fix",
-    "dev": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
-    "build": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
-    "start": "npx serve -s dist",
-    "prod": "npm run build && npm start"
+    "dev:client": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
+    "dev:server": "cross-env NODE_ENV=development npx webpack --config=configs/webpack.config.server.js -w",
+    "dev": "npm run dev:client",
+    "build:client": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
+    "build:server": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.server.js",
+    "start": "npx serve -s dist/client",
+    "start:express": "node dist/server.js",
+    "prod": "npm run build:client && npm start"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,7 @@
     "eslint": "8.34.0",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "nodemon-webpack-plugin": "4.8.1",
     "react-refresh": "0.14.0",
     "webpack-dev-server": "4.11.1"
   },
@@ -44,6 +49,7 @@
     "clean-webpack-plugin": "4.0.0",
     "cross-env": "7.0.3",
     "css-loader": "6.7.3",
+    "express": "4.18.2",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "2.7.2",
     "react": "18.2.0",
@@ -56,6 +62,7 @@
     "typescript": "4.9.5",
     "webpack": "5.75.0",
     "webpack-cli": "5.0.1",
-    "webpack-merge": "5.8.0"
+    "webpack-merge": "5.8.0",
+    "webpack-node-externals": "3.0.0"
   }
 }
