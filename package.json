@@ -4,6 +4,8 @@
   "description": "Sandbox project for playing with Express",
   "main": "index.client.js",
   "scripts": {
+    "lint": "npx eslint ./** --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "npx eslint ./** --ext .js,.jsx,.ts,.tsx --fix",
     "dev": "cross-env NODE_ENV=development npx webpack serve --config=configs/webpack.config.client.js",
     "build": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
     "start": "npx serve -s dist",
@@ -21,6 +23,10 @@
   "homepage": "https://github.com/nk11dev/sandbox-express#readme",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "@typescript-eslint/parser": "5.53.0",
+    "eslint": "8.34.0",
+    "eslint-plugin-react": "7.32.2",
     "react-refresh": "0.14.0",
     "webpack-dev-server": "4.11.1"
   },
