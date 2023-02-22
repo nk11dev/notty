@@ -26,11 +26,11 @@ const commonConfig = {
   },
   module: {
     rules: [
-      rules.scripts,
-      rules.styles,
-      rules.images,
-      rules.fonts,
-      rules.json,
+      rules.client.scripts,
+      rules.client.styles,
+      rules.client.images,
+      rules.client.fonts,
+      rules.client.json,
     ],
   },
   plugins: [

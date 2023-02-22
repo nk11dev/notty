@@ -13,7 +13,8 @@
     "build:server": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.server.js",
     "start": "npx serve -s dist/client",
     "start:express": "node dist/server.js",
-    "prod": "npm run build:client && npm start"
+    "prod:client": "npm run build:client && npm start",
+    "prod:server": "npm run build:server && npm run start:express"
   },
   "repository": {
     "type": "git",

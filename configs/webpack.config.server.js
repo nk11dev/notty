@@ -8,6 +8,7 @@ const { merge } = require('webpack-merge');
 
 // internal helpers
 const aliases = require('./webpack-helpers/aliases');
+const rules = require('./webpack-helpers/module-rules');
 
 const OUTPUT_FILENAME = 'server.js';
 
@@ -25,6 +26,13 @@ const commonConfig = {
   output: {
     filename: OUTPUT_FILENAME,
     path: path.resolve(__dirname, '../dist')
+  },
+  module: {
+    rules: [
+      rules.server.scripts,
+      rules.server.styles,
+      rules.server.images,
+    ],
   },
   stats: 'minimal',
   plugins: [

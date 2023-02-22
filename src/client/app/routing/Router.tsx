@@ -6,7 +6,7 @@ import ExamplePage from '@/pages/ExamplePage';
 import FolderPage from '@/pages/FolderPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 
-export const routes = [
+export const appRoutes = [
   {
     path: '/',
     element: <StartPage />,
@@ -22,7 +22,7 @@ export const routes = [
 ];
 
 const Router = () => useRoutes([
-  ...routes,
+  ...appRoutes,
   {
     path: '*',
     element: <NotFoundPage />,

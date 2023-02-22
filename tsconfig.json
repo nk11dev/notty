@@ -35,6 +35,9 @@
       "@/data/*": [
         "data/*"
       ],
+      "@/server/*": [
+        "server/*"
+      ],
     }
   },
   "include": [

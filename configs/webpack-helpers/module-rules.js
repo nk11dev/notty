@@ -1,3 +1,4 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const regexes = {
@@ -9,12 +10,14 @@ const regexes = {
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
-module.exports = {
+// client-side module rules
+const client = {
   scripts: {
     test: regexes.scripts,
     exclude: /node_modules/,
     loader: 'babel-loader',
     options: {
+      configFile: path.resolve(__dirname, '../../.babelrc.js'),
       plugins: [
         isDevelopment && require.resolve('react-refresh/babel')
       ].filter(Boolean),
@@ -50,4 +53,29 @@ module.exports = {
     test: /\.json$/,
     type: 'json'
   }
+};
+
+// server-side module rules
+const server = {
+  scripts: {
+    test: regexes.scripts,
+    exclude: /node_modules/,
+    loader: 'babel-loader',
+    options: {
+      configFile: path.resolve(__dirname, '../../.babelrc.js'),
+    },
+  },
+  styles: {
+    test: regexes.styles,
+    type: 'asset/inline'
+  },
+  images: {
+    test: regexes.images,
+    type: 'asset/inline',
+  },
+};
+
+module.exports = {
+  client,
+  server,
 };
