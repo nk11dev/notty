@@ -7,6 +7,7 @@ const aliases = {
   '@/pages': 'client/pages',
   '@/widgets': 'client/widgets',
   '@/features': 'client/features',
+  '@/entities': 'client/entities',
   '@/shared': 'client/shared',
   '@/images': 'assets/images',
   '@/styles': 'assets/styles',

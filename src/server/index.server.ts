@@ -2,6 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 
 import { appRoutes } from '@/app/routing/Router';
+import apiFolders from '@/server/api/folders';
 
 console.log('\n---');
 console.log('index.server.ts');
@@ -12,6 +13,8 @@ app.use(logger('dev'));
 const PORT = 3001;
 
 app.use(express.static('dist/client'));
+
+app.use('/api', apiFolders);
 
 // app routes
 for (const route of appRoutes) {
@@ -27,5 +30,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, function () {
-  console.log(`Express app listening at http://localhost:${PORT}`);
+  console.log(`Express app listening at http://localhost:${PORT}\n`);
 });

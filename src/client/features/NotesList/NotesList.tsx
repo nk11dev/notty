@@ -1,9 +1,6 @@
 import React from 'react';
 
-type Note = {
-  id: number;
-  text: string;
-};
+import { Note } from '@/entities/notes/notes.types';
 
 type Props = {
   notes: Note[]
