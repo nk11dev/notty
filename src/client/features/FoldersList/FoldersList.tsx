@@ -1,20 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import foldersData from '@/data/folders.json';
+import { useFetch } from '@/shared/api';
+import { Folder } from '@/entities/model/folder.types';
 
 const FoldersList = () => {
-  const { list: folders } = foldersData;
+  const { data, isLoading, error } = useFetch('/folders');
+
+  if (isLoading) return <p>Loading...</p>
+
+  if (error) return <p>{`Error. Name: "${error.name}", Message: "${error.message}"`}</p>;
+
+  if (data === null) return null;
 
   return (
     <>
       <div>Folders List:</div>
 
       <ul>
-        {folders.map((item, index) => (
+        {data.list.map((folder: Folder, index: number) => (
           <li key={index}>
-            <Link to={`folders/${item.id}`}>
-              {item.text}
+            <Link to={`folders/${folder.id}`}>
+              {folder.text}
             </Link>
           </li>
         ))}

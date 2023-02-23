@@ -2,18 +2,22 @@ import express from 'express';
 import logger from 'morgan';
 
 import { appRoutes } from '@/app/routing/Router';
-import apiFolders from '@/server/api/folders';
+import apiFolders from '@/server/api/folders.api';
 
 console.log('\n---');
 console.log('index.server.ts');
 
-const app = express();
-app.use(logger('dev'));
-
 const PORT = 3001;
+const app = express();
 
+// response headers
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use(logger('dev'));
 app.use(express.static('dist/client'));
-
 app.use('/api', apiFolders);
 
 // app routes

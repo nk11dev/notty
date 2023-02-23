@@ -8,12 +8,7 @@ router.get('/folders', (req, res) => {
   getContent({
     filePath: 'src/data/folders.json',
     cb: (jsonData) => {
-      res.send(JSON.stringify(
-        {
-          ok: true,
-          data: jsonData
-        }
-      ));
+      res.send(JSON.stringify(jsonData));
     }
   })
 });
