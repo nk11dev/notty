@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderNav from '@/shared/layout/HeaderNav';
+import HeaderNav from '@/shared/ui/layout/HeaderNav';
 
 type Props = {
   children: React.ReactNode

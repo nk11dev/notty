@@ -39,7 +39,7 @@ const commonConfig = {
       hash: true,
       minify: false,
       inject: 'body',
-      template: path.resolve(__dirname, '../src/client/app/templates/index.template.html'),
+      template: path.resolve(__dirname, '../src/client/app/templates/index.html'),
       filename: 'index.html',
       favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
     }),

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
-import StartPage from '@/pages/StartPage';
-import ExamplePage from '@/pages/ExamplePage';
-import FolderPage from '@/pages/FolderPage';
-import NotFoundPage from '@/pages/NotFoundPage';
+import StartPage from '@/pages/start';
+import ExamplePage from '@/pages/example';
+import FolderPage from '@/pages/folder';
+import NotFoundPage from '@/pages/not-found';
 
 export const appRoutes = [
   {
