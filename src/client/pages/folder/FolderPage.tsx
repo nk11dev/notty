@@ -6,9 +6,8 @@ import foldersData from '@/data/folders.json';
 
 const FolderPage = () => {
   const { folderId } = useParams();
-  const { list: folders } = foldersData;
 
-  const folderData = folders.find(i =>
+  const folderData = foldersData.find(i =>
     i.id.toString() === folderId.toString()
   );
 

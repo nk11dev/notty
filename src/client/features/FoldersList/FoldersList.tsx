@@ -18,7 +18,7 @@ const FoldersList = () => {
       <div>Folders List:</div>
 
       <ul>
-        {data.list.map((folder: Folder, index: number) => (
+        {data.map((folder: Folder, index: number) => (
           <li key={index}>
             <Link to={`folders/${folder.id}`}>
               {folder.text}

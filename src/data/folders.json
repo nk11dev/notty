@@ -1,70 +1,68 @@
-{
-  "list": [
-    {
-      "id": 1,
-      "text": "Folder 1",
-      "notes": [
-        {
-          "id": 1,
-          "text": "Note 1"
-        },
-        {
-          "id": 2,
-          "text": "Note 2"
-        },
-        {
-          "id": 3,
-          "text": "Note 3"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "text": "Folder 2",
-      "notes": [
-        {
-          "id": 4,
-          "text": "Note 4"
-        },
-        {
-          "id": 5,
-          "text": "Note 5"
-        },
-        {
-          "id": 6,
-          "text": "Note 6"
-        },
-        {
-          "id": 7,
-          "text": "Note 7"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "text": "Folder 3",
-      "notes": [
-        {
-          "id": 8,
-          "text": "Note 8"
-        },
-        {
-          "id": 9,
-          "text": "Note 9"
-        },
-        {
-          "id": 10,
-          "text": "Note 10"
-        },
-        {
-          "id": 11,
-          "text": "Note 11"
-        },
-        {
-          "id": 12,
-          "text": "Note 12"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "text": "Folder 1",
+    "notes": [
+      {
+        "id": 1,
+        "text": "Note 1"
+      },
+      {
+        "id": 2,
+        "text": "Note 2"
+      },
+      {
+        "id": 3,
+        "text": "Note 3"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "Folder 2",
+    "notes": [
+      {
+        "id": 4,
+        "text": "Note 4"
+      },
+      {
+        "id": 5,
+        "text": "Note 5"
+      },
+      {
+        "id": 6,
+        "text": "Note 6"
+      },
+      {
+        "id": 7,
+        "text": "Note 7"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "Folder 3",
+    "notes": [
+      {
+        "id": 8,
+        "text": "Note 8"
+      },
+      {
+        "id": 9,
+        "text": "Note 9"
+      },
+      {
+        "id": 10,
+        "text": "Note 10"
+      },
+      {
+        "id": 11,
+        "text": "Note 11"
+      },
+      {
+        "id": 12,
+        "text": "Note 12"
+      }
+    ]
+  }
+]

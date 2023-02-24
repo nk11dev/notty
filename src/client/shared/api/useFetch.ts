@@ -18,7 +18,7 @@ function useFetch(url: string) {
       .get(API_PATH + url)
       .then((response) => {
         console.log('useFetch(), then(), response: ', response);
-        setData(response.data);
+        setData(response.data.data);
       })
       .catch((err) => {
         console.log('useFetch(), catch(), err: ', err);

@@ -2,7 +2,7 @@ import fs from 'fs';
 
 export function getContent(params: {
   filePath: string;
-  cb: (jsonData: JSON) => void;
+  cb: (fileData: []) => void;
 }) {
   const { filePath, cb } = params;
 
