@@ -5,9 +5,13 @@ import { useFetch } from '@/shared/api';
 import { Folder } from '@/entities/model/folder.types';
 
 const FoldersList = () => {
-  const { data, isLoading, error } = useFetch('/folders');
+  const {
+    data,
+    isLoading,
+    error
+  } = useFetch('/folders');
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <p>Loading folders...</p>
 
   if (error) return <p>{`Error. Name: "${error.name}", Message: "${error.message}"`}</p>;
 

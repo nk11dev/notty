@@ -11,7 +11,7 @@ router.get('/folders', (req, res) => {
     filePath: FILEPATH,
     cb: (fileData) => {
       res.send(JSON.stringify({
-        data: fileData
+        payload: fileData
       }));
     }
   });
@@ -28,7 +28,7 @@ router.get('/folders/:folderId', (req, res) => {
       );
 
       res.send(JSON.stringify({
-        data: (folderData.length > 0)
+        payload: (folderData.length > 0)
           ? folderData[0]
           : {}
       }));
