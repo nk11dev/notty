@@ -11,11 +11,13 @@ function useFetch(url: string) {
   useEffect(() => {
     setLoading(true);
 
+    const urlFull = API_PATH + url;
+
     console.log('\n');
-    console.log('useFetch(), url: ', url);
+    console.log('useFetch(), urlFull: ', urlFull);
 
     axios
-      .get(API_PATH + url)
+      .get(urlFull)
       .then((response) => {
         console.log('useFetch(), then(), response: ', response);
         setData(response.data.payload);

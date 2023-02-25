@@ -1,9 +1,10 @@
 import express from 'express';
 import logger from 'morgan';
-import colors from 'ansi-colors';
 
 import { appRoutes } from '@/app/routing/Router';
 import apiFolders from '@/server/api/folders.api';
+
+const colors = require('ansi-colors');
 
 const app = express();
 

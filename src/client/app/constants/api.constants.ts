@@ -1,1 +1,3 @@
-export const API_PATH = 'http://127.0.0.1:3001/api';
+export const API_PATH = (process.env.API_HOST)
+  ? `${process.env.API_HOST}/api`
+  : '/api';
