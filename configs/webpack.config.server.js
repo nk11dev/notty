@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 // webpack plugins and well-known modules
 const nodeExternals = require('webpack-node-externals');
@@ -9,6 +10,7 @@ const { merge } = require('webpack-merge');
 // internal helpers
 const aliases = require('./webpack-helpers/aliases');
 const rules = require('./webpack-helpers/module-rules');
+const envConfig = require('./env/env.config');
 
 const OUTPUT_FILENAME = 'server.js';
 
@@ -40,6 +42,9 @@ const commonConfig = {
       verbose: true,
       cleanOnceBeforeBuildPatterns: [OUTPUT_FILENAME],
       cleanAfterEveryBuildPatterns: [OUTPUT_FILENAME]
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(envConfig)
     }),
   ]
 };

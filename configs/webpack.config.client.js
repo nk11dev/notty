@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 // webpack plugins and well-known modules
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -11,6 +12,7 @@ const { merge } = require('webpack-merge');
 // internal helpers
 const aliases = require('./webpack-helpers/aliases');
 const rules = require('./webpack-helpers/module-rules');
+const envConfig = require('./env/env.config');
 
 const commonConfig = {
   entry: './src/client/index.client.js',
@@ -35,6 +37,9 @@ const commonConfig = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(envConfig)
+    }),
     new HtmlWebpackPlugin({
       hash: true,
       minify: false,
@@ -50,7 +55,7 @@ const devConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    port: 3000,
+    port: envConfig.PORT_CLIENT,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, '../dist'),

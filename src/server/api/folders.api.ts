@@ -6,7 +6,7 @@ import { Folder } from '@/entities/model/folder.types';
 const router = express.Router();
 const FILEPATH = 'src/data/folders.json';
 
-router.get('/folders', (req, res) => {
+router.get('/folders', (_req, res) => {
   getContent({
     filePath: FILEPATH,
     cb: (fileData) => {
