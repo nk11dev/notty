@@ -31,8 +31,8 @@ app.use((_req, res) => {
   res.sendFile('dist/client/index.html', { root: '.' });
 });
 
-const { PORT_SERVER } = process.env;
+const PORT = process.env.PORT || process.env.PORT_SERVER;
 
-const listener = app.listen(PORT_SERVER, function () {
+const listener = app.listen(PORT, function () {
   console.log(colors.magenta('\n--- Express app started'), listener.address(), '\n');
 });

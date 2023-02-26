@@ -43,9 +43,6 @@ const commonConfig = {
       cleanOnceBeforeBuildPatterns: [OUTPUT_FILENAME],
       cleanAfterEveryBuildPatterns: [OUTPUT_FILENAME]
     }),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(envConfig)
-    }),
   ]
 };
 
