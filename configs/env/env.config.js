@@ -7,8 +7,6 @@ const { env } = process;
 
 const envConfig = {
   NODE_ENV: env.NODE_ENV,
-  // PORT env variable is passed for ability to use it, if PORT was setted by external service (for example, hosting or similar)
-  PORT: env.PORT,
   ...Object.keys(config).reduce(
     (acc, key) => {
       acc[key] = env[key] || config[key];

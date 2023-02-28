@@ -44,7 +44,12 @@ const commonConfig = {
       cleanAfterEveryBuildPatterns: [OUTPUT_FILENAME]
     }),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(envConfig)
+      ...Object.keys(envConfig).reduce(
+        (acc, key) => {
+          acc[`process.env.${key}`] = JSON.stringify(envConfig[key]);
+          return acc;
+        }, {}
+      )
     }),
   ]
 };
