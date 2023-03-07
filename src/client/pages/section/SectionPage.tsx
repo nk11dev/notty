@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import NotesList from '@/features/NotesList';
 
-const FolderPage = () => {
+const SectionPage = () => {
   const { sectionId } = useParams();
 
   return (
@@ -14,4 +14,4 @@ const FolderPage = () => {
   );
 };
 
-export default FolderPage;
+export default SectionPage;

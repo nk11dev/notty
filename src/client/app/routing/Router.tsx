@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom';
 
 import StartPage from '@/pages/start';
 import ExamplePage from '@/pages/example';
-import FolderPage from '@/pages/folder';
+import SectionPage from '@/pages/section';
 import NotFoundPage from '@/pages/not-found';
 
 export const appRoutes = [
@@ -17,7 +17,7 @@ export const appRoutes = [
   },
   {
     path: '/sections/:sectionId',
-    element: <FolderPage />,
+    element: <SectionPage />,
   },
 ];
 

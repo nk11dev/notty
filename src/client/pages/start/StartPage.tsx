@@ -1,11 +1,11 @@
 import React from 'react';
 
-import FoldersList from '@/features/FoldersList';
+import SectionsList from '@/features/SectionsList';
 
 const StartPage = () => (
   <>
     <h1>Start Page</h1>
-    <FoldersList />
+    <SectionsList />
   </>
 );
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useFetch } from '@/shared/api';
-import { Folder } from '@/entities/model/folder.types';
+import { Section } from '@/entities/model/section.types';
 
-const FoldersList = () => {
+const SectionsList = () => {
   const {
     data,
     isLoading,
@@ -22,10 +22,10 @@ const FoldersList = () => {
       <div>Sections List:</div>
 
       <ul>
-        {data.map((folder: Folder, index: number) => (
+        {data.map((item: Section, index: number) => (
           <li key={index}>
-            <Link to={`sections/${folder.id}`}>
-              {folder.text}
+            <Link to={`sections/${item.id}`}>
+              {item.text}
             </Link>
           </li>
         ))}
@@ -34,4 +34,4 @@ const FoldersList = () => {
   );
 };
 
-export default FoldersList;
+export default SectionsList;

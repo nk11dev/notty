@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { getContent } from '@/server/helpers/api.helpers';
-import { Folder } from '@/entities/model/folder.types';
+import { Section } from '@/entities/model/section.types';
 
 const router = express.Router();
 const FILEPATH = 'src/data/sections.example.json';
@@ -24,7 +24,7 @@ router.get('/sections/:sectionId', (req, res) => {
       const { sectionId } = req.params;
 
       const itemData = fileData.filter(
-        (item: Folder) => item.id.toString() === sectionId.toString()
+        (item: Section) => item.id.toString() === sectionId.toString()
       );
 
       res.send(JSON.stringify({
