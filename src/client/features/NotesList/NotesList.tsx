@@ -5,15 +5,15 @@ import { useFetch } from '@/shared/api';
 import { Note } from '@/entities/model/note.types';
 
 const NotesList = () => {
-  const { folderId } = useParams();
+  const { sectionId } = useParams();
 
   const {
     data,
     isLoading,
     error
-  } = useFetch(`/folders/${folderId}`);
+  } = useFetch(`/sections/${sectionId}`);
 
-  if (isLoading) return <p>Loading notes...</p>
+  if (isLoading) return <p>Loading...</p>
 
   if (error) return <p>{`Error. Name: "${error.name}", Message: "${error.message}"`}</p>;
 
@@ -35,7 +35,7 @@ const NotesList = () => {
               </ul>
             </>
           )
-          : <p>Notes for folder with id {folderId} are not found</p>
+          : <p>Notes for section with id {sectionId} are not found</p>
       }
     </>
   );

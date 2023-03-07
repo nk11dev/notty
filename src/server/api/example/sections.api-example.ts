@@ -4,9 +4,9 @@ import { getContent } from '@/server/helpers/api.helpers';
 import { Folder } from '@/entities/model/folder.types';
 
 const router = express.Router();
-const FILEPATH = 'src/data/folders.json';
+const FILEPATH = 'src/data/sections.example.json';
 
-router.get('/folders', (_req, res) => {
+router.get('/sections', (_req, res) => {
   getContent({
     filePath: FILEPATH,
     cb: (fileData) => {
@@ -17,19 +17,19 @@ router.get('/folders', (_req, res) => {
   });
 });
 
-router.get('/folders/:folderId', (req, res) => {
+router.get('/sections/:sectionId', (req, res) => {
   getContent({
     filePath: FILEPATH,
     cb: (fileData) => {
-      const { folderId } = req.params;
+      const { sectionId } = req.params;
 
-      const folderData = fileData.filter(
-        (item: Folder) => item.id.toString() === folderId.toString()
+      const itemData = fileData.filter(
+        (item: Folder) => item.id.toString() === sectionId.toString()
       );
 
       res.send(JSON.stringify({
-        payload: (folderData.length > 0)
-          ? folderData[0]
+        payload: (itemData.length > 0)
+          ? itemData[0]
           : {}
       }));
     }

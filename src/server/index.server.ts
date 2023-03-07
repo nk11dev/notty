@@ -2,8 +2,8 @@ import express from 'express';
 import logger from 'morgan';
 
 import { appRoutes } from '@/app/routing/Router';
-import apiFolders from '@/server/api/folders.api';
-import db from '@/server/api/db.api';
+import apiExample from '@/server/api/example/sections.api-example';
+import apiDb from '@/server/api/db/sections.api';
 
 const colors = require('ansi-colors');
 
@@ -17,8 +17,8 @@ app.use((_req, res, next) => {
 
 app.use(logger('dev'));
 app.use(express.static('dist/client'));
-app.use('/api', apiFolders);
-app.use('/db', db);
+app.use('/api-example', apiExample);
+app.use('/api', apiDb);
 
 // app routes
 for (const route of appRoutes) {

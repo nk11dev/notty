@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { API_PATH } from '@/app/constants/api.constants';
+import { API_URL } from '@/app/constants/api.constants';
 
 function useFetch(url: string) {
   const [data, setData] = useState(null);
@@ -11,7 +11,7 @@ function useFetch(url: string) {
   useEffect(() => {
     setLoading(true);
 
-    const urlFull = API_PATH + url;
+    const urlFull = API_URL + url;
 
     console.log('\n');
     console.log('useFetch(), urlFull: ', urlFull);

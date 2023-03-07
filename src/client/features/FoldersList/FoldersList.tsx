@@ -9,9 +9,9 @@ const FoldersList = () => {
     data,
     isLoading,
     error
-  } = useFetch('/folders');
+  } = useFetch('/sections');
 
-  if (isLoading) return <p>Loading folders...</p>
+  if (isLoading) return <p>Loading...</p>
 
   if (error) return <p>{`Error. Name: "${error.name}", Message: "${error.message}"`}</p>;
 
@@ -19,12 +19,12 @@ const FoldersList = () => {
 
   return (
     <>
-      <div>Folders List:</div>
+      <div>Sections List:</div>
 
       <ul>
         {data.map((folder: Folder, index: number) => (
           <li key={index}>
-            <Link to={`folders/${folder.id}`}>
+            <Link to={`sections/${folder.id}`}>
               {folder.text}
             </Link>
           </li>

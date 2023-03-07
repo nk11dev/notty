@@ -16,7 +16,7 @@ export const appRoutes = [
     element: <ExamplePage />,
   },
   {
-    path: '/folders/:folderId',
+    path: '/sections/:sectionId',
     element: <FolderPage />,
   },
 ];

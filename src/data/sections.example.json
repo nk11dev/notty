@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "text": "Folder 1",
+    "text": "Section 1",
     "notes": [
       {
         "id": 1,
@@ -19,7 +19,7 @@
   },
   {
     "id": 2,
-    "text": "Folder 2",
+    "text": "Section 2",
     "notes": [
       {
         "id": 4,
@@ -41,7 +41,7 @@
   },
   {
     "id": 3,
-    "text": "Folder 3",
+    "text": "Section 3",
     "notes": [
       {
         "id": 8,
@@ -67,6 +67,6 @@
   },
   {
     "id": 4,
-    "text": "Folder 4"
+    "text": "Section 4"
   }
 ]

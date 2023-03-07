@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import NotesList from '@/features/NotesList';
 
 const FolderPage = () => {
-  const { folderId } = useParams();
+  const { sectionId } = useParams();
 
   return (
     <>
-      <h1>Folder {folderId}</h1>
+      <h1>Section {sectionId}</h1>
       <NotesList />
     </>
   );
