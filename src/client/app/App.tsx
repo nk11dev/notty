@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Layout from '@/widgets/Layout';
+import Layout from '@/widgets/layout';
 import Router from '@/app/routing/Router';
 
 const App = () => (

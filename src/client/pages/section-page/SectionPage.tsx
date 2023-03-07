@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import NotesList from '@/features/NotesList';
+import NotesList from '@/features/notes-list';
 
 const SectionPage = () => {
   const { sectionId } = useParams();

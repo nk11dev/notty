@@ -20,6 +20,7 @@ module.exports = {
     '**/*.scss',
     '**/*.json',
     '**/*.html',
+    '**/*.lock',
     '**/*.md',
     'LICENSE'
   ],

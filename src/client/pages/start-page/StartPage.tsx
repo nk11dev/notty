@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SectionsList from '@/features/SectionsList';
+import SectionsList from '@/features/sections-list';
 
 const StartPage = () => (
   <>
