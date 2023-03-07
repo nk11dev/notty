@@ -29,7 +29,7 @@ const NotesList = () => {
               <ul>
                 {data.notes.map((item: Note, index: number) => (
                   <li key={index}>
-                    {item.text}
+                    {item.title}
                   </li>
                 ))}
               </ul>

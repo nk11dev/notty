@@ -1,72 +1,72 @@
 [
   {
-    "id": 1,
-    "text": "Section 1",
+    "section_id": 1,
+    "title": "Example Section 1",
     "notes": [
       {
-        "id": 1,
-        "text": "Note 1"
+        "note_id": 1,
+        "title": "Note 1"
       },
       {
-        "id": 2,
-        "text": "Note 2"
+        "note_id": 2,
+        "title": "Note 2"
       },
       {
-        "id": 3,
-        "text": "Note 3"
+        "note_id": 3,
+        "title": "Note 3"
       }
     ]
   },
   {
-    "id": 2,
-    "text": "Section 2",
+    "section_id": 2,
+    "title": "Example Section 2",
     "notes": [
       {
-        "id": 4,
-        "text": "Note 4"
+        "note_id": 4,
+        "title": "Note 4"
       },
       {
-        "id": 5,
-        "text": "Note 5"
+        "note_id": 5,
+        "title": "Note 5"
       },
       {
-        "id": 6,
-        "text": "Note 6"
+        "note_id": 6,
+        "title": "Note 6"
       },
       {
-        "id": 7,
-        "text": "Note 7"
+        "note_id": 7,
+        "title": "Note 7"
       }
     ]
   },
   {
-    "id": 3,
-    "text": "Section 3",
+    "section_id": 3,
+    "title": "Example Section 3",
     "notes": [
       {
-        "id": 8,
-        "text": "Note 8"
+        "note_id": 8,
+        "title": "Note 8"
       },
       {
-        "id": 9,
-        "text": "Note 9"
+        "note_id": 9,
+        "title": "Note 9"
       },
       {
-        "id": 10,
-        "text": "Note 10"
+        "note_id": 10,
+        "title": "Note 10"
       },
       {
-        "id": 11,
-        "text": "Note 11"
+        "note_id": 11,
+        "title": "Note 11"
       },
       {
-        "id": 12,
-        "text": "Note 12"
+        "note_id": 12,
+        "title": "Note 12"
       }
     ]
   },
   {
-    "id": 4,
-    "text": "Section 4"
+    "section_id": 4,
+    "title": "Example Section 4"
   }
 ]

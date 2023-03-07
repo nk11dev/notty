@@ -24,7 +24,7 @@ router.get('/sections/:sectionId', (req, res) => {
       const { sectionId } = req.params;
 
       const itemData = fileData.filter(
-        (item: Section) => item.id.toString() === sectionId.toString()
+        (item: Section) => item.section_id.toString() === sectionId.toString()
       );
 
       res.send(JSON.stringify({

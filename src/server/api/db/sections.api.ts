@@ -27,8 +27,16 @@ router.get('/sections', (_req, response) => {
   `;
   pool.query(query, (error: Error, results: QueryResult) => {
     if (error) throw error;
-    response.status(200).json(results.rows);
+    response.status(200).json({
+      payload: results.rows
+    });
   })
+});
+
+router.get('/sections/:sectionId', (_req, response) => {
+  response.status(200).json({
+    payload: []
+  });
 });
 
 export default router;

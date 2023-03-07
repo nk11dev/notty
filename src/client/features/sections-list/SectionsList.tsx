@@ -24,8 +24,8 @@ const SectionsList = () => {
       <ul>
         {data.map((item: Section, index: number) => (
           <li key={index}>
-            <Link to={`sections/${item.id}`}>
-              {item.text}
+            <Link to={`sections/${item.section_id}`}>
+              {item.title}
             </Link>
           </li>
         ))}

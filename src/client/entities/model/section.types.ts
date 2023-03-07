@@ -1,7 +1,7 @@
 import { Note } from '@/entities/model/note.types';
 
 export type Section = {
-  id: number;
-  text: string;
+  section_id: number;
+  title: string;
   notes?: Note[]
 };
