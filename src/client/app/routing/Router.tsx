@@ -1,23 +1,29 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
-import StartPage from '@/pages/start-page';
+import MainPage from '@/pages/main-page';
 import ExamplePage from '@/pages/example-page';
-import SectionPage from '@/pages/section-page';
 import NotFoundPage from '@/pages/not-found-page';
+import SectionContent from '@/widgets/main-content/section-content';
 
 export const appRoutes = [
   {
     path: '/',
-    element: <StartPage />,
+    element: <MainPage />,
+  },
+  {
+    path: '/sections',
+    element: <MainPage />,
+    children: [
+      {
+        path: ':sectionId',
+        element: <SectionContent />,
+      },
+    ]
   },
   {
     path: '/example',
     element: <ExamplePage />,
-  },
-  {
-    path: '/sections/:sectionId',
-    element: <SectionPage />,
   },
 ];
 

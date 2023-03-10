@@ -1,7 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
 
-import { appRoutes } from '@/app/routing/Router';
 import apiExample from '@/server/api/example/sections.api-example';
 import apiDb from '@/server/api/db/sections.api';
 
@@ -20,11 +19,15 @@ app.use(express.static('dist/client'));
 app.use('/api-example', apiExample);
 app.use('/api', apiDb);
 
-// app routes
-for (const route of appRoutes) {
-  app.get(route.path, (_req, res) => {
-    res.sendFile('dist/client/index.html', { root: '.' });
-  });
+// App react routes (used only for "production" mode for correct HMR working with client "development" mode).
+if (process.env.NODE_ENV == 'production') {
+  const appRoutes = require('@/app/routing/Router').appRoutes;
+
+  for (const route of appRoutes) {
+    app.get(route.path, (_req, res) => {
+      res.sendFile('dist/client/index.html', { root: '.' });
+    });
+  }
 }
 
 // 404 route

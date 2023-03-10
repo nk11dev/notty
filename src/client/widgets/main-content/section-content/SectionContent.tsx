@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import NotesList from '@/features/notes-list';
 
-const SectionPage = () => {
+const SectionContent = () => {
   const { sectionId } = useParams();
 
   return (
@@ -14,4 +14,4 @@ const SectionPage = () => {
   );
 };
 
-export default SectionPage;
+export default SectionContent;

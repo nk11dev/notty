@@ -2,7 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useFetch } from '@/shared/api';
+
 import { Note } from '@/entities/model/note.types';
+import LoadingMsg from '@/shared/ui/fetching/loading-msg';
+import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
   const { sectionId } = useParams();
@@ -13,9 +16,9 @@ const NotesList = () => {
     error
   } = useFetch(`/sections/${sectionId}`);
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <LoadingMsg />;
 
-  if (error) return <p>{`Error. Name: "${error.name}", Message: "${error.message}"`}</p>;
+  if (error) return <ErrorMsg error={error}/>;
 
   if (data === null) return null;
 

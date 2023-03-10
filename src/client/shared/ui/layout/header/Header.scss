@@ -1,0 +1,13 @@
+@import '/src/assets/styles/theme/mixins';
+
+.header {
+  height: 40px;
+  padding: 7px 10px;
+  z-index: 2;
+  background: #F3F2F1;
+  @include boxShadow(0px 2px 5px 0px rgba(34, 60, 80, 0.2));
+
+  .logo {
+    text-decoration: none;
+  }
+}

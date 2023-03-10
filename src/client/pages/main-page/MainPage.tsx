@@ -1,14 +1,14 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 import LeftSidebar from '@/widgets/sidebar-content/left-sidebar';
-import ExampleContent from '@/widgets/main-content/example-content';
 import TwoColumns from '@/shared/ui/layout/two-columns';
 
-const ExamplePage = () => (
+const MainPage = () => (
   <TwoColumns
     sidebarContent={<LeftSidebar />}
-    mainContent={<ExampleContent />}
+    mainContent={<Outlet />}
   />
 );
 
-export default ExamplePage;
+export default MainPage;

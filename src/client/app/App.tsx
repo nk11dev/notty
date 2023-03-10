@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Layout from '@/widgets/layout';
+import PageLayout from '@/shared/ui/layout/page-layout';
 import Router from '@/app/routing/Router';
 
 const App = () => (
   <BrowserRouter>
-    <Layout>
+    <PageLayout>
       <Router />
-    </Layout>
+    </PageLayout>
   </BrowserRouter>
 );
 

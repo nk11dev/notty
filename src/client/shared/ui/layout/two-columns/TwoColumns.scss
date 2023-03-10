@@ -1,0 +1,28 @@
+@import '/src/assets/styles/theme/breakpoints';
+
+$sidebar-default-width: 250px;
+$sidebar-small-width: 130px;
+
+.columns {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: $sidebar-default-width;
+  border-right: 1px solid #e8e6e4;
+  background: #faf9f8;
+
+  @media (max-width: $bp-small) {
+    width: $sidebar-small-width;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.main {
+  flex: 1;
+  background: #fff;
+}
