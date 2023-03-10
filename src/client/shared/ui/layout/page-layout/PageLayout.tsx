@@ -2,7 +2,7 @@ import './PageLayout.scss';
 
 import React from 'react';
 
-import Header from '@/shared/ui/layout/Header';
+import Header from '@/shared/ui/layout/header';
 
 type Props = {
   children: React.ReactNode
