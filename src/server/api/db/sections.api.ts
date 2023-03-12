@@ -1,21 +1,12 @@
-import express from 'express';
+import { Request, Response } from 'express';
 import { Pool, QueryResult, } from 'pg';
 
+import poolConfig from '@/server/api/db/pool.config'
 import { formatColumnTime } from '@/server/helpers/db.helpers';
 
-const { env } = process;
+const pool = new Pool(poolConfig);
 
-const pool = new Pool({
-  host: env.PG_HOST,
-  port: parseInt(env.PG_PORT, 10),
-  database: env.PG_DATABASE,
-  user: env.PG_USER,
-  password: env.PG_PASS
-});
-
-const router = express.Router();
-
-router.get('/sections', (_req, response) => {
+export function getSections(_request: Request, response: Response) {
   const query = `
   SELECT 
     section_id, 
@@ -25,18 +16,88 @@ router.get('/sections', (_req, response) => {
   FROM sections
   ORDER BY section_id ASC
   `;
+
   pool.query(query, (error: Error, results: QueryResult) => {
     if (error) throw error;
+
     response.status(200).json({
       payload: results.rows
     });
-  })
-});
+  });
+}
 
-router.get('/sections/:sectionId', (_req, response) => {
+export function getSection(_request: Request, response: Response) {
   response.status(200).json({
     payload: []
   });
-});
+}
 
-export default router;
+export function createSection(request: Request, response: Response) {
+  const { title } = request.body;
+
+  const titleWithCounter = `concat('New section ', (SELECT DISTINCT COUNT(*) FROM sections WHERE updated_at IS NULL) + 1)`;
+
+  const query = `
+  INSERT INTO sections (title, created_at, updated_at) 
+  VALUES (
+    ${title ? ("'" + title + "'") : titleWithCounter}, 
+    current_timestamp,
+    ${title ? 'current_timestamp' : 'NULL'}
+  ) 
+  RETURNING *
+  `;
+
+  pool.query(query, (error: Error, results: QueryResult) => {
+    if (error) throw error;
+
+    response.status(201).json({
+      payload: results.rows
+    });
+  });
+}
+
+export function updateSection(request: Request, response: Response) {
+  const { sectionId } = request.params;
+  const { title } = request.body;
+
+  const query = `
+  UPDATE sections
+  SET 
+    title = $1,
+    updated_at = current_timestamp
+  WHERE section_id = $2
+  RETURNING *
+  `;
+
+  pool.query(
+    query,
+    [title, sectionId],
+    (error: Error, results: QueryResult) => {
+      if (error) throw error;
+
+      response.status(200).json({
+        payload: results.rows
+      });
+    });
+}
+
+export function deleteSection(request: Request, response: Response) {
+  const { sectionId } = request.params;
+
+  const query = `
+  DELETE 
+  FROM sections 
+  WHERE section_id = $1
+  `;
+
+  pool.query(
+    query,
+    [sectionId],
+    (error: Error, _results: QueryResult) => {
+      if (error) throw error;
+
+      response.status(200).json({
+        payload: `Section deleted with section_id: ${sectionId}`
+      });
+    });
+}

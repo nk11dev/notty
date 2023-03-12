@@ -1,13 +1,15 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
 
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
-import apiExample from '@/server/api/example/sections.api-example';
-import apiDb from '@/server/api/db/sections.api';
+import apiExample from '@/server/api/example/routes.api-example';
+import apiDb from '@/server/api/db/routes.api';
 
 const colors = require('ansi-colors');
 
 const app = express();
+app.use(bodyParser.json())
 
 // response headers
 app.use((_req, res, next) => {
@@ -18,8 +20,10 @@ app.use((_req, res, next) => {
 app.use(logger('dev'));
 app.use(express.static('dist/client'));
 
-// API routes
+// API routes (reads from local JSON, used for debugging purposes)
 app.use('/api-example', apiExample);
+
+// API routes (DB)
 app.use('/api', apiDb);
 
 // App routes (used only for "production" mode for correct HMR working with client "development" mode).

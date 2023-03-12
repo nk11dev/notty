@@ -1,39 +1,36 @@
-import express from 'express';
+import { Request, Response } from 'express';
 
 import { getContent } from '@/server/helpers/api.helpers';
 import { Section } from '@/entities/model/section.types';
 
-const router = express.Router();
 const FILEPATH = 'src/data/sections.example.json';
 
-router.get('/sections', (_req, res) => {
+export function getSections(_request: Request, response: Response) {
   getContent({
     filePath: FILEPATH,
     cb: (fileData) => {
-      res.send(JSON.stringify({
+      response.status(200).send(JSON.stringify({
         payload: fileData
       }));
     }
   });
-});
+}
 
-router.get('/sections/:sectionId', (req, res) => {
+export function getSection(request: Request, response: Response) {
   getContent({
     filePath: FILEPATH,
     cb: (fileData) => {
-      const { sectionId } = req.params;
+      const { sectionId } = request.params;
 
       const itemData = fileData.filter(
         (item: Section) => item.section_id.toString() === sectionId.toString()
       );
 
-      res.send(JSON.stringify({
+      response.status(200).send(JSON.stringify({
         payload: (itemData.length > 0)
           ? itemData[0]
           : {}
       }));
     }
   });
-});
-
-export default router;
+}
