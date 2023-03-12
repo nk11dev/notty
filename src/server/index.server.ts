@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 
+import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import apiExample from '@/server/api/example/sections.api-example';
 import apiDb from '@/server/api/db/sections.api';
 
@@ -16,25 +17,30 @@ app.use((_req, res, next) => {
 
 app.use(logger('dev'));
 app.use(express.static('dist/client'));
+
+// API routes
 app.use('/api-example', apiExample);
 app.use('/api', apiDb);
 
-// App react routes (used only for "production" mode for correct HMR working with client "development" mode).
+// App routes (used only for "production" mode for correct HMR working with client "development" mode).
 if (process.env.NODE_ENV == 'production') {
-  const appRoutes = require('@/app/routing/Router').appRoutes;
 
-  for (const route of appRoutes) {
-    app.get(route.path, (_req, res) => {
+  // Domain routes
+  const appRoutes = require('@/app/routing/Router').appRoutes;
+  const flatRoutes = collectNestedRoutes(appRoutes);
+
+  for (const route of flatRoutes) {
+    app.get(route, (_req, res) => {
       res.sendFile('dist/client/index.html', { root: '.' });
     });
   }
-}
 
-// 404 route
-app.use((_req, res) => {
-  res.status(404);
-  res.sendFile('dist/client/index.html', { root: '.' });
-});
+  // 404 route
+  app.use((_req, res) => {
+    res.status(404);
+    res.sendFile('dist/client/index.html', { root: '.' });
+  });
+}
 
 const PORT = process.env.PORT || process.env.PORT_SERVER;
 
