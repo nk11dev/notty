@@ -71,6 +71,7 @@ const prodConfig = {
   mode: 'production',
   performance: {
     maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   },
   optimization: {
     minimize: true,
