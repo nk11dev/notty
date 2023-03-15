@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
 
 // internal helpers
@@ -62,7 +63,13 @@ const devConfig = {
 };
 
 const prodConfig = {
-  mode: 'production'
+  mode: 'production',
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: (process.env.BUNDLE_ANALYZER === 'true' ? 'server' : 'disabled'),
+      analyzerPort: envConfig.PORT_BUNDLE_ANALYZER
+    })
+  ]
 };
 
 module.exports = () => {

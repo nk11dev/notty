@@ -11,6 +11,8 @@
     "dev": "npm run dev:client",
     "build:client": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.client.js",
     "build:server": "cross-env NODE_ENV=production npx webpack --config=configs/webpack.config.server.js",
+    "analyze:client": "cross-env BUNDLE_ANALYZER=true npm run build:client",
+    "analyze:server": "cross-env BUNDLE_ANALYZER=true npm run build:server",
     "start": "node dist/server.js",
     "prod": "npm run build:client && npm run build:server && npm start"
   },
@@ -40,6 +42,7 @@
     "nodemon-webpack-plugin": "4.8.1",
     "react-refresh": "0.14.0",
     "typescript": "4.9.5",
+    "webpack-bundle-analyzer": "4.8.0",
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
