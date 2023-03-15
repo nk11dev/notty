@@ -9,6 +9,7 @@ const regexes = {
 };
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
+const babelConfigPath = '../../../.babelrc.js';
 
 // client-side module rules
 const client = {
@@ -17,7 +18,7 @@ const client = {
     exclude: /node_modules/,
     loader: 'babel-loader',
     options: {
-      configFile: path.resolve(__dirname, '../../.babelrc.js'),
+      configFile: path.resolve(__dirname, babelConfigPath),
       plugins: [
         isDevelopment && require.resolve('react-refresh/babel')
       ].filter(Boolean),
@@ -62,7 +63,7 @@ const server = {
     exclude: /node_modules/,
     loader: 'babel-loader',
     options: {
-      configFile: path.resolve(__dirname, '../../.babelrc.js'),
+      configFile: path.resolve(__dirname, babelConfigPath),
     },
   },
   styles: {

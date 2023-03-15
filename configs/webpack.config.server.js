@@ -8,8 +8,8 @@ const NodemonPlugin = require('nodemon-webpack-plugin');
 const { merge } = require('webpack-merge');
 
 // internal helpers
-const aliases = require('./webpack-helpers/aliases');
-const rules = require('./webpack-helpers/module-rules');
+const aliases = require('./webpack/helpers/aliases');
+const rules = require('./webpack/helpers/module-rules');
 const envConfig = require('./env/env.config');
 
 const OUTPUT_FILENAME = 'server.js';

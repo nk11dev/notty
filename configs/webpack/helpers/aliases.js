@@ -1,6 +1,6 @@
 const path = require('path');
 
-const SRC_PATH = path.resolve(__dirname, '../../src');
+const SRC_PATH = path.resolve(__dirname, '../../../src');
 
 const aliases = {
   '@/app': 'client/app',
@@ -24,6 +24,6 @@ Object.keys(aliases).forEach(
   }
 );
 
-aliases['@/configs'] = path.resolve(__dirname, '..');
+aliases['@/configs'] = path.resolve(__dirname, '../../');
 
 module.exports = aliases;

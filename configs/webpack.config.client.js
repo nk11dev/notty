@@ -9,9 +9,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 
-// internal helpers
-const aliases = require('./webpack-helpers/aliases');
-const rules = require('./webpack-helpers/module-rules');
+// internal helpers and plugins
+const aliases = require('./webpack/helpers/aliases');
+const rules = require('./webpack/helpers/module-rules');
+const TimeLoggerPlugin = require('./webpack/plugins/time-logger-plugin');
 const envConfig = require('./env/env.config');
 
 const commonConfig = {
@@ -63,6 +64,7 @@ const devConfig = {
     hot: true
   },
   plugins: [
+    new TimeLoggerPlugin(),
     new ReactRefreshWebpackPlugin()
   ]
 };
