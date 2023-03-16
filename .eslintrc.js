@@ -22,6 +22,7 @@ module.exports = {
     '**/*.html',
     '**/*.lock',
     '**/*.md',
+    '**/*.log*',
     'LICENSE'
   ],
   extends: [
