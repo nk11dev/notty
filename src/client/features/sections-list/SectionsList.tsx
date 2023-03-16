@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 import { useFetch } from '@/shared/api';
 
-import { Section } from '@/entities/model/section.types';
+import { Section } from '@/entities/section/types';
+import { sectionsSelector } from '@/entities/section/selectors';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
@@ -13,6 +15,11 @@ const SectionsList = () => {
     isLoading,
     error
   } = useFetch('/sections');
+
+  const sectionsState = useSelector(sectionsSelector);
+
+  console.log('\n--- SectionsList.tsx');
+  console.log('sectionsState: ', sectionsState);
 
   if (isLoading) return <LoadingMsg />;
 

@@ -1,4 +1,4 @@
-import { Note } from '@/entities/model/note.types';
+import { Note } from '@/entities/note/types';
 
 export type Section = {
   section_id: number;

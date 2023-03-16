@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { getContent } from '@/server/helpers/api.helpers';
-import { Section } from '@/entities/model/section.types';
+import { Section } from '@/entities/section/types';
 
 const FILEPATH = 'src/data/sections.example.json';
 

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useFetch } from '@/shared/api';
 
-import { Note } from '@/entities/model/note.types';
+import { Note } from '@/entities/note/types';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
@@ -18,7 +18,7 @@ const NotesList = () => {
 
   if (isLoading) return <LoadingMsg />;
 
-  if (error) return <ErrorMsg error={error}/>;
+  if (error) return <ErrorMsg error={error} />;
 
   if (data === null) return null;
 
