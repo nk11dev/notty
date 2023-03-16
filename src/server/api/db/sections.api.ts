@@ -93,7 +93,7 @@ export function deleteSection(request: Request, response: Response) {
   pool.query(
     query,
     [sectionId],
-    (error: Error, _results: QueryResult) => {
+    (error: Error) => {
       if (error) throw error;
 
       response.status(200).json({
