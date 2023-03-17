@@ -1,3 +1,1 @@
-import SectionsList from './SectionsList';
-
-export default SectionsList;
+export { default } from './SectionsList';

@@ -1,3 +1,1 @@
-import ImagesExample from './ImagesExample';
-
-export default ImagesExample;
+export { default } from './ImagesExample';

@@ -1,3 +1,1 @@
-import StylesExample from './StylesExample';
-
-export default StylesExample;
+export { default } from './StylesExample';

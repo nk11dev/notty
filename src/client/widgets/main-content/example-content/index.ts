@@ -1,3 +1,1 @@
-import ExampleContent from './ExampleContent';
-
-export default ExampleContent;
+export { default } from './ExampleContent';

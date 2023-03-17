@@ -1,3 +1,1 @@
-import ExamplePage from './ExamplePage';
-
-export default ExamplePage;
+export { default } from './ExamplePage';

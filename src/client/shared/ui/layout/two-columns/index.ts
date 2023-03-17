@@ -1,3 +1,1 @@
-import TwoColumns from './TwoColumns';
-
-export default TwoColumns;
+export { default } from './TwoColumns';

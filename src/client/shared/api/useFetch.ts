@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
 
-function useFetch(url: string) {
+export function useFetch(url: string) {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -33,5 +33,3 @@ function useFetch(url: string) {
 
   return { data, isLoading, error };
 }
-
-export default useFetch;

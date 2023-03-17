@@ -1,3 +1,1 @@
-import ErrorMsg from './ErrorMsg';
-
-export default ErrorMsg;
+export { default } from './ErrorMsg';

@@ -1,3 +1,1 @@
-import SectionContent from './SectionContent';
-
-export default SectionContent;
+export { default } from './SectionContent';

@@ -1,3 +1,1 @@
-import LoadingMsg from './LoadingMsg';
-
-export default LoadingMsg;
+export { default } from './LoadingMsg';
