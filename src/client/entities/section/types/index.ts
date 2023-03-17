@@ -1,5 +1,1 @@
-import { Section } from './section.types';
-
-export {
-  Section,
-};
+export * from './section.types';

@@ -1,5 +1,5 @@
-import { NullableString } from '@/shared/types/nullable.types';
 import { onlyUnique } from '@/shared/utils/array.utils';
+import type { NullableString } from '@/shared/types';
 
 function collectNestedRoutes(
   routes: [],

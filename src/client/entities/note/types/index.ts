@@ -1,5 +1,1 @@
-import { Note } from './note.types';
-
-export {
-  Note,
-};
+export * from './note.types';

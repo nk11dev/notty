@@ -1,14 +1,12 @@
 import React from 'react';
 
-type ErrorType = {
+type Props = {
   error: {
     status?: string,
     statusText?: string,
     message?: string
   }
 };
-
-type Props = ErrorType;
 
 const ErrorMsg = (props: Props) => {
   const { status, statusText, message } = props.error;

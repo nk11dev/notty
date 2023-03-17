@@ -2,9 +2,8 @@ import './ButtonIcon.scss';
 
 import React from 'react';
 import cn from 'classnames';
-
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type Props = {
   icon: IconDefinition,

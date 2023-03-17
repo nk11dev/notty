@@ -1,10 +1,7 @@
 import React from 'react';
 import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  useLazyGetSectionsQuery
-} from '@/entities/section/api-slices';
-
+import { useLazyGetSectionsQuery } from '@/entities/section/api-slices';
 import SectionsList from '@/features/sections-list';
 import PinnedList from '@/features/pinned-list';
 import ButtonIcon from '@/shared/ui/controls/button-icon';
