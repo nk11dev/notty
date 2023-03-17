@@ -1,19 +1,27 @@
 import React from 'react';
 
-type Props = {
+type ErrorType = {
   error: {
-    name: string,
-    message: string
+    status?: string,
+    statusText?: string,
+    message?: string
   }
 };
 
+type Props = ErrorType;
+
 const ErrorMsg = (props: Props) => {
-  const { error } = props;
+  const { status, statusText, message } = props.error;
 
   return (
-    <p>
-      {`Error. Name: "${error.name}", Message: "${error.message}"`}
-    </p>
+    <div className='error-message'>
+      <div>
+        {`Error: ${status}, ${statusText}`}
+      </div>
+      <div>
+        {`Message: ${message}`}
+      </div>
+    </div>
   );
 }
 
