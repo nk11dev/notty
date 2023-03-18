@@ -1,9 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useFetch } from '@/shared/api';
-
-import { Note } from '@/entities/note/types';
+import { useGetSectionQuery } from '@/entities/section/api-slices';
+import type { Note } from '@/entities/note/types';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
@@ -12,13 +11,14 @@ const NotesList = () => {
 
   const {
     data,
-    isLoading,
+    isFetching,
+    isError,
     error
-  } = useFetch(`/sections/${sectionId}`);
+  } = useGetSectionQuery(sectionId);
 
-  if (isLoading) return <LoadingMsg />;
+  if (isFetching) return <LoadingMsg />;
 
-  if (error) return <ErrorMsg error={error} />;
+  if (isError) return <ErrorMsg error={error} />;
 
   if (data === null) return null;
 

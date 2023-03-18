@@ -1,13 +1,21 @@
 @import '/src/assets/styles/theme/colors';
 
 .button-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  text-align: center;
   border: 1px solid #c0c0c0;
-  padding: 0px 2px;
   border-radius: 3px;
   background: none;
 
   &:hover {
     cursor: pointer;
     background: $color-header;
+  }
+
+  svg {
+    vertical-align: baseline;
   }
 }

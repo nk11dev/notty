@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useGetSectionsQuery } from '@/entities/section/api-slices';
+import { useGetAllSectionsQuery } from '@/entities/section/api-slices';
 import type { Section } from '@/entities/section/types';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
@@ -12,7 +12,7 @@ const SectionsList = () => {
     isFetching,
     isError,
     error
-  } = useGetSectionsQuery();
+  } = useGetAllSectionsQuery();
 
   if (isFetching) return <LoadingMsg />;
 
