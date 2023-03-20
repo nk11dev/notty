@@ -3,6 +3,11 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@/shared/api/base-query';
 import type { Section } from '@/entities/section/types';
 
+type SectionUpdateArgs = {
+  id: string,
+  title: string
+};
+
 export const sectionsApi = createApi({
   reducerPath: 'sectionsApi',
   baseQuery: axiosBaseQuery(),
@@ -16,12 +21,14 @@ export const sectionsApi = createApi({
         }),
         providesTags: ['Sections'],
       }),
+
       getSection: build.query<Section, string>({
         query: (sectionId) => ({
           url: `/sections/${sectionId}`,
           method: 'GET'
         })
       }),
+
       createSection: build.mutation<Section, void>({
         query: () => ({
           url: `/sections`,
@@ -29,6 +36,19 @@ export const sectionsApi = createApi({
         }),
         invalidatesTags: ['Sections'],
       }),
+
+      updateSection: build.mutation<Section, SectionUpdateArgs>({
+        query: ({ id, title }) => ({
+          url: `/sections/${id}`,
+          method: 'PUT',
+          data: {
+            title,
+          },
+          headers: { 'content-type': 'application/json' },
+        }),
+        invalidatesTags: ['Sections'],
+      }),
+
       deleteSection: build.mutation<Section, string>({
         query: (sectionId) => ({
           url: `/sections/${sectionId}`,
@@ -45,5 +65,6 @@ export const {
   useLazyGetAllSectionsQuery,
   useGetSectionQuery,
   useCreateSectionMutation,
+  useUpdateSectionMutation,
   useDeleteSectionMutation,
 } = sectionsApi;

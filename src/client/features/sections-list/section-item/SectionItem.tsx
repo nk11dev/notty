@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import type { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
@@ -12,28 +12,36 @@ type Props = {
 };
 
 const SectionItem = ({ url, id, title }: Props) => {
+  const listItemRef = useRef(null);
+  const linkRef = useRef(null);
 
   const { show } = useContextMenu({
     id: SECTIONS_CONTEXT_MENU_ID,
   });
 
   function handleContextMenu(event: MouseEvent) {
-    const target = event.target as HTMLTextAreaElement;
-    const listItem = target.closest('li');
-    const sectionId = listItem.getAttribute('data-section-id');
+    const sectionId = listItemRef.current.getAttribute('data-section-id');
+    const sectionTitle = linkRef.current.getInnerHTML();
 
     show({
       event,
-      props: { sectionId }
+      props: {
+        sectionId,
+        sectionTitle,
+      }
     });
   }
 
   return (
     <li
+      ref={listItemRef}
       data-section-id={id}
       onContextMenu={handleContextMenu}
     >
-      <Link to={url}>
+      <Link
+        ref={linkRef}
+        to={url}
+      >
         {title}
       </Link>
     </li>

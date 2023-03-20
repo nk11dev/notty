@@ -9,15 +9,16 @@ import apiDb from '@/server/api/db/routes.api';
 const colors = require('ansi-colors');
 
 const app = express();
-app.use(bodyParser.json())
 
-// response headers
+// Response headers
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   next();
 });
 
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static('dist/client'));
 
