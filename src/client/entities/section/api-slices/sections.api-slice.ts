@@ -29,13 +29,21 @@ export const sectionsApi = createApi({
         }),
         invalidatesTags: ['Sections'],
       }),
+      deleteSection: build.mutation<Section, string>({
+        query: (sectionId) => ({
+          url: `/sections/${sectionId}`,
+          method: 'DELETE'
+        }),
+        invalidatesTags: ['Sections'],
+      }),
     }
   },
 });
 
-export const { 
+export const {
   useGetAllSectionsQuery,
   useLazyGetAllSectionsQuery,
   useGetSectionQuery,
   useCreateSectionMutation,
- } = sectionsApi;
+  useDeleteSectionMutation,
+} = sectionsApi;

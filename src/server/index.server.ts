@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 // response headers
 app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'DELETE');
   next();
 });
 
