@@ -3,7 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const regexes = {
   scripts: /\.[jt]sx?$/,
-  styles: /\.(sa|sc|c)ss$/,
+  styles: /\.(sc|c)ss$/,
+  styleModules: /.*module\.(sc|c)ss$/,
   images: /\.(jpe?g|jpg|png|gif|svg)$/,
   fonts: /\.(ttf|svg|woff|woff2)$/,
 };
@@ -30,7 +31,18 @@ const client = {
       (isDevelopment
         ? 'style-loader'
         : MiniCssExtractPlugin.loader),
-      'css-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          modules: {
+            // specifies CSS modules file naming
+            auto: (resourcePath) => regexes.styleModules.test(resourcePath),
+
+            // specifies CSS modules generated ident naming
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        }
+      },
       'sass-loader'
     ]
   },
