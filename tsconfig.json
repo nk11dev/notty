@@ -11,35 +11,40 @@
     "allowJs": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     // aliases for imports
-    "baseUrl": "./src/",
+    "baseUrl": "./",
     "paths": {
       "@/app/*": [
-        "client/app/*"
+        "src/client/app/*"
       ],
       "@/pages/*": [
-        "client/pages/*"
+        "src/client/pages/*"
       ],
       "@/widgets/*": [
-        "client/widgets/*"
+        "src/client/widgets/*"
       ],
       "@/features/*": [
-        "client/features/*"
+        "src/client/features/*"
       ],
       "@/entities/*": [
-        "client/entities/*"
+        "src/client/entities/*"
       ],
       "@/shared/*": [
-        "client/shared/*"
+        "src/client/shared/*"
       ],
       "@/images/*": [
-        "assets/images/*"
+        "src/assets/images/*"
       ],
       "@/data/*": [
-        "data/*"
+        "src/data/*"
       ],
       "@/server/*": [
-        "server/*"
+        "src/server/*"
       ],
     }
   },
