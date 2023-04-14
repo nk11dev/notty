@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import SidebarList from '@/shared/ui/layout/sidebar-list';
+
 const PinnedList = () => {
 
   const linksList = [
@@ -8,7 +10,7 @@ const PinnedList = () => {
   ];
 
   return (
-    <ul>
+    <SidebarList>
       {linksList.map((item, index) => (
         <li key={index}>
           <Link
@@ -18,7 +20,7 @@ const PinnedList = () => {
           </Link>
         </li>
       ))}
-    </ul>
+    </SidebarList>
   );
 };
 

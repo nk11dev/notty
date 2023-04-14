@@ -1,0 +1,17 @@
+@import '/src/assets/styles/theme/colors';
+
+.list {
+  padding: 0 10px;
+
+  li {
+    list-style-type: none;
+
+    a {
+      color: $color-sidebar-link;
+
+      &:hover {
+        color: $color-sidebar-link-hover;
+      }
+    }
+  }
+}

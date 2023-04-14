@@ -1,4 +1,4 @@
-import '@/styles/fonts.scss';
+import '@/styles/theme/fonts.scss';
 import '@/styles/bootstrap/index.scss';
 
 import React from 'react';
