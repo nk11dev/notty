@@ -21,7 +21,7 @@ const SectionItem = ({ url, id, title }: Props) => {
 
   function handleContextMenu(event: MouseEvent) {
     const sectionId = listItemRef.current.getAttribute('data-section-id');
-    const sectionTitle = linkRef.current.getInnerHTML();
+    const sectionTitle = linkRef.current.getAttribute('innerHTML');
 
     show({
       event,
