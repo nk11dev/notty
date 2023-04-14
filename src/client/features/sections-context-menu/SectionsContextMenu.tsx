@@ -1,4 +1,4 @@
-import './SectionsContextMenu.scss';
+import styles from './SectionsContextMenu.module.scss';
 
 import React, { useState } from 'react';
 import { Menu, Item } from 'react-contexify';
@@ -53,7 +53,7 @@ const SectionsContextMenu = (
     <>
       <Menu
         id={menuId}
-        className="sections-context-menu"
+        className={styles.contextMenu}
         animation="fade"
       >
         {menuItems.map((item: MenuItemProps, index: number) => (

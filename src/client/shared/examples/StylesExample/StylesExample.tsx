@@ -1,4 +1,4 @@
-import './StylesExample.scss';
+import styles from './StylesExample.module.scss';
 
 import React from 'react';
 
@@ -7,7 +7,7 @@ type Props = {
 };
 
 const StylesExample = (props: Props) => (
-  <div className="styles-example">
+  <div className={styles.example}>
     {props.children}
   </div>
 );

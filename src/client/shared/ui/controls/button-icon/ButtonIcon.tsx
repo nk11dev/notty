@@ -1,4 +1,4 @@
-import './ButtonIcon.scss';
+import styles from './ButtonIcon.module.scss';
 
 import React from 'react';
 import cn from 'classnames';
@@ -18,7 +18,7 @@ const ButtonIcon = (props: Props) => {
 
   return (
     <span
-      className={cn('button-icon', cls)}
+      className={cn(styles.button, cls)}
       onClick={clickHandler}
     >
       <FontAwesomeIcon

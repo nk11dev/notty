@@ -1,4 +1,4 @@
-import './PageLayout.scss';
+import styles from './PageLayout.module.scss';
 
 import React from 'react';
 
@@ -9,10 +9,10 @@ type Props = {
 };
 
 const PageLayout = (props: Props) => (
-  <div className="wrapper">
+  <div className={styles.wrapper}>
     <Header />
 
-    <section className="content">
+    <section className={styles.content}>
       {props.children}
     </section>
   </div>
