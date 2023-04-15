@@ -6,6 +6,7 @@ import {
   useCreateSectionMutation
 } from '@/entities/section/api-slices';
 
+import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 const SectionsToolbar = () => {
@@ -13,10 +14,8 @@ const SectionsToolbar = () => {
   const [createSection] = useCreateSectionMutation();
 
   return (
-    <>
-      <span>
-        <b>Sections</b>
-      </span>
+    <SidebarToolbar>
+      <b>Sections</b>
 
       <ButtonIcon
         cls="m-1"
@@ -29,7 +28,7 @@ const SectionsToolbar = () => {
         icon={faRotate}
         clickHandler={() => refetchAllSections()}
       />
-    </>
+    </SidebarToolbar>
   );
 }
 

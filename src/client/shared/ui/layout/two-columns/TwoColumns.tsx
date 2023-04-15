@@ -10,7 +10,7 @@ type Props = {
 
 const TwoColumns = (props: Props) => (
   <div className={styles.columns}>
-    <aside className={cn(styles.sidebar,'p-2')}>
+    <aside className={styles.sidebar}>
       {props.sidebarContent}
     </aside>
 

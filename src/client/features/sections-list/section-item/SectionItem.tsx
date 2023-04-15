@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import type { MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
+import cn from 'classnames';
 
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 
@@ -38,12 +39,15 @@ const SectionItem = ({ url, id, title }: Props) => {
       data-section-id={id}
       onContextMenu={handleContextMenu}
     >
-      <Link
+      <NavLink
         ref={linkRef}
         to={url}
+        className={({ isActive }) =>
+          cn({ 'active': isActive })
+        }
       >
         {title}
-      </Link>
+      </NavLink>
     </li>
   );
 };

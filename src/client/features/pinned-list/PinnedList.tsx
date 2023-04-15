@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
 
 import SidebarList from '@/shared/ui/layout/sidebar-list';
 
@@ -13,11 +14,14 @@ const PinnedList = () => {
     <SidebarList>
       {linksList.map((item, index) => (
         <li key={index}>
-          <Link
+          <NavLink
             to={item.url}
+            className={({ isActive }) =>
+              cn({ 'active': isActive })
+            }
           >
             {item.text}
-          </Link>
+          </NavLink>
         </li>
       ))}
     </SidebarList>

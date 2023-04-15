@@ -1,18 +1,21 @@
+import styles from './LeftSidebar.module.scss';
+
 import React from 'react';
 
+import PinnedToolbar from '@/features/pinned-toolbar';
+import PinnedList from '@/features/pinned-list';
 import SectionsToolbar from '@/features/sections-toolbar';
 import SectionsList from '@/features/sections-list';
-import PinnedList from '@/features/pinned-list';
 
 const LeftSidebar = () => (
   <>
-    <div>
-      <b>Pinned</b>
+    <div className={styles.sidebarItem}>
+      <PinnedToolbar />
       <PinnedList />
     </div>
 
-    <div>
-      <SectionsToolbar/>
+    <div className={styles.sidebarItem}>
+      <SectionsToolbar />
       <SectionsList />
     </div>
   </>

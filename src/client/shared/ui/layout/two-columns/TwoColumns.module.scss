@@ -1,4 +1,5 @@
 @import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/colors';
 
 $sidebar-default-width: 250px;
 $sidebar-small-width: 140px;
@@ -10,8 +11,8 @@ $sidebar-small-width: 140px;
 
 .sidebar {
   width: $sidebar-default-width;
-  border-right: 1px solid #e8e6e4;
-  background: #faf9f8;
+  border-right: 1px solid $sidebar-border-right-color;
+  background: $sidebar-color-bg;
 
   @media (max-width: $bp-small) {
     width: $sidebar-small-width;

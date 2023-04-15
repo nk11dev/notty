@@ -1,16 +1,26 @@
 @import '/src/assets/styles/theme/colors';
 
 .list {
-  padding: 0 10px;
+  padding: 0;
+  margin: 0;
 
   li {
     list-style-type: none;
 
-    a {
-      color: $color-sidebar-link;
+    :global {
+      a {
+        display: block;
+        padding: 6px 20px;
+        line-height: 1.2;
+        color: $sidebar-link-color-text;
 
-      &:hover {
-        color: $color-sidebar-link-hover;
+        &.active {
+          background-color: $sidebar-link-active-color-bg;
+        }
+
+        &:not(.active):hover {
+          background-color: $sidebar-link-not-active-color-bg;
+        }
       }
     }
   }

@@ -4,6 +4,7 @@
   display: inline-block;
   width: 20px;
   height: 20px;
+  line-height: 1.45;
   vertical-align: middle;
   text-align: center;
   border: 1px solid #c0c0c0;
@@ -12,7 +13,7 @@
 
   &:hover {
     cursor: pointer;
-    background: $color-button-bg-hover;
+    background: $button-hover-color-bg;
   }
 
   svg {
