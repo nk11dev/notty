@@ -36,7 +36,7 @@ const SectionModal = (
       <Modal show={isShowing} onHide={onHide}>
 
         <Modal.Header closeButton>
-          <Modal.Title>Edit section</Modal.Title>
+          <Modal.Title><b>Edit section</b></Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
