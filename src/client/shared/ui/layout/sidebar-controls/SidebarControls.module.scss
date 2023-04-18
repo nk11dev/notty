@@ -1,0 +1,23 @@
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
+
+.controls {
+  width: $sidebar-controls-width;
+  border-right: 1px solid $sidebar-border-color;
+  background: $sidebar-color-bg;
+}
+
+.controlsBtn {
+  width: 100%;
+  height: $sidebar-item-height;
+  padding: 5px;
+  border-radius: 0;
+  border-style: solid;
+  border-color: $sidebar-border-color;
+  border-width: 0 0 1px 0;
+  color: $header-color-bg;
+}
+
+.controlsBtn:global(.active) {
+  background: $sidebar-controls-active-color-bg;
+}

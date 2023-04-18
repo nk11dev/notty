@@ -1,3 +1,4 @@
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
 .list {
@@ -10,8 +11,13 @@
     :global {
       a {
         display: block;
-        padding: 6px 20px;
+        height: $sidebar-item-height;
+        padding: 8px 20px;
         line-height: 1.2;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         color: $sidebar-link-color-text;
 
         &.active {
@@ -19,7 +25,7 @@
         }
 
         &:not(.active):hover {
-          background-color: $sidebar-link-not-active-color-bg;
+          background-color: $sidebar-link-hover-color-bg;
         }
       }
     }

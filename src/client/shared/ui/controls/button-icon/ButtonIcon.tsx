@@ -8,22 +8,26 @@ import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 type Props = {
   icon: IconDefinition,
   cls?: string,
+  size?: number,
   clickHandler?: () => void;
 };
 
 const ButtonIcon = (props: Props) => {
-  const { icon, cls, clickHandler } = props;
+  const { icon, cls, size, clickHandler } = props;
 
   if (!icon) return null;
 
   return (
     <span
-      className={cn(styles.button, cls)}
+      className={cn(styles.btn, cls)}
       onClick={clickHandler}
     >
       <FontAwesomeIcon
         icon={icon}
-        style={{ width: 16, height: 16 }}
+        style={{
+          width: size,
+          height: size
+        }}
       />
     </span>
   );

@@ -1,3 +1,18 @@
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
+
 .toolbar {
-  margin: 6px 10px;
+  height: $sidebar-item-height;
+  margin: 0 10px;
+  line-height: 2.1;
+}
+
+.toolbarBtn {
+  width: 20px;
+  height: 20px;
+  border: 1px solid $sidebar-toolbar-btn-border-color;
+
+  &:hover {
+    background: $sidebar-link-hover-color-bg;
+  }
 }

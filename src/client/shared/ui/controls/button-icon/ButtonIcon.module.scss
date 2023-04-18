@@ -1,19 +1,15 @@
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.button {
+.btn {
   display: inline-block;
-  width: 20px;
-  height: 20px;
   line-height: 1.45;
   vertical-align: middle;
   text-align: center;
-  border: 1px solid #c0c0c0;
   border-radius: 3px;
-  background: none;
 
   &:hover {
     cursor: pointer;
-    background: $button-hover-color-bg;
   }
 
   svg {

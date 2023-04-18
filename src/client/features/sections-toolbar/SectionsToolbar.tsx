@@ -1,5 +1,8 @@
+import styles from '@/shared/ui/layout/sidebar-toolbar/SidebarToolbar.module.scss';
+
 import React from 'react';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
+import cn from 'classnames';
 
 import {
   useLazyGetAllSectionsQuery,
@@ -18,14 +21,16 @@ const SectionsToolbar = () => {
       <b>Sections</b>
 
       <ButtonIcon
-        cls="m-1"
+        size={16}
         icon={faPlus}
+        cls={cn(styles.toolbarBtn, 'm-1')}
         clickHandler={() => createSection()}
       />
 
       <ButtonIcon
-        cls="m-1"
+        size={16}
         icon={faRotate}
+        cls={cn(styles.toolbarBtn, 'm-1')}
         clickHandler={() => refetchAllSections()}
       />
     </SidebarToolbar>

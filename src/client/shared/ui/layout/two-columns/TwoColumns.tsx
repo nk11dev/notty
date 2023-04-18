@@ -3,6 +3,8 @@ import styles from './TwoColumns.module.scss';
 import React from 'react';
 import cn from 'classnames';
 
+import SidebarControls from '@/shared/ui/layout/sidebar-controls';
+
 type Props = {
   sidebarContent: React.ReactNode,
   mainContent: React.ReactNode
@@ -10,11 +12,18 @@ type Props = {
 
 const TwoColumns = (props: Props) => (
   <div className={styles.columns}>
-    <aside className={styles.sidebar}>
+
+    <SidebarControls />
+
+    <aside className={cn(styles.sidebar, 'sidebar-1')}>
       {props.sidebarContent}
     </aside>
 
-    <main className={cn(styles.main,'p-2')}>
+{/*     <aside
+      className={cn(styles.sidebar, 'sidebar-2')}
+    /> */}
+
+    <main className={cn(styles.main, 'p-2')}>
       {props.mainContent}
     </main>
 

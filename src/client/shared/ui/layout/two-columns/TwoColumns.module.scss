@@ -1,29 +1,38 @@
 @import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
-
-$sidebar-default-width: 250px;
-$sidebar-small-width: 140px;
 
 .columns {
   display: flex;
   flex: 1;
+
+  // used for correct flexbox with "white-space: nowrap"
+  @media (max-width: $bp-small) {
+    min-width: 0;
+  }
 }
 
 .sidebar {
-  width: $sidebar-default-width;
-  border-right: 1px solid $sidebar-border-right-color;
+  border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;
 
   @media (max-width: $bp-small) {
-    width: $sidebar-small-width;
+    flex: 1;
+
+    // used for correct flexbox with "white-space: nowrap"
+    min-width: 0;
   }
 
-  a {
-    text-decoration: none;
+  @media (min-width: $bp-small) {
+    width: $sidebar-width;
   }
 }
 
 .main {
   flex: 1;
   background: #fff;
+
+  @media (max-width: $bp-small) {
+    display: none;
+  }
 }
