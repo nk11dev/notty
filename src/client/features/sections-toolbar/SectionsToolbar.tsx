@@ -21,17 +21,19 @@ const SectionsToolbar = () => {
       <b>Sections</b>
 
       <ButtonIcon
-        size={16}
         icon={faPlus}
-        cls={cn(styles.toolbarBtn, 'm-1')}
         clickHandler={() => createSection()}
+        cls={cn(styles.toolbarBtn, 'm-1')}
+        size={16}
+        tooltip="Create section"
       />
 
       <ButtonIcon
-        size={16}
         icon={faRotate}
-        cls={cn(styles.toolbarBtn, 'm-1')}
         clickHandler={() => refetchAllSections()}
+        cls={cn(styles.toolbarBtn, 'm-1')}
+        size={16}
+        tooltip="Refresh sections"
       />
     </SidebarToolbar>
   );

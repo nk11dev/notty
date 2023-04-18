@@ -23,15 +23,18 @@ const SidebarControls = () => {
     });
   }
 
+  const hasSidebarNav = (currentSidebarNav !== '0');
+
   return (
     <aside className={styles.controls}>
       <ButtonIcon
-        cls={cn(styles.controlsBtn, {
-          [styles.isActive]: (currentSidebarNav !== '0')
-        })}
         icon={faList}
-        size={24}
         clickHandler={() => toggleSidebarNav()}
+        cls={cn(styles.controlsBtn, {
+          [styles.isActive]: hasSidebarNav
+        })}
+        size={24}
+        tooltip={`${hasSidebarNav ? 'Hide' : 'Show'} navigation`}
       />
     </aside>
   )
