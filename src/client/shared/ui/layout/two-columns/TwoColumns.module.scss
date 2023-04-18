@@ -31,7 +31,9 @@
 .main {
   flex: 1;
   background: #fff;
+}
 
+.isHiddenBpSmall {
   @media (max-width: $bp-small) {
     display: none;
   }

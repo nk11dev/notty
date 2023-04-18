@@ -1,8 +1,10 @@
 import styles from './TwoColumns.module.scss';
 
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 
+import { SIDEBAR_NAV_QUERY_PARAM } from '@/app/constants/query-params.constants';
 import SidebarControls from '@/shared/ui/layout/sidebar-controls';
 
 type Props = {
@@ -10,24 +12,38 @@ type Props = {
   mainContent: React.ReactNode
 };
 
-const TwoColumns = (props: Props) => (
-  <div className={styles.columns}>
+const TwoColumns = (props: Props) => {
+  const [currentQueryParams] = useSearchParams();
 
-    <SidebarControls />
+  const hasSidebarNav = currentQueryParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
 
-    <aside className={cn(styles.sidebar, 'sidebar-1')}>
-      {props.sidebarContent}
-    </aside>
+  return (
+    <div className={cn(styles.columns, {
+      'has-sidebar-nav': hasSidebarNav
+    })}>
 
-{/*     <aside
-      className={cn(styles.sidebar, 'sidebar-2')}
-    /> */}
+      <SidebarControls />
 
-    <main className={cn(styles.main, 'p-2')}>
-      {props.mainContent}
-    </main>
+      {hasSidebarNav && (
+        <>
+          <aside className={cn(styles.sidebar, 'sidebar-1')}>
+            {props.sidebarContent}
+          </aside>
 
-  </div>
-);
+          {/* <aside
+            className={cn(styles.sidebar, 'sidebar-2')}
+          /> */}
+        </>
+      )}
+
+      <main className={cn(styles.main, 'p-2', {
+        [styles.isHiddenBpSmall]: hasSidebarNav
+      })}>
+        {props.mainContent}
+      </main>
+
+    </div>
+  );
+}
 
 export default TwoColumns;

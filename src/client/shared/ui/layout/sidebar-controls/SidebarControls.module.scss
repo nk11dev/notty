@@ -18,6 +18,6 @@
   color: $header-color-bg;
 }
 
-.controlsBtn:global(.active) {
-  background: $sidebar-controls-active-color-bg;
+.isActive {
+  background: $sidebar-link-active-color-bg;
 }
