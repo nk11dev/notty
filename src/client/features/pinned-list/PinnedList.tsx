@@ -1,10 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
 import SidebarList from '@/shared/ui/layout/sidebar-list';
 
 const PinnedList = () => {
+  const { search: queryParams } = useLocation();
 
   const linksList = [
     { url: '/example', text: 'Example content' },
@@ -15,7 +16,7 @@ const PinnedList = () => {
       {linksList.map((item, index) => (
         <li key={index}>
           <NavLink
-            to={item.url}
+            to={item.url + queryParams}
             className={({ isActive }) =>
               cn({ 'active': isActive })
             }

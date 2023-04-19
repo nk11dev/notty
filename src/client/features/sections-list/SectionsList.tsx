@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import SectionItem from '@/features/sections-list/section-item';
 import SectionsContextMenu from '@/features/sections-context-menu';
@@ -9,6 +10,8 @@ import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const SectionsList = () => {
+  const { search: queryParams } = useLocation();
+
   const {
     data,
     isFetching,
@@ -28,7 +31,7 @@ const SectionsList = () => {
         {data.map((item: Section, index: number) => (
           <SectionItem
             key={index}
-            url={`/sections/${item.section_id}`}
+            url={`/sections/${item.section_id}${queryParams}`}
             id={item.section_id}
             title={item.title}
           />
