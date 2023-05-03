@@ -4,9 +4,9 @@ import {
   getSections,
   getSection,
   createSection,
-  updateSection,
-  deleteSection
-} from './sections.api';
+  deleteSection,
+  updateSection
+} from '@/server/api/db-orm/sections.api-db-orm';
 
 const router = express.Router();
 

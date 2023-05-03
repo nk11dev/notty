@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "moduleResolution": "node",
+    "lib": ["es5", "es6", "dom"],
     "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
@@ -11,6 +12,7 @@
     "allowJs": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"

@@ -2,8 +2,8 @@ import { Pool, } from 'pg';
 import type { QueryResult, } from 'pg';
 import type { Request, Response } from 'express';
 
-import poolConfig from '@/server/api/db/pool.config'
-import { formatColumnTime } from '@/server/helpers/db.helpers';
+import poolConfig from '@/server/api/db-sql/pool.config'
+import { formatColumnTime } from '@/server/helpers/db-sql.helpers';
 
 const pool = new Pool(poolConfig);
 
