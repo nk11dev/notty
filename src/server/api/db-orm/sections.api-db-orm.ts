@@ -6,7 +6,11 @@ import { Section } from '@/server/api/db-orm/entities/section.entity';
 const sectionRepository = dataSource.getRepository(Section);
 
 export async function getSections(_request: Request, response: Response) {
-  const sections = await sectionRepository.find();
+  const sections = await sectionRepository.find({
+    order: {
+      section_id: "ASC"
+    }
+});
 
   response.status(200).json({
     payload: sections
@@ -33,7 +37,7 @@ export async function updateSection(request: Request, response: Response) {
     UPDATE ${sectionRepository.metadata.tableName}
     SET 
       title = $1,
-      updated_at = current_timestamp
+      updated_at = CURRENT_TIMESTAMP
     WHERE section_id = $2
     RETURNING *
 `, [request.body.title, request.params.sectionId]);

@@ -27,15 +27,14 @@ export class Section {
     type: 'timestamptz',
     nullable: true,
     transformer: dateTranformer,
-    default: () => 'CURRENT_TIMESTAMP',
+    default: () => 'NULL',
   })
   updated_at: Date;
 
   @BeforeInsert()
-  checkTitle() {
+  setDefaultTitle() {
     if (!this.title) {
-      this.title = 'orm (untitled section)';
-      this.updated_at = null;
+      this.title = 'Untitled section';
     }
   }
 }
