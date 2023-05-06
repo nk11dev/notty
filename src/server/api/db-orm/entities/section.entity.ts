@@ -10,7 +10,7 @@ export class Section {
   section_id: number;
 
   @Column({
-    nullable: true,
+    nullable: false,
     length: 30
   })
   title: string
@@ -27,7 +27,6 @@ export class Section {
     type: 'timestamptz',
     nullable: true,
     transformer: dateTranformer,
-    default: () => 'NULL',
   })
   updated_at: Date;
 
