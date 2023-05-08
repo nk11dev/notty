@@ -1,17 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
+import { Note } from '@/server/api/db-orm/entities/note.entity';
 import { dateTranformer } from '@/server/helpers/db-orm.helpers';
 
 @Entity('sections')
 export class Section {
   @PrimaryGeneratedColumn('identity', {
-    generatedIdentity: 'ALWAYS'
+    generatedIdentity: 'ALWAYS',
+    primaryKeyConstraintName: 'pk_section_id'
   })
   section_id: number;
 
   @Column({
     nullable: false,
-    length: 30
+    length: 30,
+    default: () => "'Untitled section'",
   })
   title: string
 
@@ -30,10 +33,9 @@ export class Section {
   })
   updated_at: Date;
 
-  @BeforeInsert()
-  setDefaultTitle() {
-    if (!this.title) {
-      this.title = 'Untitled section';
-    }
-  }
+  @OneToMany(
+    () => Note,
+    (note) => note.section_id
+  )
+  notes: Note[]
 }
