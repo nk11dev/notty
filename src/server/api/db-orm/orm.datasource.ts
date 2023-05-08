@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 
-import { Section } from '@/server/api/db-orm/entities/section.entity';
-import { Note } from '@/server/api/db-orm/entities/note.entity';
+import Section from '@/server/api/db-orm/entities/section.entity';
+import Note from '@/server/api/db-orm/entities/note.entity';
 
 const { env } = process;
 

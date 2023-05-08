@@ -1,25 +1,29 @@
 import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/db-orm/orm.datasource';
-import { Section } from '@/server/api/db-orm/entities/section.entity';
+import Section from '@/server/api/db-orm/entities/section.entity';
 
 const sectionRepository = dataSource.getRepository(Section);
 
 export async function getSections(_request: Request, response: Response) {
-  const sections = await sectionRepository.find({
+  const results = await sectionRepository.find({
     order: {
       section_id: "ASC"
     }
-});
+  });
 
   response.status(200).json({
-    payload: sections
+    payload: results
   });
 }
 
-export function getSection(_request: Request, response: Response) {
+export async function getSection(request: Request, response: Response) {
+  const results = await sectionRepository.findOneBy({
+    section_id: Number(request.params.sectionId),
+  });
+
   response.status(200).json({
-    payload: []
+    payload: results
   });
 }
 

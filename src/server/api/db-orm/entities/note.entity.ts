@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import { Section } from '@/server/api/db-orm/entities/section.entity';
+import Section from '@/server/api/db-orm/entities/section.entity';
 import { dateTranformer } from '@/server/helpers/db-orm.helpers';
 
 @Entity('notes')
-export class Note {
+export default class Note {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
     primaryKeyConstraintName: 'pk_note_id'
@@ -39,15 +39,22 @@ export class Note {
   })
   updated_at: Date;
 
+  // For the purpose of fetching foreign key column, we should add "section_id" column explicitly and pass this column name to @JoinColumn decorator
+  @Column({ name: 'section_id' })
+  section_id: number;
+
   @ManyToOne(
     () => Section,
     (section) => section.notes,
-    { nullable: false }
+    {
+      nullable: false,
+      onDelete: 'CASCADE'
+    }
   )
   @JoinColumn({
     name: "section_id",
     referencedColumnName: "section_id",
     foreignKeyConstraintName: "fk_section_id"
   })
-  section_id: Section
+  section: Section
 }

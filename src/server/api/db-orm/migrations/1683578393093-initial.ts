@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Initial1683511785184 implements MigrationInterface {
-  name = 'Initial1683511785184'
+export class Initial1683578393093 implements MigrationInterface {
+  name = 'Initial1683578393093'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
@@ -10,7 +10,8 @@ export class Initial1683511785184 implements MigrationInterface {
         "title" character varying(30) NOT NULL DEFAULT 'Untitled note', 
         "body" text, 
         "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), 
-        "updated_at" TIMESTAMP WITH TIME ZONE, "section_id" integer NOT NULL, 
+        "updated_at" TIMESTAMP WITH TIME ZONE, 
+        "section_id" integer NOT NULL, 
         CONSTRAINT "pk_note_id" PRIMARY KEY ("note_id")
       )
     `);
@@ -27,7 +28,7 @@ export class Initial1683511785184 implements MigrationInterface {
       ALTER TABLE "notes" 
         ADD CONSTRAINT "fk_section_id" 
           FOREIGN KEY ("section_id") REFERENCES "sections"("section_id") 
-          ON DELETE NO ACTION ON UPDATE NO ACTION
+          ON DELETE CASCADE ON UPDATE NO ACTION
     `);
   }
 
