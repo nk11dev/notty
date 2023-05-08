@@ -1,0 +1,19 @@
+@import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
+
+.sidebarAside {
+  border-right: 1px solid $sidebar-border-color;
+  background: $sidebar-color-bg;
+
+  @media (max-width: $bp-small) {
+    flex: 1;
+
+    // used for correct flexbox with "white-space: nowrap"
+    min-width: 0;
+  }
+
+  @media (min-width: $bp-small) {
+    width: $sidebar-width;
+  }
+}

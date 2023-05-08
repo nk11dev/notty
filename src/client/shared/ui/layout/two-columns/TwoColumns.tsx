@@ -18,30 +18,16 @@ const TwoColumns = (props: Props) => {
   const hasSidebarNav = currentQueryParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
 
   return (
-    <div className={cn(styles.columns, {
-      'has-sidebar-nav': hasSidebarNav
-    })}>
-
+    <div className={styles.columns}>
       <SidebarControls />
 
-      {hasSidebarNav && (
-        <>
-          <aside className={cn(styles.sidebar, 'sidebar-1')}>
-            {props.sidebarContent}
-          </aside>
-
-          {/* <aside
-            className={cn(styles.sidebar, 'sidebar-2')}
-          /> */}
-        </>
-      )}
+      {hasSidebarNav && props.sidebarContent}
 
       <main className={cn(styles.main, 'p-2', {
         [styles.isHiddenBpSmall]: hasSidebarNav
       })}>
         {props.mainContent}
       </main>
-
     </div>
   );
 }
