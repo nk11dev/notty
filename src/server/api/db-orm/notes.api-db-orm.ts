@@ -1,12 +1,11 @@
 import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/db-orm/orm.datasource';
-import Section from '@/server/api/db-orm/entities/section.entity';
-import Note from '@/server/api/db-orm/entities/note.entity';
+import SectionEntity from '@/server/api/db-orm/entities/section.entity';
+import NoteEntity from '@/server/api/db-orm/entities/note.entity';
 
-const sectionRepository = dataSource.getRepository(Section);
-const noteRepository = dataSource.getRepository(Note);
-
+const sectionRepository = dataSource.getRepository(SectionEntity);
+const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getNotes(request: Request, response: Response) {
   const { sectionId } = request.params;

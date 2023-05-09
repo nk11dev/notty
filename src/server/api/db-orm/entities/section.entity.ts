@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-import Note from '@/server/api/db-orm/entities/note.entity';
+import NoteEntity from '@/server/api/db-orm/entities/note.entity';
 import { dateTranformer } from '@/server/helpers/db-orm.helpers';
 
 @Entity('sections')
-export default class Section {
+export default class SectionEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
     primaryKeyConstraintName: 'pk_section_id'
@@ -34,8 +34,8 @@ export default class Section {
   updated_at: Date;
 
   @OneToMany(
-    () => Note,
+    () => NoteEntity,
     (note) => note.section,
   )
-  notes: Note[]
+  notes: NoteEntity[]
 }

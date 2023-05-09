@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import Section from '@/server/api/db-orm/entities/section.entity';
+import SectionEntity from '@/server/api/db-orm/entities/section.entity';
 import { dateTranformer } from '@/server/helpers/db-orm.helpers';
 
 @Entity('notes')
-export default class Note {
+export default class NoteEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
     primaryKeyConstraintName: 'pk_note_id'
@@ -44,7 +44,7 @@ export default class Note {
   section_id: number;
 
   @ManyToOne(
-    () => Section,
+    () => SectionEntity,
     (section) => section.notes,
     {
       nullable: false,
@@ -56,5 +56,5 @@ export default class Note {
     referencedColumnName: "section_id",
     foreignKeyConstraintName: "fk_section_id"
   })
-  section: Section
+  section: SectionEntity
 }

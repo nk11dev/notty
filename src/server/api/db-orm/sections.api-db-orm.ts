@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/db-orm/orm.datasource';
-import Section from '@/server/api/db-orm/entities/section.entity';
+import SectionEntity from '@/server/api/db-orm/entities/section.entity';
 
-const sectionRepository = dataSource.getRepository(Section);
+const sectionRepository = dataSource.getRepository(SectionEntity);
 
 export async function getSections(_request: Request, response: Response) {
   const results = await sectionRepository.find({

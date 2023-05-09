@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 
-import Section from '@/server/api/db-orm/entities/section.entity';
-import Note from '@/server/api/db-orm/entities/note.entity';
+import SectionEntity from '@/server/api/db-orm/entities/section.entity';
+import NoteEntity from '@/server/api/db-orm/entities/note.entity';
 
 const { env } = process;
 
@@ -21,11 +21,11 @@ const dataSource = new DataSource({
   password: env.PG_PASS,
   database: env.PG_DATABASE,
   entities: [
-    Section,
-    Note,
+    SectionEntity,
+    NoteEntity,
   ],
   synchronize: false,
-  logging: true,
+  logging: false,
   migrations: [
     `./src/server/api/db-orm/migrations/**/*.${migrationsExt}`,
   ],
