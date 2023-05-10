@@ -60,7 +60,7 @@ const devConfig = {
     port: envConfig.PORT_CLIENT,
     historyApiFallback: true,
     static: {
-      directory: path.join(__dirname, '../dist'),
+      directory: path.join(__dirname, '../dist/client'),
     },
     hot: true
   },

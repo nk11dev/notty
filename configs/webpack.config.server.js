@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
 
@@ -64,6 +65,15 @@ const devConfig = {
 
 const prodConfig = {
   mode: 'production',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        // prevents "LICENSE.txt" creation (in output folder)
+        extractComments: false,
+      }),
+    ],
+  },
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: (process.env.BUNDLE_ANALYZER === 'true' ? 'server' : 'disabled'),
