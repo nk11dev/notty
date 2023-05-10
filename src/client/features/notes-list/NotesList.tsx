@@ -14,7 +14,9 @@ const NotesList = () => {
     isFetching,
     isError,
     error
-  } = useGetSectionQuery(sectionId);
+  } = useGetSectionQuery(sectionId, {
+    refetchOnMountOrArgChange: true
+  });
 
   if (isFetching) return <LoadingMsg />;
 
