@@ -40,14 +40,16 @@ export default class NoteEntity {
   updated_at: Date;
 
   // For the purpose of fetching foreign key column, we should add "section_id" column explicitly and pass this column name to @JoinColumn decorator
-  @Column({ name: 'section_id' })
+  @Column({
+    name: 'section_id',
+    nullable: false,
+  })
   section_id: number;
 
   @ManyToOne(
     () => SectionEntity,
     (section) => section.notes,
     {
-      nullable: false,
       onDelete: 'CASCADE'
     }
   )
