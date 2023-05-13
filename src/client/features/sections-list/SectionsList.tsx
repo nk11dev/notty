@@ -23,7 +23,7 @@ const SectionsList = () => {
 
   if (isError) return <ErrorMsg error={error} />;
 
-  if (data === null) return null;
+  if (!data || data?.length <= 0) return null;
 
   return (
     <>

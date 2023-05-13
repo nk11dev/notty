@@ -1,12 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams, NavLink } from 'react-router-dom';
+import cn from 'classnames';
 
-import { useGetSectionQuery } from '@/entities/section/api-slices';
+import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
 import type { Note } from '@/entities/note/types';
+import SidebarList from '@/shared/ui/layout/sidebar-list';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
+  const { search: queryParams } = useLocation();
   const { sectionId } = useParams();
 
   const {
@@ -14,7 +17,8 @@ const NotesList = () => {
     isFetching,
     isError,
     error
-  } = useGetSectionQuery(sectionId, {
+  } = useGetNotesBySectionQuery(sectionId, {
+    skip: !sectionId,
     refetchOnMountOrArgChange: true
   });
 
@@ -22,27 +26,23 @@ const NotesList = () => {
 
   if (isError) return <ErrorMsg error={error} />;
 
-  if (data === null) return null;
+  if (!data || data?.length <= 0) return null;
 
   return (
-    <>
-      {
-        data?.notes?.length
-          ? (
-            <>
-              <div>Notes List:</div>
-              <ul>
-                {data.notes.map((item: Note, index: number) => (
-                  <li key={index}>
-                    {item.title}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )
-          : <p>Notes for section with id {sectionId} are not found</p>
-      }
-    </>
+    <SidebarList>
+      {data.map((item: Note, index: number) => (
+        <li key={index}>
+          <NavLink
+            to={`/sections/${item.section_id}/notes/${item.note_id}/${queryParams}`}
+            className={({ isActive }) =>
+              cn({ 'active': isActive })
+            }
+          >
+            {item.title}
+          </NavLink>
+        </li>
+      ))}
+    </SidebarList>
   );
 }
 

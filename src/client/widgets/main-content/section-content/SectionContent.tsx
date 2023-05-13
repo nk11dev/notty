@@ -1,13 +1,16 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 
 const SectionContent = () => {
   const { sectionId } = useParams();
 
   return (
-    <h1>
-      Section {sectionId}
-    </h1>
+    <>
+      <h1>
+        Section {sectionId}
+      </h1>
+      <Outlet />
+    </>
   );
 };
 

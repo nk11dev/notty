@@ -31,7 +31,7 @@ const SectionsToolbar = () => {
         clickHandler={() => refetchAllSections()}
         cls={cn(styles.toolbarBtn, 'm-1')}
         size={16}
-        tooltip="Refresh sections"
+        tooltip="Refetch sections"
       />
     </SidebarToolbar>
   );
