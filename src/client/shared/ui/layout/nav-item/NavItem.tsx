@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
-import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
+import { NAV_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 
 type Props = {
   url: string,
@@ -12,31 +12,31 @@ type Props = {
   title: string
 };
 
-const SectionItem = ({ url, id, title }: Props) => {
-  const listItemRef = useRef(null);
+const NavItem = ({ url, id, title }: Props) => {
+  const itemRef = useRef(null);
   const linkRef = useRef(null);
 
   const { show } = useContextMenu({
-    id: SECTIONS_CONTEXT_MENU_ID,
+    id: NAV_CONTEXT_MENU_ID,
   });
 
   function handleContextMenu(event: MouseEvent) {
-    const sectionId = listItemRef.current.getAttribute('data-section-id');
-    const sectionTitle = linkRef.current.innerHTML;
+    const itemId = itemRef.current.getAttribute('data-item-id');
+    const itemTitle = linkRef.current.innerHTML;
 
     show({
       event,
       props: {
-        sectionId,
-        sectionTitle,
+        id: itemId,
+        title: itemTitle,
       }
     });
   }
 
   return (
     <li
-      ref={listItemRef}
-      data-section-id={id}
+      ref={itemRef}
+      data-item-id={id}
       onContextMenu={handleContextMenu}
     >
       <NavLink
@@ -52,4 +52,4 @@ const SectionItem = ({ url, id, title }: Props) => {
   );
 };
 
-export default SectionItem;
+export default NavItem;

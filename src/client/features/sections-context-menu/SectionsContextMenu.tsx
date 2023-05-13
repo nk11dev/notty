@@ -1,45 +1,29 @@
-import styles from './SectionsContextMenu.module.scss';
-
 import React, { useState } from 'react';
-import { Menu, Item } from 'react-contexify';
-import type { MenuId, ItemParams } from 'react-contexify';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-import { useDeleteSectionMutation } from '@/entities/section/api-slices';
-
+import { NAV_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/features/section-modal';
+import { useDeleteSectionMutation } from '@/entities/section/api-slices';
+import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 import useModal from '@/shared/hooks/useModal';
 
-type Props = {
-  menuId: MenuId
-};
-
-type MenuItemProps = {
-  id: string,
-  text: string,
-  icon: IconDefinition,
-};
-
-const SectionsContextMenu = (
-  { menuId }: Props
-) => {
-
-  const [deleteSection] = useDeleteSectionMutation();
+const SectionsContextMenu = () => {
   const { isShowing, toggleModal } = useModal();
+  const [modalData, setModalData] = useState(null);
+  const [deleteSection] = useDeleteSectionMutation();
 
-  const [sectionData, setSectionData] = useState(null);
+  const onItemClick = (args: ItemParams) => {
+    const { id, title } = args.props;
 
-  const handleItemClick = (args: ItemParams) => {
     switch (args.id) {
       case 'edit':
-        setSectionData(args.props);
+        setModalData({ id, title });
         toggleModal();
         break;
 
       case 'delete':
-        deleteSection(args.props.sectionId)
+        deleteSection(id);
         break;
     }
   }
@@ -51,32 +35,14 @@ const SectionsContextMenu = (
 
   return (
     <>
-      <Menu
-        id={menuId}
-        className={styles.contextMenu}
-        animation="fade"
-      >
-        {menuItems.map((item: MenuItemProps, index: number) => (
-          <Item
-            key={index}
-            id={item.id}
-            onClick={handleItemClick}
-          >
-            <span>
-              <FontAwesomeIcon
-                icon={item.icon}
-                style={{ width: 16, height: 16 }}
-              />
-            </span>
-            <span className="mx-1">
-              {item.text}
-            </span>
-          </Item>
-        ))}
-      </Menu>
+      <NavContextMenu
+        menuId={NAV_CONTEXT_MENU_ID}
+        menuItems={menuItems}
+        onItemClick={onItemClick}
+      />
 
       <SectionModal
-        data={sectionData}
+        data={modalData}
         isShowing={isShowing}
         onHide={toggleModal}
       />

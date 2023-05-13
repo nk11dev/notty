@@ -4,14 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import {
-  useUpdateSectionMutation,
-} from '@/entities/section/api-slices';
+import { useUpdateSectionMutation } from '@/entities/section/api-slices';
 
 type Props = {
   data: {
-    sectionId: string,
-    sectionTitle: string
+    id: string,
+    title: string
   } | null,
   isShowing: boolean,
   onHide: () => void;
@@ -26,7 +24,7 @@ const SectionModal = (
 
   const onSave = () => {
     updateSection({
-      id: data.sectionId,
+      id: data.id,
       title: titleRef.current.value,
     });
   };
@@ -47,7 +45,7 @@ const SectionModal = (
               <Form.Control
                 ref={titleRef}
                 type="text"
-                defaultValue={data.sectionTitle}
+                defaultValue={data.title}
               />
             </Form.Group>
           </Form>
