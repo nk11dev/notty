@@ -17,9 +17,7 @@ const SectionsToolbar = () => {
   const [createSection] = useCreateSectionMutation();
 
   return (
-    <SidebarToolbar>
-      <b>Sections</b>
-
+    <SidebarToolbar title="Sections">
       <ButtonIcon
         icon={faPlus}
         clickHandler={() => createSection()}

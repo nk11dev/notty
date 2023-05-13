@@ -3,13 +3,22 @@ import styles from './SidebarToolbar.module.scss';
 import React from 'react';
 
 type Props = {
-  children: React.ReactNode
+  title: string,
+  children?: React.ReactNode
 };
 
-const SidebarToolbar = (props: Props) => (
-  <div className={styles.toolbar}>
-    {props.children}
-  </div>
-);
+const SidebarToolbar = (props: Props) => {
+  const { title, children } = props;
+
+  return (
+    <div className={styles.toolbar}>
+      <b className='me-1'>
+        {title}
+      </b>
+      
+      {children}
+    </div>
+  );
+}
 
 export default SidebarToolbar;
