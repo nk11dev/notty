@@ -5,7 +5,7 @@ import PinnedList from '@/features/pinned-list';
 import SectionsToolbar from '@/features/sections-toolbar';
 import SectionsList from '@/features/sections-list';
 
-const LeftSidebar = () => (
+const AsideLeft = () => (
   <>
     <PinnedToolbar />
     <PinnedList />
@@ -15,4 +15,4 @@ const LeftSidebar = () => (
   </>
 );
 
-export default LeftSidebar;
+export default AsideLeft;

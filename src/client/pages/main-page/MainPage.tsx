@@ -1,19 +1,23 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import LeftSidebar from '@/widgets/sidebar-content/left-sidebar';
-import TwoColumns from '@/shared/ui/layout/two-columns';
+import AsideLeft from '@/widgets/sidebar-content/aside-left';
+import AsideRight from '@/widgets/sidebar-content/aside-right';
 import SidebarAside from '@/shared/ui/layout/sidebar-aside';
+import TwoColumns from '@/shared/ui/layout/two-columns';
 
 const MainPage = () => (
   <TwoColumns
     sidebarContent={
       <>
         <SidebarAside cls="sidebar-aside-1">
-          <LeftSidebar />
+          <AsideLeft />
         </SidebarAside>
 
-        <SidebarAside cls="sidebar-aside-2" />
+        <SidebarAside cls="sidebar-aside-2">
+          <AsideRight />
+        </SidebarAside>
+        
       </>
     }
     mainContent={<Outlet />}
