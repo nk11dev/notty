@@ -16,6 +16,14 @@ export const notesApi = createApi({
         }),
         providesTags: ['Notes'],
       }),
+
+      createNote: build.mutation<Note, void>({
+        query: (sectionId) => ({
+          url: `/sections/${sectionId}/notes`,
+          method: 'POST'
+        }),
+        invalidatesTags: ['Notes'],
+      }),
     }
   },
 });
@@ -23,4 +31,5 @@ export const notesApi = createApi({
 export const {
   useGetNotesBySectionQuery,
   useLazyGetNotesBySectionQuery,
+  useCreateNoteMutation,
 } = notesApi;
