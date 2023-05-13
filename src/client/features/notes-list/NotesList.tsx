@@ -1,10 +1,12 @@
 import React from 'react';
-import { useLocation, useParams, NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { useLocation, useParams } from 'react-router-dom';
 
+import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
+import NotesContextMenu from '@/features/notes-context-menu';
 import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
 import type { Note } from '@/entities/note/types';
 import SidebarList from '@/shared/ui/layout/sidebar-list';
+import NavItem from '@/shared/ui/layout/nav-item';
 import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
@@ -29,20 +31,20 @@ const NotesList = () => {
   if (!data || data?.length <= 0) return null;
 
   return (
-    <SidebarList>
-      {data.map((item: Note, index: number) => (
-        <li key={index}>
-          <NavLink
-            to={`/sections/${item.section_id}/notes/${item.note_id}/${queryParams}`}
-            className={({ isActive }) =>
-              cn({ 'active': isActive })
-            }
-          >
-            {item.title}
-          </NavLink>
-        </li>
-      ))}
-    </SidebarList>
+    <>
+      <SidebarList>
+        {data.map((item: Note, index: number) => (
+          <NavItem
+            key={index}
+            url={`/sections/${item.section_id}/notes/${item.note_id}/${queryParams}`}
+            id={item.note_id}
+            title={item.title}
+            contextMenuId={NOTES_CONTEXT_MENU_ID}
+          />
+        ))}
+      </SidebarList>
+      <NotesContextMenu />
+    </>
   );
 }
 

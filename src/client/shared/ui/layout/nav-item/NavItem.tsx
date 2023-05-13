@@ -4,20 +4,21 @@ import { NavLink } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
-import { NAV_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-
 type Props = {
   url: string,
   id: number,
-  title: string
+  title: string,
+  contextMenuId: string
 };
 
-const NavItem = ({ url, id, title }: Props) => {
+const NavItem = (props: Props) => {
+  const { url, id, title, contextMenuId } = props;
+
   const itemRef = useRef(null);
   const linkRef = useRef(null);
 
   const { show } = useContextMenu({
-    id: NAV_CONTEXT_MENU_ID,
+    id: contextMenuId,
   });
 
   function handleContextMenu(event: MouseEvent) {

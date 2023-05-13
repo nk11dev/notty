@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { NAV_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
+import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/features/section-modal';
 import { useDeleteSectionMutation } from '@/entities/section/api-slices';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
@@ -36,7 +36,7 @@ const SectionsContextMenu = () => {
   return (
     <>
       <NavContextMenu
-        menuId={NAV_CONTEXT_MENU_ID}
+        menuId={SECTIONS_CONTEXT_MENU_ID}
         menuItems={menuItems}
         onItemClick={onItemClick}
       />
