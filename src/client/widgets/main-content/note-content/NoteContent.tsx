@@ -5,9 +5,9 @@ const NoteContent = () => {
   const { noteId } = useParams();
 
   return (
-    <h4>
+    <h1>
       Note {noteId}
-    </h4>
+    </h1>
   );
 };
 

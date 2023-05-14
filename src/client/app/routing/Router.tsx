@@ -4,7 +4,6 @@ import { useRoutes } from 'react-router-dom';
 import MainPage from '@/pages/main-page';
 import ExamplePage from '@/pages/example-page';
 import NotFoundPage from '@/pages/not-found-page';
-import SectionContent from '@/widgets/main-content/section-content';
 import NoteContent from '@/widgets/main-content/note-content';
 
 export const appRoutes = [
@@ -13,18 +12,12 @@ export const appRoutes = [
     element: <MainPage />,
   },
   {
-    path: '/sections',
+    path: '/sections/:sectionId',
     element: <MainPage />,
     children: [
       {
-        path: ':sectionId',
-        element: <SectionContent />,
-        children: [
-          {
-            path: 'notes/:noteId',
-            element: <NoteContent />,
-          },
-        ]
+        path: 'notes/:noteId',
+        element: <NoteContent />,
       },
     ]
   },
