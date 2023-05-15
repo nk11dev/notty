@@ -6,11 +6,17 @@ import SectionEntity from '@/server/api/db-orm/entities/section.entity';
 const sectionRepository = dataSource.getRepository(SectionEntity);
 
 export async function getSections(_request: Request, response: Response) {
-  const results = await sectionRepository.find({
-    order: {
-      section_id: "ASC"
-    }
-  });
+
+  const results = await sectionRepository.manager.query(`
+    SELECT
+      s.section_id,
+      s.title,
+      count(n.note_id)::int as notes_count
+    FROM sections s
+    LEFT JOIN notes n on s.section_id = n.section_id
+    GROUP BY s.section_id
+    ORDER BY s.section_id ASC
+  `);
 
   response.status(200).json({
     payload: results

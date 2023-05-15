@@ -18,7 +18,7 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        color: $sidebar-link-color-text;
+        color: $sidebar-link-color-title-text;
 
         &.active {
           background-color: $sidebar-link-active-color-bg;
@@ -30,4 +30,8 @@
       }
     }
   }
+}
+
+.suffixText {
+  color: $sidebar-link-color-suffix-text;
 }

@@ -7,12 +7,12 @@ import cn from 'classnames';
 type Props = {
   url: string,
   id: number,
-  title: string,
-  contextMenuId: string
+  contextMenuId: string,
+  children: React.ReactNode
 };
 
 const NavItem = (props: Props) => {
-  const { url, id, title, contextMenuId } = props;
+  const { url, id, contextMenuId, children } = props;
 
   const { show } = useContextMenu({
     id: contextMenuId,
@@ -30,7 +30,7 @@ const NavItem = (props: Props) => {
           cn({ 'active': isActive })
         }
       >
-        {title}
+        {children}
       </NavLink>
     </li>
   );

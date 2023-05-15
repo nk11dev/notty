@@ -2,6 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
 import type { Note } from '@/entities/note/types';
+import { sectionsApi } from '@/entities/section/api-slices';
 
 export const notesApi = createApi({
   reducerPath: 'notesApi',
@@ -23,6 +24,14 @@ export const notesApi = createApi({
           method: 'POST'
         }),
         invalidatesTags: ['Notes'],
+
+        // Wait until the query is completed and refetch sections (to get current notes count)
+        onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
+          await cacheDataLoaded;
+          dispatch(sectionsApi.util.invalidateTags(
+            ["Sections"]
+          ));
+        }
       }),
 
       deleteNote: build.mutation<Note, string>({
@@ -31,6 +40,14 @@ export const notesApi = createApi({
           method: 'DELETE'
         }),
         invalidatesTags: ['Notes'],
+
+        // Wait until the query is completed and refetch sections (to get current notes count)
+        onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
+          await cacheDataLoaded;
+          dispatch(sectionsApi.util.invalidateTags(
+            ["Sections"]
+          ));
+        }
       }),
     }
   },

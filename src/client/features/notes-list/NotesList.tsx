@@ -38,9 +38,10 @@ const NotesList = () => {
             key={index}
             url={`/sections/${item.section_id}/notes/${item.note_id}/${queryParams}`}
             id={item.note_id}
-            title={item.title}
             contextMenuId={NOTES_CONTEXT_MENU_ID}
-          />
+          >
+            {item.title}
+          </NavItem>
         ))}
       </SidebarList>
       <NotesContextMenu />
