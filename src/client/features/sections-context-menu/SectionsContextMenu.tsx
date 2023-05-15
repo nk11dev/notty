@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,20 +6,27 @@ import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants
 import SectionModal from '@/features/section-modal';
 import { useDeleteSectionMutation } from '@/entities/section/api-slices';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
-import useModal from '@/shared/hooks/useModal';
 
 const SectionsContextMenu = () => {
-  const { isShowing, toggleModal } = useModal();
-  const [modalData, setModalData] = useState(null);
+  const [isShowing, setIsShowing] = useState(false);
+  const [sectionId, setSectionId] = useState(null);
+
   const [deleteSection] = useDeleteSectionMutation();
 
+  useEffect(() => {
+    (sectionId !== null) && setIsShowing(true);
+  }, [sectionId]);
+
+  useEffect(() => {
+    (isShowing === false) && setSectionId(null);
+  }, [isShowing]);
+
   const onItemClick = (args: ItemParams) => {
-    const { id, title } = args.props;
+    const { id } = args.props;
 
     switch (args.id) {
       case 'edit':
-        setModalData({ id, title });
-        toggleModal();
+        setSectionId(id);
         break;
 
       case 'delete':
@@ -41,11 +48,12 @@ const SectionsContextMenu = () => {
         onItemClick={onItemClick}
       />
 
-      <SectionModal
-        data={modalData}
-        isShowing={isShowing}
-        onHide={toggleModal}
-      />
+      {isShowing && (
+        <SectionModal
+          sectionId={sectionId}
+          onHide={() => setIsShowing(false)}
+        />
+      )}
     </>
   );
 };
