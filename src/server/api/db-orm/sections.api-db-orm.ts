@@ -29,7 +29,7 @@ export async function getSection(request: Request, response: Response) {
 
 export async function createSection(request: Request, response: Response) {
   const section = sectionRepository.create(request.body);
-  const results = await sectionRepository.save(section);
+  const results = await sectionRepository.insert(section);
 
   response.status(201).json({
     payload: results

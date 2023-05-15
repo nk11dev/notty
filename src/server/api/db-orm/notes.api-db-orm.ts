@@ -57,7 +57,7 @@ export async function createNote(request: Request, response: Response) {
       ...request.body,
       section_id: sectionId
     });
-    const results = await noteRepository.save(note);
+    const results = await noteRepository.insert(note);
 
     response.status(201).json({
       payload: results
