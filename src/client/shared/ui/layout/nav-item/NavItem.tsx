@@ -1,6 +1,6 @@
 import React from 'react';
 import type { MouseEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
@@ -14,11 +14,14 @@ type Props = {
 const NavItem = (props: Props) => {
   const { url, id, contextMenuId, children } = props;
 
+  const navigate = useNavigate();
+
   const { show } = useContextMenu({
     id: contextMenuId,
   });
 
   function handleContextMenu(event: MouseEvent) {
+    navigate(url);
     show({ event, props: { id } });
   }
 
