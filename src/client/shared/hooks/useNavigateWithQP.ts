@@ -10,7 +10,8 @@ const useNavigateWithQP = () => {
 
   return {
     navigateWithQP,
-  }
+    queryParams,
+  };
 };
 
 export default useNavigateWithQP;

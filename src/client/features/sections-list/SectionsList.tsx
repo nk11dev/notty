@@ -1,7 +1,6 @@
 import style from '@/shared/ui/layout/sidebar-list/SidebarList.module.scss';
 
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
@@ -14,8 +13,6 @@ import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const SectionsList = () => {
-  const { search: queryParams } = useLocation();
-
   const {
     data,
     isFetching,
@@ -38,7 +35,7 @@ const SectionsList = () => {
           return (
             <NavItem
               key={index}
-              url={`/sections/${section_id}${queryParams}`}
+              url={`/sections/${section_id}`}
               id={section_id}
               contextMenuId={SECTIONS_CONTEXT_MENU_ID}
             >

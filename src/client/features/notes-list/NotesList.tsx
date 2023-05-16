@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import NotesContextMenu from '@/features/notes-context-menu';
@@ -11,7 +11,6 @@ import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
-  const { search: queryParams } = useLocation();
   const { sectionId } = useParams();
 
   const {
@@ -36,7 +35,7 @@ const NotesList = () => {
         {data.map((item: Note, index: number) => (
           <NavItem
             key={index}
-            url={`/sections/${item.section_id}/notes/${item.note_id}${queryParams}`}
+            url={`/sections/${item.section_id}/notes/${item.note_id}`}
             id={item.note_id}
             contextMenuId={NOTES_CONTEXT_MENU_ID}
           >
