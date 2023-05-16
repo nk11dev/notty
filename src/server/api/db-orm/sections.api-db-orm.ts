@@ -34,11 +34,16 @@ export async function getSection(request: Request, response: Response) {
 }
 
 export async function createSection(request: Request, response: Response) {
-  const section = sectionRepository.create(request.body);
-  const results = await sectionRepository.insert(section);
+
+  const results = await sectionRepository
+    .createQueryBuilder()
+    .insert()
+    .values(request.body)
+    .returning('*')
+    .execute();
 
   response.status(201).json({
-    payload: results
+    payload: results.raw[0]
   });
 }
 
