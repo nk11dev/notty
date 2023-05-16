@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
-import { useNavigateWithQP } from '@/shared/hooks';
+import { useNavigateWithSearch } from '@/shared/hooks';
 
 type Props = {
   url: string,
@@ -16,14 +16,14 @@ type Props = {
 const NavItem = (props: Props) => {
   const { url, children, id, contextMenuId } = props;
 
-  const { navigateWithQP, queryParams } = useNavigateWithQP();
+  const { search, navigateWithSearch } = useNavigateWithSearch();
 
   const { show } = useContextMenu({
     id: contextMenuId,
   });
 
   function handleContextMenu(event: MouseEvent) {
-    navigateWithQP(url);
+    navigateWithSearch(url);
     show({ event, props: { id } });
   }
 
@@ -34,7 +34,7 @@ const NavItem = (props: Props) => {
         : undefined
     }>
       <NavLink
-        to={url + queryParams}
+        to={url + search}
         className={({ isActive }) =>
           cn({ 'active': isActive })
         }

@@ -9,16 +9,16 @@ import { SIDEBAR_NAV_QUERY_PARAM } from '@/app/constants/query-params.constants'
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 const SidebarControls = () => {
-  const [currentQueryParams, setQueryParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentSidebarNav = currentQueryParams.get(SIDEBAR_NAV_QUERY_PARAM);
+  const currentSidebarNav = searchParams.get(SIDEBAR_NAV_QUERY_PARAM);
 
   const toggleSidebarNav = () => {
     const newValue = (currentSidebarNav !== null)
       ? 1 - Number(currentSidebarNav)
       : 0;
 
-    setQueryParams({
+    setSearchParams({
       [SIDEBAR_NAV_QUERY_PARAM]: newValue.toString()
     });
   }

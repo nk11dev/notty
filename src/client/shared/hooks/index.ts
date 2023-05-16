@@ -1,5 +1,5 @@
-import useNavigateWithQP from './useNavigateWithQP';
+import useNavigateWithSearch from './useNavigateWithSearch';
 
 export {
-  useNavigateWithQP,
+  useNavigateWithSearch,
 };

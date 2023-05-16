@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 
-import { useNavigateWithQP } from '@/shared/hooks';
+import { useNavigateWithSearch } from '@/shared/hooks';
 import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
@@ -17,7 +17,7 @@ import {
 const NotesToolbar = () => {
   const { sectionId } = useParams();
 
-  const { navigateWithQP } = useNavigateWithQP();
+  const { navigateWithSearch } = useNavigateWithSearch();
 
   const [refetchNotesBySection] = useLazyGetNotesBySectionQuery();
   const [createNote] = useCreateNoteMutation();
@@ -28,7 +28,7 @@ const NotesToolbar = () => {
     if ('data' in result) {
       const { data } = result;
 
-      navigateWithQP(`/sections/${data.section_id}/notes/${data.note_id}`);
+      navigateWithSearch(`/sections/${data.section_id}/notes/${data.note_id}`);
     }
   }
 

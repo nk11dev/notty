@@ -13,9 +13,9 @@ type Props = {
 };
 
 const TwoColumns = (props: Props) => {
-  const [currentQueryParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const hasSidebarNav = currentQueryParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
+  const hasSidebarNav = searchParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
 
   return (
     <div className={styles.columns}>
