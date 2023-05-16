@@ -96,10 +96,34 @@ export async function deleteNote(request: Request, response: Response) {
     RETURNING *
   `, [request.params.noteId]);
 
+  let lastRow = null;
+
+  if (affectedCount > 0) {
+    const { section_id } = affectedRows[0];
+
+    const [result] = await noteRepository
+      .createQueryBuilder()
+
+      // If note belongs to section then get last note from this section. Else - get last "unsorted" note. 
+      .andWhere(section_id
+        ? `section_id = :section_id`
+        : '1=1',
+        { section_id })
+
+      .orderBy('note_id', 'DESC')
+      .limit(1)
+      .getMany();
+
+    if (result) {
+      lastRow = result;
+    }
+  }
+
   response.status(200).json({
     payload: {
-      affectedRows,
-      affectedCount
+      affectedCount,
+      affectedRow: affectedRows[0] || null,
+      lastRow
     }
   });
 }

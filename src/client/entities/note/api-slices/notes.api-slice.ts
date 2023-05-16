@@ -1,7 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
-import type { Note } from '@/entities/note/types';
+import type { 
+  Note,
+  NoteDeleteResponse
+} from '@/entities/note/types';
+
 import { sectionsApi } from '@/entities/section/api-slices';
 
 export const notesApi = createApi({
@@ -34,7 +38,7 @@ export const notesApi = createApi({
         }
       }),
 
-      deleteNote: build.mutation<Note, string>({
+      deleteNote: build.mutation<NoteDeleteResponse, string>({
         query: (noteId) => ({
           url: `/notes/${noteId}`,
           method: 'DELETE'

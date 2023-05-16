@@ -6,3 +6,9 @@ export type Note = {
   updated_at: string | null;
   section_id: number;
 };
+
+export type NoteDeleteResponse = {
+  affectedCount: number,
+  affectedRow: Note | null,
+  lastRow: Note | null,
+};

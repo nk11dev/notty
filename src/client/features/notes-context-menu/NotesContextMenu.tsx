@@ -3,15 +3,15 @@ import type { ItemParams } from 'react-contexify';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import { useDeleteNoteMutation } from '@/entities/note/api-slices';
+import { useHandleDeleteNote } from '@/entities/note/hooks';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 
 const NotesContextMenu = () => {
-  const [deleteNote] = useDeleteNoteMutation();
+  const [onDeleteNote] = useHandleDeleteNote();
 
   const onItemClick = (args: ItemParams) => {
     const { id } = args.props;
-    deleteNote(id);
+    onDeleteNote(id);
   }
 
   const menuItems = [
