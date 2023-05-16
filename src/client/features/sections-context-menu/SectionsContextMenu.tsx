@@ -4,17 +4,14 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/features/section-modal';
-import { useDeleteSectionMutation } from '@/entities/section/api-slices';
-import { useNavigateWithSearch } from '@/shared/hooks';
+import { useHandleDeleteSection } from '@/entities/section/hooks';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 
 const SectionsContextMenu = () => {
   const [isShowing, setIsShowing] = useState(false);
   const [sectionId, setSectionId] = useState(null);
 
-  const { navigateWithSearch } = useNavigateWithSearch();
-
-  const [deleteSection] = useDeleteSectionMutation();
+  const [onDeleteSection] = useHandleDeleteSection();
 
   useEffect(() => {
     (sectionId !== null) && setIsShowing(true);
@@ -23,19 +20,6 @@ const SectionsContextMenu = () => {
   useEffect(() => {
     (isShowing === false) && setSectionId(null);
   }, [isShowing]);
-
-  const onDeleteSection = async (id: string) => {
-    const result = await deleteSection(id);
-
-    if ('data' in result) {
-      const { data } = result;
-      const { lastRow } = data;
-
-      if (lastRow !== null) {
-        navigateWithSearch(`/sections/${lastRow.section_id}`);
-      }
-    }
-  }
 
   const onItemClick = (args: ItemParams) => {
     const { id } = args.props;
