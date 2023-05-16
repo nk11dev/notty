@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const useNavigateWithSearch = () => {
+export const useNavigateWithSearch = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
 
@@ -13,5 +13,3 @@ const useNavigateWithSearch = () => {
     navigateWithSearch,
   };
 };
-
-export default useNavigateWithSearch;

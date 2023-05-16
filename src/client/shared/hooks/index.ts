@@ -1,5 +1,1 @@
-import useNavigateWithSearch from './useNavigateWithSearch';
-
-export {
-  useNavigateWithSearch,
-};
+export * from './useNavigateWithSearch';
