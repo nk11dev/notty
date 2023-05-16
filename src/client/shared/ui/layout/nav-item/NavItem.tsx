@@ -8,13 +8,13 @@ import { useNavigateWithQP } from '@/shared/hooks';
 
 type Props = {
   url: string,
-  id: number,
-  contextMenuId: string,
-  children: React.ReactNode
+  children: React.ReactNode,
+  id?: number,
+  contextMenuId?: string
 };
 
 const NavItem = (props: Props) => {
-  const { url, id, contextMenuId, children } = props;
+  const { url, children, id, contextMenuId } = props;
 
   const { navigateWithQP, queryParams } = useNavigateWithQP();
 
@@ -28,7 +28,11 @@ const NavItem = (props: Props) => {
   }
 
   return (
-    <li onContextMenu={handleContextMenu}>
+    <li onContextMenu={
+      (id && contextMenuId)
+        ? handleContextMenu
+        : undefined
+    }>
       <NavLink
         to={url + queryParams}
         className={({ isActive }) =>
