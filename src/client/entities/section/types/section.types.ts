@@ -17,5 +17,5 @@ export type SectionUpdateEndpointArg = {
 export type SectionDeleteResponse = {
   affectedRows: Section[],
   affectedCount: number,
-  lastRow: Section,
+  lastRow: Section | null,
 };

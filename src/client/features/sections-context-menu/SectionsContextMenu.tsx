@@ -31,7 +31,9 @@ const SectionsContextMenu = () => {
       const { data } = result;
       const { lastRow } = data;
 
-      navigateWithSearch(`/sections/${lastRow.section_id}`);
+      if (lastRow !== null) {
+        navigateWithSearch(`/sections/${lastRow.section_id}`);
+      }
     }
   }
 

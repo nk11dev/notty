@@ -50,7 +50,7 @@ export async function createSection(request: Request, response: Response) {
 }
 
 export async function updateSection(request: Request, response: Response) {
-  
+
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     UPDATE ${sectionRepository.metadata.tableName}
     SET 
@@ -88,7 +88,7 @@ export async function deleteSection(request: Request, response: Response) {
     payload: {
       affectedRows,
       affectedCount,
-      lastRow: lastRow
+      lastRow: lastRow || null
     }
   });
 }
