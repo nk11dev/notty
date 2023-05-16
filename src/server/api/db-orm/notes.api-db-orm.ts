@@ -27,11 +27,6 @@ export async function getNotes(request: Request, response: Response) {
 
 export async function getNote(request: Request, response: Response) {
 
-  console.log('\n');
-  console.log('getNote()');
-  console.log('request.params:', request.params);
-  console.log('\n');
-
   const results = await noteRepository.findOneBy({
     note_id: Number(request.params.noteId),
   });
