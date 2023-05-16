@@ -2,8 +2,10 @@ import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/db-orm/orm.datasource';
 import SectionEntity from '@/server/api/db-orm/entities/section.entity';
+import NoteEntity from '@/server/api/db-orm/entities/note.entity';
 
 const sectionRepository = dataSource.getRepository(SectionEntity);
+const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getSections(_request: Request, response: Response) {
 
@@ -12,8 +14,8 @@ export async function getSections(_request: Request, response: Response) {
       s.section_id,
       s.title,
       count(n.note_id)::int as notes_count
-    FROM sections s
-    LEFT JOIN notes n on s.section_id = n.section_id
+    FROM ${sectionRepository.metadata.tableName} s
+    LEFT JOIN ${noteRepository.metadata.tableName} n on s.section_id = n.section_id
     GROUP BY s.section_id
     ORDER BY s.section_id ASC
   `);
@@ -48,6 +50,7 @@ export async function createSection(request: Request, response: Response) {
 }
 
 export async function updateSection(request: Request, response: Response) {
+  
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     UPDATE ${sectionRepository.metadata.tableName}
     SET 
@@ -66,6 +69,7 @@ export async function updateSection(request: Request, response: Response) {
 }
 
 export async function deleteSection(request: Request, response: Response) {
+
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     DELETE 
     FROM ${sectionRepository.metadata.tableName} 
@@ -73,10 +77,18 @@ export async function deleteSection(request: Request, response: Response) {
     RETURNING *
   `, [request.params.sectionId]);
 
+  const [lastRow] = await sectionRepository.manager.query(`
+    SELECT *
+    FROM ${sectionRepository.metadata.tableName}
+    ORDER BY section_id DESC
+    LIMIT 1
+  `);
+
   response.status(200).json({
     payload: {
       affectedRows,
-      affectedCount
+      affectedCount,
+      lastRow: lastRow
     }
   });
 }

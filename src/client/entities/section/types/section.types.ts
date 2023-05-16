@@ -8,3 +8,14 @@ export type Section = {
   notes?: Note[],
   notes_count?: number
 };
+
+export type SectionUpdateEndpointArg = {
+  id: string,
+  title: string
+};
+
+export type SectionDeleteResponse = {
+  affectedRows: Section[],
+  affectedCount: number,
+  lastRow: Section,
+};

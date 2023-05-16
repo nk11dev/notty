@@ -5,11 +5,14 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/features/section-modal';
 import { useDeleteSectionMutation } from '@/entities/section/api-slices';
+import { useNavigateWithSearch } from '@/shared/hooks';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 
 const SectionsContextMenu = () => {
   const [isShowing, setIsShowing] = useState(false);
   const [sectionId, setSectionId] = useState(null);
+
+  const { navigateWithSearch } = useNavigateWithSearch();
 
   const [deleteSection] = useDeleteSectionMutation();
 
@@ -21,6 +24,17 @@ const SectionsContextMenu = () => {
     (isShowing === false) && setSectionId(null);
   }, [isShowing]);
 
+  const onDeleteSection = async (id: string) => {
+    const result = await deleteSection(id);
+
+    if ('data' in result) {
+      const { data } = result;
+      const { lastRow } = data;
+
+      navigateWithSearch(`/sections/${lastRow.section_id}`);
+    }
+  }
+
   const onItemClick = (args: ItemParams) => {
     const { id } = args.props;
 
@@ -30,7 +44,7 @@ const SectionsContextMenu = () => {
         break;
 
       case 'delete':
-        deleteSection(id);
+        onDeleteSection(id);
         break;
     }
   }
