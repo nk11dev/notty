@@ -16,7 +16,9 @@ export async function getNotes(request: Request, response: Response) {
     queryBuilder = queryBuilder.where("section_id = :id", { id: sectionId })
   }
 
-  const result = await queryBuilder.getMany();
+  const result = await queryBuilder
+    .orderBy('note_id', 'ASC')
+    .getMany();
 
   response.status(200).json({
     payload: result
@@ -53,14 +55,19 @@ export async function createNote(request: Request, response: Response) {
     });
 
   } else {
-    const note = noteRepository.create({
-      ...request.body,
-      section_id: sectionId
-    });
-    const results = await noteRepository.insert(note);
+
+    const results = await noteRepository
+      .createQueryBuilder()
+      .insert()
+      .values({
+        ...request.body,
+        section_id: sectionId
+      })
+      .returning('*')
+      .execute();
 
     response.status(201).json({
-      payload: results
+      payload: results.raw[0]
     });
   }
 }

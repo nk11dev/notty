@@ -36,7 +36,7 @@ const NotesList = () => {
         {data.map((item: Note, index: number) => (
           <NavItem
             key={index}
-            url={`/sections/${item.section_id}/notes/${item.note_id}/${queryParams}`}
+            url={`/sections/${item.section_id}/notes/${item.note_id}${queryParams}`}
             id={item.note_id}
             contextMenuId={NOTES_CONTEXT_MENU_ID}
           >
