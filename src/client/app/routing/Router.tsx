@@ -1,15 +1,23 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
+import StartPage from '@/pages/start-page';
 import MainPage from '@/pages/main-page';
-import ExamplePage from '@/pages/example-page';
 import NotFoundPage from '@/pages/not-found-page';
+
+import ExampleContent from '@/widgets/main-content/example-content';
 import NoteContent from '@/widgets/main-content/note-content';
 
 export const appRoutes = [
   {
     path: '/',
-    element: <MainPage />,
+    element: <StartPage />,
+    children: [
+      {
+        path: '/example',
+        element: <ExampleContent />,
+      },
+    ]
   },
   {
     path: '/sections/:sectionId',
@@ -20,10 +28,6 @@ export const appRoutes = [
         element: <NoteContent />,
       },
     ]
-  },
-  {
-    path: '/example',
-    element: <ExamplePage />,
   },
 ];
 
