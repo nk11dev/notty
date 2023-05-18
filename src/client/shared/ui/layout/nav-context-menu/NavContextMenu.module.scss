@@ -1,6 +1,5 @@
 @import '~react-contexify/ReactContexify.css';
-
-$menu-width: 140px;
+@import '/src/assets/styles/theme/sizings';
 
 @keyframes contexify_feedback {
   from {
@@ -12,10 +11,10 @@ $menu-width: 140px;
 }
 
 .contextMenu {
-  min-width: $menu-width;
+  min-width: $sidebar-context-menu-width;
 
   .contexify_item {
-    width: $menu-width;
+    width: $sidebar-context-menu-width;
 
     &Content {
       padding: 3px 6px;
