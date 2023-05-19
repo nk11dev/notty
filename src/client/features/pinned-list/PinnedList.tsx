@@ -14,6 +14,9 @@ const PinnedList = () => {
         <NavItem
           key={index}
           url={item.url}
+          searchParamsOptions={{
+            hideSidebarNav: true
+          }}
         >
           {item.text}
         </NavItem>

@@ -4,40 +4,59 @@ import { NavLink } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
-import { useNavigateWithSearch } from '@/shared/hooks';
+import {
+  useCustomSearchParams,
+  useNavigateWithSearch
+} from '@/shared/hooks';
+
+import type { SearchParamsOptions } from '@/shared/types';
 
 type Props = {
   url: string,
   children: React.ReactNode,
   id?: number,
   contextMenuId?: string
+  searchParamsOptions?: SearchParamsOptions
 };
 
 const NavItem = (props: Props) => {
-  const { url, children, id, contextMenuId } = props;
+  const { url, children, id, contextMenuId, searchParamsOptions = {} } = props;
 
-  const { search, navigateWithSearch } = useNavigateWithSearch();
+  const { getCustomSearchParams } = useCustomSearchParams();
+  const { navigateWithSearch } = useNavigateWithSearch();
 
   const { show } = useContextMenu({
     id: contextMenuId,
   });
 
-  function handleContextMenu(event: MouseEvent) {
+  function onContextMenu(e: MouseEvent) {
     navigateWithSearch(url);
-    show({ event, props: { id } });
+    show({
+      event: e,
+      props: { id }
+    });
+  }
+
+  function onClick(e: MouseEvent) {
+    e.preventDefault();
+
+    navigateWithSearch(url,
+      getCustomSearchParams(searchParamsOptions)
+    );
   }
 
   return (
     <li onContextMenu={
       (id && contextMenuId)
-        ? handleContextMenu
+        ? onContextMenu
         : undefined
     }>
       <NavLink
-        to={url + search}
+        to={url}
         className={({ isActive }) =>
           cn({ 'active': isActive })
         }
+        onClick={onClick}
       >
         {children}
       </NavLink>

@@ -38,6 +38,9 @@ const NotesList = () => {
             url={`/sections/${item.section_id}/notes/${item.note_id}`}
             id={item.note_id}
             contextMenuId={NOTES_CONTEXT_MENU_ID}
+            searchParamsOptions={{
+              hideSidebarNav: true
+            }}
           >
             {item.title}
           </NavItem>
