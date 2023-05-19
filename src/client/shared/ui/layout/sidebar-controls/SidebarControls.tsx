@@ -18,9 +18,9 @@ const SidebarControls = () => {
       ? 1 - Number(currentSidebarNav)
       : 0;
 
-    setSearchParams({
-      [SIDEBAR_NAV_QUERY_PARAM]: newValue.toString()
-    });
+    searchParams.set(SIDEBAR_NAV_QUERY_PARAM, newValue.toString());
+    
+    setSearchParams(searchParams);
   }
 
   const hasSidebarNav = (currentSidebarNav !== '0');
