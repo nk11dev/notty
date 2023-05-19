@@ -1,8 +1,13 @@
 import { useCreateNoteMutation } from '@/entities/note/api-slices';
-import { useNavigateWithSearch } from '@/shared/hooks';
+import {
+  useCustomSearchParams,
+  useNavigateWithSearch
+} from '@/shared/hooks';
 
 export const useHandleCreateNote = () => {
   const [createNote] = useCreateNoteMutation();
+
+  const { getCustomSearchParams } = useCustomSearchParams();
   const { navigateWithSearch } = useNavigateWithSearch();
 
   async function handleCreateNote(sectionId: string) {
@@ -11,7 +16,9 @@ export const useHandleCreateNote = () => {
     if ('data' in result) {
       const { data } = result;
 
-      navigateWithSearch(`/sections/${data.section_id}/notes/${data.note_id}`);
+      navigateWithSearch(`/sections/${data.section_id}/notes/${data.note_id}`,
+        getCustomSearchParams({ hideSidebarNav: true })
+      );
     }
   }
 
