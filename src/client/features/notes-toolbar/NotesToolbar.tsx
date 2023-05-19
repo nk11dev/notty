@@ -5,32 +5,17 @@ import { useParams } from 'react-router-dom';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 
-import { useNavigateWithSearch } from '@/shared/hooks';
 import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
-import {
-  useLazyGetNotesBySectionQuery,
-  useCreateNoteMutation
-} from '@/entities/note/api-slices';
+import { useLazyGetNotesBySectionQuery } from '@/entities/note/api-slices';
+import { useHandleCreateNote } from '@/entities/note/hooks';
 
 const NotesToolbar = () => {
   const { sectionId } = useParams();
 
-  const { navigateWithSearch } = useNavigateWithSearch();
-
   const [refetchNotesBySection] = useLazyGetNotesBySectionQuery();
-  const [createNote] = useCreateNoteMutation();
-
-  const onCreateNote = async () => {
-    const result = await createNote(sectionId);
-
-    if ('data' in result) {
-      const { data } = result;
-
-      navigateWithSearch(`/sections/${data.section_id}/notes/${data.note_id}`);
-    }
-  }
+  const [onCreateNote] = useHandleCreateNote();
 
   return (
     <SidebarToolbar title="Notes">
@@ -38,7 +23,7 @@ const NotesToolbar = () => {
         <>
           <ButtonIcon
             icon={faPlus}
-            clickHandler={() => onCreateNote()}
+            clickHandler={() => onCreateNote(sectionId)}
             cls={cn(styles.toolbarBtn, 'm-1')}
             size={16}
             tooltip="Create section"
