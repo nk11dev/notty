@@ -5,7 +5,7 @@
   flex: 1;
 
   // used for correct flexbox with "white-space: nowrap"
-  @media (max-width: $bp-small) {
+  @media (max-width: $small-breakpoint) {
     min-width: 0;
   }
 }
@@ -16,7 +16,7 @@
 }
 
 .isHiddenBpSmall {
-  @media (max-width: $bp-small) {
+  @media (max-width: $small-breakpoint) {
     display: none;
   }
 }

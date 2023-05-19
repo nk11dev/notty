@@ -6,14 +6,14 @@
   border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;
 
-  @media (max-width: $bp-small) {
+  @media (max-width: $small-breakpoint) {
     flex: 1;
 
     // used for correct flexbox with "white-space: nowrap"
     min-width: 0;
   }
 
-  @media (min-width: $bp-small) {
+  @media (min-width: $small-breakpoint) {
     width: $sidebar-width;
   }
 }
