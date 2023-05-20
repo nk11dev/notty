@@ -1,10 +1,11 @@
+import { useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export const useNavigateWithSearch = () => {
-  const [currentSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [currentSearchParams] = useSearchParams();
 
-  function navigateWithSearch(to: string, customSearchParams?: URLSearchParams) {
+  const navigateWithSearch = useCallback((to: string, customSearchParams?: URLSearchParams) => {
     navigate({
       pathname: to,
       search: (customSearchParams
@@ -12,7 +13,7 @@ export const useNavigateWithSearch = () => {
         : currentSearchParams
       ).toString()
     });
-  }
+  }, [navigate, currentSearchParams])
 
   return {
     navigateWithSearch,
