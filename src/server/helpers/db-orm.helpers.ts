@@ -6,7 +6,9 @@ export const dateTranformer = {
     if (value === null) return null;
 
     const date = new Date(value);
+    const lacaleDate = date.toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' });
+    const localeTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    return `${lacaleDate} ${localeTime}`;
   }
 };

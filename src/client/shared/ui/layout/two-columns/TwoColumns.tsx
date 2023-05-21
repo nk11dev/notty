@@ -23,7 +23,7 @@ const TwoColumns = (props: Props) => {
 
       {hasSidebarNav && props.sidebarContent}
 
-      <main className={cn(styles.main, 'p-2', {
+      <main className={cn(styles.main, 'px-4 py-3', {
         [styles.isHiddenBpSmall]: hasSidebarNav
       })}>
         {props.mainContent}

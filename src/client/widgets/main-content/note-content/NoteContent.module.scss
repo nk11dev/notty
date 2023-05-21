@@ -1,0 +1,13 @@
+@import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/colors';
+
+.title {
+  padding-bottom: 3px;
+  border-bottom: 1px solid $note-content-color-title;
+  font-size: 32px;
+  color: $note-content-color-title;
+
+  @media (max-width: $small-breakpoint) {
+    font-size: 28px;
+  }
+}

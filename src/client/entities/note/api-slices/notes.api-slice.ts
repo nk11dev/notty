@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
-import type { 
+import type {
   Note,
   NoteDeleteResponse
 } from '@/entities/note/types';
@@ -11,7 +11,7 @@ import { sectionsApi } from '@/entities/section/api-slices';
 export const notesApi = createApi({
   reducerPath: 'notesApi',
   baseQuery: axiosBaseQuery(),
-  tagTypes: ['Notes'],
+  tagTypes: ['Note', 'Notes'],
   endpoints(build) {
     return {
       getNotesBySection: build.query<Note[], string>({
@@ -20,6 +20,14 @@ export const notesApi = createApi({
           method: 'GET'
         }),
         providesTags: ['Notes'],
+      }),
+
+      getNote: build.query<Note, string>({
+        query: (noteId) => ({
+          url: `/notes/${noteId}`,
+          method: 'GET'
+        }),
+        providesTags: ['Note'],
       }),
 
       createNote: build.mutation<Note, string>({
@@ -60,6 +68,7 @@ export const notesApi = createApi({
 export const {
   useGetNotesBySectionQuery,
   useLazyGetNotesBySectionQuery,
+  useGetNoteQuery,
   useCreateNoteMutation,
   useDeleteNoteMutation,
 } = notesApi;
