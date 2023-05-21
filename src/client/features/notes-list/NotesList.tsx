@@ -12,7 +12,7 @@ import NavItem from '@/shared/ui/layout/nav-item';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
-  const { sectionId } = useParams();
+  const { sectionId, noteId } = useParams();
 
   const {
     data,
@@ -23,7 +23,9 @@ const NotesList = () => {
     refetchOnMountOrArgChange: true
   });
 
-  useNavigateDefaultNote(sectionId);
+  useNavigateDefaultNote(sectionId, {
+    skip: !!noteId
+  });
 
   if (isError) return <ErrorMsg error={error} />;
 

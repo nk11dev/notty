@@ -6,7 +6,16 @@ import {
   useNavigateWithSearch,
 } from '@/shared/hooks';
 
-export const useNavigateDefaultNote = (sectionId: string): void => {
+type Options = {
+  skip: boolean
+};
+
+export const useNavigateDefaultNote = (
+  sectionId: string,
+  options?: Options
+): void => {
+  const { skip = false } = options || {};
+
   const { navigateWithSearch } = useNavigateWithSearch();
 
   const state = notesApi.endpoints.getNotesBySection.useQueryState(sectionId);
@@ -15,8 +24,8 @@ export const useNavigateDefaultNote = (sectionId: string): void => {
   const prevDefaultNote = usePrevious(defaultNote);
 
   useEffect(() => {
-    if (defaultNote && (defaultNote !== prevDefaultNote)) {
+    if (!skip && defaultNote && (defaultNote !== prevDefaultNote)) {
       navigateWithSearch(`/sections/${defaultNote.section_id}/notes/${defaultNote.note_id}`);
     }
-  }, [defaultNote, prevDefaultNote, navigateWithSearch]);
+  }, [skip, defaultNote, prevDefaultNote, navigateWithSearch]);
 };
