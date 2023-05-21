@@ -8,7 +8,6 @@ import { useNavigateDefaultNote } from '@/entities/note/hooks';
 import type { Note } from '@/entities/note/types';
 import SidebarList from '@/shared/ui/layout/sidebar-list';
 import NavItem from '@/shared/ui/layout/nav-item';
-import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
@@ -16,7 +15,6 @@ const NotesList = () => {
 
   const {
     data,
-    isFetching,
     isError,
     error
   } = useGetNotesBySectionQuery(sectionId, {
@@ -25,8 +23,6 @@ const NotesList = () => {
   });
 
   useNavigateDefaultNote(sectionId);
-
-  if (isFetching) return <LoadingMsg />;
 
   if (isError) return <ErrorMsg error={error} />;
 

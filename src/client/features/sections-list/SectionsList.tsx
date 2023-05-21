@@ -9,18 +9,14 @@ import { useGetAllSectionsQuery } from '@/entities/section/api-slices';
 import type { Section } from '@/entities/section/types';
 import SidebarList from '@/shared/ui/layout/sidebar-list';
 import NavItem from '@/shared/ui/layout/nav-item';
-import LoadingMsg from '@/shared/ui/fetching/loading-msg';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const SectionsList = () => {
   const {
     data,
-    isFetching,
     isError,
     error
   } = useGetAllSectionsQuery();
-
-  if (isFetching) return <LoadingMsg />;
 
   if (isError) return <ErrorMsg error={error} />;
 

@@ -2,7 +2,9 @@
 @import '/src/assets/styles/theme/colors';
 
 .toolbar {
+  display: flex;
   height: $sidebar-item-height;
+  justify-content: space-between;
   margin: 0 10px;
   line-height: 2.1;
 }

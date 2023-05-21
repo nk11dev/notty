@@ -1,0 +1,15 @@
+@import '/src/assets/styles/theme/colors';
+
+.spinnerWrapper {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 1.45;
+  vertical-align: middle;
+  text-align: center;
+  color: #ABBACC;
+
+  svg {
+    vertical-align: baseline;
+  }
+}

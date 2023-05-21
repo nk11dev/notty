@@ -2,23 +2,30 @@ import styles from '@/shared/ui/layout/sidebar-toolbar/SidebarToolbar.module.scs
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faRotate } from '@fortawesome/free-solid-svg-icons';
 import cn from 'classnames';
 
 import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 import { useLazyGetNotesBySectionQuery } from '@/entities/note/api-slices';
-import { useHandleCreateNote } from '@/entities/note/hooks';
+import {
+  useNotesState,
+  useHandleCreateNote
+} from '@/entities/note/hooks';
 
 const NotesToolbar = () => {
   const { sectionId } = useParams();
 
+  const { isFetching } = useNotesState(sectionId);
   const [refetchNotesBySection] = useLazyGetNotesBySectionQuery();
   const [onCreateNote] = useHandleCreateNote();
 
   return (
-    <SidebarToolbar title="Notes">
+    <SidebarToolbar
+      title="Notes"
+      showLoader={isFetching}
+    >
       {sectionId && (
         <>
           <ButtonIcon
