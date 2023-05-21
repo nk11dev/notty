@@ -8,18 +8,18 @@ import { useHandleDeleteSection } from '@/entities/section/hooks';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 
 const SectionsContextMenu = () => {
-  const [isShowing, setIsShowing] = useState(false);
+  const [isShowingModal, toggleModal] = useState(false);
   const [sectionId, setSectionId] = useState(null);
 
   const [onDeleteSection] = useHandleDeleteSection();
 
   useEffect(() => {
-    (sectionId !== null) && setIsShowing(true);
+    (sectionId !== null) && toggleModal(true);
   }, [sectionId]);
 
   useEffect(() => {
-    (isShowing === false) && setSectionId(null);
-  }, [isShowing]);
+    (isShowingModal === false) && setSectionId(null);
+  }, [isShowingModal]);
 
   const onItemClick = (args: ItemParams) => {
     const { id } = args.props;
@@ -48,10 +48,10 @@ const SectionsContextMenu = () => {
         onItemClick={onItemClick}
       />
 
-      {isShowing && (
+      {isShowingModal && (
         <SectionModal
           sectionId={sectionId}
-          onHide={() => setIsShowing(false)}
+          onHide={() => toggleModal(false)}
         />
       )}
     </>

@@ -35,6 +35,7 @@ const SectionModal = (props: Props) => {
       id: sectionId,
       title: titleRef.current.value,
     });
+    onHide();
   };
 
   return ReactDOM.createPortal(
