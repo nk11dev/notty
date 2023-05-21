@@ -5,7 +5,7 @@
   height: 40px;
   padding: 7px 10px;
   z-index: 2;
-  background: $header-color-bg;
+  background: $brand-color;
   @include boxShadow(0px 2px 5px 0px rgba(34, 60, 80, 0.2));
 
   .logo {

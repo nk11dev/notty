@@ -1,0 +1,20 @@
+@import '/src/assets/styles/theme/colors';
+
+.emptyText {
+  display: block;
+  padding: 8px 20px;
+  color: $sidebar-link-color-suffix-text;
+}
+
+.textBtn {
+  padding: 0;
+  border: none;
+  line-height: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  color: $brand-color;
+
+  &:hover {
+    color: $brand-color-darker-10;
+  }
+}

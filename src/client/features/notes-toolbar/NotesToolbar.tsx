@@ -33,7 +33,7 @@ const NotesToolbar = () => {
             clickHandler={() => onCreateNote(sectionId)}
             cls={cn(styles.toolbarBtn, 'm-1')}
             size={16}
-            tooltip="Create section"
+            tooltip="Create new note"
           />
 
           <ButtonIcon
@@ -41,7 +41,7 @@ const NotesToolbar = () => {
             clickHandler={() => refetchNotesBySection(sectionId)}
             cls={cn(styles.toolbarBtn, 'm-1')}
             size={16}
-            tooltip="Refetch Notes"
+            tooltip="Refetch notes"
           />
         </>
       )}

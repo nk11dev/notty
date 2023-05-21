@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import NotesContextMenu from '@/features/notes-context-menu';
+import NotesEmptyMsg from '@/features/notes-empty-msg';
 import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
 import { useNavigateDefaultNote } from '@/entities/note/hooks';
 import type { Note } from '@/entities/note/types';
@@ -26,10 +27,10 @@ const NotesList = () => {
 
   if (isError) return <ErrorMsg error={error} />;
 
-  if (!data || data?.length <= 0) return null;
+  if (!data) return null;
 
-  return (
-    <>
+  return data?.length > 0
+    ? (<>
       <SidebarList>
         {data.map((item: Note, index: number) => (
           <NavItem
@@ -46,8 +47,8 @@ const NotesList = () => {
         ))}
       </SidebarList>
       <NotesContextMenu />
-    </>
-  );
+    </>)
+    : <NotesEmptyMsg />;
 }
 
 export default NotesList;

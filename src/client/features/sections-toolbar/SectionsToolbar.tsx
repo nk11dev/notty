@@ -28,7 +28,7 @@ const SectionsToolbar = () => {
         clickHandler={() => onCreateSection()}
         cls={cn(styles.toolbarBtn, 'm-1')}
         size={16}
-        tooltip="Create section"
+        tooltip="Create new section"
       />
 
       <ButtonIcon
