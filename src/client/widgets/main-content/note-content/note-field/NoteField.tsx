@@ -1,20 +1,36 @@
 import styles from './NoteField.module.scss';
 
 import React from 'react';
+import cn from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type Props = {
-  text: string,
   data: string | number,
+  text?: string,
+  icon?: IconDefinition,
 };
 
 const NoteField = (props: Props) => {
-  const { text, data } = props;
+  const { data, text, icon } = props;
 
-  if (!text || !data) return null;
+  if (!data) return null;
 
   return (
-    <div className={styles.field}>
-      <span className="me-1">{text}:</span>
+    <div className={cn(styles.field, 'me-3')}>
+      {icon && <FontAwesomeIcon
+        icon={icon}
+        className="me-1"
+        style={{
+          width: 16,
+          height: 16
+        }}
+      />}
+
+      {text && <span className="me-1">
+        {text}:
+      </span>}
+
       <span>{data}</span>
     </div>
   );
