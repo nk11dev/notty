@@ -1,11 +1,21 @@
 @import '/src/assets/styles/common/breakpoints';
 @import '/src/assets/styles/theme/colors';
 
-.title {
-  padding-bottom: 3px;
-  border-bottom: 1px solid $note-content-color-title;
+.titleInput {
+  width: 100%;
+  padding: 0px 0px 3px 0px;
+  margin: 0px 0px 10px 0px;
+
+  border: none;
+  border-bottom: 1px solid #2d3b4a;
+
+  line-height: 0;
   font-size: 32px;
-  color: $note-content-color-title;
+  color: #2d3b4a;
+
+  &:focus {
+    outline: none;
+  }
 
   @media (max-width: $small-breakpoint) {
     font-size: 28px;

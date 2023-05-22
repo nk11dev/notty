@@ -3,6 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from '@/shared/api/base-query';
 import type {
   Note,
+  NoteUpdateEndpointArg,
   NoteDeleteResponse
 } from '@/entities/note/types';
 
@@ -46,6 +47,18 @@ export const notesApi = createApi({
         }
       }),
 
+      updateNote: build.mutation<Note, NoteUpdateEndpointArg>({
+        query: ({ id, title }) => ({
+          url: `/notes/${id}`,
+          method: 'PUT',
+          data: {
+            title,
+          },
+          headers: { 'content-type': 'application/json' },
+        }),
+        invalidatesTags: ['Note', 'Notes'],
+      }),
+
       deleteNote: build.mutation<NoteDeleteResponse, string>({
         query: (noteId) => ({
           url: `/notes/${noteId}`,
@@ -70,5 +83,6 @@ export const {
   useLazyGetNotesBySectionQuery,
   useGetNoteQuery,
   useCreateNoteMutation,
+  useUpdateNoteMutation,
   useDeleteNoteMutation,
 } = notesApi;

@@ -7,6 +7,11 @@ export type Note = {
   section_id: number;
 };
 
+export type NoteUpdateEndpointArg = {
+  id: number,
+  title: string
+};
+
 export type NoteDeleteResponse = {
   affectedCount: number,
   affectedRow: Note | null,
