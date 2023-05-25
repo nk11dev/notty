@@ -3,6 +3,7 @@ import type { AxiosRequestConfig, AxiosError } from 'axios';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
+import { log } from '@/shared/utils/log.utils';
 
 const axiosBaseQuery =
   (
@@ -20,7 +21,11 @@ const axiosBaseQuery =
     async (args) => {
       const { url, method, data, params } = args;
 
-      console.log('\n axiosBaseQuery:', args);
+      log({
+        msg: 'axiosBaseQuery()',
+        data: `${args.method} ${args.url}`,
+        theme: 'violet',
+      });
 
       try {
         const result = await axios({
