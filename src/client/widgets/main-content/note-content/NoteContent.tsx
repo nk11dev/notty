@@ -11,7 +11,8 @@ import {
 } from '@/entities/note/api-slices';
 import { useDebounce } from '@/shared/hooks';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
-import NoteField from '@/widgets/main-content/note-content/note-field';
+import PageField from '@/shared/ui/page/page-field';
+import PageEditor from '@/shared/ui/page/page-editor';
 
 type NoteContent = {
   id: number | null,
@@ -78,16 +79,17 @@ const NoteContent = () => {
         onChange={onTitleChange}
       />
 
-      <div>
-        <NoteField
-          icon={faCalendarDays}
-          data={currentData.created_at}
-        />
-        <NoteField
-          icon={faPencil}
-          data={currentData.updated_at}
-        />
-      </div>
+      <PageField
+        icon={faCalendarDays}
+        data={currentData.created_at}
+      />
+
+      <PageField
+        icon={faPencil}
+        data={currentData.updated_at}
+      />
+
+      <PageEditor />
     </>
   );
 };

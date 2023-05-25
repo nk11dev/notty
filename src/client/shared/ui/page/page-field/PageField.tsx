@@ -1,4 +1,4 @@
-import styles from './NoteField.module.scss';
+import styles from './PageField.module.scss';
 
 import React from 'react';
 import cn from 'classnames';
@@ -11,7 +11,7 @@ type Props = {
   icon?: IconDefinition,
 };
 
-const NoteField = (props: Props) => {
+const PageField = (props: Props) => {
   const { data, text, icon } = props;
 
   if (!data) return null;
@@ -36,4 +36,4 @@ const NoteField = (props: Props) => {
   );
 };
 
-export default NoteField;
+export default PageField;

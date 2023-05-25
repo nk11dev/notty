@@ -1,0 +1,22 @@
+.menu {
+  margin: 10px 0px;
+
+  :global {
+    button {
+      width: 28px;
+      height: 28px;
+      margin: 2px;
+      padding: 4px;
+      font-size: 16px;
+      line-height: 1;
+      vertical-align: middle;
+      border: 1px solid darkgray;
+      border-radius: 3px;
+
+      &.is-active {
+        background: black;
+        color: #fff;
+      }
+    }
+  }
+}
