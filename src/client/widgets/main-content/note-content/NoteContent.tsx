@@ -1,33 +1,15 @@
-import styles from './NoteContent.module.scss';
-
-import React, { useState, useEffect } from 'react';
-import type { ChangeEvent } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { faCalendarDays, faPencil } from '@fortawesome/free-solid-svg-icons';
 
-import {
-  useGetNoteQuery,
-  useUpdateNoteMutation
-} from '@/entities/note/api-slices';
-import { useDebounce } from '@/shared/hooks';
+import { useGetNoteQuery } from '@/entities/note/api-slices';
+import NoteTitleInput from '@/features/note-title-input';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
-type NoteContent = {
-  id: number | null,
-  title: string,
-};
-
-const defaultContent: NoteContent = {
-  id: null,
-  title: '',
-};
-
 const NoteContent = () => {
   const { noteId } = useParams();
-
-  const [updateNote] = useUpdateNoteMutation();
 
   const {
     currentData,
@@ -38,46 +20,13 @@ const NoteContent = () => {
     refetchOnMountOrArgChange: true
   });
 
-  const [noteContent, setContent] = useState(defaultContent);
-  const debouncedContent = useDebounce(noteContent, 300)
-
-  useEffect(() => {
-    if (currentData) {
-      setContent({
-        id: currentData.note_id,
-        title: currentData.title
-      });
-    }
-  }, [currentData])
-
-  useEffect(() => {
-    if (
-      (debouncedContent.id === currentData?.note_id) &&
-      (debouncedContent.title !== currentData?.title)
-    ) {
-      updateNote(debouncedContent);
-    }
-  }, [debouncedContent, currentData, updateNote])
-
-  const onTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setContent(prevValue => ({
-      ...prevValue,
-      title: event.target.value
-    }));
-  }
-
   if (isError) return <ErrorMsg error={error} />;
 
   if (!currentData) return null;
 
   return (
     <>
-      <input
-        className={styles.titleInput}
-        type="text"
-        value={noteContent.title}
-        onChange={onTitleChange}
-      />
+      <NoteTitleInput />
 
       <PageField
         icon={faCalendarDays}
