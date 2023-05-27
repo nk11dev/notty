@@ -1,7 +1,13 @@
 .editor {
+  flex: 1;
+
   :global {
-    [contenteditable]:focus {
-      outline: 0px solid transparent;
-  }
+    [contenteditable] {
+      height: 100%;
+
+      &:focus {
+        outline: 0px solid transparent;
+      }
+    }
   }
 }

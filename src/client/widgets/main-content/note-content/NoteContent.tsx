@@ -1,3 +1,5 @@
+import styles from './NoteContent.module.scss';
+
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { faCalendarDays, faPencil } from '@fortawesome/free-solid-svg-icons';
@@ -26,7 +28,7 @@ const NoteContent = () => {
   if (!currentData) return null;
 
   return (
-    <>
+    <div className={styles.contentWrapper}>
       <NoteTitleInput />
 
       <div>
@@ -44,7 +46,7 @@ const NoteContent = () => {
       {/* <NoteBodyTextarea /> */}
 
       <PageEditor />
-    </>
+    </div>
   );
 };
 
