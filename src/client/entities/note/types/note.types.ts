@@ -11,6 +11,7 @@ export type Note = {
 export type NoteUpdateEndpointArg = {
   id: number,
   title?: string,
+  body?: string,
   [key: string]: number | string | undefined
 };
 

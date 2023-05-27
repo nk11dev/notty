@@ -11,11 +11,14 @@ import { useDebounce } from '@/shared/hooks';
 const defaultContent: NoteUpdateEndpointArg = {
   id: null,
   title: '',
+  body: '',
 };
+
+type FieldChangeEvent = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>;
 
 type Result = [
   NoteUpdateEndpointArg,
-  (event: ChangeEvent<HTMLInputElement>) => void
+  (event: FieldChangeEvent) => void
 ];
 
 export const useUpdateNoteField = (
@@ -34,7 +37,8 @@ export const useUpdateNoteField = (
     if (currentData) {
       setContent({
         id: currentData.note_id,
-        title: currentData.title
+        title: currentData.title,
+        body: currentData.body
       });
     }
   }, [currentData, fieldName])
@@ -49,7 +53,7 @@ export const useUpdateNoteField = (
     }
   }, [debouncedContent, currentData, updateNote, fieldName])
 
-  const onFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onFieldChange = (event: FieldChangeEvent) => {
     setContent(prevValue => ({
       ...prevValue,
       [fieldName]: event.target.value
