@@ -48,11 +48,11 @@ export const notesApi = createApi({
       }),
 
       updateNote: build.mutation<Note, NoteUpdateEndpointArg>({
-        query: ({ id, title }) => ({
+        query: ({ id, ...fields }) => ({
           url: `/notes/${id}`,
           method: 'PUT',
           data: {
-            title,
+            ...fields,
           },
           headers: { 'content-type': 'application/json' },
         }),
