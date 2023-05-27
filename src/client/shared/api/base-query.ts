@@ -22,9 +22,16 @@ const axiosBaseQuery =
       const { url, method, data, params } = args;
 
       log({
-        msg: 'axiosBaseQuery()',
+        msg: '--- axiosBaseQuery()',
         data: `${args.method} ${args.url}`,
         theme: 'violet',
+      });
+
+      log({
+        msg: 'data',
+        data: data,
+        theme: 'gray',
+        isDisabled: !data
       });
 
       try {

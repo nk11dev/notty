@@ -41,7 +41,7 @@ const NoteContent = () => {
         />
       </div>
 
-      <NoteBodyTextarea />
+      {/* <NoteBodyTextarea /> */}
 
       <PageEditor />
     </>
