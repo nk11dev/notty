@@ -1,11 +1,14 @@
+@import '/src/assets/styles/theme/sizings';
+
 .wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .content {
   display: flex;
   flex: 1;
+  height: calc(100% - $header-height);
   z-index: 1;
 }

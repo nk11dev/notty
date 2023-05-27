@@ -1,8 +1,9 @@
 @import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/colors';
+@import '/src/assets/styles/theme/sizings';
 
 .header {
-  height: 40px;
+  height: $header-height;
   padding: 7px 10px;
   z-index: 2;
   background: $brand-color;

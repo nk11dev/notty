@@ -1,5 +1,6 @@
 import '@/styles/theme/fonts.scss';
 import '@/styles/bootstrap/index.scss';
+import '@/styles/common/common.scss';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
