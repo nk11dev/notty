@@ -20,3 +20,12 @@
     }
   }
 }
+
+.separator {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0px 4px;
+  background: darkgray;
+}

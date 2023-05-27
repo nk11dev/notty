@@ -80,6 +80,8 @@ const EditorMenuBar = ({ editor }: Props) => {
         <Icon icon={faTextSlash} />
       </button>
 
+      <span className={styles.separator}/>
+
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
         className={editor.isActive('paragraph') ? 'is-active' : ''}
@@ -139,6 +141,8 @@ const EditorMenuBar = ({ editor }: Props) => {
       <button onClick={() => editor.chain().focus().clearNodes().run()}>
         <Icon icon={faBroom} />
       </button>
+
+      <span className={styles.separator}/>
 
       <button
         onClick={() => editor.chain().focus().undo().run()}
