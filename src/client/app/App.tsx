@@ -4,15 +4,11 @@ import { Provider } from 'react-redux';
 
 import { store } from '@/app/redux/store';
 import Router from '@/app/routing/Router';
-import RootLayout from '@/shared/ui/layout/root-layout';
-
 
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <RootLayout>
-        <Router />
-      </RootLayout>
+      <Router />
     </BrowserRouter>
   </Provider>
 );
