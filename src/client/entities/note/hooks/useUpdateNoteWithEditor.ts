@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import type { Editor } from '@tiptap/core';
 
+import { PAGE_TITLE_INPUT_EL_NAME } from '@/app/constants/elements.constants';
 import {
   notesApi,
   useUpdateNoteMutation
@@ -18,7 +19,10 @@ export const useUpdateNoteWithEditor = (
 
   useEffect(() => {
     if (currentData && editor) {
-      if (['', null].includes(currentData.body)) {
+      if (
+        ((document.activeElement as HTMLInputElement)?.name !== PAGE_TITLE_INPUT_EL_NAME) &&
+        ['', null].includes(currentData.body)
+      ) {
         editor
           .chain()
           .setContent(currentData.body)
