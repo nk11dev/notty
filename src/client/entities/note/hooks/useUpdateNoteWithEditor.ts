@@ -18,7 +18,16 @@ export const useUpdateNoteWithEditor = (
 
   useEffect(() => {
     if (currentData && editor) {
-      editor.commands.setContent(currentData.body);
+      if (['', null].includes(currentData.body)) {
+        editor
+          .chain()
+          .setContent(currentData.body)
+          .setTextSelection(1)
+          .focus()
+          .run();
+      } else {
+        editor.commands.setContent(currentData.body);
+      }
     }
   }, [currentData, editor])
 
