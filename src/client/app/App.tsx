@@ -4,15 +4,15 @@ import { Provider } from 'react-redux';
 
 import { store } from '@/app/redux/store';
 import Router from '@/app/routing/Router';
-import PageLayout from '@/shared/ui/layout/page-layout';
+import RootLayout from '@/shared/ui/layout/root-layout';
 
 
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <PageLayout>
+      <RootLayout>
         <Router />
-      </PageLayout>
+      </RootLayout>
     </BrowserRouter>
   </Provider>
 );

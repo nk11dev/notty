@@ -1,4 +1,4 @@
-import styles from './PageLayout.module.scss';
+import styles from './RootLayout.module.scss';
 
 import React from 'react';
 
@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode
 };
 
-const PageLayout = (props: Props) => (
+const RootLayout = (props: Props) => (
   <div className={styles.wrapper}>
     <Header />
 
@@ -18,4 +18,4 @@ const PageLayout = (props: Props) => (
   </div>
 );
 
-export default PageLayout;
+export default RootLayout;
