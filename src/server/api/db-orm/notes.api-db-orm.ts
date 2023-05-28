@@ -68,22 +68,23 @@ export async function createNote(request: Request, response: Response) {
 }
 
 export async function updateNote(request: Request, response: Response) {
-  const { title, body } = request.body;
+  const result = await noteRepository
+    .createQueryBuilder()
+    .update()
+    .set({
+      ...request.body,
+      updated_at: new Date(),
+    })
+    .where('note_id = :note_id', { note_id: request.params.noteId })
+    .returning('*')
+    .execute();
 
-  const [affectedRows, affectedCount] = await noteRepository.manager.query(`
-    UPDATE ${noteRepository.metadata.tableName}
-    SET 
-      title = $1,
-      body = $2,
-      updated_at = CURRENT_TIMESTAMP
-    WHERE note_id = $3
-    RETURNING *
-`, [title, body, request.params.noteId]);
+  const { raw, affected } = result || {};
 
   response.status(200).json({
     payload: {
-      affectedRows,
-      affectedCount
+      affectedRows: raw[0] || null,
+      affectedCount: affected
     }
   });
 }

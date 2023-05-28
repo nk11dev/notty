@@ -45,7 +45,6 @@ export const useUpdateNoteWithEditor = (
     ) {
       updateNote({
         id: currentData.note_id,
-        title: currentData.title,
         body: text ? html : '',
       });
     }
