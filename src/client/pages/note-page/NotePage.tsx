@@ -1,4 +1,4 @@
-import styles from './NoteContent.module.scss';
+import styles from './NotePage.module.scss';
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
@@ -10,7 +10,7 @@ import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
-const NoteContent = () => {
+const NotePage = () => {
   const { noteId } = useParams();
 
   const {
@@ -40,4 +40,4 @@ const NoteContent = () => {
   );
 };
 
-export default NoteContent;
+export default NotePage;

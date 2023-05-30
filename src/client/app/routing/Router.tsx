@@ -1,10 +1,9 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
+import ExamplePage from '@/pages/example-page';
+import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
-
-import ExampleContent from '@/widgets/main-content/example-content';
-import NoteContent from '@/widgets/main-content/note-content';
 
 import SingleAsideLayout from '@/shared/ui/layout/aside-layouts/single-aside-layout';
 import DoubleAsideLayout from '@/shared/ui/layout/aside-layouts/double-aside-layout';
@@ -16,7 +15,7 @@ export const appRoutes = [
     children: [
       {
         path: '/example',
-        element: <ExampleContent />,
+        element: <ExamplePage />,
       },
     ]
   },
@@ -26,7 +25,7 @@ export const appRoutes = [
     children: [
       {
         path: 'notes/:noteId',
-        element: <NoteContent />,
+        element: <NotePage />,
       },
     ]
   },

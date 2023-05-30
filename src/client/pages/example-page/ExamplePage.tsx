@@ -3,7 +3,7 @@ import React from 'react';
 import StylesExample from '@/shared/examples/StylesExample';
 import ImagesExample from '@/shared/examples/ImagesExample';
 
-const ExampleContent = () => (
+const ExamplePage = () => (
   <>
     <StylesExample>
       <h1>Example content</h1>
@@ -13,4 +13,4 @@ const ExampleContent = () => (
   </>
 );
 
-export default ExampleContent;
+export default ExamplePage;
