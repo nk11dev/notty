@@ -18,21 +18,19 @@ const BaseAsideLayout = (props: Props) => {
   const hasSidebarNav = searchParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
 
   return (
-    <>
-      <SidebarControls />
+    <div className={cn(styles.layout, {
+      'sidebar-nav-is-visible': hasSidebarNav,
+      'sidebar-nav-is-hidden': !hasSidebarNav,
+    })}>
+      <aside className={styles.sidebar}>
+        <SidebarControls />
+        {hasSidebarNav && props.asideContent}
+      </aside>
 
-      {hasSidebarNav && (
-        <aside className={styles.sidebar}>
-          {props.asideContent}
-        </aside>
-      )}
-
-      <main className={cn(styles.main, 'px-4 py-3', {
-        [styles.hideOnMobile]: hasSidebarNav
-      })}>
+      <main className={cn(styles.main, 'px-4 py-3')}>
         {props.children}
       </main>
-    </>
+    </div>
   );
 };
 

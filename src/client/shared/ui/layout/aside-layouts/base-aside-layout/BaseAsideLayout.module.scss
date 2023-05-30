@@ -1,5 +1,11 @@
 @import '/src/assets/styles/common/breakpoints';
 
+.layout {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
 .sidebar {
   flex: 0 1 auto;
   display: flex;
@@ -16,7 +22,7 @@
   background: #fff;
 }
 
-.hideOnMobile {
+:global(.sidebar-nav-is-visible) .main {
   @media (max-width: $small-breakpoint) {
     display: none;
   }
