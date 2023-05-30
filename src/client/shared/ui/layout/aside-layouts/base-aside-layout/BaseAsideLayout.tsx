@@ -1,4 +1,4 @@
-import styles from './TwoColumns.module.scss';
+import styles from './BaseAsideLayout.module.scss';
 
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -8,11 +8,11 @@ import { SIDEBAR_NAV_QUERY_PARAM } from '@/app/constants/query-params.constants'
 import SidebarControls from '@/shared/ui/layout/sidebar-controls';
 
 type Props = {
-  sidebarContent: React.ReactNode,
-  mainContent: React.ReactNode
+  asideContent: React.ReactNode,
+  children: React.ReactNode,
 };
 
-const TwoColumns = (props: Props) => {
+const BaseAsideLayout = (props: Props) => {
   const [searchParams] = useSearchParams();
 
   const hasSidebarNav = searchParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
@@ -21,15 +21,15 @@ const TwoColumns = (props: Props) => {
     <div className={styles.columns}>
       <SidebarControls />
 
-      {hasSidebarNav && props.sidebarContent}
+      {hasSidebarNav && props.asideContent}
 
       <main className={cn(styles.main, 'px-4 py-3', {
         [styles.isHiddenBpSmall]: hasSidebarNav
       })}>
-        {props.mainContent}
+        {props.children}
       </main>
     </div>
   );
-}
+};
 
-export default TwoColumns;
+export default BaseAsideLayout;

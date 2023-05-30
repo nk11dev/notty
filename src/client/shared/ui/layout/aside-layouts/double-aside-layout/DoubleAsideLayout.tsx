@@ -4,11 +4,15 @@ import { Outlet } from 'react-router-dom';
 import AsideLeft from '@/widgets/sidebar-content/aside-left';
 import AsideRight from '@/widgets/sidebar-content/aside-right';
 import SidebarAside from '@/shared/ui/layout/sidebar-aside';
-import TwoColumns from '@/shared/ui/layout/two-columns';
+import BaseAsideLayout from '@/shared/ui/layout/aside-layouts/base-aside-layout';
 
-const MainPage = () => (
-  <TwoColumns
-    sidebarContent={
+type Props = {
+  children?: React.ReactNode,
+};
+
+const DoubleAsideLayout = (props: Props) => (
+  <BaseAsideLayout
+    asideContent={
       <>
         <SidebarAside cls="sidebar-aside-1">
           <AsideLeft />
@@ -17,11 +21,15 @@ const MainPage = () => (
         <SidebarAside cls="sidebar-aside-2">
           <AsideRight />
         </SidebarAside>
-        
       </>
     }
-    mainContent={<Outlet />}
-  />
+  >
+    {
+      props.children
+        ? props.children
+        : <Outlet />
+    }
+  </BaseAsideLayout>
 );
 
-export default MainPage;
+export default DoubleAsideLayout;
