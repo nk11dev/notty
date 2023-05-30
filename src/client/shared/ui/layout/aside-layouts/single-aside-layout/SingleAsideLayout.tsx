@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AsideLeft from '@/widgets/sidebar-content/aside-left';
-import SidebarAside from '@/shared/ui/layout/sidebar-aside';
+import SidebarColumn from '@/shared/ui/layout/sidebar-column';
 import BaseAsideLayout from '@/shared/ui/layout/aside-layouts/base-aside-layout';
 
 type Props = {
@@ -12,9 +12,9 @@ type Props = {
 const SingleAsideLayout = (props: Props) => (
   <BaseAsideLayout
     asideContent={
-      <SidebarAside cls="sidebar-aside-1">
+      <SidebarColumn>
         <AsideLeft />
-      </SidebarAside>
+      </SidebarColumn>
     }
   >
     {

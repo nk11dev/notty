@@ -2,7 +2,7 @@
 @import '/src/assets/styles/theme/colors';
 
 .controls {
-  width: $sidebar-controls-width;
+  flex: 0 0 auto;
   border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;
 }

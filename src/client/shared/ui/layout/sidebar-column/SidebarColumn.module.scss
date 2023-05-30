@@ -2,18 +2,18 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.sidebarAside {
+.sidebarColumn {
   border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;
 
+  @media (min-width: $small-breakpoint) {
+    width: $sidebar-width;
+  }
+
   @media (max-width: $small-breakpoint) {
-    flex: 1;
+    flex: 1 1 0;
 
     // used for correct flexbox with "white-space: nowrap"
     min-width: 0;
-  }
-
-  @media (min-width: $small-breakpoint) {
-    width: $sidebar-width;
   }
 }

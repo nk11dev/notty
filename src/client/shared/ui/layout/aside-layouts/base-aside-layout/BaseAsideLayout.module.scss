@@ -1,22 +1,22 @@
 @import '/src/assets/styles/common/breakpoints';
 
-.columns {
+.sidebar {
+  flex: 0 1 auto;
   display: flex;
-  flex: 1;
+  flex-direction: row;
 
-  // used for correct flexbox with "white-space: nowrap"
   @media (max-width: $small-breakpoint) {
-    min-width: 0;
+    flex-grow: 1;
   }
 }
 
 .main {
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
   background: #fff;
 }
 
-.isHiddenBpSmall {
+.hideOnMobile {
   @media (max-width: $small-breakpoint) {
     display: none;
   }
