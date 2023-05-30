@@ -5,6 +5,7 @@ import NavItem from '@/shared/ui/layout/nav-item';
 
 const PinnedList = () => {
   const linksList = [
+    { url: '/', text: 'Home' },
     { url: '/example', text: 'Example content' },
   ];
 
