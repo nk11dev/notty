@@ -1,78 +1,73 @@
 @import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
+@import '/src/assets/styles/theme/z-indexes';
 
 .layout {
+  display: flex;
   height: 100%;
 }
 
 .sidebar {
   position: fixed;
-  display: flex;
+  left: $sidebar-controls-width;
   height: 100%;
-  left: 35px;
-  top: 0px;
-
-  // temporary bug workaround - sometimes (on mobile view) page content is visible behind sidebar
-  z-index: 9;
+  display: flex;
   background: $sidebar-color-bg;
-
-  transition: all 500ms ease;
+  z-index: $sidebar-z-index;
+  transition: margin 500ms ease;
 
   @media (max-width: $small-breakpoint) {
-    width: calc(100% - 35px);
+    width: calc(100% - $sidebar-controls-width);
   }
 }
 
 .main {
-  position: relative;
-  height: 100%;
+  flex-grow: 1;
+  overflow: auto;
+  background: #fff;
+  z-index: $main-z-index;
+  transition: margin 500ms ease;
+}
 
-  // temporary bug workaround - sometimes (on mobile view) page content is visible behind sidebar
-  z-index: 8;
+.sidebarNavIsVisible {
+  &:global(.single-column-layout) {
+    .main {
+      @media (min-width: $small-breakpoint) {
+        margin-left: $sidebar-width;
+      }
+    }
+  }
 
-  transition: all 500ms ease;
-
-  @media (max-width: $small-breakpoint) {
-    width: calc(100% - 35px);
+  &:global(.double-column-layout) {
+    .main {
+      @media (min-width: $small-breakpoint) {
+        margin-left: ($sidebar-width * 2);
+      }
+    }
   }
 }
 
-:global(.sidebar-nav-is-hidden) {
-  .main {
-    margin-left: 35px;
-  }
-
+.sidebarNavIsHidden {
   .sidebar {
-    @media (min-width: $small-breakpoint) {
-      margin-left: -430px;
-    }
     @media (max-width: $small-breakpoint) {
       margin-left: -100%;
     }
   }
-}
 
-// desktop
-:global(.sidebar-nav-is-visible.single-column-layout) {
-  .main {
-    @media (min-width: $small-breakpoint) {
-      margin-left: 250px;
+  &:global(.single-column-layout) {
+    .sidebar {
+      @media (min-width: $small-breakpoint) {
+        margin-left: -$sidebar-width;
+      }
     }
   }
-}
-:global(.sidebar-nav-is-visible.double-column-layout) {
-  .main {
-    @media (min-width: $small-breakpoint) {
-      margin-left: 465px;
-    }
-  }
-}
 
-// mobile
-:global(.sidebar-nav-is-visible) {
-  .main {
-    @media (max-width: $small-breakpoint) {
-      margin-left: 35px;
+  &:global(.double-column-layout) {
+    .sidebar {
+      @media (min-width: $small-breakpoint) {
+        margin-left: -($sidebar-width * 2);
+      }
     }
   }
 }

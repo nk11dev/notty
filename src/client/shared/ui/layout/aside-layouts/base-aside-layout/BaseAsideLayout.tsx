@@ -20,8 +20,8 @@ const BaseAsideLayout = (props: Props) => {
 
   return (
     <div className={cn(styles.layout, props.cls, {
-      'sidebar-nav-is-visible': hasSidebarNav,
-      'sidebar-nav-is-hidden': !hasSidebarNav,
+      [styles.sidebarNavIsVisible]: hasSidebarNav,
+      [styles.sidebarNavIsHidden]: !hasSidebarNav,
     })}>
       <SidebarControls />
 
