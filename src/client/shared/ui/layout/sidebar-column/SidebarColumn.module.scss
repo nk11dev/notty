@@ -11,9 +11,23 @@
   }
 
   @media (max-width: $small-breakpoint) {
-    flex: 1 1 0;
-
     // used for correct flexbox with "white-space: nowrap"
     min-width: 0;
+  }
+}
+
+:global(.sidebar-nav-is-visible.single-column-layout) {
+  .sidebarColumn {
+    @media (max-width: $small-breakpoint) {
+      flex: 1 1 0;
+      width: calc(100% - 35px);
+    }
+  }
+}
+:global(.sidebar-nav-is-visible.double-column-layout) {
+  .sidebarColumn {
+    @media (max-width: $small-breakpoint) {
+      width: calc((100% - 35px) / 2);
+    }
   }
 }

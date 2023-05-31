@@ -11,6 +11,7 @@ type Props = {
 
 const SingleAsideLayout = (props: Props) => (
   <BaseAsideLayout
+    cls="single-column-layout"
     asideContent={
       <SidebarColumn>
         <AsideLeft />

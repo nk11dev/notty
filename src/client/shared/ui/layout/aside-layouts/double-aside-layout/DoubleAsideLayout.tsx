@@ -12,6 +12,7 @@ type Props = {
 
 const DoubleAsideLayout = (props: Props) => (
   <BaseAsideLayout
+    cls="double-column-layout"
     asideContent={
       <>
         <SidebarColumn>

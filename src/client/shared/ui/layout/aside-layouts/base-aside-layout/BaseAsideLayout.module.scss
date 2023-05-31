@@ -1,29 +1,78 @@
 @import '/src/assets/styles/common/breakpoints';
 
 .layout {
-  display: flex;
-  flex-direction: row;
   height: 100%;
 }
 
 .sidebar {
-  flex: 0 1 auto;
+  position: fixed;
   display: flex;
-  flex-direction: row;
+  height: 100%;
+  left: 35px;
+  top: 0px;
 
-  @media (max-width: $small-breakpoint) {
-    flex-grow: 1;
-  }
+  // temporary bug workaround - sometimes (on mobile view) page content is visible behind sidebar
+  z-index: 9;
+
+  transition: all 500ms ease;
 }
 
 .main {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  background: #fff;
+  position: relative;
+  height: 100%;
+
+  // temporary bug workaround - sometimes (on mobile view) page content is visible behind sidebar
+  z-index: 8;
+
+  transition: all 500ms ease;
+
+  @media (max-width: $small-breakpoint) {
+    width: calc(100% - 35px);
+  }
 }
 
-:global(.sidebar-nav-is-visible) .main {
-  @media (max-width: $small-breakpoint) {
-    display: none;
+:global(.sidebar-nav-is-hidden) {
+  .main {
+    margin-left: 35px;
+  }
+
+  .sidebar {
+    @media (min-width: $small-breakpoint) {
+      margin-left: -430px;
+    }
+    @media (max-width: $small-breakpoint) {
+      margin-left: -100%;
+    }
+  }
+}
+
+// desktop
+:global(.sidebar-nav-is-visible.single-column-layout) {
+  .main {
+    @media (min-width: $small-breakpoint) {
+      margin-left: 250px;
+    }
+  }
+}
+:global(.sidebar-nav-is-visible.double-column-layout) {
+  .main {
+    @media (min-width: $small-breakpoint) {
+      margin-left: 465px;
+    }
+  }
+}
+
+// mobile
+:global(.sidebar-nav-is-visible) {
+  .main {
+    @media (max-width: $small-breakpoint) {
+      margin-left: calc(100% + 35px);
+    }
+  }
+
+  .sidebar {
+    @media (max-width: $small-breakpoint) {
+      width: 100%;
+    }
   }
 }
