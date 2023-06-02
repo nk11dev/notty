@@ -34,13 +34,18 @@ export const useUpdateNoteField = (
   const debouncedContent = useDebounce<NoteUpdateEndpointArg>(noteContent, 300);
 
   useEffect(() => {
-    if (currentData) {
-      setContent({
+    setContent((val) => {
+      if (!currentData || (val !== defaultContent)) {
+        return val;
+      }
+
+      return {
         id: currentData.note_id,
         title: currentData.title,
-        body: currentData.body
-      });
-    }
+        body: currentData.body,
+      };
+    });
+
   }, [currentData, fieldName])
 
   useEffect(() => {
