@@ -10,6 +10,10 @@ import {
 import { useNoteData } from '@/entities/note/hooks/useNoteData';
 import { useDebounce } from '@/shared/hooks';
 
+const PM_PARSE_OPTIONS = {
+  preserveWhitespace: true
+};
+
 export const useUpdateNoteWithEditor = (editor: Editor): void => {
   const { noteId } = useParams();
 
@@ -38,7 +42,7 @@ export const useUpdateNoteWithEditor = (editor: Editor): void => {
         (text === '') ||
         (noteData.id !== currentData.note_id)
       ) {
-        editor.commands.setContent(currentData.body);
+        editor.commands.setContent(currentData.body, false, PM_PARSE_OPTIONS);
       }
     }
 
