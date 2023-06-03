@@ -1,18 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import type { ChangeEvent } from 'react';
+import { useParams } from 'react-router-dom';
 
 import {
   notesApi,
   useUpdateNoteMutation
 } from '@/entities/note/api-slices';
+import { useNoteData } from '@/entities/note/hooks/useNoteData';
 import type { NoteUpdateEndpointArg } from '@/entities/note/types';
 import { useDebounce } from '@/shared/hooks';
-
-const defaultContent: NoteUpdateEndpointArg = {
-  id: null,
-  title: '',
-  body: '',
-};
 
 type FieldChangeEvent = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>;
 
@@ -21,52 +17,34 @@ type Result = [
   (event: FieldChangeEvent) => void
 ];
 
-export const useUpdateNoteField = (
-  noteId: string,
-  fieldName: string,
-): Result => {
+export const useUpdateNoteField = (fieldName: string): Result => {
+  const { noteId } = useParams();
 
   const [updateNote] = useUpdateNoteMutation();
-
   const { currentData } = notesApi.endpoints.getNote.useQueryState(noteId);
 
-  const [noteContent, setContent] = useState(defaultContent);
-  const debouncedContent = useDebounce<NoteUpdateEndpointArg>(noteContent, 300);
-
-  useEffect(() => {
-    setContent((val) => {
-      if (!currentData || (val !== defaultContent)) {
-        return val;
-      }
-
-      return {
-        id: currentData.note_id,
-        title: currentData.title,
-        body: currentData.body,
-      };
-    });
-
-  }, [currentData, fieldName])
+  const [noteData, setNoteData] = useNoteData();
+  const debouncedData = useDebounce<NoteUpdateEndpointArg>(noteData, 300);
 
   useEffect(() => {
     if (
       currentData &&
-      (debouncedContent.id === currentData.note_id) &&
-      (debouncedContent[fieldName] !== currentData[fieldName])
+      (debouncedData.id === currentData.note_id) &&
+      (debouncedData[fieldName] !== currentData[fieldName])
     ) {
-      updateNote(debouncedContent);
+      updateNote(debouncedData);
     }
-  }, [debouncedContent, currentData, updateNote, fieldName])
+  }, [debouncedData, currentData, updateNote, fieldName])
 
   const onFieldChange = (event: FieldChangeEvent) => {
-    setContent(prevValue => ({
+    setNoteData(prevValue => ({
       ...prevValue,
       [fieldName]: event.target.value
     }));
   }
 
   return [
-    noteContent,
+    noteData,
     onFieldChange
   ];
 }

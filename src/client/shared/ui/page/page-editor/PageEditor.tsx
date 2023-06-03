@@ -2,7 +2,6 @@ import './ProseMirror.scss';
 import styles from './PageEditor.module.scss';
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ListItem from '@tiptap/extension-list-item';
@@ -17,8 +16,6 @@ interface ExtendedTextStyleOptions extends TextStyleOptions {
 }
 
 const PageEditor = () => {
-  const { noteId } = useParams();
-
   const editor = useEditor({
     extensions: [
       TextStyle.configure({ types: [ListItem.name] } as ExtendedTextStyleOptions),
@@ -39,7 +36,7 @@ const PageEditor = () => {
     content: '',
   });
 
-  useUpdateNoteWithEditor(noteId, editor);
+  useUpdateNoteWithEditor(editor);
 
   return (
     <>
