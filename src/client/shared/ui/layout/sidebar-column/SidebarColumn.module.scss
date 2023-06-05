@@ -3,6 +3,8 @@
 @import '/src/assets/styles/theme/colors';
 
 .sidebarColumn {
+  display: flex;
+  flex-direction: column;
   border-right: 1px solid $sidebar-border-color;
 
   @media (min-width: $small-breakpoint) {

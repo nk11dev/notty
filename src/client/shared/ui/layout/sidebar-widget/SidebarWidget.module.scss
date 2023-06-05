@@ -1,0 +1,13 @@
+.element {
+  display: flex;
+  flex-direction: column;
+}
+
+.isScrollable {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.isNotScrollable {
+  flex: 1 0 auto;
+}
