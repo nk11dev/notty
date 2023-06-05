@@ -3,6 +3,8 @@
 @import '/src/assets/styles/theme/z-indexes';
 
 .controls {
+  position: fixed;
+  height: 100%;
   width: $sidebar-controls-width;
   border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;

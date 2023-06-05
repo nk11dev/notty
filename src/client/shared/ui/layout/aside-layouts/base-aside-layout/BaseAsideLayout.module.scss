@@ -24,17 +24,27 @@
 
 .main {
   flex-grow: 1;
-  overflow: auto;
   background: #fff;
   z-index: $main-z-index;
   transition: margin 500ms ease;
+
+  // prevents URL adress bar hiding on user scroll (for touch devices)
+  @media (max-width: $small-breakpoint) {
+    overflow: auto;
+  }
 }
 
 .sidebarNavIsVisible {
+  .main {
+    @media (max-width: $small-breakpoint) {
+      margin-left: $sidebar-controls-width;
+    }
+  }
+
   &:global(.single-column-layout) {
     .main {
       @media (min-width: $small-breakpoint) {
-        margin-left: $sidebar-width;
+        margin-left: $sidebar-width + $sidebar-controls-width;
       }
     }
   }
@@ -42,13 +52,17 @@
   &:global(.double-column-layout) {
     .main {
       @media (min-width: $small-breakpoint) {
-        margin-left: ($sidebar-width * 2);
+        margin-left: ($sidebar-width * 2) + $sidebar-controls-width;
       }
     }
   }
 }
 
 .sidebarNavIsHidden {
+  .main {
+    margin-left: $sidebar-controls-width;
+  }
+
   .sidebar {
     @media (max-width: $small-breakpoint) {
       margin-left: -100%;
