@@ -29,7 +29,7 @@ const BaseAsideLayout = (props: Props) => {
         {props.asideContent}
       </aside>
 
-      <main className={cn(styles.main, 'px-4 py-3')}>
+      <main className={styles.main}>
         {props.children}
       </main>
     </div>

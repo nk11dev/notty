@@ -1,12 +1,12 @@
-import styles from './NotePage.module.scss';
-
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 import { useGetNoteQuery } from '@/entities/note/api-slices';
+import NoteHeader from '@/features/note-header';
 import NoteTitleInput from '@/features/note-title-input';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
+import PageContent from '@/shared/ui/page/page-content';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
@@ -27,16 +27,20 @@ const NotePage = () => {
   if (!currentData) return null;
 
   return (
-    <div className={styles.contentWrapper}>
-      <NoteTitleInput />
+    <>
+      <NoteHeader />
 
-      <PageField
-        icon={faFloppyDisk}
-        data={currentData.updated_at || currentData.created_at}
-      />
+      <PageContent>
+        <NoteTitleInput />
 
-      <PageEditor />
-    </div>
+        <PageField
+          icon={faFloppyDisk}
+          data={currentData.updated_at || currentData.created_at}
+        />
+
+        <PageEditor />
+      </PageContent>
+    </>
   );
 };
 

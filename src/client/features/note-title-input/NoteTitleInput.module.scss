@@ -3,15 +3,12 @@
 
 .titleInput {
   width: 100%;
-  padding: 0px 0px 3px 0px;
-  margin: 0px 0px 10px 0px;
-
+  padding: 0px;
+  margin: 0px;
   border: none;
-  border-bottom: 1px solid #2d3b4a;
-
-  line-height: 0;
   font-size: 32px;
   color: #2d3b4a;
+  text-overflow: ellipsis;
 
   &:focus {
     outline: none;
