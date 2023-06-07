@@ -17,3 +17,9 @@
     line-height: 2.4;
   }
 }
+
+.breadcrumbs {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

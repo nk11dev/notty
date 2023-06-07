@@ -29,6 +29,9 @@
   background: #fff;
   z-index: $main-z-index;
   transition: margin 500ms ease;
+
+  // used for correct flexbox with "white-space: nowrap" (breadcrumbs)
+  min-width: 0;
 }
 
 .sidebarNavIsVisible {

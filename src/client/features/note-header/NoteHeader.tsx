@@ -11,7 +11,9 @@ const NoteHeader = () => {
 
   return (
     <div className={styles.element}>
-      {sectionState?.title} / {noteState?.title}
+      <div className={styles.breadcrumbs}>
+        {sectionState?.title} / {noteState?.title}
+      </div>
     </div>
   );
 };

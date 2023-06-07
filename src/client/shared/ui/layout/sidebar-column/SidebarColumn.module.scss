@@ -14,7 +14,7 @@
   @media (max-width: $small-breakpoint) {
     flex: 1 1 0;
 
-    // used for correct flexbox with "white-space: nowrap"
+    // used for correct flexbox with "white-space: nowrap" (links)
     min-width: 0;
   }
 }
