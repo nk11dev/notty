@@ -15,7 +15,7 @@ const SidebarToolbar = (props: Props) => {
   const { title, children, showLoader = false } = props;
 
   return (
-    <div className={styles.toolbar}>
+    <div className={styles.element}>
       <span>
         <b className='me-1'>
           {title}

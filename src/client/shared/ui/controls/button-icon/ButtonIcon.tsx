@@ -6,17 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type Props = {
-  icon: IconDefinition,
-  clickHandler: () => void;
+  icon?: IconDefinition,
+  children?: React.ReactNode,
+  clickHandler?: () => void;
   cls?: string,
   size?: number,
   tooltip?: string,
 };
 
 const ButtonIcon = (props: Props) => {
-  const { icon, clickHandler, cls, size, tooltip } = props;
+  const { icon, children, clickHandler, cls, size, tooltip } = props;
 
-  if (!icon) return null;
+  if (!icon && !children) return null;
 
   return (
     <span
@@ -24,13 +25,15 @@ const ButtonIcon = (props: Props) => {
       onClick={clickHandler}
       title={tooltip}
     >
-      <FontAwesomeIcon
-        icon={icon}
-        style={{
-          width: size,
-          height: size
-        }}
-      />
+      {icon
+        ? <FontAwesomeIcon
+          icon={icon}
+          style={{
+            width: size,
+            height: size
+          }}
+        />
+        : children}
     </span>
   );
 };

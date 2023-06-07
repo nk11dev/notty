@@ -1,0 +1,30 @@
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
+
+.controlsBtn {
+  width: $sidebar-controls-width;
+  display: flex;
+  color: $brand-color;
+}
+
+.controlsIcon {
+  width: 100%;
+  height: $sidebar-item-height;
+  padding: 5px;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: $sidebar-border-color;
+  border-width: 0 0 1px 0;
+}
+
+.isActive {
+  background: $sidebar-link-active-color-bg;
+}
+
+.isDisabled {
+  color: $common-color-suffix-text;
+
+  &:hover {
+    cursor: auto;
+  }
+}

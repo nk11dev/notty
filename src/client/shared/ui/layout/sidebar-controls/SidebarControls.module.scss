@@ -2,24 +2,9 @@
 @import '/src/assets/styles/theme/colors';
 @import '/src/assets/styles/theme/z-indexes';
 
-.controls {
+.element {
   width: $sidebar-controls-width;
   border-right: 1px solid $sidebar-border-color;
   background: $sidebar-color-bg;
   z-index: $sidebar-controls-z-index;
-}
-
-.controlsBtn {
-  width: 100%;
-  height: $sidebar-item-height;
-  padding: 5px;
-  border-radius: 0px;
-  border-style: solid;
-  border-color: $sidebar-border-color;
-  border-width: 0 0 1px 0;
-  color: $brand-color;
-}
-
-.isActive {
-  background: $sidebar-link-active-color-bg;
 }

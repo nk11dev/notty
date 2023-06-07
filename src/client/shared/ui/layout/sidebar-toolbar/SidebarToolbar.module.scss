@@ -1,7 +1,7 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.toolbar {
+.element {
   display: flex;
   height: $sidebar-item-height;
   justify-content: space-between;
@@ -10,6 +10,7 @@
 }
 
 .toolbarBtn {
+  display: inline-block;
   width: 20px;
   height: 20px;
   border: 1px solid $sidebar-toolbar-btn-border-color;
