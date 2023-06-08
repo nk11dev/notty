@@ -5,9 +5,14 @@
   width: $sidebar-controls-width;
   display: flex;
   color: $note-content-color-title;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0px 0px 0px 1px;
 
   &:hover {
     background: $sidebar-link-active-color-bg;
+    border-color: $sidebar-border-color;
   }
 }
 
@@ -15,14 +20,6 @@
   width: 100%;
   height: $sidebar-item-height;
   padding: 7px;
-  border-radius: 0px;
-  border-style: solid;
-  border-color: transparent;
-  border-width: 0px 0px 0px 1px;
-
-  &:hover {
-    border-color: $sidebar-border-color;
-  }
 }
 
 .isDisabled {

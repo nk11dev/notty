@@ -2,9 +2,13 @@
 @import '/src/assets/styles/theme/colors';
 
 .controlsBtn {
-  width: $sidebar-controls-width;
   display: flex;
+  width: $sidebar-controls-width;
   color: $brand-color;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: $sidebar-border-color;
+  border-width: 0 0 1px 0;
 
   &:hover {
     background: $sidebar-link-active-color-bg;
@@ -15,10 +19,6 @@
   width: 100%;
   height: $sidebar-item-height;
   padding: 7px;
-  border-radius: 0px;
-  border-style: solid;
-  border-color: $sidebar-border-color;
-  border-width: 0 0 1px 0;
 }
 
 .isActive {
