@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 import { useGetNoteQuery } from '@/entities/note/api-slices';
-import NoteHeader from '@/features/note-header';
+import PageHeader from '@/features/page-header';
 import NoteTitleInput from '@/features/note-title-input';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import PageContent from '@/shared/ui/page/page-content';
@@ -28,9 +28,9 @@ const NotePage = () => {
 
   return (
     <>
-      <NoteHeader />
+      <PageHeader />
 
-      <PageContent>
+      <PageContent isFlex>
         <NoteTitleInput />
 
         <PageField

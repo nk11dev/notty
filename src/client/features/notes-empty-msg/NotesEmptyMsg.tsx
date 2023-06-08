@@ -1,31 +1,15 @@
 import styles from './NotesEmptyMsg.module.scss';
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import cn from 'classnames';
 
-import {
-  useHandleCreateNote
-} from '@/entities/note/hooks';
+import MessageCreateNote from '@/features/message-create-note';
 
-const NotesEmptyMsg = () => {
-  const { sectionId } = useParams();
-  const [onCreateNote] = useHandleCreateNote();
+const NotesEmptyMsg = () => (
+  <div className={styles.element}>
+    <div>No notes here yet.</div>
 
-  return (
-    <div className={styles.emptyText}>
-      <div>It&rsquo;s empty here.</div>
-
-      <button
-        type="button"
-        className={cn(styles.textBtn, 'btn btn-link')}
-        onClick={() => onCreateNote(sectionId)}
-      >
-        Create new note
-      </button>
-      <span> to start writing</span>
-    </div>
-  );
-}
+    <MessageCreateNote />
+  </div>
+);
 
 export default NotesEmptyMsg;

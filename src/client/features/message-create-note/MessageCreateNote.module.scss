@@ -1,0 +1,14 @@
+@import '/src/assets/styles/theme/colors';
+
+.element {
+  padding: 0;
+  border: none;
+  line-height: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+  color: $brand-color;
+
+  &:hover {
+    color: $brand-color-darker-10;
+  }
+}

@@ -1,13 +1,17 @@
 import styles from './PageContent.module.scss';
 
 import React from 'react';
+import cn from 'classnames';
 
 type Props = {
   children: React.ReactNode,
+  isFlex?: boolean
 };
 
 const PageContent = (props: Props) => (
-  <div className={styles.element}>
+  <div className={cn(styles.element, {
+    [styles.isFlex]: (props.isFlex === true)
+  })}>
     {props.children}
   </div>
 );

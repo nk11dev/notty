@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 
 import HomePage from '@/pages/home-page';
 import ExamplePage from '@/pages/example-page';
+import SectionPage from '@/pages/section-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
 
@@ -24,11 +25,15 @@ export const appRoutes = [
     ]
   },
   {
-    path: '/sections/:sectionId',
+    path: '/sections',
     element: <DoubleAsideLayout />,
     children: [
       {
-        path: 'notes/:noteId',
+        path: ':sectionId',
+        element: <SectionPage />,
+      },
+      {
+        path: ':sectionId/notes/:noteId',
         element: <NotePage />,
       },
     ]
