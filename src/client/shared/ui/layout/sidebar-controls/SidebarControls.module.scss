@@ -13,7 +13,8 @@
 
 .controlsFiller {
   flex-grow: 1;
-}
-.controlsFiller + span {
-  border-width: 1px 0px 0px 0px;
+
+  ~ span {
+    border-width: 1px 0px 0px 0px;
+  }
 }

@@ -1,11 +1,12 @@
 @import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
 .element {
   flex: 0 0 auto;
   display: flex;
   justify-content: stretch;
-  height: 34px;
+  height: $sidebar-item-height;
   line-height: 2.2;
   z-index: inherit;
 

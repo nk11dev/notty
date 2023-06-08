@@ -3,10 +3,10 @@
 
 .element {
   display: flex;
-  height: $sidebar-item-height;
+  height: $sidebar-item-height + 1;
   justify-content: space-between;
   margin: 0 10px;
-  line-height: 2.1;
+  line-height: 2.3;
 }
 
 .toolbarBtn {
