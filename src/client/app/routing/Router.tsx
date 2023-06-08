@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
+import HomePage from '@/pages/home-page';
 import ExamplePage from '@/pages/example-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
@@ -10,9 +11,12 @@ import DoubleAsideLayout from '@/shared/ui/layout/aside-layouts/double-aside-lay
 
 export const appRoutes = [
   {
-    path: '/',
     element: <SingleAsideLayout />,
     children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
       {
         path: '/example',
         element: <ExamplePage />,

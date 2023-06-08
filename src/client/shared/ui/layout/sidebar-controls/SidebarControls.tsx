@@ -6,6 +6,7 @@ import SectionsControl from '@/shared/ui/layout/sidebar-controls/sections-contro
 import FavoritesControl from '@/shared/ui/layout/sidebar-controls/favorites-control';
 import SearchControl from '@/shared/ui/layout/sidebar-controls/search-control';
 import RecentControl from '@/shared/ui/layout/sidebar-controls/recent-control';
+import HomeControl from '@/shared/ui/layout/sidebar-controls/home-control';
 import UserControl from '@/shared/ui/layout/sidebar-controls/user-control';
 
 const SidebarControls = () => (
@@ -17,6 +18,7 @@ const SidebarControls = () => (
 
     <span className={styles.controlsFiller} />
 
+    <HomeControl />
     <UserControl />
   </aside>
 );
