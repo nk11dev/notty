@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import type { FormEvent } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -38,6 +39,11 @@ const SectionModal = (props: Props) => {
     onHide();
   };
 
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    onSave();
+  };
+
   return ReactDOM.createPortal(
     <Modal show onHide={onHide}>
 
@@ -48,7 +54,7 @@ const SectionModal = (props: Props) => {
       </Modal.Header>
 
       <Modal.Body>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
 
