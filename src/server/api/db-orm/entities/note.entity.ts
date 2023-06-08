@@ -14,7 +14,7 @@ export default class NoteEntity {
   @Column({
     nullable: false,
     length: 30,
-    default: () => "'Untitled note'",
+    default: 'Untitled note',
   })
   title: string
 
@@ -23,6 +23,12 @@ export default class NoteEntity {
     nullable: true,
   })
   body: string
+
+  @Column({
+    nullable: false,
+    default: false,
+  })
+  is_favorite: boolean
 
   @Column({
     type: 'timestamptz',
