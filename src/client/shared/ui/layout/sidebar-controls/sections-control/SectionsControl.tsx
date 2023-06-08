@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { LuMenu } from 'react-icons/lu';
+import {
+  AiOutlineFolder,
+  AiOutlineFolderOpen
+} from 'react-icons/ai';
 
 import { SIDEBAR_NAV_QUERY_PARAM } from '@/app/constants/query-params.constants';
 import ControlsButton from '@/shared/ui/controls/controls-button';
@@ -26,9 +29,13 @@ const SectionsControl = () => {
     <ControlsButton
       clickHandler={toggleSidebarNav}
       clsIsActive={hasSidebarNav}
-      tooltip={`${hasSidebarNav ? 'Hide' : 'Show'} navigation`}
+      tooltip={`${hasSidebarNav ? 'Hide' : 'Show'} sections`}
     >
-      <LuMenu />
+      {
+        hasSidebarNav
+          ? <AiOutlineFolderOpen />
+          : <AiOutlineFolder />
+      }
     </ControlsButton>
   );
 };
