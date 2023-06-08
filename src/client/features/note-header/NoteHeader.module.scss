@@ -3,8 +3,9 @@
 
 .element {
   flex: 0 0 auto;
+  display: flex;
+  justify-content: stretch;
   height: 34px;
-  padding: 0px 10px;
   line-height: 2.2;
   z-index: inherit;
 
@@ -19,7 +20,14 @@
 }
 
 .breadcrumbs {
+  flex: 1 1 auto;
+  padding: 0px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.headerControls {
+  display: flex;
+  margin-left: 10px;
 }

@@ -1,28 +1,28 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.controlsBtn {
+.headerBtn {
   width: $sidebar-controls-width;
   display: flex;
-  color: $brand-color;
+  color: $note-content-color-title;
 
   &:hover {
     background: $sidebar-link-active-color-bg;
   }
 }
 
-.controlsIcon {
+.headerIcon {
   width: 100%;
   height: $sidebar-item-height;
   padding: 7px;
   border-radius: 0px;
   border-style: solid;
-  border-color: $sidebar-border-color;
-  border-width: 0 0 1px 0;
-}
+  border-color: transparent;
+  border-width: 0px 0px 0px 1px;
 
-.isActive {
-  background: $sidebar-link-active-color-bg;
+  &:hover {
+    border-color: $sidebar-border-color;
+  }
 }
 
 .isDisabled {
