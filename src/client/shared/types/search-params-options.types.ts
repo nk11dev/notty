@@ -1,3 +1,3 @@
 export type SearchParamsOptions = {
-  hideSidebarNav?: boolean
+  hideSidebarOnMobile?: boolean
 };

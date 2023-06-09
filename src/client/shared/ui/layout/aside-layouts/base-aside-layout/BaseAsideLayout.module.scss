@@ -34,7 +34,7 @@
   min-width: 0;
 }
 
-.sidebarNavIsVisible {
+.sidebar-is-visible {
   &:global(.single-column-layout) {
     .main {
       @media (min-width: $small-breakpoint) {
@@ -52,7 +52,7 @@
   }
 }
 
-.sidebarNavIsHidden {
+.sidebar-is-hidden {
   .sidebar {
     @media (max-width: $small-breakpoint) {
       margin-left: -100%;

@@ -36,7 +36,7 @@ const NotesList = () => {
             id={item.note_id}
             contextMenuId={NOTES_CONTEXT_MENU_ID}
             searchParamsOptions={{
-              hideSidebarNav: true
+              hideSidebarOnMobile: true
             }}
           >
             {item.title}

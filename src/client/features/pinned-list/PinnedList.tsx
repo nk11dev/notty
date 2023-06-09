@@ -15,7 +15,7 @@ const PinnedList = () => {
           key={index}
           url={item.url}
           searchParamsOptions={{
-            hideSidebarNav: true
+            hideSidebarOnMobile: true
           }}
         >
           {item.text}

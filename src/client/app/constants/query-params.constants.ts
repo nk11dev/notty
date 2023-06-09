@@ -1,1 +1,1 @@
-export const SIDEBAR_NAV_QUERY_PARAM = 'sidebar_nav';
+export const SIDEBAR_MODE_QUERY_PARAM = 'sidebar_mode';

@@ -4,7 +4,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
 
-import { SIDEBAR_NAV_QUERY_PARAM } from '@/app/constants/query-params.constants';
+import { SIDEBAR_MODE_QUERY_PARAM } from '@/app/constants/query-params.constants';
 import SidebarControls from '@/shared/ui/layout/sidebar-controls';
 
 type Props = {
@@ -16,12 +16,12 @@ type Props = {
 const BaseAsideLayout = (props: Props) => {
   const [searchParams] = useSearchParams();
 
-  const hasSidebarNav = searchParams.get(SIDEBAR_NAV_QUERY_PARAM) !== '0';
+  const sidebarIsVisible = searchParams.get(SIDEBAR_MODE_QUERY_PARAM) !== '0';
 
   return (
     <div className={cn(styles.layout, props.cls, {
-      [styles.sidebarNavIsVisible]: hasSidebarNav,
-      [styles.sidebarNavIsHidden]: !hasSidebarNav,
+      [styles['sidebar-is-visible']]: sidebarIsVisible,
+      [styles['sidebar-is-hidden']]: !sidebarIsVisible,
     })}>
       <SidebarControls />
 
