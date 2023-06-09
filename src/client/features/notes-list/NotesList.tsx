@@ -5,14 +5,13 @@ import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import NotesContextMenu from '@/features/notes-context-menu';
 import NotesEmptyMsg from '@/features/notes-empty-msg';
 import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
-import { useNavigateDefaultNote } from '@/entities/note/hooks';
 import type { Note } from '@/entities/note/types';
 import SidebarList from '@/shared/ui/layout/sidebar-list';
 import NavItem from '@/shared/ui/layout/nav-item';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const NotesList = () => {
-  const { sectionId, noteId } = useParams();
+  const { sectionId } = useParams();
 
   const {
     data,
@@ -21,10 +20,6 @@ const NotesList = () => {
   } = useGetNotesBySectionQuery(sectionId, {
     skip: !sectionId,
     refetchOnMountOrArgChange: true
-  });
-
-  useNavigateDefaultNote(sectionId, {
-    skip: !!noteId
   });
 
   if (isError) return <ErrorMsg error={error} />;

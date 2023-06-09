@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
 import { useSectionState } from '@/entities/section/hooks';
+import { useNotesState } from '@/entities/note/hooks';
 import PageHeader from '@/features/page-header';
-import PageContent from '@/shared/ui/page/page-content';
 import MessageCreateNote from '@/features/message-create-note';
+import { useNavigateWithSearch } from '@/shared/hooks';
+import PageContent from '@/shared/ui/page/page-content';
 
 const SectionPage = () => {
   const { sectionId } = useParams();
-  const { data } = useSectionState(sectionId);
+  const { navigateWithSearch } = useNavigateWithSearch();
 
-  if (!data || data?.notes_count > 0) return null;
+  const { data: sectionData } = useSectionState(sectionId);
+  const { data: notesData } = useNotesState(sectionId);
+
+  useEffect(() => {
+    const [firstNote] = notesData || [];
+
+    if (firstNote) {
+      navigateWithSearch(`/sections/${firstNote.section_id}/notes/${firstNote.note_id}`);
+    }
+  }, [notesData, navigateWithSearch]);
+
+  if (!sectionData || sectionData?.notes_count > 0) return null;
 
   return (
     <>
