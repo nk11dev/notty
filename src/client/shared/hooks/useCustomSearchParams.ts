@@ -2,6 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { SMALL_BREAKPOINT } from '@/app/constants/breakpoints.constants';
 import { SIDEBAR_MODE_QUERY_PARAM } from '@/app/constants/query-params.constants';
+import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import type { SearchParamsOptions } from '@/shared/types';
 
 export const useCustomSearchParams = () => {
@@ -14,7 +15,7 @@ export const useCustomSearchParams = () => {
 
     if (isSmall.matches) {
       if (hideSidebarOnMobile) {
-        searchParams.set(SIDEBAR_MODE_QUERY_PARAM, '0');
+        searchParams.set(SIDEBAR_MODE_QUERY_PARAM, SidebarModesMap.HIDDEN);
       }
     }
 

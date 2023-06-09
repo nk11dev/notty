@@ -1,38 +1,32 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import {
   AiOutlineFolder,
   AiOutlineFolderOpen
 } from 'react-icons/ai';
 
-import { SIDEBAR_MODE_QUERY_PARAM } from '@/app/constants/query-params.constants';
+import { SidebarModesMap } from '@/app/enums/query-params.enums';
+import { useSidebarMode } from '@/shared/hooks';
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
 const SectionsControl = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentSidebarMode = searchParams.get(SIDEBAR_MODE_QUERY_PARAM);
+  const { sidebarMode, isSidebarVisible, setSidebarMode } = useSidebarMode();
 
   const toggleSidebarMode = () => {
-    const newValue = (currentSidebarMode !== null)
-      ? 1 - Number(currentSidebarMode)
-      : 0;
+    const newMode = ([SidebarModesMap.SECTIONS, null].includes(sidebarMode as SidebarModesMap))
+      ? SidebarModesMap.HIDDEN
+      : SidebarModesMap.SECTIONS;
 
-    searchParams.set(SIDEBAR_MODE_QUERY_PARAM, newValue.toString());
-
-    setSearchParams(searchParams);
-  }
-
-  const sidebarIsVisible = (currentSidebarMode !== '0');
+    setSidebarMode(newMode);
+  };
 
   return (
     <ControlsButton
       clickHandler={toggleSidebarMode}
-      clsIsActive={sidebarIsVisible}
-      tooltip={`${sidebarIsVisible ? 'Hide' : 'Show'} sections`}
+      clsIsActive={isSidebarVisible}
+      tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} sections`}
     >
       {
-        sidebarIsVisible
+        isSidebarVisible
           ? <AiOutlineFolderOpen />
           : <AiOutlineFolder />
       }
