@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { ChangeEvent } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -10,11 +10,9 @@ import { useNoteData } from '@/entities/note/hooks/useNoteData';
 import type { NoteUpdateEndpointArg } from '@/entities/note/types';
 import { useDebounce } from '@/shared/hooks';
 
-type FieldChangeEvent = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>;
-
 type Result = [
   NoteUpdateEndpointArg,
-  (event: FieldChangeEvent) => void
+  Dispatch<SetStateAction<NoteUpdateEndpointArg>>
 ];
 
 export const useUpdateNoteField = (fieldName: string): Result => {
@@ -36,15 +34,8 @@ export const useUpdateNoteField = (fieldName: string): Result => {
     }
   }, [debouncedData, currentData, updateNote, fieldName])
 
-  const onFieldChange = (event: FieldChangeEvent) => {
-    setNoteData(prevValue => ({
-      ...prevValue,
-      [fieldName]: event.target.value
-    }));
-  }
-
   return [
     noteData,
-    onFieldChange
+    setNoteData
   ];
 }

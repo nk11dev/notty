@@ -9,6 +9,7 @@ const defaultData: NoteUpdateEndpointArg = {
   id: null,
   title: '',
   body: '',
+  is_favorite: false,
 };
 
 type Result = [
@@ -33,6 +34,7 @@ export const useNoteData = (): Result => {
           id: currentData.note_id,
           title: currentData.title,
           body: currentData.body,
+          is_favorite: currentData.is_favorite,
         };
       }
       return prevData;

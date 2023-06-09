@@ -1,6 +1,7 @@
 import styles from './NoteTitleInput.module.scss';
 
 import React from 'react';
+import type { ChangeEvent } from 'react';
 
 import { PAGE_TITLE_INPUT_EL_NAME } from '@/app/constants/elements.constants';
 import {
@@ -8,7 +9,14 @@ import {
 } from '@/entities/note/hooks';
 
 const NoteTitleInput = () => {
-  const [noteData, onFieldChange] = useUpdateNoteField('title');
+  const [noteData, setNoteData] = useUpdateNoteField('title');
+
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNoteData(prevValue => ({
+      ...prevValue,
+      title: event.target.value
+    }));
+  };
 
   return (
     <input
@@ -16,7 +24,7 @@ const NoteTitleInput = () => {
       name={PAGE_TITLE_INPUT_EL_NAME}
       type="text"
       value={noteData.title}
-      onChange={onFieldChange}
+      onChange={onInputChange}
     />
   );
 };

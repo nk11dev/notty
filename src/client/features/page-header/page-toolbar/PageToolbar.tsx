@@ -2,15 +2,13 @@ import styles from './PageToolbar.module.scss';
 
 import React from 'react';
 import { HiDotsHorizontal } from 'react-icons/hi';
-import { AiOutlineStar } from 'react-icons/ai';
 
 import HeaderButton from '@/shared/ui/controls/header-button';
+import FavoriteButton from '@/features/page-header/page-toolbar/favorite-button';
 
 const PageToolbar = () => (
   <div className={styles.element}>
-    <HeaderButton isDisabled>
-      <AiOutlineStar />
-    </HeaderButton>
+    <FavoriteButton />
 
     <HeaderButton isDisabled>
       <HiDotsHorizontal />

@@ -9,6 +9,7 @@ import ButtonIcon from '@/shared/ui/controls/button-icon';
 type Props = {
   children?: React.ReactNode,
   clickHandler?: () => void;
+  cls?: string,
   tooltip?: string,
   isDisabled?: boolean,
 };
@@ -16,7 +17,7 @@ type Props = {
 const HeaderButton = (props: Props) => (
   <ButtonIcon
     clickHandler={props.clickHandler}
-    cls={cn(styles.headerBtn, {
+    cls={cn(styles.headerBtn, props.cls, {
       [styles.isDisabled]: (props.isDisabled === true)
     })}
     tooltip={props.tooltip}
