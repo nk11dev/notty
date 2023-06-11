@@ -1,6 +1,5 @@
 @import '/src/assets/styles/common/breakpoints';
 @import '/src/assets/styles/theme/sizings';
-@import '/src/assets/styles/theme/colors';
 @import '/src/assets/styles/theme/z-indexes';
 
 .layout {
@@ -13,7 +12,6 @@
   left: $sidebar-controls-width;
   height: 100%;
   display: flex;
-  background: $sidebar-color-bg;
   z-index: $sidebar-z-index;
   transition: margin 500ms ease;
 

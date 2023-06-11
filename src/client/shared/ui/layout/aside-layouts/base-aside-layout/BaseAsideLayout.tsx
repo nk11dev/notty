@@ -1,33 +1,42 @@
 import styles from './BaseAsideLayout.module.scss';
 
 import React from 'react';
+import { useParams, Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useSidebarMode } from '@/shared/hooks';
 import SidebarControls from '@/shared/ui/layout/sidebar-controls';
+import SidebarLayout from '@/shared/ui/layout/sidebar-layout';
 
 type Props = {
-  asideContent: React.ReactNode,
-  children: React.ReactNode,
-  cls: string,
+  children?: React.ReactNode,
 };
 
 const BaseAsideLayout = (props: Props) => {
-  const { isSidebarVisible } = useSidebarMode();
+  const { sectionId } = useParams();
+  const { isSectionsModeOrNull, isSidebarVisible } = useSidebarMode();
+
+  const isDoubleColumnLayout = (isSectionsModeOrNull && sectionId);
 
   return (
-    <div className={cn(styles.layout, props.cls, {
+    <div className={cn(styles.layout, {
+      'single-column-layout': !isDoubleColumnLayout,
+      'double-column-layout': isDoubleColumnLayout,
       [styles['sidebar-is-visible']]: isSidebarVisible,
       [styles['sidebar-is-hidden']]: !isSidebarVisible,
     })}>
       <SidebarControls />
 
       <aside className={styles.sidebar}>
-        {props.asideContent}
+        <SidebarLayout />
       </aside>
 
       <main className={styles.main}>
-        {props.children}
+        {
+          props.children
+            ? props.children
+            : <Outlet />
+        }
       </main>
     </div>
   );

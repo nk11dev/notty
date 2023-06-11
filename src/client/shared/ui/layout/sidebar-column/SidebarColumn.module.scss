@@ -2,9 +2,10 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.sidebarColumn {
+.element {
   display: flex;
   flex-direction: column;
+  background: $sidebar-color-bg;
   border-right: 1px solid $sidebar-border-color;
 
   @media (min-width: $small-breakpoint) {
@@ -16,5 +17,16 @@
 
     // used for correct flexbox with "white-space: nowrap" (links)
     min-width: 0;
+  }
+
+  margin-left: 0px;
+  transition: margin 500ms ease;
+}
+
+.is-hidden {
+  margin-left: -$sidebar-width;
+
+  @media (max-width: $small-breakpoint) {
+    margin-left: -100%;
   }
 }

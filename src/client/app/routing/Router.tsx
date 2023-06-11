@@ -7,12 +7,11 @@ import SectionPage from '@/pages/section-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
 
-import SingleAsideLayout from '@/shared/ui/layout/aside-layouts/single-aside-layout';
-import DoubleAsideLayout from '@/shared/ui/layout/aside-layouts/double-aside-layout';
+import BaseAsideLayout from '@/shared/ui/layout/aside-layouts/base-aside-layout';
 
 export const appRoutes = [
   {
-    element: <SingleAsideLayout />,
+    element: <BaseAsideLayout />,
     children: [
       {
         path: '/',
@@ -22,22 +21,17 @@ export const appRoutes = [
         path: '/example',
         element: <ExamplePage />,
       },
-    ]
-  },
-  {
-    path: '/sections',
-    element: <DoubleAsideLayout />,
-    children: [
       {
-        path: ':sectionId',
+        path: '/sections/:sectionId',
         element: <SectionPage />,
       },
       {
-        path: ':sectionId/notes/:noteId',
+        path: '/sections/:sectionId/notes/:noteId',
         element: <NotePage />,
       },
     ]
   },
+
 ];
 
 const Router = () => useRoutes([
