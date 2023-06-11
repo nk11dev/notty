@@ -1,17 +1,13 @@
-import styles from '@/shared/ui/layout/sidebar-toolbar/SidebarToolbar.module.scss';
-
 import React from 'react';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
-import cn from 'classnames';
 
 import { useLazyGetAllSectionsQuery } from '@/entities/section/api-slices';
 import {
   useSectionsState,
   useHandleCreateSection
 } from '@/entities/section/hooks';
-
 import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
-import ButtonIcon from '@/shared/ui/controls/button-icon';
+import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const SectionsToolbar = () => {
   const { isFetching } = useSectionsState();
@@ -23,19 +19,15 @@ const SectionsToolbar = () => {
       title="Sections"
       showLoader={isFetching}
     >
-      <ButtonIcon
+      <ToolbarButton
         icon={faPlus}
-        clickHandler={() => onCreateSection()}
-        cls={cn(styles.toolbarBtn, 'm-1')}
-        size={16}
+        clickHandler={onCreateSection}
         tooltip="Create new section"
       />
 
-      <ButtonIcon
+      <ToolbarButton
         icon={faRotate}
-        clickHandler={() => refetchAllSections()}
-        cls={cn(styles.toolbarBtn, 'm-1')}
-        size={16}
+        clickHandler={refetchAllSections}
         tooltip="Refetch sections"
       />
     </SidebarToolbar>

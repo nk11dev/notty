@@ -1,18 +1,14 @@
-import styles from '@/shared/ui/layout/sidebar-toolbar/SidebarToolbar.module.scss';
-
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { faPlus, faRotate } from '@fortawesome/free-solid-svg-icons';
-import cn from 'classnames';
-
-import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
-import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 import { useLazyGetNotesBySectionQuery } from '@/entities/note/api-slices';
 import {
   useNotesState,
   useHandleCreateNote
 } from '@/entities/note/hooks';
+import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
+import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const NotesToolbar = () => {
   const { sectionId } = useParams();
@@ -28,19 +24,15 @@ const NotesToolbar = () => {
     >
       {sectionId && (
         <>
-          <ButtonIcon
+          <ToolbarButton
             icon={faPlus}
             clickHandler={() => onCreateNote(sectionId)}
-            cls={cn(styles.toolbarBtn, 'm-1')}
-            size={16}
             tooltip="Create new note"
           />
 
-          <ButtonIcon
+          <ToolbarButton
             icon={faRotate}
             clickHandler={() => refetchNotesBySection(sectionId)}
-            cls={cn(styles.toolbarBtn, 'm-1')}
-            size={16}
             tooltip="Refetch notes"
           />
         </>

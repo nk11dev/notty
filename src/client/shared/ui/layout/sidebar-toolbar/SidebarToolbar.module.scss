@@ -1,5 +1,4 @@
 @import '/src/assets/styles/theme/sizings';
-@import '/src/assets/styles/theme/colors';
 
 .element {
   display: flex;
@@ -7,16 +6,4 @@
   justify-content: space-between;
   margin: 0 10px;
   line-height: 2.3;
-}
-
-.toolbarBtn {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid $sidebar-toolbar-btn-border-color;
-  border-radius: 3px;
-
-  &:hover {
-    background: $sidebar-link-hover-color-bg;
-  }
 }

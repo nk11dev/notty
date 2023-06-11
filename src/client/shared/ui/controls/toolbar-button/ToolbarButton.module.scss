@@ -1,0 +1,13 @@
+@import '/src/assets/styles/theme/colors';
+
+.toolbarBtn {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $sidebar-toolbar-btn-border-color;
+  border-radius: 3px;
+
+  &:hover {
+    background: $sidebar-link-hover-color-bg;
+  }
+}
