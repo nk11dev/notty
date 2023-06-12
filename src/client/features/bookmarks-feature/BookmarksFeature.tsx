@@ -6,7 +6,7 @@ import NotesContextMenu from '@/features/notes-context-menu';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import EmptyMsg from '@/shared/ui/fetching/empty-msg';
 
-const FavoritesFeature = () => {
+const BookmarksFeature = () => {
   const {
     data,
     isError,
@@ -29,4 +29,4 @@ const FavoritesFeature = () => {
     : <EmptyMsg />;
 }
 
-export default FavoritesFeature;
+export default BookmarksFeature;

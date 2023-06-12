@@ -1,4 +1,4 @@
-export * from './useFavoritesState';
+export * from './useBookmarksState';
 export * from './useHandleCreateNote';
 export * from './useHandleDeleteNote';
 export * from './useNotesState';

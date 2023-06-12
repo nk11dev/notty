@@ -1,4 +1,4 @@
-import styles from './FavoriteButton.module.scss';
+import styles from './BookmarkButton.module.scss';
 
 import React from 'react';
 import cn from 'classnames';
@@ -10,7 +10,7 @@ import {
 import { useUpdateNoteField } from '@/entities/note/hooks';
 import HeaderButton from '@/shared/ui/controls/header-button';
 
-const FavoriteButton = () => {
+const BookmarkButton = () => {
   const [noteData, setNoteData] = useUpdateNoteField('is_favorite');
 
   const isFavorite = (noteData?.is_favorite === true);
@@ -36,4 +36,4 @@ const FavoriteButton = () => {
   );
 }
 
-export default FavoriteButton;
+export default BookmarkButton;

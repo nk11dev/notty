@@ -9,7 +9,7 @@ import {
   SidebarPinnedWidget,
   SidebarSectionsWidget,
   SidebarNotesWidget,
-  SidebarFavoritesWidget,
+  SidebarBookmarksWidget,
 } from '@/widgets/sidebar-widgets';
 
 const SidebarLayout = () => {
@@ -30,7 +30,7 @@ const SidebarLayout = () => {
         );
 
       case SidebarModesMap.FAVORITES:
-        return <SidebarFavoritesWidget />;
+        return <SidebarBookmarksWidget />;
 
       default:
         return null

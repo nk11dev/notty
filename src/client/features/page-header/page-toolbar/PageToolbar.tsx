@@ -4,11 +4,11 @@ import React from 'react';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
 import HeaderButton from '@/shared/ui/controls/header-button';
-import FavoriteButton from '@/features/page-header/page-toolbar/favorite-button';
+import BookmarkButton from '@/features/page-header/page-toolbar/bookmark-button';
 
 const PageToolbar = () => (
   <div className={styles.element}>
-    <FavoriteButton />
+    <BookmarkButton />
 
     <HeaderButton isDisabled>
       <HiDotsHorizontal />

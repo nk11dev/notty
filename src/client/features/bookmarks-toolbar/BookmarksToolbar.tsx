@@ -2,12 +2,12 @@ import React from 'react';
 import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
 import { useLazyGetFavoritesQuery } from '@/entities/note/api-slices';
-import { useFavoritesState } from '@/entities/note/hooks';
+import { useBookmarksState } from '@/entities/note/hooks';
 import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
-const FavoritesToolbar = () => {
-  const { isFetching } = useFavoritesState();
+const BookmarksToolbar = () => {
+  const { isFetching } = useBookmarksState();
   const [refetchFavorites] = useLazyGetFavoritesQuery();
 
   return (
@@ -24,4 +24,4 @@ const FavoritesToolbar = () => {
   );
 }
 
-export default FavoritesToolbar;
+export default BookmarksToolbar;

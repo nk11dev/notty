@@ -5,7 +5,7 @@ import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
-const FavoritesControl = () => {
+const BookmarksControl = () => {
   const { sidebarMode, isSidebarVisible, setSidebarMode } = useSidebarMode();
 
   const isFavoritesMode = (sidebarMode === SidebarModesMap.FAVORITES);
@@ -29,4 +29,4 @@ const FavoritesControl = () => {
   );
 }
 
-export default FavoritesControl;
+export default BookmarksControl;
