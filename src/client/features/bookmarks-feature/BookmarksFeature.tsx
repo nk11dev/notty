@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetFavoritesQuery } from '@/entities/note/api-slices';
+import { useGetBookmarksQuery } from '@/entities/note/api-slices';
 import NotesList from '@/features/notes-list';
 import NotesContextMenu from '@/features/notes-context-menu';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
@@ -11,7 +11,7 @@ const BookmarksFeature = () => {
     data,
     isError,
     error
-  } = useGetFavoritesQuery(undefined, {
+  } = useGetBookmarksQuery(undefined, {
     refetchOnMountOrArgChange: true
   });
 

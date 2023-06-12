@@ -8,12 +8,12 @@ import ControlsButton from '@/shared/ui/controls/controls-button';
 const BookmarksControl = () => {
   const { sidebarMode, isSidebarVisible, setSidebarMode } = useSidebarMode();
 
-  const isFavoritesMode = (sidebarMode === SidebarModesMap.FAVORITES);
+  const isBookmarksMode = (sidebarMode === SidebarModesMap.BOOKMARKS);
 
   const toggleSidebarMode = () => {
-    const newMode = (sidebarMode === SidebarModesMap.FAVORITES)
+    const newMode = (sidebarMode === SidebarModesMap.BOOKMARKS)
       ? SidebarModesMap.HIDDEN
-      : SidebarModesMap.FAVORITES;
+      : SidebarModesMap.BOOKMARKS;
 
     setSidebarMode(newMode);
   };
@@ -21,8 +21,8 @@ const BookmarksControl = () => {
   return (
     <ControlsButton
       clickHandler={toggleSidebarMode}
-      clsIsActive={isFavoritesMode}
-      tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} favorite notes`}
+      clsIsActive={isBookmarksMode}
+      tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} bookmarks`}
     >
       <AiOutlineStar />
     </ControlsButton>

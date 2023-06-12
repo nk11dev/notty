@@ -9,7 +9,7 @@ const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getNotes(request: Request, response: Response) {
   const { sectionId } = request.params;
-  const { filterByIsFavorite } = request.query;
+  const { filterByIsBookmark } = request.query;
 
   const result = await noteRepository
     .createQueryBuilder()
@@ -20,10 +20,10 @@ export async function getNotes(request: Request, response: Response) {
       : '1=1',
       { id: sectionId })
 
-    .andWhere((typeof filterByIsFavorite !== 'undefined')
+    .andWhere((typeof filterByIsBookmark !== 'undefined')
       ? 'is_bookmark = :value'
       : '1=1',
-      { value: filterByIsFavorite })
+      { value: filterByIsBookmark })
 
     .getMany();
 

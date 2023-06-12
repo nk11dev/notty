@@ -1,7 +1,7 @@
 export enum SidebarModesMap {
   HIDDEN = 'hidden',
   SECTIONS = 'sections',
-  FAVORITES = 'favorites',
+  BOOKMARKS = 'bookmarks',
   SEARCH = 'search',
   RECENT = 'recent',
 }

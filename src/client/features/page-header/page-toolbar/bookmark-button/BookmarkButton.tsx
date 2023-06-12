@@ -13,23 +13,23 @@ import HeaderButton from '@/shared/ui/controls/header-button';
 const BookmarkButton = () => {
   const [noteData, setNoteData] = useUpdateNoteField('is_bookmark');
 
-  const isFavorite = (noteData?.is_bookmark === true);
+  const isBookmark = (noteData?.is_bookmark === true);
 
-  const toggleIsFavorite = () => {
+  const toggleIsBookmark = () => {
     setNoteData(prevValue => ({
       ...prevValue,
-      is_bookmark: !isFavorite
+      is_bookmark: !isBookmark
     }));
   };
 
   return (
     <HeaderButton
-      clickHandler={toggleIsFavorite}
+      clickHandler={toggleIsBookmark}
       cls={cn({
-        [styles.isFavorite]: isFavorite
+        [styles.isBookmark]: isBookmark
       })}
     >
-      {isFavorite
+      {isBookmark
         ? <AiFillStar />
         : <AiOutlineStar />}
     </HeaderButton>

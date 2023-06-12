@@ -29,7 +29,7 @@ const SidebarLayout = () => {
           </>
         );
 
-      case SidebarModesMap.FAVORITES:
+      case SidebarModesMap.BOOKMARKS:
         return <SidebarBookmarksWidget />;
 
       default:
