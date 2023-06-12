@@ -6,15 +6,11 @@
   display: flex;
   flex-direction: column;
   width: $sidebar-controls-width;
-  border-right: 1px solid $sidebar-border-color;
-  background: $sidebar-color-bg;
-  z-index: $sidebar-controls-z-index;
+  background: $sidebar-controls-color-bg;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2) inset;
+  z-index: $sidebar-controls-z-index
 }
 
 .controlsFiller {
   flex-grow: 1;
-
-  ~ span {
-    border-width: 1px 0px 0px 0px;
-  }
 }
