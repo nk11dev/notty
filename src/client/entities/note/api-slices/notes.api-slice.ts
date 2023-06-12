@@ -15,6 +15,14 @@ export const notesApi = createApi({
   tagTypes: ['Note', 'Notes'],
   endpoints(build) {
     return {
+      getFavorites: build.query<Note[], void>({
+        query: () => ({
+          url: '/notes?filterByIsFavorite=true',
+          method: 'GET',
+        }),
+        providesTags: ['Notes'],
+      }),
+
       getNotesBySection: build.query<Note[], string>({
         query: (sectionId) => ({
           url: `/sections/${sectionId}/notes`,
@@ -79,6 +87,8 @@ export const notesApi = createApi({
 });
 
 export const {
+  useGetFavoritesQuery,
+  useLazyGetFavoritesQuery,
   useGetNotesBySectionQuery,
   useLazyGetNotesBySectionQuery,
   useGetNoteQuery,

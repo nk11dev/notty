@@ -1,22 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
-import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
+import { useGetFavoritesQuery } from '@/entities/note/api-slices';
 import NotesList from '@/features/notes-list';
 import NotesContextMenu from '@/features/notes-context-menu';
-import MessageCreateNote from '@/features/message-create-note';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import EmptyMsg from '@/shared/ui/fetching/empty-msg';
 
-const NotesStandardList = () => {
-  const { sectionId } = useParams();
-
+const FavoritesFeature = () => {
   const {
     data,
     isError,
     error
-  } = useGetNotesBySectionQuery(sectionId, {
-    skip: !sectionId,
+  } = useGetFavoritesQuery(undefined, {
     refetchOnMountOrArgChange: true
   });
 
@@ -31,11 +26,7 @@ const NotesStandardList = () => {
         <NotesContextMenu />
       </>
     )
-    : (
-      <EmptyMsg>
-        <MessageCreateNote />
-      </EmptyMsg>
-    );
+    : <EmptyMsg />;
 }
 
-export default NotesStandardList;
+export default FavoritesFeature;

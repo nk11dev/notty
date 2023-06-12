@@ -9,15 +9,22 @@ const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getNotes(request: Request, response: Response) {
   const { sectionId } = request.params;
+  const { filterByIsFavorite } = request.query;
 
-  let queryBuilder = noteRepository.createQueryBuilder();
-
-  if (sectionId) {
-    queryBuilder = queryBuilder.where("section_id = :id", { id: sectionId })
-  }
-
-  const result = await queryBuilder
+  const result = await noteRepository
+    .createQueryBuilder()
     .orderBy('note_id', 'ASC')
+
+    .andWhere(sectionId
+      ? `section_id = :id`
+      : '1=1',
+      { id: sectionId })
+
+    .andWhere((typeof filterByIsFavorite !== 'undefined')
+      ? 'is_favorite = :value'
+      : '1=1',
+      { value: filterByIsFavorite })
+
     .getMany();
 
   response.status(200).json({

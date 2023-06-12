@@ -27,7 +27,7 @@ const SectionsToolbar = () => {
 
       <ToolbarButton
         icon={faRotate}
-        clickHandler={refetchAllSections}
+        clickHandler={() => refetchAllSections()}
         tooltip="Refetch sections"
       />
     </SidebarToolbar>
