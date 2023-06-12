@@ -28,7 +28,7 @@ export default class NoteEntity {
     nullable: false,
     default: false,
   })
-  is_favorite: boolean
+  is_bookmark: boolean
 
   @Column({
     type: 'timestamptz',

@@ -2,7 +2,7 @@ export type Note = {
   note_id: number,
   title: string,
   body: string | null,
-  is_favorite: boolean,
+  is_bookmark: boolean,
   created_at: string,
   updated_at: string | null,
   section_id: number,
@@ -13,7 +13,7 @@ export type NoteUpdateEndpointArg = {
   id: number,
   title?: string,
   body?: string,
-  is_favorite?: boolean,
+  is_bookmark?: boolean,
   [key: string]: number | string | boolean | undefined
 };
 

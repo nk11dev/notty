@@ -21,7 +21,7 @@ export async function getNotes(request: Request, response: Response) {
       { id: sectionId })
 
     .andWhere((typeof filterByIsFavorite !== 'undefined')
-      ? 'is_favorite = :value'
+      ? 'is_bookmark = :value'
       : '1=1',
       { value: filterByIsFavorite })
 

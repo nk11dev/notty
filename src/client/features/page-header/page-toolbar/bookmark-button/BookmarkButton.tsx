@@ -11,14 +11,14 @@ import { useUpdateNoteField } from '@/entities/note/hooks';
 import HeaderButton from '@/shared/ui/controls/header-button';
 
 const BookmarkButton = () => {
-  const [noteData, setNoteData] = useUpdateNoteField('is_favorite');
+  const [noteData, setNoteData] = useUpdateNoteField('is_bookmark');
 
-  const isFavorite = (noteData?.is_favorite === true);
+  const isFavorite = (noteData?.is_bookmark === true);
 
   const toggleIsFavorite = () => {
     setNoteData(prevValue => ({
       ...prevValue,
-      is_favorite: !isFavorite
+      is_bookmark: !isFavorite
     }));
   };
 

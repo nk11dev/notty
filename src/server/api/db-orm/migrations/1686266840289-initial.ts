@@ -9,7 +9,7 @@ export class Initial1686266840289 implements MigrationInterface {
             "note_id" integer GENERATED ALWAYS AS IDENTITY NOT NULL, 
             "title" character varying(30) NOT NULL DEFAULT 'Untitled note', 
             "body" text, 
-            "is_favorite" boolean NOT NULL DEFAULT false, 
+            "is_bookmark" boolean NOT NULL DEFAULT false, 
             "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), 
             "updated_at" TIMESTAMP WITH TIME ZONE, 
             "section_id" integer NOT NULL, 
