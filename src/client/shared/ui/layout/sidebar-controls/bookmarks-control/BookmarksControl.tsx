@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineStar } from 'react-icons/ai';
+import { IoBookmarksOutline } from 'react-icons/io5';
 
 import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
@@ -24,7 +24,7 @@ const BookmarksControl = () => {
       clsIsActive={isBookmarksMode}
       tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} bookmarks`}
     >
-      <AiOutlineStar />
+      <IoBookmarksOutline />
     </ControlsButton>
   );
 }

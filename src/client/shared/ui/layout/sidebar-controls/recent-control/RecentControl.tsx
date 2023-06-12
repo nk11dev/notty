@@ -1,5 +1,5 @@
 import React from 'react';
-import { LuClock3 } from 'react-icons/lu';
+import { IoTimeOutline } from 'react-icons/io5';
 
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
@@ -8,7 +8,9 @@ const RecentControl = () => (
     tooltip="Show recent notes"
     isDisabled
   >
-    <LuClock3 />
+    <IoTimeOutline style={{
+      padding: '6px'
+    }} />
   </ControlsButton>
 );
 

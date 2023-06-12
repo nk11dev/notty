@@ -1,5 +1,5 @@
 import React from 'react';
-import { LuSearch } from 'react-icons/lu';
+import { IoSearchOutline } from 'react-icons/io5';
 
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
@@ -8,7 +8,9 @@ const SearchControl = () => (
     tooltip="Show search"
     isDisabled
   >
-    <LuSearch />
+    <IoSearchOutline style={{
+      padding: '6px'
+    }}/>
   </ControlsButton>
 );
 

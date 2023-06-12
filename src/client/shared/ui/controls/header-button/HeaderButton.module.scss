@@ -4,7 +4,7 @@
 .headerBtn {
   width: $sidebar-controls-width;
   display: flex;
-  color: $note-content-color-title;
+  color: $page-header-btn-color;
   border-radius: 0px;
   border-style: solid;
   border-color: transparent;
@@ -19,7 +19,7 @@
 .headerIcon {
   width: 100%;
   height: $sidebar-item-height;
-  padding: 7px;
+  padding: 6px;
 }
 
 .isDisabled {

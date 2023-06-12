@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineHome } from 'react-icons/ai';
+import { IoHomeOutline } from 'react-icons/io5';
 
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
@@ -12,7 +12,7 @@ const HomeControl = () => {
       clickHandler={() => navigate('/')}
       tooltip="Home"
     >
-      <AiOutlineHome />
+      <IoHomeOutline />
     </ControlsButton>
   );
 }

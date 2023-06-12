@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  AiOutlineFolder,
-  AiOutlineFolderOpen,
-} from 'react-icons/ai';
+import { IoFolderOutline} from 'react-icons/io5';
 
 import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
@@ -25,11 +22,7 @@ const SectionsControl = () => {
       clsIsActive={isSectionsModeOrNull}
       tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} sections`}
     >
-      {
-        isSectionsModeOrNull
-          ? <AiOutlineFolderOpen />
-          : <AiOutlineFolder />
-      }
+      <IoFolderOutline/>
     </ControlsButton>
   );
 };

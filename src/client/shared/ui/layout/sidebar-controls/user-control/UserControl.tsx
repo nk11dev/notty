@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegUser } from 'react-icons/fa';
+import { IoPersonOutline } from 'react-icons/io5';
 
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
@@ -8,7 +8,7 @@ const UserControl = () => (
     tooltip="User"
     isDisabled
   >
-    <FaRegUser />
+    <IoPersonOutline />
   </ControlsButton>
 );
 

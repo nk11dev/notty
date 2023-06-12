@@ -3,9 +3,9 @@ import styles from './BookmarkButton.module.scss';
 import React from 'react';
 import cn from 'classnames';
 import {
-  AiOutlineStar,
-  AiFillStar
-} from 'react-icons/ai';
+  IoBookmark,
+  IoBookmarkOutline
+} from 'react-icons/io5';
 
 import { useUpdateNoteField } from '@/entities/note/hooks';
 import HeaderButton from '@/shared/ui/controls/header-button';
@@ -30,8 +30,8 @@ const BookmarkButton = () => {
       })}
     >
       {isBookmark
-        ? <AiFillStar />
-        : <AiOutlineStar />}
+        ? <IoBookmark />
+        : <IoBookmarkOutline />}
     </HeaderButton>
   );
 }
