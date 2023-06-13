@@ -40,9 +40,10 @@ const NavItem = (props: Props) => {
   function onClick(e: MouseEvent) {
     e.preventDefault();
 
-    navigateWithSearch(url,
-      getCustomSearchParams(searchParamsOptions)
-    );
+    navigateWithSearch({
+      pathname: url,
+      search: getCustomSearchParams(searchParamsOptions)
+    });
   }
 
   return (

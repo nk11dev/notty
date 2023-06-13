@@ -19,7 +19,9 @@ const SectionPage = () => {
     const [firstNote] = notesData || [];
 
     if (firstNote) {
-      navigateWithSearch(`/sections/${firstNote.section_id}/notes/${firstNote.note_id}`);
+      const url = `/sections/${firstNote.section_id}/notes/${firstNote.note_id}`;
+
+      navigateWithSearch(url, { replace: true });
     }
   }, [notesData, navigateWithSearch]);
 

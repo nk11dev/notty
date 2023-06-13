@@ -16,9 +16,10 @@ export const useHandleCreateNote = () => {
     if ('data' in result) {
       const { data } = result;
 
-      navigateWithSearch(`/sections/${data.section_id}/notes/${data.note_id}`,
-        getCustomSearchParams({ hideSidebarOnMobile: true })
-      );
+      navigateWithSearch({
+        pathname: `/sections/${data.section_id}/notes/${data.note_id}`,
+        search: getCustomSearchParams({ hideSidebarOnMobile: true })
+      });
     }
   }
 

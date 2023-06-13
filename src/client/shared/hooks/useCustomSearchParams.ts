@@ -19,7 +19,7 @@ export const useCustomSearchParams = () => {
       }
     }
 
-    return searchParams;
+    return searchParams.toString();
   }
 
   return {
