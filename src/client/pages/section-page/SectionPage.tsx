@@ -12,18 +12,18 @@ const SectionPage = () => {
   const { sectionId } = useParams();
   const { navigateWithSearch } = useNavigateWithSearch();
 
-  const { data: sectionData } = useSectionState(sectionId);
+  const { isFetching, data: sectionData } = useSectionState(sectionId);
   const { data: notesData } = useNotesState(sectionId);
 
   useEffect(() => {
     const [firstNote] = notesData || [];
 
-    if (firstNote) {
+    if (!isFetching && firstNote) {
       const url = `/sections/${firstNote.section_id}/notes/${firstNote.note_id}`;
 
       navigateWithSearch(url, { replace: true });
     }
-  }, [notesData, navigateWithSearch]);
+  }, [isFetching, notesData, navigateWithSearch]);
 
   if (!sectionData || sectionData?.notes_count > 0) return null;
 

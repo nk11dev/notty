@@ -1,6 +1,6 @@
 import React from 'react';
 import type { MouseEvent } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useContextMenu } from 'react-contexify';
 import cn from 'classnames';
 
@@ -20,17 +20,21 @@ type Props = {
 };
 
 const NavItem = (props: Props) => {
-  const { url, children, id, contextMenuId, searchParamsOptions = {} } = props;
-
+  const { pathname } = useLocation();
   const { getCustomSearchParams } = useCustomSearchParams();
   const { navigateWithSearch } = useNavigateWithSearch();
+
+  const { url, children, id, contextMenuId, searchParamsOptions = {} } = props;
 
   const { show } = useContextMenu({
     id: contextMenuId,
   });
 
   function onContextMenu(e: MouseEvent) {
-    navigateWithSearch(url);
+    if (pathname !== url) {
+      navigateWithSearch(url);
+    }
+
     show({
       event: e,
       props: { id }
