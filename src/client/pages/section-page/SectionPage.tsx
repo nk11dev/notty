@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useSectionState } from '@/entities/section/hooks';
 import { useNotesState } from '@/entities/note/hooks';
 import PageHeader from '@/features/page-header';
-import MessageCreateNote from '@/features/message-create-note';
+import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import { useNavigateWithSearch } from '@/shared/hooks';
 import PageContent from '@/shared/ui/page/page-content';
 
