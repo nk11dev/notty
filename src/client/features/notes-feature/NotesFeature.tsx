@@ -8,7 +8,7 @@ import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import EmptyMsg from '@/shared/ui/fetching/empty-msg';
 
-const NotesStandardList = () => {
+const NotesFeature = () => {
   const { sectionId } = useParams();
 
   const {
@@ -38,4 +38,4 @@ const NotesStandardList = () => {
     );
 }
 
-export default NotesStandardList;
+export default NotesFeature;
