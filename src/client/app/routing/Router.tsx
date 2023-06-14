@@ -6,11 +6,11 @@ import SectionPage from '@/pages/section-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
 
-import BaseAsideLayout from '@/shared/ui/layout/aside-layouts/base-aside-layout';
+import RootLayout from '@/shared/ui/layouts/root-layout';
 
 export const appRoutes = [
   {
-    element: <BaseAsideLayout />,
+    element: <RootLayout />,
     children: [
       {
         path: '/',

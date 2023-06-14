@@ -1,14 +1,14 @@
 import React from 'react';
 
 import PageContent from '@/shared/ui/page/page-content';
-import BaseAsideLayout from '@/shared/ui/layout/aside-layouts/base-aside-layout';
+import RootLayout from '@/shared/ui/layouts/root-layout';
 
 const NotFoundPage = () => (
-  <BaseAsideLayout>
+  <RootLayout>
     <PageContent>
       <h1>404 Page Not Found</h1>
     </PageContent>
-  </BaseAsideLayout>
+  </RootLayout>
 );
 
 export default NotFoundPage;

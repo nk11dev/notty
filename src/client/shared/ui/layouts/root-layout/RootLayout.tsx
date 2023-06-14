@@ -1,4 +1,4 @@
-import styles from './BaseAsideLayout.module.scss';
+import styles from './RootLayout.module.scss';
 
 import React from 'react';
 import { useParams, Outlet } from 'react-router-dom';
@@ -6,13 +6,13 @@ import cn from 'classnames';
 
 import { useSidebarMode } from '@/shared/hooks';
 import SidebarControls from '@/shared/ui/sidebar/sidebar-controls';
-import SidebarLayout from '@/shared/ui/layout/sidebar-layout';
+import SidebarLayout from '@/shared/ui/layouts/sidebar-layout';
 
 type Props = {
   children?: React.ReactNode,
 };
 
-const BaseAsideLayout = (props: Props) => {
+const RootLayout = (props: Props) => {
   const { sectionId } = useParams();
   const { isSectionsModeOrNull, isSidebarVisible } = useSidebarMode();
 
@@ -42,4 +42,4 @@ const BaseAsideLayout = (props: Props) => {
   );
 };
 
-export default BaseAsideLayout;
+export default RootLayout;
