@@ -2,7 +2,6 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
 import HomePage from '@/pages/home-page';
-import ExamplePage from '@/pages/example-page';
 import SectionPage from '@/pages/section-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
@@ -16,10 +15,6 @@ export const appRoutes = [
       {
         path: '/',
         element: <HomePage />,
-      },
-      {
-        path: '/example',
-        element: <ExamplePage />,
       },
       {
         path: '/sections/:sectionId',

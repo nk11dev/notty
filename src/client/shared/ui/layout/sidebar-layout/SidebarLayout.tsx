@@ -6,7 +6,6 @@ import { useSidebarMode } from '@/shared/hooks';
 
 import SidebarColumn from '@/shared/ui/layout/sidebar-column';
 import {
-  SidebarPinnedWidget,
   SidebarSectionsWidget,
   SidebarNotesWidget,
   SidebarBookmarksWidget,
@@ -22,12 +21,7 @@ const SidebarLayout = () => {
     switch (sidebarMode) {
       case null:
       case SidebarModesMap.SECTIONS:
-        return (
-          <>
-            <SidebarPinnedWidget />
-            <SidebarSectionsWidget />
-          </>
-        );
+        return <SidebarSectionsWidget />;
 
       case SidebarModesMap.BOOKMARKS:
         return <SidebarBookmarksWidget />;
