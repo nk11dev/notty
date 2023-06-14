@@ -3,7 +3,7 @@ import { faRotate } from '@fortawesome/free-solid-svg-icons';
 
 import { useLazyGetBookmarksQuery } from '@/entities/note/api-slices';
 import { useBookmarksState } from '@/entities/note/hooks';
-import SidebarToolbar from '@/shared/ui/layout/sidebar-toolbar';
+import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const BookmarksToolbar = () => {

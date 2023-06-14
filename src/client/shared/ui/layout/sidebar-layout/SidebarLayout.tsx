@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
 
-import SidebarColumn from '@/shared/ui/layout/sidebar-column';
+import SidebarColumn from '@/shared/ui/sidebar/sidebar-column';
 import {
   SidebarSectionsWidget,
   SidebarNotesWidget,

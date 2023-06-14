@@ -2,8 +2,8 @@ import React from 'react';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import type { Note } from '@/entities/note/types';
-import SidebarList from '@/shared/ui/layout/sidebar-list';
-import NavItem from '@/shared/ui/layout/nav-item';
+import SidebarList from '@/shared/ui/sidebar/sidebar-list';
+import NavItem from '@/shared/ui/sidebar/nav-item';
 
 type Props = {
   data: Note[]

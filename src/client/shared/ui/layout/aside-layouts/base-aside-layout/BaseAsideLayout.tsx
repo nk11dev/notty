@@ -5,7 +5,7 @@ import { useParams, Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useSidebarMode } from '@/shared/hooks';
-import SidebarControls from '@/shared/ui/layout/sidebar-controls';
+import SidebarControls from '@/shared/ui/sidebar/sidebar-controls';
 import SidebarLayout from '@/shared/ui/layout/sidebar-layout';
 
 type Props = {

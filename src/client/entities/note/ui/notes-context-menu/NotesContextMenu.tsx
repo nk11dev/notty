@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import { useHandleDeleteNote } from '@/entities/note/hooks';
-import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
+import NavContextMenu from '@/shared/ui/sidebar/nav-context-menu';
 
 const NotesContextMenu = () => {
   const [onDeleteNote] = useHandleDeleteNote();
