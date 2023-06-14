@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SectionsContextMenu from '@/features/sections-context-menu';
+import SectionsContextMenu from '@/entities/section/ui/sections-context-menu';
 import { useGetAllSectionsQuery } from '@/entities/section/api-slices';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import SectionsList from '@/entities/section/ui/sections-list';

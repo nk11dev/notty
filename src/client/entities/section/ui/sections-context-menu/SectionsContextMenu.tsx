@@ -3,7 +3,7 @@ import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import SectionModal from '@/features/section-modal';
+import SectionModal from '@/entities/section/ui/section-modal';
 import { useHandleDeleteSection } from '@/entities/section/hooks';
 import NavContextMenu from '@/shared/ui/layout/nav-context-menu';
 
