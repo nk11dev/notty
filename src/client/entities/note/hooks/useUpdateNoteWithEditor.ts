@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Editor } from '@tiptap/core';
 
-import { PAGE_TITLE_INPUT_EL_NAME } from '@/app/constants/elements.constants';
+import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import {
   notesApi,
   useUpdateNoteMutation
@@ -28,22 +28,11 @@ export const useUpdateNoteWithEditor = (editor: Editor): void => {
       const text = editor.getText();
 
       if (
-        ((document.activeElement as HTMLInputElement)?.name !== PAGE_TITLE_INPUT_EL_NAME) &&
-        ['', null].includes(currentData.body)
-      ) {
-        editor
-          .chain()
-          .setContent(currentData.body)
-          .setTextSelection(1)
-          .focus()
-          .run();
-
-      } else if (
-        (text === '') ||
+        (text === EDITOR_DEFAULT_CONTENT) ||
         (noteData.id !== currentData.note_id)
       ) {
         editor.commands.setContent(currentData.body, false, PM_PARSE_OPTIONS);
-      }
+      } 
     }
 
   }, [currentData, editor, noteData])

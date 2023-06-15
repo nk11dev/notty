@@ -1,1 +1,0 @@
-export const PAGE_TITLE_INPUT_EL_NAME = 'page-title-input';
