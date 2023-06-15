@@ -4,6 +4,7 @@ import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
 import { log } from '@/shared/utils/log.utils';
+import type { BaseQueryError } from '@/shared/types';
 
 const axiosBaseQuery =
   (
@@ -16,7 +17,7 @@ const axiosBaseQuery =
       params?: AxiosRequestConfig['params']
     },
     unknown,
-    unknown
+    BaseQueryError
   > =>
     async (args) => {
       const { url, method, data, params } = args;
@@ -50,8 +51,7 @@ const axiosBaseQuery =
         return {
           error: {
             status: err.response?.status,
-            statusText: err.response?.statusText,
-            message: err.response?.data || err.message,
+            data: err.response?.data || err.message,
           },
         };
       }

@@ -20,7 +20,7 @@ const NotesFeature = () => {
     refetchOnMountOrArgChange: true
   });
 
-  if (isError) return <ErrorMsg error={error} />;
+  if (isError) return <ErrorMsg {...error} />;
 
   if (!data) return null;
 

@@ -5,7 +5,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { useGetNoteQuery } from '@/entities/note/api-slices';
 import PageHeader from '@/features/page-header';
 import NoteTitleInput from '@/entities/note/ui/note-title-input';
-import ErrorMsg from '@/shared/ui/fetching/error-msg';
+import NoteError from '@/entities/note/ui/note-error';
 import PageContent from '@/shared/ui/page/page-content';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
@@ -22,7 +22,7 @@ const NotePage = () => {
     refetchOnMountOrArgChange: true
   });
 
-  if (isError) return <ErrorMsg error={error} />;
+  if (isError) return <NoteError {...error} />;
 
   if (!currentData) return null;
 

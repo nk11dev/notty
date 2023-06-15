@@ -1,24 +1,20 @@
+import styles from './ErrorMsg.module.scss';
+
 import React from 'react';
 
-type Props = {
-  error: {
-    status?: string,
-    statusText?: string,
-    message?: string
-  }
-};
+import type { BaseQueryError } from '@/shared/types';
 
-const ErrorMsg = (props: Props) => {
-  const { status, statusText, message } = props.error;
+const ErrorMsg = (props: Partial<BaseQueryError>) => {
+  const { status, data } = props;
+
+  const details = [
+    status,
+    (typeof data === 'string') && data,
+  ].filter(item => !!item);
 
   return (
-    <div className='error-message'>
-      <div>
-        {`Error: ${status}, ${statusText}`}
-      </div>
-      <div>
-        {`Message: ${message}`}
-      </div>
+    <div className={styles.element}>
+      Error: {details.join(', ')}
     </div>
   );
 }

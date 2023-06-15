@@ -33,14 +33,20 @@ export async function getNotes(request: Request, response: Response) {
 }
 
 export async function getNote(request: Request, response: Response) {
+  const { noteId } = request.params;
 
   const results = await noteRepository.findOneBy({
-    note_id: Number(request.params.noteId),
+    note_id: Number(noteId),
   });
 
-  response.status(200).json({
-    payload: results
-  });
+  if (!results) {
+    response.status(404).send('Note is not found');
+
+  } else {
+    response.status(200).json({
+      payload: results
+    });
+  }
 }
 
 export async function createNote(request: Request, response: Response) {

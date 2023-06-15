@@ -12,7 +12,7 @@ const SectionsFeature = () => {
     error
   } = useGetAllSectionsQuery();
 
-  if (isError) return <ErrorMsg error={error} />;
+  if (isError) return <ErrorMsg {...error} />;
 
   if (!data || data?.length <= 0) return null;
 
