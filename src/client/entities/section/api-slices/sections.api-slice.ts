@@ -1,16 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
-import type { 
+import type {
   Section,
   SectionUpdateEndpointArg,
   SectionDeleteResponse
- } from '@/entities/section/types';
+} from '@/entities/section/types';
 
 export const sectionsApi = createApi({
   reducerPath: 'sectionsApi',
   baseQuery: axiosBaseQuery(),
-  tagTypes: ['Sections'],
+  tagTypes: ['Sections', 'Section'],
   endpoints(build) {
     return {
       getAllSections: build.query<Section[], void>({
@@ -25,7 +25,8 @@ export const sectionsApi = createApi({
         query: (sectionId) => ({
           url: `/sections/${sectionId}`,
           method: 'GET'
-        })
+        }),
+        providesTags: ['Section'],
       }),
 
       createSection: build.mutation<Section, void>({
