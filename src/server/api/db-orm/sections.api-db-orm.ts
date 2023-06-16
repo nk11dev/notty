@@ -26,13 +26,29 @@ export async function getSections(_request: Request, response: Response) {
 }
 
 export async function getSection(request: Request, response: Response) {
-  const results = await sectionRepository.findOneBy({
-    section_id: Number(request.params.sectionId),
+  const { sectionId } = request.params;
+
+  const sectionResults = await sectionRepository.findOneBy({
+    section_id: Number(sectionId),
   });
 
-  response.status(200).json({
-    payload: results
-  });
+  if (!sectionResults) {
+    response.status(404).send('Section is not found');
+
+  } else {
+    const notesResults = await noteRepository
+      .createQueryBuilder()
+      .orderBy('note_id', 'ASC')
+      .andWhere(`section_id = :id`, { id: sectionId })
+      .getMany();
+
+    response.status(200).json({
+      payload: {
+        ...sectionResults,
+        notes: notesResults
+      }
+    });
+  }
 }
 
 export async function createSection(request: Request, response: Response) {

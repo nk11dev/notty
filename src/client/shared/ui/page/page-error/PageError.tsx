@@ -4,7 +4,7 @@ import type { BaseQueryError } from '@/shared/types';
 import PageContent from '@/shared/ui/page/page-content';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
-const NoteError = (props: Partial<BaseQueryError>) => {
+const PageError = (props: Partial<BaseQueryError>) => {
   if (
     (props.status === 404) &&
     (typeof props.data === 'string')
@@ -19,4 +19,4 @@ const NoteError = (props: Partial<BaseQueryError>) => {
   return <ErrorMsg {...props} />;
 };
 
-export default NoteError;
+export default PageError;

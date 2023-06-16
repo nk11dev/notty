@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
-import { useSectionState } from '@/entities/section/hooks';
+import { useGetSectionQuery } from '@/entities/section/api-slices';
 import { useNotesState } from '@/entities/note/hooks';
 import PageHeader from '@/features/page-header';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import { useNavigateWithSearch } from '@/shared/hooks';
+import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 
 const SectionPage = () => {
   const { sectionId } = useParams();
   const { navigateWithSearch } = useNavigateWithSearch();
 
-  const { isFetching, data: sectionData } = useSectionState(sectionId);
+  const { 
+    data: sectionData,
+    isFetching, 
+    isError,
+    error
+   } = useGetSectionQuery(sectionId, {
+    refetchOnMountOrArgChange: true
+  });
   const { data: notesData } = useNotesState(sectionId);
 
   useEffect(() => {
@@ -24,6 +32,8 @@ const SectionPage = () => {
       navigateWithSearch(url, { replace: true });
     }
   }, [isFetching, notesData, navigateWithSearch]);
+
+  if (isError) return <PageError {...error} />;
 
   if (!sectionData || sectionData?.notes_count > 0) return null;
 
