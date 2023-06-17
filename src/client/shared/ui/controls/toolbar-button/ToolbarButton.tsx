@@ -1,6 +1,7 @@
 import styles from './ToolbarButton.module.scss';
 
 import React from 'react';
+import type { MouseEvent } from 'react';
 import cn from 'classnames';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
@@ -8,7 +9,7 @@ import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 type Props = {
   icon: IconDefinition,
-  clickHandler?: () => void;
+  clickHandler?: (e: MouseEvent) => void;
   tooltip?: string,
 };
 

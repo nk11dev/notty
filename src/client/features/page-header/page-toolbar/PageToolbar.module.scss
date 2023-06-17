@@ -1,4 +1,7 @@
+@import '/src/assets/styles/theme/colors';
+
 .element {
   display: flex;
   margin-left: 10px;
+  color: $page-header-btn-color;
 }

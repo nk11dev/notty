@@ -1,14 +1,14 @@
 import styles from './ControlsButton.module.scss';
 
 import React, { cloneElement } from 'react';
-import type { ReactElement } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
 import cn from 'classnames';
 
 import ButtonIcon from '@/shared/ui/controls/button-icon';
 
 type Props = {
   children?: React.ReactNode,
-  clickHandler?: () => void;
+  clickHandler?: (e: MouseEvent) => void;
   clsIsActive?: boolean,
   tooltip?: string,
   isDisabled?: boolean,

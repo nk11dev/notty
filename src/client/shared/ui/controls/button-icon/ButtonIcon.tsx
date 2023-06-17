@@ -1,6 +1,7 @@
 import styles from './ButtonIcon.module.scss';
 
 import React from 'react';
+import type { MouseEvent } from 'react';
 import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -8,7 +9,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 type Props = {
   icon?: IconDefinition,
   children?: React.ReactNode,
-  clickHandler?: () => void;
+  clickHandler?: (e: MouseEvent) => void;
   cls?: string,
   size?: number,
   tooltip?: string,

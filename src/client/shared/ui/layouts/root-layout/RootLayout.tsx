@@ -4,6 +4,8 @@ import React from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
+import SectionsContextMenu from '@/entities/section/ui/sections-context-menu';
+import NotesContextMenu from '@/entities/note/ui/notes-context-menu';
 import { useSidebarMode } from '@/shared/hooks';
 import SidebarControls from '@/shared/ui/sidebar/sidebar-controls';
 import SidebarLayout from '@/shared/ui/layouts/sidebar-layout';
@@ -38,6 +40,9 @@ const RootLayout = (props: Props) => {
             : <Outlet />
         }
       </main>
+
+      <SectionsContextMenu />
+      <NotesContextMenu />
     </div>
   );
 };
