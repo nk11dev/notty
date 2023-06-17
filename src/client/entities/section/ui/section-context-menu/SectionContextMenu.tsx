@@ -5,9 +5,9 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/entities/section/ui/section-modal';
 import { useHandleDeleteSection } from '@/entities/section/hooks';
-import NavContextMenu from '@/shared/ui/sidebar/nav-context-menu';
+import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
-const SectionsContextMenu = () => {
+const SectionContextMenu = () => {
   const [isShowingModal, toggleModal] = useState(false);
   const [sectionId, setSectionId] = useState(null);
 
@@ -42,7 +42,7 @@ const SectionsContextMenu = () => {
 
   return (
     <>
-      <NavContextMenu
+      <BaseContextMenu
         menuId={SECTIONS_CONTEXT_MENU_ID}
         menuItems={menuItems}
         onItemClick={onItemClick}
@@ -58,4 +58,4 @@ const SectionsContextMenu = () => {
   );
 };
 
-export default SectionsContextMenu;
+export default SectionContextMenu;

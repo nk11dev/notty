@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useGetBookmarksQuery } from '@/entities/note/api-slices';
 import NotesList from '@/entities/note/ui/notes-list';
-import NotesContextMenu from '@/entities/note/ui/notes-context-menu';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import EmptyMsg from '@/shared/ui/fetching/empty-msg';
 
@@ -20,12 +19,7 @@ const BookmarksFeature = () => {
   if (!data) return null;
 
   return data?.length > 0
-    ? (
-      <>
-        <NotesList data={data} />
-        <NotesContextMenu />
-      </>
-    )
+    ? <NotesList data={data} />
     : <EmptyMsg />;
 }
 

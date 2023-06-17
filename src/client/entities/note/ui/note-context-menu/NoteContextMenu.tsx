@@ -4,9 +4,9 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import { useHandleDeleteNote } from '@/entities/note/hooks';
-import NavContextMenu from '@/shared/ui/sidebar/nav-context-menu';
+import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
-const NotesContextMenu = () => {
+const NoteContextMenu = () => {
   const [onDeleteNote] = useHandleDeleteNote();
 
   const onItemClick = (args: ItemParams) => {
@@ -19,7 +19,7 @@ const NotesContextMenu = () => {
   ];
 
   return (
-    <NavContextMenu
+    <BaseContextMenu
       menuId={NOTES_CONTEXT_MENU_ID}
       menuItems={menuItems}
       onItemClick={onItemClick}
@@ -27,4 +27,4 @@ const NotesContextMenu = () => {
   );
 };
 
-export default NotesContextMenu;
+export default NoteContextMenu;
