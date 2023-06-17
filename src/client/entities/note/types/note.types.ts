@@ -1,3 +1,5 @@
+import type { Section } from '@/entities/section/types';
+
 export type Note = {
   note_id: number,
   title: string,
@@ -6,7 +8,8 @@ export type Note = {
   created_at: string,
   updated_at: string | null,
   section_id: number,
-  [key: string]: number | string | boolean | undefined
+  section?: Section,
+  [key: string]: number | string | boolean | undefined | Section
 };
 
 export type NoteUpdateEndpointArg = {

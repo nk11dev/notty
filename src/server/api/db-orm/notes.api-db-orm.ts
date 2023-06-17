@@ -35,9 +35,11 @@ export async function getNotes(request: Request, response: Response) {
 export async function getNote(request: Request, response: Response) {
   const { noteId } = request.params;
 
-  const results = await noteRepository.findOneBy({
-    note_id: Number(noteId),
-  });
+  const results = await noteRepository
+    .createQueryBuilder('note')
+    .leftJoinAndSelect('note.section', 'section')
+    .where(`note.note_id = :note_id`, { note_id: noteId })
+    .getOne();
 
   if (!results) {
     response.status(404).send('Note is not found');
