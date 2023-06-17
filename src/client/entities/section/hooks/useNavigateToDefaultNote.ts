@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { sectionsApi } from '@/entities/section/api-slices';
 import { useNavigateWithSearch } from '@/shared/hooks';
+import { useSectionState } from './useSectionState';
 
 export const useNavigateToDefaultNote = (sectionId: string) => {
   const { navigateWithSearch } = useNavigateWithSearch();
@@ -9,7 +9,7 @@ export const useNavigateToDefaultNote = (sectionId: string) => {
   const {
     currentData,
     isFetching,
-  } = sectionsApi.endpoints.getSection.useQueryState(sectionId);
+  } = useSectionState(sectionId);
 
   useEffect(() => {
     if (!isFetching && currentData) {
