@@ -6,7 +6,6 @@ import collectNestedRoutes from '@/server/helpers/routing.helpers';
 
 import apiDbSql from '@/server/routing/routes.api-db-sql';
 import apiDbOrm from '@/server/routing/routes.api-db-orm';
-import apiJsonExample from '@/server/routing/routes.api-json-example';
 
 
 const colors = require('ansi-colors');
@@ -30,9 +29,6 @@ app.use('/api', apiDbSql);
 
 // API routes (DB, uses ORM)
 app.use('/api-orm', apiDbOrm);
-
-// API routes (reads from local JSON, used for debugging purposes)
-app.use('/api-example', apiJsonExample);
 
 // App routes (used only for "production" mode for correct HMR working with client "development" mode).
 if (process.env.NODE_ENV == 'production') {
