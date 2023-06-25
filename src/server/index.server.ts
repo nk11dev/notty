@@ -3,10 +3,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
-
-import apiDbSql from '@/server/routing/routes.api-db-sql';
-import apiDbOrm from '@/server/routing/routes.api-db-orm';
-
+import api from '@/server/routing/routes.api-db-orm';
 
 const colors = require('ansi-colors');
 
@@ -24,11 +21,8 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static('dist/client'));
 
-// API routes (DB, uses raw SQL)
-app.use('/api', apiDbSql);
-
-// API routes (DB, uses ORM)
-app.use('/api-orm', apiDbOrm);
+// API routes
+app.use('/api', api);
 
 // App routes (used only for "production" mode for correct HMR working with client "development" mode).
 if (process.env.NODE_ENV == 'production') {
