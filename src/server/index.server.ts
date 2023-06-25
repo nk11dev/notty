@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
-import api from '@/server/routing/routes.api-db-orm';
+import api from '@/server/routing/api.routes';
 
 const colors = require('ansi-colors');
 

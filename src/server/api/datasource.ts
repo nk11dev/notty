@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 
-import SectionEntity from '@/server/api/db-orm/entities/section.entity';
-import NoteEntity from '@/server/api/db-orm/entities/note.entity';
+import SectionEntity from '@/server/api/entities/section.entity';
+import NoteEntity from '@/server/api/entities/note.entity';
 
 const { env } = process;
 
@@ -27,7 +27,7 @@ const dataSource = new DataSource({
   synchronize: false,
   logging: false,
   migrations: [
-    `./src/server/api/db-orm/migrations/**/*.${migrationsExt}`,
+    `./src/server/api/migrations/**/*.${migrationsExt}`,
   ],
 });
 

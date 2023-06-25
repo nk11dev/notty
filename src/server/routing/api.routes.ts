@@ -6,7 +6,7 @@ import {
   createSection,
   deleteSection,
   updateSection
-} from '@/server/api/db-orm/sections.api-db-orm';
+} from '@/server/api/sections.api';
 
 import {
   getNotes,
@@ -14,7 +14,7 @@ import {
   createNote,
   updateNote,
   deleteNote
-} from '@/server/api/db-orm/notes.api-db-orm';
+} from '@/server/api/notes.api';
 
 const router = express.Router();
 

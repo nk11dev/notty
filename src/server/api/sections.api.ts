@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 
-import dataSource from '@/server/api/db-orm/orm.datasource';
-import SectionEntity from '@/server/api/db-orm/entities/section.entity';
-import NoteEntity from '@/server/api/db-orm/entities/note.entity';
+import dataSource from '@/server/api/datasource';
+import SectionEntity from '@/server/api/entities/section.entity';
+import NoteEntity from '@/server/api/entities/note.entity';
 
 const sectionRepository = dataSource.getRepository(SectionEntity);
 const noteRepository = dataSource.getRepository(NoteEntity);

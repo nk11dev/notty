@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import SectionEntity from '@/server/api/db-orm/entities/section.entity';
-import { dateTranformer } from '@/server/helpers/db-orm.helpers';
+import SectionEntity from '@/server/api/entities/section.entity';
+import { dateTranformer } from '@/server/helpers/api.helpers';
 
 @Entity('notes')
 export default class NoteEntity {
