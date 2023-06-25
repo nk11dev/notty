@@ -31,6 +31,7 @@ export async function getSection(request: Request, response: Response) {
   const results = await sectionRepository
     .createQueryBuilder('section')
     .leftJoinAndSelect('section.notes', 'note')
+    .orderBy('note.note_id', 'ASC')
     .where(`section.section_id = :section_id`, { section_id: sectionId })
     .getOne();
 
