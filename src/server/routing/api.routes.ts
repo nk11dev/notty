@@ -33,8 +33,8 @@ router
 
   // notes (common)
   .get('/notes', getNotes)
-  .get('/notes/:noteId', getNote)
-  .put('/notes/:noteId', updateNote)
-  .delete('/notes/:noteId', deleteNote);
+  .get('/notes/:noteSlug', getNote)
+  .put('/notes/:noteSlug', updateNote)
+  .delete('/notes/:noteSlug', deleteNote);
 
 export default router;

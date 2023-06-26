@@ -18,9 +18,9 @@ type Result = [
 ];
 
 export const useNoteData = (): Result => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
-  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteId);
+  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);
 
   const [noteData, setNoteData] = useState(defaultData);
 

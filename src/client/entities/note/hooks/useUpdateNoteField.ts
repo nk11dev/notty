@@ -16,10 +16,10 @@ type Result = [
 ];
 
 export const useUpdateNoteField = (fieldName: string): Result => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
   const [updateNote] = useUpdateNoteMutation();
-  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteId);
+  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);
 
   const [noteData, setNoteData] = useNoteData();
   const debouncedData = useDebounce<NoteUpdateEndpointArg>(noteData, 300);

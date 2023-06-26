@@ -33,12 +33,12 @@ export async function getNotes(request: Request, response: Response) {
 }
 
 export async function getNote(request: Request, response: Response) {
-  const { noteId } = request.params;
+  const { noteSlug } = request.params;
 
   const results = await noteRepository
     .createQueryBuilder('note')
     .leftJoinAndSelect('note.section', 'section')
-    .where(`note.note_id = :note_id`, { note_id: noteId })
+    .where(`note.note_id = :note_id`, { note_id: noteSlug })
     .getOne();
 
   if (!results) {
@@ -90,7 +90,7 @@ export async function updateNote(request: Request, response: Response) {
       ...request.body,
       updated_at: new Date(),
     })
-    .where('note_id = :note_id', { note_id: request.params.noteId })
+    .where('note_id = :note_id', { note_id: request.params.noteSlug })
     .returning('*')
     .execute();
 
@@ -110,7 +110,7 @@ export async function deleteNote(request: Request, response: Response) {
     FROM ${noteRepository.metadata.tableName} 
     WHERE note_id = $1
     RETURNING *
-  `, [request.params.noteId]);
+  `, [request.params.noteSlug]);
 
   let lastRow = null;
 

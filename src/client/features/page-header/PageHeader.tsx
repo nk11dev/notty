@@ -7,13 +7,13 @@ import PageBreadcrumbs from '@/features/page-header/page-breadcrumbs';
 import PageToolbar from '@/features/page-header/page-toolbar';
 
 const PageHeader = () => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
   return (
     <div className={styles.element}>
       <PageBreadcrumbs />
 
-      {noteId && <PageToolbar />}
+      {noteSlug && <PageToolbar />}
     </div>
   );
 };

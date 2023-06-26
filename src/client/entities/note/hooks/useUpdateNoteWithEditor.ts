@@ -15,10 +15,10 @@ const PM_PARSE_OPTIONS = {
 };
 
 export const useUpdateNoteWithEditor = (editor: Editor): void => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
   const [updateNote] = useUpdateNoteMutation();
-  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteId);
+  const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);
 
   const [noteData] = useNoteData();
   const debouncedContent = useDebounce(editor?.state.doc.content, 300);

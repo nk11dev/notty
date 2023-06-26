@@ -11,14 +11,14 @@ import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
 const NotePage = () => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
   const {
     currentData,
     isError,
     error
-  } = useGetNoteQuery(noteId, {
-    skip: !noteId,
+  } = useGetNoteQuery(noteSlug, {
+    skip: !noteSlug,
     refetchOnMountOrArgChange: true
   });
 

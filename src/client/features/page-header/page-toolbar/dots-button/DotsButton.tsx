@@ -8,7 +8,7 @@ import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import HeaderButton from '@/shared/ui/controls/header-button';
 
 const DotsButton = () => {
-  const { noteId } = useParams();
+  const { noteSlug } = useParams();
 
   const { show } = useContextMenu({
     id: NOTES_CONTEXT_MENU_ID,
@@ -18,7 +18,7 @@ const DotsButton = () => {
     show({
       event: e,
       props: {
-        id: noteId
+        id: noteSlug
       }
     });
   }

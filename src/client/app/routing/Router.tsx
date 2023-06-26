@@ -21,7 +21,7 @@ export const appRoutes = [
         element: <SectionPage />,
       },
       {
-        path: '/sections/:folderSlug/notes/:noteId',
+        path: '/sections/:folderSlug/notes/:noteSlug',
         element: <NotePage />,
       },
     ]
