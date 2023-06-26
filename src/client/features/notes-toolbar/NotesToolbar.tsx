@@ -11,9 +11,9 @@ import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const NotesToolbar = () => {
-  const { sectionId } = useParams();
+  const { folderSlug } = useParams();
 
-  const { isFetching } = useNotesState(sectionId);
+  const { isFetching } = useNotesState(folderSlug);
   const [refetchNotesBySection] = useLazyGetNotesBySectionQuery();
   const [onCreateNote] = useHandleCreateNote();
 
@@ -22,17 +22,17 @@ const NotesToolbar = () => {
       title="Notes"
       showLoader={isFetching}
     >
-      {sectionId && (
+      {folderSlug && (
         <>
           <ToolbarButton
             icon={faPlus}
-            clickHandler={() => onCreateNote(sectionId)}
+            clickHandler={() => onCreateNote(folderSlug)}
             tooltip="Create new note"
           />
 
           <ToolbarButton
             icon={faRotate}
-            clickHandler={() => refetchNotesBySection(sectionId)}
+            clickHandler={() => refetchNotesBySection(folderSlug)}
             tooltip="Refetch notes"
           />
         </>

@@ -26,13 +26,13 @@ export async function getSections(_request: Request, response: Response) {
 }
 
 export async function getSection(request: Request, response: Response) {
-  const { sectionId } = request.params;
+  const { folderSlug } = request.params;
 
   const results = await sectionRepository
     .createQueryBuilder('section')
     .leftJoinAndSelect('section.notes', 'note')
     .orderBy('note.note_id', 'ASC')
-    .where(`section.section_id = :section_id`, { section_id: sectionId })
+    .where(`section.section_id = :section_id`, { section_id: folderSlug })
     .getOne();
 
   if (!results) {
@@ -68,7 +68,7 @@ export async function updateSection(request: Request, response: Response) {
       updated_at = CURRENT_TIMESTAMP
     WHERE section_id = $2
     RETURNING *
-`, [request.body.title, request.params.sectionId]);
+`, [request.body.title, request.params.folderSlug]);
 
   response.status(200).json({
     payload: {
@@ -85,7 +85,7 @@ export async function deleteSection(request: Request, response: Response) {
     FROM ${sectionRepository.metadata.tableName} 
     WHERE section_id = $1
     RETURNING *
-  `, [request.params.sectionId]);
+  `, [request.params.folderSlug]);
 
   const [lastRow] = await sectionRepository.manager.query(`
     SELECT *

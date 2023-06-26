@@ -22,14 +22,14 @@ const router = express.Router();
 router
   // sections
   .get('/sections', getSections)
-  .get('/sections/:sectionId', getSection)
+  .get('/sections/:folderSlug', getSection)
   .post('/sections', createSection)
-  .put('/sections/:sectionId', updateSection)
-  .delete('/sections/:sectionId', deleteSection)
+  .put('/sections/:folderSlug', updateSection)
+  .delete('/sections/:folderSlug', deleteSection)
 
   // notes (for specified section)
-  .get('/sections/:sectionId/notes', getNotes)
-  .post('/sections/:sectionId/notes', createNote)
+  .get('/sections/:folderSlug/notes', getNotes)
+  .post('/sections/:folderSlug/notes', createNote)
 
   // notes (common)
   .get('/notes', getNotes)

@@ -8,14 +8,14 @@ import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import EmptyMsg from '@/shared/ui/fetching/empty-msg';
 
 const NotesFeature = () => {
-  const { sectionId } = useParams();
+  const { folderSlug } = useParams();
 
   const {
     data,
     isError,
     error
-  } = useGetNotesBySectionQuery(sectionId, {
-    skip: !sectionId,
+  } = useGetNotesBySectionQuery(folderSlug, {
+    skip: !folderSlug,
     refetchOnMountOrArgChange: true
   });
 

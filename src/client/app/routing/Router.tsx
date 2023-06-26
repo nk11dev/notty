@@ -17,11 +17,11 @@ export const appRoutes = [
         element: <HomePage />,
       },
       {
-        path: '/sections/:sectionId',
+        path: '/sections/:folderSlug',
         element: <SectionPage />,
       },
       {
-        path: '/sections/:sectionId/notes/:noteId',
+        path: '/sections/:folderSlug/notes/:noteId',
         element: <NotePage />,
       },
     ]

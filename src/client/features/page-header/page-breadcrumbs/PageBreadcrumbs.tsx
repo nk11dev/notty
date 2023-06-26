@@ -7,9 +7,9 @@ import { useSectionState } from '@/entities/section/hooks';
 import { useNoteState } from '@/entities/note/hooks';
 
 const PageBreadcrumbs = () => {
-  const { sectionId, noteId } = useParams();
+  const { folderSlug, noteId } = useParams();
 
-  const { data: sectionData } = useSectionState(sectionId);
+  const { data: sectionData } = useSectionState(folderSlug);
   const { data: noteData } = useNoteState(noteId);
 
   const breadcrumbs = [

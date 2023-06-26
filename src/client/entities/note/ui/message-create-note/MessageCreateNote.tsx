@@ -9,14 +9,14 @@ import {
 } from '@/entities/note/hooks';
 
 const MessageCreateNote = () => {
-  const { sectionId } = useParams();
+  const { folderSlug } = useParams();
   const [onCreateNote] = useHandleCreateNote();
 
   return (
     <button
       type="button"
       className={cn(styles.element, 'btn btn-link')}
-      onClick={() => onCreateNote(sectionId)}
+      onClick={() => onCreateNote(folderSlug)}
     >
       Create new note
     </button>

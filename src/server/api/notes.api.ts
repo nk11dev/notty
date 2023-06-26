@@ -8,17 +8,17 @@ const sectionRepository = dataSource.getRepository(SectionEntity);
 const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getNotes(request: Request, response: Response) {
-  const { sectionId } = request.params;
+  const { folderSlug } = request.params;
   const { filterByIsBookmark } = request.query;
 
   const result = await noteRepository
     .createQueryBuilder()
     .orderBy('note_id', 'ASC')
 
-    .andWhere(sectionId
+    .andWhere(folderSlug
       ? `section_id = :id`
       : '1=1',
-      { id: sectionId })
+      { id: folderSlug })
 
     .andWhere((typeof filterByIsBookmark !== 'undefined')
       ? 'is_bookmark = :value'
@@ -52,16 +52,16 @@ export async function getNote(request: Request, response: Response) {
 }
 
 export async function createNote(request: Request, response: Response) {
-  const { sectionId } = request.params;
+  const { folderSlug } = request.params;
 
   const section = await sectionRepository.findOneBy({
-    section_id: Number(sectionId),
+    section_id: Number(folderSlug),
   });
 
   if (!section) {
     response.status(400).json({
       error: `Cannot create note.`,
-      message: `Foreign key constraint preasumable violation: 'section_id' = '${sectionId}' doesn't exist in 'sections' table.`
+      message: `Foreign key constraint preasumable violation: 'section_id' = '${folderSlug}' doesn't exist in 'sections' table.`
     });
 
   } else {
@@ -71,7 +71,7 @@ export async function createNote(request: Request, response: Response) {
       .insert()
       .values({
         ...request.body,
-        section_id: sectionId
+        section_id: folderSlug
       })
       .returning('*')
       .execute();

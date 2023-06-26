@@ -9,17 +9,17 @@ import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 
 const SectionPage = () => {
-  const { sectionId } = useParams();
+  const { folderSlug } = useParams();
 
   const {
     currentData,
     isError,
     error
-  } = useGetSectionQuery(sectionId, {
+  } = useGetSectionQuery(folderSlug, {
     refetchOnMountOrArgChange: true
   });
 
-  useNavigateToDefaultNote(sectionId);
+  useNavigateToDefaultNote(folderSlug);
 
   if (isError) return <PageError {...error} />;
 

@@ -12,10 +12,10 @@ import {
 } from '@/widgets/sidebar-widgets';
 
 const SidebarLayout = () => {
-  const { sectionId } = useParams();
+  const { folderSlug } = useParams();
   const { isSectionsModeOrNull, sidebarMode } = useSidebarMode();
 
-  const isDoubleColumnLayout = (isSectionsModeOrNull && sectionId);
+  const isDoubleColumnLayout = (isSectionsModeOrNull && folderSlug);
 
   const renderLeftColumnWidgets = () => {
     switch (sidebarMode) {
