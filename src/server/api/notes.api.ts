@@ -16,7 +16,7 @@ export async function getNotes(request: Request, response: Response) {
     .orderBy('id', 'ASC')
 
     .andWhere(folderSlug
-      ? `section_id = :id`
+      ? `folder_id = :id`
       : '1=1',
       { id: folderSlug })
 
@@ -55,13 +55,13 @@ export async function createNote(request: Request, response: Response) {
   const { folderSlug } = request.params;
 
   const section = await sectionRepository.findOneBy({
-    section_id: Number(folderSlug),
+    id: Number(folderSlug),
   });
 
   if (!section) {
     response.status(400).json({
       error: `Cannot create note.`,
-      message: `Foreign key constraint preasumable violation: 'section_id' = '${folderSlug}' doesn't exist in 'sections' table.`
+      message: `Foreign key constraint preasumable violation: Folder with 'id' = '${folderSlug}' doesn't exist in 'sections' table.`
     });
 
   } else {
@@ -71,7 +71,7 @@ export async function createNote(request: Request, response: Response) {
       .insert()
       .values({
         ...request.body,
-        section_id: folderSlug
+        folder_id: folderSlug
       })
       .returning('*')
       .execute();
@@ -115,16 +115,16 @@ export async function deleteNote(request: Request, response: Response) {
   let lastRow = null;
 
   if (affectedCount > 0) {
-    const { section_id } = affectedRows[0];
+    const { folder_id } = affectedRows[0];
 
     const [result] = await noteRepository
       .createQueryBuilder()
 
       // If note belongs to section then get last note from this section. Else - get last "unsorted" note. 
-      .andWhere(section_id
-        ? `section_id = :section_id`
+      .andWhere(folder_id
+        ? `folder_id = :folder_id`
         : '1=1',
-        { section_id })
+        { folder_id })
 
       .orderBy('id', 'DESC')
       .limit(1)

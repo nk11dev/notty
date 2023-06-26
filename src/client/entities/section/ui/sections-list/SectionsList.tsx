@@ -15,13 +15,13 @@ type Props = {
 const SectionsList = (props: Props) => (
   <SidebarList>
     {props.data.map((item: Section, index: number) => {
-      const { section_id, title, notes_count } = item;
+      const { id, title, notes_count } = item;
 
       return (
         <NavItem
           key={index}
-          url={`/sections/${section_id}`}
-          id={section_id}
+          url={`/sections/${id}`}
+          id={id}
           contextMenuId={SECTIONS_CONTEXT_MENU_ID}
         >
           {title}

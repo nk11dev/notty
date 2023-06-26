@@ -13,7 +13,7 @@ export const useHandleDeleteSection = () => {
       const { lastRow } = data;
 
       if (lastRow !== null) {
-        navigateWithSearch(`/sections/${lastRow.section_id}`);
+        navigateWithSearch(`/sections/${lastRow.id}`);
       } else {
         navigateWithSearch(`/`);
       }

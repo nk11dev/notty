@@ -45,12 +45,12 @@ export default class NoteEntity {
   })
   updated_at: Date;
 
-  // For the purpose of fetching foreign key column, we should add "section_id" column explicitly and pass this column name to @JoinColumn decorator
+  // For the purpose of fetching foreign key column, we should add "folder_id" column explicitly and pass this column name to @JoinColumn decorator
   @Column({
-    name: 'section_id',
+    name: 'folder_id',
     nullable: false,
   })
-  section_id: number;
+  folder_id: number;
 
   @ManyToOne(
     () => SectionEntity,
@@ -60,9 +60,9 @@ export default class NoteEntity {
     }
   )
   @JoinColumn({
-    name: "section_id",
-    referencedColumnName: "section_id",
-    foreignKeyConstraintName: "fk_section_id"
+    name: "folder_id",
+    referencedColumnName: "id",
+    foreignKeyConstraintName: "fk_folder_id"
   })
   section: SectionEntity
 }

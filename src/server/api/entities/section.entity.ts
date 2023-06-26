@@ -7,9 +7,9 @@ import { dateTranformer } from '@/server/helpers/api.helpers';
 export default class SectionEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
-    primaryKeyConstraintName: 'pk_section_id'
+    primaryKeyConstraintName: 'pk_folder_id'
   })
-  section_id: number;
+  id: number;
 
   @Column({
     nullable: false,

@@ -11,13 +11,13 @@ export async function getSections(_request: Request, response: Response) {
 
   const results = await sectionRepository.manager.query(`
     SELECT
-      s.section_id,
+      s.id,
       s.title,
       count(n.id)::int as notes_count
     FROM ${sectionRepository.metadata.tableName} s
-    LEFT JOIN ${noteRepository.metadata.tableName} n on s.section_id = n.section_id
-    GROUP BY s.section_id
-    ORDER BY s.section_id ASC
+    LEFT JOIN ${noteRepository.metadata.tableName} n on s.id = n.folder_id
+    GROUP BY s.id
+    ORDER BY s.id ASC
   `);
 
   response.status(200).json({
@@ -32,7 +32,7 @@ export async function getSection(request: Request, response: Response) {
     .createQueryBuilder('section')
     .leftJoinAndSelect('section.notes', 'note')
     .orderBy('note.id', 'ASC')
-    .where(`section.section_id = :section_id`, { section_id: folderSlug })
+    .where(`section.id = :id`, { id: folderSlug })
     .getOne();
 
   if (!results) {
@@ -66,7 +66,7 @@ export async function updateSection(request: Request, response: Response) {
     SET 
       title = $1,
       updated_at = CURRENT_TIMESTAMP
-    WHERE section_id = $2
+    WHERE id = $2
     RETURNING *
 `, [request.body.title, request.params.folderSlug]);
 
@@ -83,14 +83,14 @@ export async function deleteSection(request: Request, response: Response) {
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     DELETE 
     FROM ${sectionRepository.metadata.tableName} 
-    WHERE section_id = $1
+    WHERE id = $1
     RETURNING *
   `, [request.params.folderSlug]);
 
   const [lastRow] = await sectionRepository.manager.query(`
     SELECT *
     FROM ${sectionRepository.metadata.tableName}
-    ORDER BY section_id DESC
+    ORDER BY id DESC
     LIMIT 1
   `);
 

@@ -14,15 +14,15 @@ export const useHandleDeleteNote = () => {
 
       // If there is other notes in this section - navigate to last note.
       if (lastRow !== null) {
-        const { id, section_id } = lastRow;
+        const { id, folder_id } = lastRow;
 
-        if (section_id != null) {
-          navigateWithSearch(`/sections/${section_id}/notes/${id}`);
+        if (folder_id !== null) {
+          navigateWithSearch(`/sections/${folder_id}/notes/${id}`);
         }
 
         // Else - navigate to section itself.
       } else if (affectedRow !== null) {
-        navigateWithSearch(`/sections/${affectedRow.section_id}`);
+        navigateWithSearch(`/sections/${affectedRow.folder_id}`);
       }
     }
   }

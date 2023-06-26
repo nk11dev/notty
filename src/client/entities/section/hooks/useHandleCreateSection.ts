@@ -11,7 +11,7 @@ export const useHandleCreateSection = () => {
     if ('data' in result) {
       const { data } = result;
 
-      navigateWithSearch(`/sections/${data.section_id}`);
+      navigateWithSearch(`/sections/${data.id}`);
     }
   }
 

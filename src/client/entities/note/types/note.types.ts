@@ -7,7 +7,7 @@ export type Note = {
   is_bookmark: boolean,
   created_at: string,
   updated_at: string | null,
-  section_id: number,
+  folder_id: number,
   section?: Section,
   [key: string]: number | string | boolean | undefined | Section
 };

@@ -1,7 +1,7 @@
 import type { Note } from '@/entities/note/types';
 
 export type Section = {
-  section_id: number,
+  id: number,
   title: string,
   created_at?: string,
   updated_at?: string,
