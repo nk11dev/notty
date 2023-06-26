@@ -27,7 +27,7 @@ export const useUpdateNoteField = (fieldName: string): Result => {
   useEffect(() => {
     if (
       currentData &&
-      (debouncedData.id === currentData.note_id) &&
+      (debouncedData.id === currentData.id) &&
       (debouncedData[fieldName] !== currentData[fieldName])
     ) {
       updateNote(debouncedData);

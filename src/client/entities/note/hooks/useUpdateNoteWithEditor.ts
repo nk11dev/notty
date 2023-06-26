@@ -29,7 +29,7 @@ export const useUpdateNoteWithEditor = (editor: Editor): void => {
 
       if (
         (text === EDITOR_DEFAULT_CONTENT) ||
-        (noteData.id !== currentData.note_id)
+        (noteData.id !== currentData.id)
       ) {
         editor.commands.setContent(currentData.body, false, PM_PARSE_OPTIONS);
       } 
@@ -42,14 +42,14 @@ export const useUpdateNoteWithEditor = (editor: Editor): void => {
     const html = editor?.getHTML();
 
     if (
-      (noteData.id === currentData.note_id) &&
+      (noteData.id === currentData.id) &&
       (
         (text && ![text, html].includes(currentData.body)) ||
         ((text === '') && !['', null].includes(currentData.body))
       )
     ) {
       updateNote({
-        id: currentData.note_id,
+        id: currentData.id,
         body: text ? html : '',
       });
     }

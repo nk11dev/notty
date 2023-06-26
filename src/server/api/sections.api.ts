@@ -13,7 +13,7 @@ export async function getSections(_request: Request, response: Response) {
     SELECT
       s.section_id,
       s.title,
-      count(n.note_id)::int as notes_count
+      count(n.id)::int as notes_count
     FROM ${sectionRepository.metadata.tableName} s
     LEFT JOIN ${noteRepository.metadata.tableName} n on s.section_id = n.section_id
     GROUP BY s.section_id
@@ -31,7 +31,7 @@ export async function getSection(request: Request, response: Response) {
   const results = await sectionRepository
     .createQueryBuilder('section')
     .leftJoinAndSelect('section.notes', 'note')
-    .orderBy('note.note_id', 'ASC')
+    .orderBy('note.id', 'ASC')
     .where(`section.section_id = :section_id`, { section_id: folderSlug })
     .getOne();
 

@@ -14,8 +14,8 @@ const NotesList = (props: Props) => (
     {props.data.map((item: Note, index: number) => (
       <NavItem
         key={index}
-        url={`/sections/${item.section_id}/notes/${item.note_id}`}
-        id={item.note_id}
+        url={`/sections/${item.section_id}/notes/${item.id}`}
+        id={item.id}
         contextMenuId={NOTES_CONTEXT_MENU_ID}
         searchParamsOptions={{
           hideSidebarOnMobile: true

@@ -1,7 +1,7 @@
 import type { Section } from '@/entities/section/types';
 
 export type Note = {
-  note_id: number,
+  id: number,
   title: string,
   body: string | null,
   is_bookmark: boolean,

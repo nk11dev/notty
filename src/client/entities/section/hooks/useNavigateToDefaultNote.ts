@@ -16,7 +16,7 @@ export const useNavigateToDefaultNote = (folderId: string) => {
       const [firstNote] = currentData.notes || [];
 
       if (firstNote) {
-        const url = `/sections/${firstNote.section_id}/notes/${firstNote.note_id}`;
+        const url = `/sections/${firstNote.section_id}/notes/${firstNote.id}`;
 
         navigateWithSearch(url, { replace: true });
       }

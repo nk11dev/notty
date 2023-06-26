@@ -9,7 +9,7 @@ export default class NoteEntity {
     generatedIdentity: 'ALWAYS',
     primaryKeyConstraintName: 'pk_note_id'
   })
-  note_id: number;
+  id: number;
 
   @Column({
     nullable: false,

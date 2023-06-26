@@ -32,8 +32,8 @@ export const notesApi = createApi({
       }),
 
       getNote: build.query<Note, string>({
-        query: (noteId) => ({
-          url: `/notes/${noteId}`,
+        query: (id) => ({
+          url: `/notes/${id}`,
           method: 'GET'
         }),
         providesTags: ['Note'],
@@ -68,8 +68,8 @@ export const notesApi = createApi({
       }),
 
       deleteNote: build.mutation<NoteDeleteResponse, string>({
-        query: (noteId) => ({
-          url: `/notes/${noteId}`,
+        query: (id) => ({
+          url: `/notes/${id}`,
           method: 'DELETE'
         }),
         invalidatesTags: ['Notes'],

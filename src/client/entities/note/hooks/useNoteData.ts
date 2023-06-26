@@ -28,10 +28,10 @@ export const useNoteData = (): Result => {
     setNoteData(prevData => {
       if (currentData && (
         (prevData === defaultData) ||
-        (prevData.id !== currentData.note_id)
+        (prevData.id !== currentData.id)
       )) {
         return {
-          id: currentData.note_id,
+          id: currentData.id,
           title: currentData.title,
           body: currentData.body,
           is_bookmark: currentData.is_bookmark,
