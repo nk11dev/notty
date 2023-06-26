@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { SECTIONS_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
+import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/entities/section/ui/section-modal';
 import { useHandleDeleteSection } from '@/entities/section/hooks';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
@@ -43,7 +43,7 @@ const SectionContextMenu = () => {
   return (
     <>
       <BaseContextMenu
-        menuId={SECTIONS_CONTEXT_MENU_ID}
+        menuId={FOLDER_CONTEXT_MENU_ID}
         menuItems={menuItems}
         onItemClick={onItemClick}
       />
