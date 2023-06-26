@@ -1,6 +1,6 @@
-import { sectionsApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/section/api-slices';
 
-export const useSectionState = (id: string) => sectionsApi
+export const useSectionState = (id: string) => foldersApi
   .endpoints
   .getSection
   .useQueryState(id);

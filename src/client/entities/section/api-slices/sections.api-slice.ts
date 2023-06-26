@@ -7,8 +7,8 @@ import type {
   SectionDeleteResponse
 } from '@/entities/section/types';
 
-export const sectionsApi = createApi({
-  reducerPath: 'sectionsApi',
+export const foldersApi = createApi({
+  reducerPath: 'foldersApi',
   baseQuery: axiosBaseQuery(),
   tagTypes: ['Sections', 'Section'],
   endpoints(build) {
@@ -67,4 +67,4 @@ export const {
   useCreateSectionMutation,
   useUpdateSectionMutation,
   useDeleteSectionMutation,
-} = sectionsApi;
+} = foldersApi;

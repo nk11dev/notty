@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 
-import { sectionsApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/section/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
 
 const logger = createLogger({
@@ -10,12 +10,12 @@ const logger = createLogger({
 
 export const store = configureStore({
   reducer: {
-    [sectionsApi.reducerPath]: sectionsApi.reducer,
+    [foldersApi.reducerPath]: foldersApi.reducer,
     [notesApi.reducerPath]: notesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      sectionsApi.middleware,
+      foldersApi.middleware,
       notesApi.middleware,
       logger
     ]),

@@ -7,7 +7,7 @@ import type {
   NoteDeleteResponse
 } from '@/entities/note/types';
 
-import { sectionsApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/section/api-slices';
 
 export const notesApi = createApi({
   reducerPath: 'notesApi',
@@ -49,7 +49,7 @@ export const notesApi = createApi({
         // Wait until the query is completed and refetch sections (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
-          dispatch(sectionsApi.util.invalidateTags(
+          dispatch(foldersApi.util.invalidateTags(
             ["Sections"]
           ));
         }
@@ -77,7 +77,7 @@ export const notesApi = createApi({
         // Wait until the query is completed and refetch sections and section (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
-          dispatch(sectionsApi.util.invalidateTags(
+          dispatch(foldersApi.util.invalidateTags(
             ['Sections', 'Section']
           ));
         }
