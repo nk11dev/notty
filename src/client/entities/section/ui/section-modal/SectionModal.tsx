@@ -11,19 +11,19 @@ import {
 } from '@/entities/section/api-slices';
 
 type Props = {
-  sectionId: string,
+  folderId: string,
   onHide: () => void;
 };
 
 const SectionModal = (props: Props) => {
-  const { sectionId, onHide } = props;
+  const { folderId, onHide } = props;
 
   const titleRef = useRef(null);
   const [formData, setFormData] = useState(null);
 
   const [updateSection] = useUpdateSectionMutation();
 
-  const { data: sectionData } = useGetSectionQuery(sectionId, {
+  const { data: sectionData } = useGetSectionQuery(folderId, {
     refetchOnMountOrArgChange: true
   });
 
@@ -33,7 +33,7 @@ const SectionModal = (props: Props) => {
 
   const onSave = () => {
     updateSection({
-      id: sectionId,
+      id: folderId,
       title: titleRef.current.value,
     });
     onHide();

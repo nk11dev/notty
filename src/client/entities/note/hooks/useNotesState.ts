@@ -1,5 +1,5 @@
 import { notesApi } from '@/entities/note/api-slices';
 
-export const useNotesState = (sectionId: string) => {
-  return notesApi.endpoints.getNotesBySection.useQueryState(sectionId);
+export const useNotesState = (folderId: string) => {
+  return notesApi.endpoints.getNotesBySection.useQueryState(folderId);
 };

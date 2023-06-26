@@ -10,8 +10,8 @@ export const useHandleCreateNote = () => {
   const { getCustomSearchParams } = useCustomSearchParams();
   const { navigateWithSearch } = useNavigateWithSearch();
 
-  async function handleCreateNote(sectionId: string) {
-    const result = await createNote(sectionId);
+  async function handleCreateNote(folderId: string) {
+    const result = await createNote(folderId);
 
     if ('data' in result) {
       const { data } = result;

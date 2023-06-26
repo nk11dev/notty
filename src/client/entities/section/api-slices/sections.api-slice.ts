@@ -22,8 +22,8 @@ export const sectionsApi = createApi({
       }),
 
       getSection: build.query<Section, string>({
-        query: (sectionId) => ({
-          url: `/sections/${sectionId}`,
+        query: (id) => ({
+          url: `/sections/${id}`,
           method: 'GET'
         }),
         providesTags: ['Section'],
@@ -50,8 +50,8 @@ export const sectionsApi = createApi({
       }),
 
       deleteSection: build.mutation<SectionDeleteResponse, string>({
-        query: (sectionId) => ({
-          url: `/sections/${sectionId}`,
+        query: (id) => ({
+          url: `/sections/${id}`,
           method: 'DELETE'
         }),
         invalidatesTags: ['Sections'],

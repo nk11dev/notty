@@ -9,16 +9,16 @@ import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const SectionContextMenu = () => {
   const [isShowingModal, toggleModal] = useState(false);
-  const [sectionId, setSectionId] = useState(null);
+  const [folderId, setFolderId] = useState(null);
 
   const [onDeleteSection] = useHandleDeleteSection();
 
   useEffect(() => {
-    (sectionId !== null) && toggleModal(true);
-  }, [sectionId]);
+    (folderId !== null) && toggleModal(true);
+  }, [folderId]);
 
   useEffect(() => {
-    (isShowingModal === false) && setSectionId(null);
+    (isShowingModal === false) && setFolderId(null);
   }, [isShowingModal]);
 
   const onItemClick = (args: ItemParams) => {
@@ -26,7 +26,7 @@ const SectionContextMenu = () => {
 
     switch (args.id) {
       case 'edit':
-        setSectionId(id);
+        setFolderId(id);
         break;
 
       case 'delete':
@@ -50,7 +50,7 @@ const SectionContextMenu = () => {
 
       {isShowingModal && (
         <SectionModal
-          sectionId={sectionId}
+          folderId={folderId}
           onHide={() => toggleModal(false)}
         />
       )}

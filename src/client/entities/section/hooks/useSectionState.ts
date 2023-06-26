@@ -1,6 +1,6 @@
 import { sectionsApi } from '@/entities/section/api-slices';
 
-export const useSectionState = (sectionId: string) => sectionsApi
+export const useSectionState = (id: string) => sectionsApi
   .endpoints
   .getSection
-  .useQueryState(sectionId);
+  .useQueryState(id);

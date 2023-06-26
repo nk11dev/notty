@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { useNavigateWithSearch } from '@/shared/hooks';
 import { useSectionState } from './useSectionState';
 
-export const useNavigateToDefaultNote = (sectionId: string) => {
+export const useNavigateToDefaultNote = (folderId: string) => {
   const { navigateWithSearch } = useNavigateWithSearch();
 
   const {
     currentData,
     isFetching,
-  } = useSectionState(sectionId);
+  } = useSectionState(folderId);
 
   useEffect(() => {
     if (!isFetching && currentData) {
