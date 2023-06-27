@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom'
 
 import { useGetFolderQuery } from '@/entities/section/api-slices';
-import { useNavigateToDefaultNote } from '@/entities/section/hooks';
+import { useSelectDefaultNote } from '@/entities/section/hooks';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import PageHeader from '@/features/page-header';
 import PageError from '@/shared/ui/page/page-error';
@@ -19,7 +19,7 @@ const SectionPage = () => {
     refetchOnMountOrArgChange: true
   });
 
-  useNavigateToDefaultNote(folderSlug);
+  useSelectDefaultNote(folderSlug);
 
   if (isError) return <PageError {...error} />;
 

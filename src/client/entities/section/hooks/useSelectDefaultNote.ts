@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigateWithSearch } from '@/shared/hooks';
 import { useSectionState } from './useSectionState';
 
-export const useNavigateToDefaultNote = (folderId: string) => {
+export const useSelectDefaultNote = (folderId: string) => {
   const { navigateWithSearch } = useNavigateWithSearch();
 
   const {
