@@ -23,7 +23,7 @@ export const notesApi = createApi({
         providesTags: ['Notes'],
       }),
 
-      getNotesBySection: build.query<Note[], string>({
+      getNotesByFolder: build.query<Note[], string>({
         query: (folderId) => ({
           url: `/sections/${folderId}/notes`,
           method: 'GET'
@@ -89,8 +89,8 @@ export const notesApi = createApi({
 export const {
   useGetBookmarksQuery,
   useLazyGetBookmarksQuery,
-  useGetNotesBySectionQuery,
-  useLazyGetNotesBySectionQuery,
+  useGetNotesByFolderQuery,
+  useLazyGetNotesByFolderQuery,
   useGetNoteQuery,
   useCreateNoteMutation,
   useUpdateNoteMutation,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { faPlus, faRotate } from '@fortawesome/free-solid-svg-icons';
 
-import { useLazyGetNotesBySectionQuery } from '@/entities/note/api-slices';
+import { useLazyGetNotesByFolderQuery } from '@/entities/note/api-slices';
 import {
   useNotesState,
   useHandleCreateNote
@@ -14,7 +14,7 @@ const NotesToolbar = () => {
   const { folderSlug } = useParams();
 
   const { isFetching } = useNotesState(folderSlug);
-  const [refetchNotesBySection] = useLazyGetNotesBySectionQuery();
+  const [refetchNotesBySection] = useLazyGetNotesByFolderQuery();
   const [onCreateNote] = useHandleCreateNote();
 
   return (

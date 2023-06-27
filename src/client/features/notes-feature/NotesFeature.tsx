@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useGetNotesBySectionQuery } from '@/entities/note/api-slices';
+import { useGetNotesByFolderQuery } from '@/entities/note/api-slices';
 import NotesList from '@/entities/note/ui/notes-list';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
@@ -14,7 +14,7 @@ const NotesFeature = () => {
     data,
     isError,
     error
-  } = useGetNotesBySectionQuery(folderSlug, {
+  } = useGetNotesByFolderQuery(folderSlug, {
     skip: !folderSlug,
     refetchOnMountOrArgChange: true
   });
