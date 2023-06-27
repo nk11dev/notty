@@ -13,7 +13,7 @@ export const foldersApi = createApi({
   tagTypes: ['FoldersTag', 'FolderTag'],
   endpoints(build) {
     return {
-      getAllSections: build.query<Section[], void>({
+      getAllFolders: build.query<Section[], void>({
         query: () => ({
           url: '/sections',
           method: 'GET'
@@ -21,7 +21,7 @@ export const foldersApi = createApi({
         providesTags: ['FoldersTag'],
       }),
 
-      getSection: build.query<Section, string>({
+      getFolder: build.query<Section, string>({
         query: (id) => ({
           url: `/sections/${id}`,
           method: 'GET'
@@ -29,7 +29,7 @@ export const foldersApi = createApi({
         providesTags: ['FolderTag'],
       }),
 
-      createSection: build.mutation<Section, void>({
+      createFolder: build.mutation<Section, void>({
         query: () => ({
           url: `/sections`,
           method: 'POST'
@@ -37,7 +37,7 @@ export const foldersApi = createApi({
         invalidatesTags: ['FoldersTag'],
       }),
 
-      updateSection: build.mutation<Section, SectionUpdateEndpointArg>({
+      updateFolder: build.mutation<Section, SectionUpdateEndpointArg>({
         query: ({ id, title }) => ({
           url: `/sections/${id}`,
           method: 'PUT',
@@ -49,7 +49,7 @@ export const foldersApi = createApi({
         invalidatesTags: ['FoldersTag'],
       }),
 
-      deleteSection: build.mutation<SectionDeleteResponse, string>({
+      deleteFolder: build.mutation<SectionDeleteResponse, string>({
         query: (id) => ({
           url: `/sections/${id}`,
           method: 'DELETE'
@@ -61,10 +61,10 @@ export const foldersApi = createApi({
 });
 
 export const {
-  useGetAllSectionsQuery,
-  useLazyGetAllSectionsQuery,
-  useGetSectionQuery,
-  useCreateSectionMutation,
-  useUpdateSectionMutation,
-  useDeleteSectionMutation,
+  useGetAllFoldersQuery,
+  useLazyGetAllFoldersQuery,
+  useGetFolderQuery,
+  useCreateFolderMutation,
+  useUpdateFolderMutation,
+  useDeleteFolderMutation,
 } = foldersApi;

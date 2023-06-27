@@ -1,12 +1,12 @@
-import { useCreateSectionMutation } from '@/entities/section/api-slices';
+import { useCreateFolderMutation } from '@/entities/section/api-slices';
 import { useNavigateWithSearch } from '@/shared/hooks';
 
 export const useHandleCreateSection = () => {
-  const [createSection] = useCreateSectionMutation();
+  const [createFolder] = useCreateFolderMutation();
   const { navigateWithSearch } = useNavigateWithSearch();
 
   async function handleCreateSection() {
-    const result = await createSection();
+    const result = await createFolder();
 
     if ('data' in result) {
       const { data } = result;

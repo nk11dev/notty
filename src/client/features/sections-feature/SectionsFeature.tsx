@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetAllSectionsQuery } from '@/entities/section/api-slices';
+import { useGetAllFoldersQuery } from '@/entities/section/api-slices';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import SectionsList from '@/entities/section/ui/sections-list';
 
@@ -9,7 +9,7 @@ const SectionsFeature = () => {
     data,
     isError,
     error
-  } = useGetAllSectionsQuery();
+  } = useGetAllFoldersQuery();
 
   if (isError) return <ErrorMsg {...error} />;
 

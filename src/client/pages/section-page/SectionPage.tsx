@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 
-import { useGetSectionQuery } from '@/entities/section/api-slices';
+import { useGetFolderQuery } from '@/entities/section/api-slices';
 import { useNavigateToDefaultNote } from '@/entities/section/hooks';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
 import PageHeader from '@/features/page-header';
@@ -15,7 +15,7 @@ const SectionPage = () => {
     currentData,
     isError,
     error
-  } = useGetSectionQuery(folderSlug, {
+  } = useGetFolderQuery(folderSlug, {
     refetchOnMountOrArgChange: true
   });
 

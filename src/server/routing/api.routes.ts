@@ -1,11 +1,11 @@
 import express from 'express';
 
 import {
-  getSections,
-  getSection,
-  createSection,
-  deleteSection,
-  updateSection
+  getAllFolders,
+  getFolder,
+  createFolder,
+  deleteFolder,
+  updateFolder
 } from '@/server/api/sections.api';
 
 import {
@@ -21,11 +21,11 @@ const router = express.Router();
 
 router
   // sections
-  .get('/sections', getSections)
-  .get('/sections/:folderSlug', getSection)
-  .post('/sections', createSection)
-  .put('/sections/:folderSlug', updateSection)
-  .delete('/sections/:folderSlug', deleteSection)
+  .get('/sections', getAllFolders)
+  .get('/sections/:folderSlug', getFolder)
+  .post('/sections', createFolder)
+  .put('/sections/:folderSlug', updateFolder)
+  .delete('/sections/:folderSlug', deleteFolder)
 
   // notes (for specified section)
   .get('/sections/:folderSlug/notes', getNotes)

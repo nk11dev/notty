@@ -1,7 +1,7 @@
 import React from 'react';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { useLazyGetAllSectionsQuery } from '@/entities/section/api-slices';
+import { useLazyGetAllFoldersQuery } from '@/entities/section/api-slices';
 import {
   useSectionsState,
   useHandleCreateSection
@@ -11,7 +11,7 @@ import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const SectionsToolbar = () => {
   const { isFetching } = useSectionsState();
-  const [refetchAllSections] = useLazyGetAllSectionsQuery();
+  const [refetchAllSections] = useLazyGetAllFoldersQuery();
   const [onCreateSection] = useHandleCreateSection();
 
   return (

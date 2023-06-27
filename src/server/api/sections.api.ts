@@ -7,7 +7,7 @@ import NoteEntity from '@/server/api/entities/note.entity';
 const sectionRepository = dataSource.getRepository(SectionEntity);
 const noteRepository = dataSource.getRepository(NoteEntity);
 
-export async function getSections(_request: Request, response: Response) {
+export async function getAllFolders(_request: Request, response: Response) {
 
   const results = await sectionRepository.manager.query(`
     SELECT
@@ -25,7 +25,7 @@ export async function getSections(_request: Request, response: Response) {
   });
 }
 
-export async function getSection(request: Request, response: Response) {
+export async function getFolder(request: Request, response: Response) {
   const { folderSlug } = request.params;
 
   const results = await sectionRepository
@@ -45,7 +45,7 @@ export async function getSection(request: Request, response: Response) {
   }
 }
 
-export async function createSection(request: Request, response: Response) {
+export async function createFolder(request: Request, response: Response) {
 
   const results = await sectionRepository
     .createQueryBuilder()
@@ -59,7 +59,7 @@ export async function createSection(request: Request, response: Response) {
   });
 }
 
-export async function updateSection(request: Request, response: Response) {
+export async function updateFolder(request: Request, response: Response) {
 
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     UPDATE ${sectionRepository.metadata.tableName}
@@ -78,7 +78,7 @@ export async function updateSection(request: Request, response: Response) {
   });
 }
 
-export async function deleteSection(request: Request, response: Response) {
+export async function deleteFolder(request: Request, response: Response) {
 
   const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
     DELETE 

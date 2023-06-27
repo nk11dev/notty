@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import {
-  useGetSectionQuery,
-  useUpdateSectionMutation
+  useGetFolderQuery,
+  useUpdateFolderMutation
 } from '@/entities/section/api-slices';
 
 type Props = {
@@ -21,9 +21,9 @@ const SectionModal = (props: Props) => {
   const titleRef = useRef(null);
   const [formData, setFormData] = useState(null);
 
-  const [updateSection] = useUpdateSectionMutation();
+  const [updateFolder] = useUpdateFolderMutation();
 
-  const { data: sectionData } = useGetSectionQuery(folderId, {
+  const { data: sectionData } = useGetFolderQuery(folderId, {
     refetchOnMountOrArgChange: true
   });
 
@@ -32,7 +32,7 @@ const SectionModal = (props: Props) => {
   }, [sectionData]);
 
   const onSave = () => {
-    updateSection({
+    updateFolder({
       id: folderId,
       title: titleRef.current.value,
     });
