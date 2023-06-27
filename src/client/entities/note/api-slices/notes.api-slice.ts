@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
 import type {
-  Note,
+  NoteDto,
   NoteUpdateEndpointArg,
   NoteDeleteResponse
 } from '@/entities/note/types';
@@ -12,39 +12,39 @@ import { foldersApi } from '@/entities/section/api-slices';
 export const notesApi = createApi({
   reducerPath: 'notesApi',
   baseQuery: axiosBaseQuery(),
-  tagTypes: ['Note', 'Notes'],
+  tagTypes: ['NoteTag', 'NotesTag'],
   endpoints(build) {
     return {
-      getBookmarks: build.query<Note[], void>({
+      getBookmarks: build.query<NoteDto[], void>({
         query: () => ({
           url: '/notes?filterByIsBookmark=true',
           method: 'GET',
         }),
-        providesTags: ['Notes'],
+        providesTags: ['NotesTag'],
       }),
 
-      getNotesByFolder: build.query<Note[], string>({
+      getNotesByFolder: build.query<NoteDto[], string>({
         query: (folderId) => ({
           url: `/sections/${folderId}/notes`,
           method: 'GET'
         }),
-        providesTags: ['Notes'],
+        providesTags: ['NotesTag'],
       }),
 
-      getNote: build.query<Note, string>({
+      getNote: build.query<NoteDto, string>({
         query: (id) => ({
           url: `/notes/${id}`,
           method: 'GET'
         }),
-        providesTags: ['Note'],
+        providesTags: ['NoteTag'],
       }),
 
-      createNote: build.mutation<Note, string>({
+      createNote: build.mutation<NoteDto, string>({
         query: (folderId) => ({
           url: `/sections/${folderId}/notes`,
           method: 'POST'
         }),
-        invalidatesTags: ['Notes'],
+        invalidatesTags: ['NotesTag'],
 
         // Wait until the query is completed and refetch sections (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
@@ -55,7 +55,7 @@ export const notesApi = createApi({
         }
       }),
 
-      updateNote: build.mutation<Note, NoteUpdateEndpointArg>({
+      updateNote: build.mutation<NoteDto, NoteUpdateEndpointArg>({
         query: ({ id, ...fields }) => ({
           url: `/notes/${id}`,
           method: 'PUT',
@@ -64,7 +64,7 @@ export const notesApi = createApi({
           },
           headers: { 'content-type': 'application/json' },
         }),
-        invalidatesTags: ['Note', 'Notes'],
+        invalidatesTags: ['NoteTag', 'NotesTag'],
       }),
 
       deleteNote: build.mutation<NoteDeleteResponse, string>({
@@ -72,7 +72,7 @@ export const notesApi = createApi({
           url: `/notes/${id}`,
           method: 'DELETE'
         }),
-        invalidatesTags: ['Notes'],
+        invalidatesTags: ['NotesTag'],
 
         // Wait until the query is completed and refetch sections and section (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {

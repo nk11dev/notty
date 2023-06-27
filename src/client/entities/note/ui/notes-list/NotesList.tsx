@@ -1,17 +1,17 @@
 import React from 'react';
 
 import { NOTES_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import type { Note } from '@/entities/note/types';
+import type { NoteDto } from '@/entities/note/types';
 import SidebarList from '@/shared/ui/sidebar/sidebar-list';
 import NavItem from '@/shared/ui/sidebar/nav-item';
 
 type Props = {
-  data: Note[]
+  data: NoteDto[]
 };
 
 const NotesList = (props: Props) => (
   <SidebarList>
-    {props.data.map((item: Note, index: number) => (
+    {props.data.map((item: NoteDto, index: number) => (
       <NavItem
         key={index}
         url={`/sections/${item.folder_id}/notes/${item.id}`}

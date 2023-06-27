@@ -1,11 +1,11 @@
-import type { Note } from '@/entities/note/types';
+import type { NoteDto } from '@/entities/note/types';
 
 export type FolderDto = {
   id: number,
   title: string,
   created_at?: string,
   updated_at?: string,
-  notes?: Note[],
+  notes?: NoteDto[],
   notes_count?: number
 };
 
