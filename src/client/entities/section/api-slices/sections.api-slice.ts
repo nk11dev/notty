@@ -10,7 +10,7 @@ import type {
 export const foldersApi = createApi({
   reducerPath: 'foldersApi',
   baseQuery: axiosBaseQuery(),
-  tagTypes: ['Sections', 'Section'],
+  tagTypes: ['FoldersTag', 'FolderTag'],
   endpoints(build) {
     return {
       getAllSections: build.query<Section[], void>({
@@ -18,7 +18,7 @@ export const foldersApi = createApi({
           url: '/sections',
           method: 'GET'
         }),
-        providesTags: ['Sections'],
+        providesTags: ['FoldersTag'],
       }),
 
       getSection: build.query<Section, string>({
@@ -26,7 +26,7 @@ export const foldersApi = createApi({
           url: `/sections/${id}`,
           method: 'GET'
         }),
-        providesTags: ['Section'],
+        providesTags: ['FolderTag'],
       }),
 
       createSection: build.mutation<Section, void>({
@@ -34,7 +34,7 @@ export const foldersApi = createApi({
           url: `/sections`,
           method: 'POST'
         }),
-        invalidatesTags: ['Sections'],
+        invalidatesTags: ['FoldersTag'],
       }),
 
       updateSection: build.mutation<Section, SectionUpdateEndpointArg>({
@@ -46,7 +46,7 @@ export const foldersApi = createApi({
           },
           headers: { 'content-type': 'application/json' },
         }),
-        invalidatesTags: ['Sections'],
+        invalidatesTags: ['FoldersTag'],
       }),
 
       deleteSection: build.mutation<SectionDeleteResponse, string>({
@@ -54,7 +54,7 @@ export const foldersApi = createApi({
           url: `/sections/${id}`,
           method: 'DELETE'
         }),
-        invalidatesTags: ['Sections'],
+        invalidatesTags: ['FoldersTag'],
       }),
     }
   },

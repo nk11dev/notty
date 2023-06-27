@@ -50,7 +50,7 @@ export const notesApi = createApi({
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
           dispatch(foldersApi.util.invalidateTags(
-            ["Sections"]
+            ['FoldersTag']
           ));
         }
       }),
@@ -78,7 +78,7 @@ export const notesApi = createApi({
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
           dispatch(foldersApi.util.invalidateTags(
-            ['Sections', 'Section']
+            ['FoldersTag', 'FolderTag']
           ));
         }
       }),
