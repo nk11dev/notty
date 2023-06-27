@@ -1,6 +1,6 @@
 import type { Note } from '@/entities/note/types';
 
-export type Section = {
+export type FolderDto = {
   id: number,
   title: string,
   created_at?: string,
@@ -9,13 +9,8 @@ export type Section = {
   notes_count?: number
 };
 
-export type SectionUpdateEndpointArg = {
-  id: string,
-  title: string
-};
-
-export type SectionDeleteResponse = {
-  affectedRows: Section[],
+export type FolderDeleteResponse = {
+  affectedRows: FolderDto[],
   affectedCount: number,
-  lastRow: Section | null,
+  lastRow: FolderDto | null,
 };

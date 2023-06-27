@@ -4,17 +4,17 @@ import React from 'react';
 import cn from 'classnames';
 
 import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import type { Section } from '@/entities/section/types';
+import type { FolderDto } from '@/entities/section/types';
 import SidebarList from '@/shared/ui/sidebar/sidebar-list';
 import NavItem from '@/shared/ui/sidebar/nav-item';
 
 type Props = {
-  data: Section[]
+  data: FolderDto[]
 };
 
 const SectionsList = (props: Props) => (
   <SidebarList>
-    {props.data.map((item: Section, index: number) => {
+    {props.data.map((item: FolderDto, index: number) => {
       const { id, title, notes_count } = item;
 
       return (

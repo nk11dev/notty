@@ -2,9 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import axiosBaseQuery from '@/shared/api/base-query';
 import type {
-  Section,
-  SectionUpdateEndpointArg,
-  SectionDeleteResponse
+  FolderDto,
+  FolderDeleteResponse
 } from '@/entities/section/types';
 
 export const foldersApi = createApi({
@@ -13,7 +12,7 @@ export const foldersApi = createApi({
   tagTypes: ['FoldersTag', 'FolderTag'],
   endpoints(build) {
     return {
-      getAllFolders: build.query<Section[], void>({
+      getAllFolders: build.query<FolderDto[], void>({
         query: () => ({
           url: '/sections',
           method: 'GET'
@@ -21,7 +20,7 @@ export const foldersApi = createApi({
         providesTags: ['FoldersTag'],
       }),
 
-      getFolder: build.query<Section, string>({
+      getFolder: build.query<FolderDto, string>({
         query: (id) => ({
           url: `/sections/${id}`,
           method: 'GET'
@@ -29,7 +28,7 @@ export const foldersApi = createApi({
         providesTags: ['FolderTag'],
       }),
 
-      createFolder: build.mutation<Section, void>({
+      createFolder: build.mutation<FolderDto, void>({
         query: () => ({
           url: `/sections`,
           method: 'POST'
@@ -37,7 +36,7 @@ export const foldersApi = createApi({
         invalidatesTags: ['FoldersTag'],
       }),
 
-      updateFolder: build.mutation<Section, SectionUpdateEndpointArg>({
+      updateFolder: build.mutation<FolderDto, Partial<FolderDto>>({
         query: ({ id, title }) => ({
           url: `/sections/${id}`,
           method: 'PUT',
@@ -49,7 +48,7 @@ export const foldersApi = createApi({
         invalidatesTags: ['FoldersTag'],
       }),
 
-      deleteFolder: build.mutation<SectionDeleteResponse, string>({
+      deleteFolder: build.mutation<FolderDeleteResponse, string>({
         query: (id) => ({
           url: `/sections/${id}`,
           method: 'DELETE'

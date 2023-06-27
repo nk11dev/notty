@@ -1,4 +1,4 @@
-import type { Section } from '@/entities/section/types';
+import type { FolderDto } from '@/entities/section/types';
 
 export type Note = {
   id: number,
@@ -8,8 +8,8 @@ export type Note = {
   created_at: string,
   updated_at: string | null,
   folder_id: number,
-  section?: Section,
-  [key: string]: number | string | boolean | undefined | Section
+  section?: FolderDto,
+  [key: string]: number | string | boolean | undefined | FolderDto
 };
 
 export type NoteUpdateEndpointArg = {
