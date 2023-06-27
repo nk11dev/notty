@@ -1,11 +1,11 @@
 import { useDeleteFolderMutation } from '@/entities/section/api-slices';
 import { useNavigateWithSearch } from '@/shared/hooks';
 
-export const useHandleDeleteSection = () => {
+export const useHandleDeleteFolder = () => {
   const [deleteFolder] = useDeleteFolderMutation();
   const { navigateWithSearch } = useNavigateWithSearch();
 
-  async function handleDeleteSection(id: string) {
+  async function onDelete(id: string) {
     const result = await deleteFolder(id);
 
     if ('data' in result) {
@@ -21,6 +21,6 @@ export const useHandleDeleteSection = () => {
   }
 
   return [
-    handleDeleteSection
+    onDelete
   ];
 };

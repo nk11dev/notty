@@ -16,9 +16,9 @@ type Props = {
 
 const RootLayout = (props: Props) => {
   const { folderSlug } = useParams();
-  const { isSectionsModeOrNull, isSidebarVisible } = useSidebarMode();
+  const { isFoldersModeOrNull, isSidebarVisible } = useSidebarMode();
 
-  const isDoubleColumnLayout = (isSectionsModeOrNull && folderSlug);
+  const isDoubleColumnLayout = (isFoldersModeOrNull && folderSlug);
 
   return (
     <div className={cn(styles.layout, {

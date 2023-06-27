@@ -1,5 +1,5 @@
 import { foldersApi } from '@/entities/section/api-slices';
 
-export const useSectionsState = () => {
+export const useFoldersState = () => {
   return foldersApi.endpoints.getAllFolders.useQueryState();
 };

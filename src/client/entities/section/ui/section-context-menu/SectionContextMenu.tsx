@@ -4,14 +4,14 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import SectionModal from '@/entities/section/ui/section-modal';
-import { useHandleDeleteSection } from '@/entities/section/hooks';
+import { useHandleDeleteFolder } from '@/entities/section/hooks';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const SectionContextMenu = () => {
   const [isShowingModal, toggleModal] = useState(false);
   const [folderId, setFolderId] = useState(null);
 
-  const [onDeleteSection] = useHandleDeleteSection();
+  const [onDelete] = useHandleDeleteFolder();
 
   useEffect(() => {
     (folderId !== null) && toggleModal(true);
@@ -30,7 +30,7 @@ const SectionContextMenu = () => {
         break;
 
       case 'delete':
-        onDeleteSection(id);
+        onDelete(id);
         break;
     }
   }

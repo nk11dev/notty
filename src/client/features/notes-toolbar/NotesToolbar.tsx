@@ -14,8 +14,8 @@ const NotesToolbar = () => {
   const { folderSlug } = useParams();
 
   const { isFetching } = useNotesState(folderSlug);
-  const [refetchNotesBySection] = useLazyGetNotesByFolderQuery();
-  const [onCreateNote] = useHandleCreateNote();
+  const [onRefetch] = useLazyGetNotesByFolderQuery();
+  const [onCreate] = useHandleCreateNote();
 
   return (
     <SidebarToolbar
@@ -26,13 +26,13 @@ const NotesToolbar = () => {
         <>
           <ToolbarButton
             icon={faPlus}
-            clickHandler={() => onCreateNote(folderSlug)}
+            clickHandler={() => onCreate(folderSlug)}
             tooltip="Create new note"
           />
 
           <ToolbarButton
             icon={faRotate}
-            clickHandler={() => refetchNotesBySection(folderSlug)}
+            clickHandler={() => onRefetch(folderSlug)}
             tooltip="Refetch notes"
           />
         </>

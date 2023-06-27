@@ -17,6 +17,6 @@ export const useSidebarMode = () => {
     sidebarMode,
     setSidebarMode,
     isSidebarVisible: (sidebarMode !== SidebarModesMap.HIDDEN),
-    isSectionsModeOrNull: [SidebarModesMap.SECTIONS, null].includes(sidebarMode as SidebarModesMap)
+    isFoldersModeOrNull: [SidebarModesMap.FOLDERS, null].includes(sidebarMode as SidebarModesMap)
   };
 };

@@ -13,14 +13,14 @@ import {
 
 const SidebarLayout = () => {
   const { folderSlug } = useParams();
-  const { isSectionsModeOrNull, sidebarMode } = useSidebarMode();
+  const { isFoldersModeOrNull, sidebarMode } = useSidebarMode();
 
-  const isDoubleColumnLayout = (isSectionsModeOrNull && folderSlug);
+  const isDoubleColumnLayout = (isFoldersModeOrNull && folderSlug);
 
   const renderLeftColumnWidgets = () => {
     switch (sidebarMode) {
       case null:
-      case SidebarModesMap.SECTIONS:
+      case SidebarModesMap.FOLDERS:
         return <SidebarSectionsWidget />;
 
       case SidebarModesMap.BOOKMARKS:

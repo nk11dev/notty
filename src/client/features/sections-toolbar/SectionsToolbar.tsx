@@ -3,16 +3,16 @@ import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { useLazyGetAllFoldersQuery } from '@/entities/section/api-slices';
 import {
-  useSectionsState,
-  useHandleCreateSection
+  useFoldersState,
+  useHandleCreateFolder
 } from '@/entities/section/hooks';
 import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
 const SectionsToolbar = () => {
-  const { isFetching } = useSectionsState();
-  const [refetchAllSections] = useLazyGetAllFoldersQuery();
-  const [onCreateSection] = useHandleCreateSection();
+  const { isFetching } = useFoldersState();
+  const [onRefetch] = useLazyGetAllFoldersQuery();
+  const [onCreate] = useHandleCreateFolder();
 
   return (
     <SidebarToolbar
@@ -21,13 +21,13 @@ const SectionsToolbar = () => {
     >
       <ToolbarButton
         icon={faPlus}
-        clickHandler={onCreateSection}
+        clickHandler={onCreate}
         tooltip="Create new section"
       />
 
       <ToolbarButton
         icon={faRotate}
-        clickHandler={() => refetchAllSections()}
+        clickHandler={() => onRefetch()}
         tooltip="Refetch sections"
       />
     </SidebarToolbar>
