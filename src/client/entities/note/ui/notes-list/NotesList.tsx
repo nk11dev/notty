@@ -14,7 +14,7 @@ const NotesList = (props: Props) => (
     {props.data.map((item: NoteDto, index: number) => (
       <NavItem
         key={index}
-        url={`/sections/${item.folder_id}/notes/${item.id}`}
+        url={`/folders/${item.folder_id}/notes/${item.id}`}
         id={item.id}
         contextMenuId={NOTES_CONTEXT_MENU_ID}
         searchParamsOptions={{

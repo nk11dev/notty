@@ -17,12 +17,12 @@ export const useHandleDeleteNote = () => {
         const { id, folder_id } = lastRow;
 
         if (folder_id !== null) {
-          navigateWithSearch(`/sections/${folder_id}/notes/${id}`);
+          navigateWithSearch(`/folders/${folder_id}/notes/${id}`);
         }
 
         // Else - navigate to folder itself.
       } else if (affectedRow !== null) {
-        navigateWithSearch(`/sections/${affectedRow.folder_id}`);
+        navigateWithSearch(`/folders/${affectedRow.folder_id}`);
       }
     }
   }

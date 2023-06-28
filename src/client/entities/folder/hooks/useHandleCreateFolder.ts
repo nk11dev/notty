@@ -11,7 +11,7 @@ export const useHandleCreateFolder = () => {
     if ('data' in result) {
       const { data } = result;
 
-      navigateWithSearch(`/sections/${data.id}`);
+      navigateWithSearch(`/folders/${data.id}`);
     }
   }
 

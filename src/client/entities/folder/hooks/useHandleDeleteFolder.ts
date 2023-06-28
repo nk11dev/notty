@@ -13,7 +13,7 @@ export const useHandleDeleteFolder = () => {
       const { lastRow } = data;
 
       if (lastRow !== null) {
-        navigateWithSearch(`/sections/${lastRow.id}`);
+        navigateWithSearch(`/folders/${lastRow.id}`);
       } else {
         navigateWithSearch(`/`);
       }

@@ -20,7 +20,7 @@ const FoldersList = (props: Props) => (
       return (
         <NavItem
           key={index}
-          url={`/sections/${id}`}
+          url={`/folders/${id}`}
           id={id}
           contextMenuId={FOLDER_CONTEXT_MENU_ID}
         >
