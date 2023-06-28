@@ -2,7 +2,7 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
 import HomePage from '@/pages/home-page';
-import SectionPage from '@/pages/section-page';
+import FolderPage from '@/pages/folder-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
 
@@ -18,7 +18,7 @@ export const appRoutes = [
       },
       {
         path: '/sections/:folderSlug',
-        element: <SectionPage />,
+        element: <FolderPage />,
       },
       {
         path: '/sections/:folderSlug/notes/:noteSlug',

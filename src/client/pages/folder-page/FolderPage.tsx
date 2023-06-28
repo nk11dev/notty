@@ -8,7 +8,7 @@ import PageHeader from '@/features/page-header';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 
-const SectionPage = () => {
+const FolderPage = () => {
   const { folderSlug } = useParams();
 
   const {
@@ -29,11 +29,11 @@ const SectionPage = () => {
     <>
       <PageHeader />
       <PageContent>
-        <h1>It&rsquo;s an empty section</h1>
+        <h1>It&rsquo;s an empty folder</h1>
         <MessageCreateNote />
       </PageContent>
     </>
   );
 }
 
-export default SectionPage;
+export default FolderPage;
