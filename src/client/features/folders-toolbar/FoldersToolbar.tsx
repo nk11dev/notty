@@ -9,29 +9,29 @@ import {
 import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 
-const SectionsToolbar = () => {
+const FoldersToolbar = () => {
   const { isFetching } = useFoldersState();
   const [onRefetch] = useLazyGetAllFoldersQuery();
   const [onCreate] = useHandleCreateFolder();
 
   return (
     <SidebarToolbar
-      title="Sections"
+      title="Folders"
       showLoader={isFetching}
     >
       <ToolbarButton
         icon={faPlus}
         clickHandler={onCreate}
-        tooltip="Create new section"
+        tooltip="Create new folder"
       />
 
       <ToolbarButton
         icon={faRotate}
         clickHandler={() => onRefetch()}
-        tooltip="Refetch sections"
+        tooltip="Refetch folders"
       />
     </SidebarToolbar>
   );
 }
 
-export default SectionsToolbar;
+export default FoldersToolbar;

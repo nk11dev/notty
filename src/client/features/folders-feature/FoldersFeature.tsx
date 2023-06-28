@@ -4,7 +4,7 @@ import { useGetAllFoldersQuery } from '@/entities/folder/api-slices';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 import FoldersList from '@/entities/folder/ui/folders-list';
 
-const SectionsFeature = () => {
+const FoldersFeature = () => {
   const {
     data,
     isError,
@@ -18,4 +18,4 @@ const SectionsFeature = () => {
   return <FoldersList data={data} />;
 };
 
-export default SectionsFeature;
+export default FoldersFeature;

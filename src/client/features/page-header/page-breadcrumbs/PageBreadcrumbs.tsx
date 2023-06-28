@@ -9,11 +9,11 @@ import { useNoteState } from '@/entities/note/hooks';
 const PageBreadcrumbs = () => {
   const { folderSlug, noteSlug } = useParams();
 
-  const { data: sectionData } = useFolderState(folderSlug);
+  const { data: folderData } = useFolderState(folderSlug);
   const { data: noteData } = useNoteState(noteSlug);
 
   const breadcrumbs = [
-    noteData?.section?.title ?? sectionData?.title,
+    noteData?.section?.title ?? folderData?.title,
     noteData?.title,
   ];
 
