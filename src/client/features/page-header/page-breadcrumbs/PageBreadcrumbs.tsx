@@ -13,7 +13,7 @@ const PageBreadcrumbs = () => {
   const { data: noteData } = useNoteState(noteSlug);
 
   const breadcrumbs = [
-    noteData?.section?.title ?? folderData?.title,
+    noteData?.folder_info?.title ?? folderData?.title,
     noteData?.title,
   ];
 

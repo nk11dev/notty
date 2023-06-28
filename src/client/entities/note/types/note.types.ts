@@ -8,7 +8,7 @@ export type NoteDto = {
   created_at: string,
   updated_at: string | null,
   folder_id: number,
-  section?: FolderDto,
+  folder_info?: FolderDto,
   [key: string]: number | string | boolean | undefined | FolderDto
 };
 

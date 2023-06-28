@@ -35,7 +35,7 @@ export default class FolderEntity {
 
   @OneToMany(
     () => NoteEntity,
-    (note) => note.section,
+    (note) => note.folder_info,
   )
   notes: NoteEntity[]
 }

@@ -37,7 +37,7 @@ export async function getNote(request: Request, response: Response) {
 
   const results = await noteRepository
     .createQueryBuilder('n')
-    .leftJoinAndSelect('n.section', 'f')
+    .leftJoinAndSelect('n.folder_info', 'f')
     .where(`n.id = :id`, { id: noteSlug })
     .getOne();
 
@@ -61,7 +61,7 @@ export async function createNote(request: Request, response: Response) {
   if (!relatedFolder) {
     response.status(400).json({
       error: `Cannot create note.`,
-      message: `Foreign key constraint preasumable violation: Folder with 'id' = '${folderSlug}' doesn't exist in 'sections' table.`
+      message: `Foreign key constraint preasumable violation: Folder with 'id' = '${folderSlug}' doesn't exist in 'folders' table.`
     });
 
   } else {

@@ -45,7 +45,7 @@ export default class NoteEntity {
   })
   updated_at: Date;
 
-  // For the purpose of fetching foreign key column, we should add "folder_id" column explicitly and pass this column name to @JoinColumn decorator
+  // For the purpose of fetching foreign key column, we should add 'folder_id' column explicitly and pass this column name to @JoinColumn decorator
   @Column({
     name: 'folder_id',
     nullable: false,
@@ -54,15 +54,15 @@ export default class NoteEntity {
 
   @ManyToOne(
     () => FolderEntity,
-    (section) => section.notes,
+    (folder) => folder.notes,
     {
       onDelete: 'CASCADE'
     }
   )
   @JoinColumn({
-    name: "folder_id",
-    referencedColumnName: "id",
-    foreignKeyConstraintName: "fk_folder_id"
+    name: 'folder_id',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'fk_folder_id'
   })
-  section: FolderEntity
+  folder_info: FolderEntity
 }
