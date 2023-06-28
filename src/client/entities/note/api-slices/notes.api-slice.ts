@@ -25,7 +25,7 @@ export const notesApi = createApi({
 
       getNotesByFolder: build.query<NoteDto[], string>({
         query: (folderId) => ({
-          url: `/sections/${folderId}/notes`,
+          url: `/folders/${folderId}/notes`,
           method: 'GET'
         }),
         providesTags: ['NotesTag'],
@@ -41,7 +41,7 @@ export const notesApi = createApi({
 
       createNote: build.mutation<NoteDto, string>({
         query: (folderId) => ({
-          url: `/sections/${folderId}/notes`,
+          url: `/folders/${folderId}/notes`,
           method: 'POST'
         }),
         invalidatesTags: ['NotesTag'],

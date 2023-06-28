@@ -20,16 +20,16 @@ const router = express.Router();
 
 
 router
-  // sections
-  .get('/sections', getAllFolders)
-  .get('/sections/:folderSlug', getFolder)
-  .post('/sections', createFolder)
-  .put('/sections/:folderSlug', updateFolder)
-  .delete('/sections/:folderSlug', deleteFolder)
+  // folders
+  .get('/folders', getAllFolders)
+  .get('/folders/:folderSlug', getFolder)
+  .post('/folders', createFolder)
+  .put('/folders/:folderSlug', updateFolder)
+  .delete('/folders/:folderSlug', deleteFolder)
 
-  // notes (for specified section)
-  .get('/sections/:folderSlug/notes', getNotes)
-  .post('/sections/:folderSlug/notes', createNote)
+  // notes (for specified folder)
+  .get('/folders/:folderSlug/notes', getNotes)
+  .post('/folders/:folderSlug/notes', createNote)
 
   // notes (common)
   .get('/notes', getNotes)

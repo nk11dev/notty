@@ -14,7 +14,7 @@ export const foldersApi = createApi({
     return {
       getAllFolders: build.query<FolderDto[], void>({
         query: () => ({
-          url: '/sections',
+          url: '/folders',
           method: 'GET'
         }),
         providesTags: ['FoldersTag'],
@@ -22,7 +22,7 @@ export const foldersApi = createApi({
 
       getFolder: build.query<FolderDto, string>({
         query: (id) => ({
-          url: `/sections/${id}`,
+          url: `/folders/${id}`,
           method: 'GET'
         }),
         providesTags: ['FolderTag'],
@@ -30,7 +30,7 @@ export const foldersApi = createApi({
 
       createFolder: build.mutation<FolderDto, void>({
         query: () => ({
-          url: `/sections`,
+          url: `/folders`,
           method: 'POST'
         }),
         invalidatesTags: ['FoldersTag'],
@@ -38,7 +38,7 @@ export const foldersApi = createApi({
 
       updateFolder: build.mutation<FolderDto, Partial<FolderDto>>({
         query: ({ id, title }) => ({
-          url: `/sections/${id}`,
+          url: `/folders/${id}`,
           method: 'PUT',
           data: {
             title,
@@ -50,7 +50,7 @@ export const foldersApi = createApi({
 
       deleteFolder: build.mutation<FolderDeleteResponse, string>({
         query: (id) => ({
-          url: `/sections/${id}`,
+          url: `/folders/${id}`,
           method: 'DELETE'
         }),
         invalidatesTags: ['FoldersTag'],
