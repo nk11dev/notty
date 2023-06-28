@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import SectionEntity from '@/server/api/entities/section.entity';
+import FolderEntity from '@/server/api/entities/folder.entity';
 import { dateTranformer } from '@/server/helpers/api.helpers';
 
 @Entity('notes')
@@ -53,7 +53,7 @@ export default class NoteEntity {
   folder_id: number;
 
   @ManyToOne(
-    () => SectionEntity,
+    () => FolderEntity,
     (section) => section.notes,
     {
       onDelete: 'CASCADE'
@@ -64,5 +64,5 @@ export default class NoteEntity {
     referencedColumnName: "id",
     foreignKeyConstraintName: "fk_folder_id"
   })
-  section: SectionEntity
+  section: FolderEntity
 }

@@ -4,7 +4,7 @@ import NoteEntity from '@/server/api/entities/note.entity';
 import { dateTranformer } from '@/server/helpers/api.helpers';
 
 @Entity('sections')
-export default class SectionEntity {
+export default class FolderEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
     primaryKeyConstraintName: 'pk_folder_id'

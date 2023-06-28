@@ -6,7 +6,7 @@ import {
   createFolder,
   deleteFolder,
   updateFolder
-} from '@/server/api/sections.api';
+} from '@/server/api/folders.api';
 
 import {
   getNotes,

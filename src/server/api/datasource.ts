@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import SectionEntity from '@/server/api/entities/section.entity';
+import FolderEntity from '@/server/api/entities/folder.entity';
 import NoteEntity from '@/server/api/entities/note.entity';
 
 const { env } = process;
@@ -21,7 +21,7 @@ const dataSource = new DataSource({
   password: env.PG_PASS,
   database: env.PG_DATABASE,
   entities: [
-    SectionEntity,
+    FolderEntity,
     NoteEntity,
   ],
   synchronize: false,

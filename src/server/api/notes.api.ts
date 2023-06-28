@@ -1,10 +1,10 @@
 import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/datasource';
-import SectionEntity from '@/server/api/entities/section.entity';
+import FolderEntity from '@/server/api/entities/folder.entity';
 import NoteEntity from '@/server/api/entities/note.entity';
 
-const sectionRepository = dataSource.getRepository(SectionEntity);
+const folderRepository = dataSource.getRepository(FolderEntity);
 const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getNotes(request: Request, response: Response) {
@@ -36,9 +36,9 @@ export async function getNote(request: Request, response: Response) {
   const { noteSlug } = request.params;
 
   const results = await noteRepository
-    .createQueryBuilder('note')
-    .leftJoinAndSelect('note.section', 'section')
-    .where(`note.id = :id`, { id: noteSlug })
+    .createQueryBuilder('n')
+    .leftJoinAndSelect('n.section', 'f')
+    .where(`n.id = :id`, { id: noteSlug })
     .getOne();
 
   if (!results) {
@@ -54,11 +54,11 @@ export async function getNote(request: Request, response: Response) {
 export async function createNote(request: Request, response: Response) {
   const { folderSlug } = request.params;
 
-  const section = await sectionRepository.findOneBy({
+  const relatedFolder = await folderRepository.findOneBy({
     id: Number(folderSlug),
   });
 
-  if (!section) {
+  if (!relatedFolder) {
     response.status(400).json({
       error: `Cannot create note.`,
       message: `Foreign key constraint preasumable violation: Folder with 'id' = '${folderSlug}' doesn't exist in 'sections' table.`
@@ -120,7 +120,7 @@ export async function deleteNote(request: Request, response: Response) {
     const [result] = await noteRepository
       .createQueryBuilder()
 
-      // If note belongs to section then get last note from this section. Else - get last "unsorted" note. 
+      // If note is related to some folder, then get last note from this folder. Else - get last "unsorted" note. 
       .andWhere(folder_id
         ? `folder_id = :folder_id`
         : '1=1',

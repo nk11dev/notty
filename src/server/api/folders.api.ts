@@ -1,20 +1,20 @@
 import type { Request, Response } from 'express';
 
 import dataSource from '@/server/api/datasource';
-import SectionEntity from '@/server/api/entities/section.entity';
+import FolderEntity from '@/server/api/entities/folder.entity';
 import NoteEntity from '@/server/api/entities/note.entity';
 
-const sectionRepository = dataSource.getRepository(SectionEntity);
+const folderRepository = dataSource.getRepository(FolderEntity);
 const noteRepository = dataSource.getRepository(NoteEntity);
 
 export async function getAllFolders(_request: Request, response: Response) {
 
-  const results = await sectionRepository.manager.query(`
+  const results = await folderRepository.manager.query(`
     SELECT
       s.id,
       s.title,
       count(n.id)::int as notes_count
-    FROM ${sectionRepository.metadata.tableName} s
+    FROM ${folderRepository.metadata.tableName} s
     LEFT JOIN ${noteRepository.metadata.tableName} n on s.id = n.folder_id
     GROUP BY s.id
     ORDER BY s.id ASC
@@ -28,15 +28,15 @@ export async function getAllFolders(_request: Request, response: Response) {
 export async function getFolder(request: Request, response: Response) {
   const { folderSlug } = request.params;
 
-  const results = await sectionRepository
-    .createQueryBuilder('section')
-    .leftJoinAndSelect('section.notes', 'note')
-    .orderBy('note.id', 'ASC')
-    .where(`section.id = :id`, { id: folderSlug })
+  const results = await folderRepository
+    .createQueryBuilder('f')
+    .leftJoinAndSelect('f.notes', 'n')
+    .orderBy('n.id', 'ASC')
+    .where(`f.id = :id`, { id: folderSlug })
     .getOne();
 
   if (!results) {
-    response.status(404).send('Section is not found');
+    response.status(404).send('Folder is not found');
 
   } else {
     response.status(200).json({
@@ -47,7 +47,7 @@ export async function getFolder(request: Request, response: Response) {
 
 export async function createFolder(request: Request, response: Response) {
 
-  const results = await sectionRepository
+  const results = await folderRepository
     .createQueryBuilder()
     .insert()
     .values(request.body)
@@ -61,8 +61,8 @@ export async function createFolder(request: Request, response: Response) {
 
 export async function updateFolder(request: Request, response: Response) {
 
-  const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
-    UPDATE ${sectionRepository.metadata.tableName}
+  const [affectedRows, affectedCount] = await folderRepository.manager.query(`
+    UPDATE ${folderRepository.metadata.tableName}
     SET 
       title = $1,
       updated_at = CURRENT_TIMESTAMP
@@ -80,16 +80,16 @@ export async function updateFolder(request: Request, response: Response) {
 
 export async function deleteFolder(request: Request, response: Response) {
 
-  const [affectedRows, affectedCount] = await sectionRepository.manager.query(`
+  const [affectedRows, affectedCount] = await folderRepository.manager.query(`
     DELETE 
-    FROM ${sectionRepository.metadata.tableName} 
+    FROM ${folderRepository.metadata.tableName} 
     WHERE id = $1
     RETURNING *
   `, [request.params.folderSlug]);
 
-  const [lastRow] = await sectionRepository.manager.query(`
+  const [lastRow] = await folderRepository.manager.query(`
     SELECT *
-    FROM ${sectionRepository.metadata.tableName}
+    FROM ${folderRepository.metadata.tableName}
     ORDER BY id DESC
     LIMIT 1
   `);
