@@ -1,6 +1,9 @@
+@import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/colors';
 
 .element {
+  @include fontSizeForMobile(15px);
+
   padding: 0;
   border: none;
   line-height: 0;

@@ -24,12 +24,17 @@ const FoldersList = (props: Props) => (
           id={id}
           contextMenuId={FOLDER_CONTEXT_MENU_ID}
         >
-          {title}
-          {(notes_count > 0) && (
-            <span className={cn(style.suffixText, 'ms-1')}>
-              ({notes_count})
+          <div className={style.wrapperWithSuffix}>
+
+            <span className={style.titleWithSuffix}>
+              {title}
             </span>
-          )}
+
+            <span className={cn(style.suffixText, 'ms-2')}>
+              {notes_count}
+            </span>
+
+          </div>
         </NavItem>
       )
     })}

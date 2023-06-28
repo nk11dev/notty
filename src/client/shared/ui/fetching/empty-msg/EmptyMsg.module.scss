@@ -1,6 +1,9 @@
+@import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/colors';
 
 .element {
+  @include fontSizeForMobile(15px);
+
   display: block;
   padding: 8px 20px;
   color: $common-color-suffix-text;

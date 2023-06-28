@@ -1,3 +1,4 @@
+@import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
@@ -11,14 +12,14 @@
 
     :global {
       a {
+        @include ellipsisTextOnOverflow;
+        @include fontSizeForMobile(15px);
+
         display: block;
         height: $sidebar-item-height;
-        padding: 8px 20px;
+        padding: 8px 10px 8px 20px;
         line-height: 1.2;
         text-decoration: none;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
         color: $sidebar-link-color-title-text;
 
         &.active {
@@ -31,6 +32,16 @@
       }
     }
   }
+}
+
+.wrapperWithSuffix {
+  @include stretchedContent;
+}
+
+.titleWithSuffix {
+  @include ellipsisTextOnOverflow;
+
+  flex: 1 1 auto;
 }
 
 .suffixText {
