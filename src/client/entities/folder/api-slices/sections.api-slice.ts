@@ -4,7 +4,7 @@ import axiosBaseQuery from '@/shared/api/base-query';
 import type {
   FolderDto,
   FolderDeleteResponse
-} from '@/entities/section/types';
+} from '@/entities/folder/types';
 
 export const foldersApi = createApi({
   reducerPath: 'foldersApi',

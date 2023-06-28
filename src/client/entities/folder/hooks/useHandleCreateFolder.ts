@@ -1,4 +1,4 @@
-import { useCreateFolderMutation } from '@/entities/section/api-slices';
+import { useCreateFolderMutation } from '@/entities/folder/api-slices';
 import { useNavigateWithSearch } from '@/shared/hooks';
 
 export const useHandleCreateFolder = () => {

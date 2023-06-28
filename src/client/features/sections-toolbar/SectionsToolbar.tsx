@@ -1,11 +1,11 @@
 import React from 'react';
 import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { useLazyGetAllFoldersQuery } from '@/entities/section/api-slices';
+import { useLazyGetAllFoldersQuery } from '@/entities/folder/api-slices';
 import {
   useFoldersState,
   useHandleCreateFolder
-} from '@/entities/section/hooks';
+} from '@/entities/folder/hooks';
 import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
 import ToolbarButton from '@/shared/ui/controls/toolbar-button';
 

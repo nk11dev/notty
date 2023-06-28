@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useGetAllFoldersQuery } from '@/entities/section/api-slices';
+import { useGetAllFoldersQuery } from '@/entities/folder/api-slices';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
-import SectionsList from '@/entities/section/ui/sections-list';
+import SectionsList from '@/entities/folder/ui/sections-list';
 
 const SectionsFeature = () => {
   const {

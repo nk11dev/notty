@@ -1,4 +1,4 @@
-import type { FolderDto } from '@/entities/section/types';
+import type { FolderDto } from '@/entities/folder/types';
 
 export type NoteDto = {
   id: number,

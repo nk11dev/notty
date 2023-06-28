@@ -1,4 +1,4 @@
-import { useDeleteFolderMutation } from '@/entities/section/api-slices';
+import { useDeleteFolderMutation } from '@/entities/folder/api-slices';
 import { useNavigateWithSearch } from '@/shared/hooks';
 
 export const useHandleDeleteFolder = () => {

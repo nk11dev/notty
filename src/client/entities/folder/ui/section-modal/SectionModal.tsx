@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import {
   useGetFolderQuery,
   useUpdateFolderMutation
-} from '@/entities/section/api-slices';
+} from '@/entities/folder/api-slices';
 
 type Props = {
   folderId: string,

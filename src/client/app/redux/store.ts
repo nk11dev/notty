@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 
-import { foldersApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
 
 const logger = createLogger({

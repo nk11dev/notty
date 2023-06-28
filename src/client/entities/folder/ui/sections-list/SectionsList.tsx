@@ -4,7 +4,7 @@ import React from 'react';
 import cn from 'classnames';
 
 import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import type { FolderDto } from '@/entities/section/types';
+import type { FolderDto } from '@/entities/folder/types';
 import SidebarList from '@/shared/ui/sidebar/sidebar-list';
 import NavItem from '@/shared/ui/sidebar/nav-item';
 

@@ -7,7 +7,7 @@ import type {
   NoteDeleteResponse
 } from '@/entities/note/types';
 
-import { foldersApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/folder/api-slices';
 
 export const notesApi = createApi({
   reducerPath: 'notesApi',

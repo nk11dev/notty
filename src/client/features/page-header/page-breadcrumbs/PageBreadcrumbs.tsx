@@ -3,7 +3,7 @@ import styles from './PageBreadcrumbs.module.scss';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useFolderState } from '@/entities/section/hooks';
+import { useFolderState } from '@/entities/folder/hooks';
 import { useNoteState } from '@/entities/note/hooks';
 
 const PageBreadcrumbs = () => {

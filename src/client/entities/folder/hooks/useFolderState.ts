@@ -1,4 +1,4 @@
-import { foldersApi } from '@/entities/section/api-slices';
+import { foldersApi } from '@/entities/folder/api-slices';
 
 export const useFolderState = (id: string) => foldersApi
   .endpoints
