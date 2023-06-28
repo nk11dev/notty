@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Initial1687819286998 implements MigrationInterface {
-  name = 'Initial1687819286998'
+export class Initial1687922376726 implements MigrationInterface {
+  name = 'Initial1687922376726'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
@@ -17,19 +17,19 @@ export class Initial1687819286998 implements MigrationInterface {
       )
     `);
     await queryRunner.query(`
-      CREATE TABLE "sections" (
+      CREATE TABLE "folders" (
         "id" integer GENERATED ALWAYS AS IDENTITY NOT NULL, 
-        "title" character varying(30) NOT NULL DEFAULT 'Untitled section', 
+        "title" character varying(30) NOT NULL DEFAULT 'Untitled folder', 
         "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), 
         "updated_at" TIMESTAMP WITH TIME ZONE, 
         CONSTRAINT "pk_folder_id" PRIMARY KEY ("id")
       )
-  `);
+    `);
     await queryRunner.query(`
       ALTER TABLE "notes" 
         ADD CONSTRAINT "fk_folder_id" 
           FOREIGN KEY ("folder_id") 
-          REFERENCES "sections"("id") 
+          REFERENCES "folders"("id") 
           ON DELETE CASCADE ON UPDATE NO ACTION
     `);
   }
@@ -39,7 +39,7 @@ export class Initial1687819286998 implements MigrationInterface {
       ALTER TABLE "notes" 
         DROP CONSTRAINT "fk_folder_id"
     `);
-    await queryRunner.query(`DROP TABLE "sections"`);
+    await queryRunner.query(`DROP TABLE "folders"`);
     await queryRunner.query(`DROP TABLE "notes"`);
   }
 

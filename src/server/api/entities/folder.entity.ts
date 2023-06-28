@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import NoteEntity from '@/server/api/entities/note.entity';
 import { dateTranformer } from '@/server/helpers/api.helpers';
 
-@Entity('sections')
+@Entity('folders')
 export default class FolderEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
@@ -14,7 +14,7 @@ export default class FolderEntity {
   @Column({
     nullable: false,
     length: 30,
-    default: () => "'Untitled section'",
+    default: () => "'Untitled folder'",
   })
   title: string
 
