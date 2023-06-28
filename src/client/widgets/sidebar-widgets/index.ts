@@ -1,3 +1,3 @@
 export * from './SidebarNotesWidget';
-export * from './SidebarSectionsWidget';
+export * from './SidebarFoldersWidget';
 export * from './SidebarBookmarksWidget';

@@ -6,7 +6,7 @@ import { useSidebarMode } from '@/shared/hooks';
 
 import SidebarColumn from '@/shared/ui/sidebar/sidebar-column';
 import {
-  SidebarSectionsWidget,
+  SidebarFoldersWidget,
   SidebarNotesWidget,
   SidebarBookmarksWidget,
 } from '@/widgets/sidebar-widgets';
@@ -21,7 +21,7 @@ const SidebarLayout = () => {
     switch (sidebarMode) {
       case null:
       case SidebarModesMap.FOLDERS:
-        return <SidebarSectionsWidget />;
+        return <SidebarFoldersWidget />;
 
       case SidebarModesMap.BOOKMARKS:
         return <SidebarBookmarksWidget />;

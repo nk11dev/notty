@@ -5,7 +5,7 @@ import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
-const SectionsControl = () => {
+const FoldersControl = () => {
   const { isFoldersModeOrNull, isSidebarVisible, setSidebarMode } = useSidebarMode();
 
   const toggleSidebarMode = () => {
@@ -20,11 +20,11 @@ const SectionsControl = () => {
     <ControlsButton
       clickHandler={toggleSidebarMode}
       clsIsActive={isFoldersModeOrNull}
-      tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} sections`}
+      tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} folders`}
     >
       <IoFolderOutline/>
     </ControlsButton>
   );
 };
 
-export default SectionsControl;
+export default FoldersControl;
