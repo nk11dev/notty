@@ -3,11 +3,11 @@ import type { ItemParams } from 'react-contexify';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import SectionModal from '@/entities/folder/ui/section-modal';
+import FolderModal from '@/entities/folder/ui/folder-modal';
 import { useHandleDeleteFolder } from '@/entities/folder/hooks';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
-const SectionContextMenu = () => {
+const FolderContextMenu = () => {
   const [isShowingModal, toggleModal] = useState(false);
   const [folderId, setFolderId] = useState(null);
 
@@ -36,8 +36,8 @@ const SectionContextMenu = () => {
   }
 
   const menuItems = [
-    { icon: faPen, id: 'edit', text: 'Edit section' },
-    { id: 'delete', text: 'Delete section', icon: faTrash },
+    { icon: faPen, id: 'edit', text: 'Edit folder' },
+    { id: 'delete', text: 'Delete folder', icon: faTrash },
   ];
 
   return (
@@ -49,7 +49,7 @@ const SectionContextMenu = () => {
       />
 
       {isShowingModal && (
-        <SectionModal
+        <FolderModal
           folderId={folderId}
           onHide={() => toggleModal(false)}
         />
@@ -58,4 +58,4 @@ const SectionContextMenu = () => {
   );
 };
 
-export default SectionContextMenu;
+export default FolderContextMenu;

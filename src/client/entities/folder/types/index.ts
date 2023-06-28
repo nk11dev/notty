@@ -1,1 +1,1 @@
-export * from './section.types';
+export * from './folder.types';

@@ -46,7 +46,7 @@ export const notesApi = createApi({
         }),
         invalidatesTags: ['NotesTag'],
 
-        // Wait until the query is completed and refetch sections (to get current notes count)
+        // Wait until the query is completed and refetch related data (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
           dispatch(foldersApi.util.invalidateTags(
@@ -74,7 +74,7 @@ export const notesApi = createApi({
         }),
         invalidatesTags: ['NotesTag'],
 
-        // Wait until the query is completed and refetch sections and section (to get current notes count)
+        // Wait until the query is completed and refetch related data (to get current notes count)
         onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
           await cacheDataLoaded;
           dispatch(foldersApi.util.invalidateTags(

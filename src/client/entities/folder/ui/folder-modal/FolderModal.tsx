@@ -15,7 +15,7 @@ type Props = {
   onHide: () => void;
 };
 
-const SectionModal = (props: Props) => {
+const FolderModal = (props: Props) => {
   const { folderId, onHide } = props;
 
   const titleRef = useRef(null);
@@ -23,17 +23,17 @@ const SectionModal = (props: Props) => {
 
   const [updateFolder] = useUpdateFolderMutation();
 
-  const { data: sectionData } = useGetFolderQuery(folderId, {
+  const { data: folderData } = useGetFolderQuery(folderId, {
     refetchOnMountOrArgChange: true
   });
 
   useEffect(() => {
-    setFormData(sectionData);
-  }, [sectionData]);
+    setFormData(folderData);
+  }, [folderData]);
 
   const onSave = () => {
     updateFolder({
-      id: folderId,
+      id: parseInt(folderId),
       title: titleRef.current.value,
     });
     onHide();
@@ -49,7 +49,7 @@ const SectionModal = (props: Props) => {
 
       <Modal.Header closeButton>
         <Modal.Title>
-          <b>Edit section</b>
+          <b>Edit folder</b>
         </Modal.Title>
       </Modal.Header>
 
@@ -82,4 +82,4 @@ const SectionModal = (props: Props) => {
   );
 }
 
-export default SectionModal;
+export default FolderModal;

@@ -12,7 +12,7 @@ type Props = {
   data: FolderDto[]
 };
 
-const SectionsList = (props: Props) => (
+const FoldersList = (props: Props) => (
   <SidebarList>
     {props.data.map((item: FolderDto, index: number) => {
       const { id, title, notes_count } = item;
@@ -36,4 +36,4 @@ const SectionsList = (props: Props) => (
   </SidebarList>
 );
 
-export default SectionsList;
+export default FoldersList;

@@ -4,7 +4,7 @@ import React from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
-import SectionContextMenu from '@/entities/folder/ui/section-context-menu';
+import FolderContextMenu from '@/entities/folder/ui/folder-context-menu';
 import NoteContextMenu from '@/entities/note/ui/note-context-menu';
 import { useSidebarMode } from '@/shared/hooks';
 import SidebarControls from '@/shared/ui/sidebar/sidebar-controls';
@@ -41,7 +41,7 @@ const RootLayout = (props: Props) => {
         }
       </main>
 
-      <SectionContextMenu />
+      <FolderContextMenu />
       <NoteContextMenu />
     </div>
   );
