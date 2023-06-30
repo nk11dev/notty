@@ -1,37 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 
+import BaseModel from '@/server/api/models/base.model';
 import NoteEntity from '@/server/api/entities/note.entity';
-import { dateTranformer } from '@/server/helpers/api.helpers';
 
 @Entity('folders')
-export default class FolderEntity {
-  @PrimaryGeneratedColumn('identity', {
-    generatedIdentity: 'ALWAYS',
-    primaryKeyConstraintName: 'pk_folder_id'
-  })
-  id: number;
-
+export default class FolderEntity extends BaseModel {
   @Column({
     nullable: false,
     length: 30,
     default: () => "'Untitled folder'",
   })
   title: string
-
-  @Column({
-    type: 'timestamptz',
-    nullable: false,
-    transformer: dateTranformer,
-    default: () => 'CURRENT_TIMESTAMP',
-  })
-  created_at: Date;
-
-  @Column({
-    type: 'timestamptz',
-    nullable: true,
-    transformer: dateTranformer,
-  })
-  updated_at: Date;
 
   @OneToMany(
     () => NoteEntity,

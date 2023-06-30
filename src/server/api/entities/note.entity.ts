@@ -1,16 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
+import BaseModel from '@/server/api/models/base.model';
 import FolderEntity from '@/server/api/entities/folder.entity';
-import { dateTranformer } from '@/server/helpers/api.helpers';
 
 @Entity('notes')
-export default class NoteEntity {
-  @PrimaryGeneratedColumn('identity', {
-    generatedIdentity: 'ALWAYS',
-    primaryKeyConstraintName: 'pk_note_id'
-  })
-  id: number;
-
+export default class NoteEntity extends BaseModel {
   @Column({
     nullable: false,
     length: 30,
@@ -29,21 +23,6 @@ export default class NoteEntity {
     default: false,
   })
   is_bookmark: boolean
-
-  @Column({
-    type: 'timestamptz',
-    nullable: false,
-    transformer: dateTranformer,
-    default: () => 'CURRENT_TIMESTAMP',
-  })
-  created_at: Date;
-
-  @Column({
-    type: 'timestamptz',
-    nullable: true,
-    transformer: dateTranformer,
-  })
-  updated_at: Date;
 
   // For the purpose of fetching foreign key column, we should add 'folder_id' column explicitly and pass this column name to @JoinColumn decorator
   @Column({
