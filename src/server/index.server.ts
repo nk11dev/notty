@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
+import { headersMiddleware } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import foldersRoutes from '@/server/routes/folders.routes';
 import notesRoutes from '@/server/routes/notes.routes';
@@ -10,16 +11,9 @@ const colors = require('ansi-colors');
 
 const app = express();
 
-// Response headers
-app.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  next();
-});
-
-app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(headersMiddleware);
+app.use(bodyParser.json());
 app.use(express.static('dist/client'));
 
 // API routes
