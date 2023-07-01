@@ -1,10 +1,10 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-import BaseModel from '@/server/api/models/base.model';
-import FolderEntity from '@/server/api/entities/folder.entity';
+import BaseEntity from '@/server/orm/entities/base.entity';
+import FolderEntity from '@/server/orm/entities/folder.entity';
 
 @Entity('notes')
-export default class NoteEntity extends BaseModel {
+export default class NoteEntity extends BaseEntity {
   @Column({
     nullable: false,
     length: 30,

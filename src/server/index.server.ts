@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
-import api from '@/server/routing/api.routes';
+import foldersRoutes from '@/server/routes/folders.routes';
+import notesRoutes from '@/server/routes/notes.routes';
 
 const colors = require('ansi-colors');
 
@@ -22,7 +23,8 @@ app.use(logger('dev'));
 app.use(express.static('dist/client'));
 
 // API routes
-app.use('/api', api);
+app.use('/api/folders', foldersRoutes);
+app.use('/api/notes', notesRoutes);
 
 // App routes (used only for "production" mode for correct HMR working with client "development" mode).
 if (process.env.NODE_ENV == 'production') {

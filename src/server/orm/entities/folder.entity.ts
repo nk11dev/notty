@@ -1,10 +1,10 @@
 import { Entity, Column, OneToMany } from 'typeorm';
 
-import BaseModel from '@/server/api/models/base.model';
-import NoteEntity from '@/server/api/entities/note.entity';
+import BaseEntity from '@/server/orm/entities/base.entity';
+import NoteEntity from '@/server/orm/entities/note.entity';
 
 @Entity('folders')
-export default class FolderEntity extends BaseModel {
+export default class FolderEntity extends BaseEntity {
   @Column({
     nullable: false,
     length: 30,

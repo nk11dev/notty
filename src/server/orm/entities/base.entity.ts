@@ -1,8 +1,8 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-import { dateTranformer } from '@/server/helpers/api.helpers';
+import { dateTranformer } from '@/server/helpers/orm.helpers';
 
-export default abstract class BaseModel {
+export default abstract class BaseEntity {
   @PrimaryGeneratedColumn('identity', {
     generatedIdentity: 'ALWAYS',
   })
