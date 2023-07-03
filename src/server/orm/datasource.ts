@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 
 import FolderEntity from '@/server/orm/entities/folder.entity';
 import NoteEntity from '@/server/orm/entities/note.entity';
+import UserEntity from '@/server/orm/entities/user.entity';
 
 const { env } = process;
 
@@ -23,6 +24,7 @@ const dataSource = new DataSource({
   entities: [
     FolderEntity,
     NoteEntity,
+    UserEntity,
   ],
   synchronize: false,
   logging: false,

@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Initial1688132958510 implements MigrationInterface {
-  name = 'Initial1688132958510'
+export class Initial1688399282986 implements MigrationInterface {
+  name = 'Initial1688399282986'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
@@ -26,6 +26,23 @@ export class Initial1688132958510 implements MigrationInterface {
       )
     `);
     await queryRunner.query(`
+      CREATE TABLE "users" (
+        "id" integer GENERATED ALWAYS AS IDENTITY NOT NULL, 
+        "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), 
+        "updated_at" TIMESTAMP WITH TIME ZONE, 
+        "email" character varying NOT NULL, 
+        "password" character varying NOT NULL, 
+        "username" character varying, 
+        "last_login_at" TIMESTAMP WITH TIME ZONE, 
+        CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), 
+        CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id")
+      )
+    `);
+    await queryRunner.query(`
+      CREATE INDEX "index_user_email" 
+        ON "users" ("email")
+    `);
+    await queryRunner.query(`
       ALTER TABLE "notes" 
         ADD CONSTRAINT "fk_folder_id" 
           FOREIGN KEY ("folder_id") 
@@ -39,6 +56,8 @@ export class Initial1688132958510 implements MigrationInterface {
       ALTER TABLE "notes" 
         DROP CONSTRAINT "fk_folder_id"
     `);
+    await queryRunner.query(`DROP INDEX "public"."index_user_email"`);
+    await queryRunner.query(`DROP TABLE "users"`);
     await queryRunner.query(`DROP TABLE "folders"`);
     await queryRunner.query(`DROP TABLE "notes"`);
   }
