@@ -4,6 +4,8 @@ import logger from 'morgan';
 
 import { headersMiddleware } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
+import authRoutes from '@/server/routes/auth.routes';
+import usersRoutes from '@/server/routes/users.routes';
 import foldersRoutes from '@/server/routes/folders.routes';
 import notesRoutes from '@/server/routes/notes.routes';
 
@@ -14,7 +16,8 @@ app.use(headersMiddleware);
 app.use(bodyParser.json());
 app.use(express.static('dist/client'));
 
-// API routes
+app.use('/auth', authRoutes);
+app.use('/api/users', usersRoutes);
 app.use('/api/folders', foldersRoutes);
 app.use('/api/notes', notesRoutes);
 
