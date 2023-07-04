@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import colors from 'ansi-colors';
 
+import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
 
 export default class AuthController {
@@ -10,11 +11,12 @@ export default class AuthController {
     console.log('request.body:', request.body);
 
     const { email, password } = request.body;
+    const hashedPassword = await AuthService.hash(password);
 
     try {
       const result = await UsersService.createUser({
         email: email.toLowerCase(),
-        password
+        password: hashedPassword
       });
 
       response.status(200).json({
