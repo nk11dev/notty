@@ -2,7 +2,12 @@ import type { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import colors from 'ansi-colors';
 
-export const validate = (schema: z.AnyZodObject) =>
+import {
+  userCreateRequestSchema,
+  userUpdateRequestSchema,
+} from '@/server/schemas';
+
+const validate = (schema: z.AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
       schema.parse({
@@ -27,3 +32,7 @@ export const validate = (schema: z.AnyZodObject) =>
       });
     }
   };
+
+export const validateUserCreate = validate(userCreateRequestSchema);
+
+export const validateUserUpdate = validate(userUpdateRequestSchema);

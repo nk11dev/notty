@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
-import { headersMiddleware } from '@/server/middlewares';
+import { setAccessHeaders } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import authRoutes from '@/server/routes/auth.routes';
 import usersRoutes from '@/server/routes/users.routes';
@@ -12,7 +12,7 @@ import notesRoutes from '@/server/routes/notes.routes';
 const app = express();
 
 app.use(logger('dev'));
-app.use(headersMiddleware);
+app.use(setAccessHeaders);
 app.use(bodyParser.json());
 app.use(express.static('dist/client'));
 

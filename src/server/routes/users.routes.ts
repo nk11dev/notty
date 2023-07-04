@@ -2,10 +2,9 @@ import express from 'express';
 
 import UsersController from '@/server/controllers/users.controller';
 import {
-  validate,
-  userUpdateRequestSchema,
-} from '@/server/helpers/validation';
-import { hashPassword } from '@/server/middlewares/auth.middlewares';
+  validateUserUpdate,
+  hashPassword,
+} from '@/server/middlewares';
 
 const router = express.Router();
 
@@ -14,7 +13,7 @@ router
   .get('/:userSlug', UsersController.getOneUser)
 
   .put('/:userSlug',
-    validate(userUpdateRequestSchema),
+    validateUserUpdate,
     hashPassword,
     UsersController.updateUser
   )

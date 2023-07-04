@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { 
+import {
   userCreatePayloadSchema,
   userUpdatePayloadSchema,
- } from '@/server/helpers/validation/user.schemas';
+} from '@/server/schemas';
 
 export type UserCreatePayload = z.infer<typeof userCreatePayloadSchema>;
 

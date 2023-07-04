@@ -1,14 +1,14 @@
 import express from 'express';
 
 import AuthController from '@/server/controllers/auth.controller';
-import {
-  validate,
-  userCreateRequestSchema,
-} from '@/server/helpers/validation';
+import { validateUserCreate } from '@/server/middlewares';
 
 const router = express.Router();
 
 router
-  .post('/register', validate(userCreateRequestSchema), AuthController.register);
+  .post('/register',
+    validateUserCreate,
+    AuthController.register
+  );
 
 export default router;
