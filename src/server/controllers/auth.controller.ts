@@ -10,34 +10,30 @@ export default class AuthController {
     console.log('request.body:', request.body);
 
     const { email, password } = request.body;
-    const errorName = 'Registration error.';
 
-    if (email && password) {
-      try {
-        const result = await UsersService.createUser(request.body);
+    try {
+      const result = await UsersService.createUser({
+        email: email.toLowerCase(),
+        password
+      });
 
-        response.status(200).json({
-          payload: result
-        });
+      response.status(200).json({
+        payload: result
+      });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        console.log('err.detail:', err.detail)
+    } catch (err: any) {
+      console.log(colors.red(`registration error: ${err}`));
 
-        if (err.code === '23505') {
-          return response.status(409).json({
-            error: errorName,
-            message: 'User with that email already exist',
-          });
-        }
+      if (err.code === '23505') {
+        return response.status(409).json({
+          errors: [
+            { message: 'User with that email already exist' }
+          ],
+        });
       }
-
-    } else {
-      response.status(400).json({
-        error: errorName,
-        message: `Empty email or password`
-      });
     }
+
   }
 
 }

@@ -1,6 +1,9 @@
 import dataSource from '@/server/orm/datasource';
 import UserEntity from '@/server/orm/entities/user.entity';
-import type { UserPayload } from '@/server/types/user.types';
+import type { 
+  UserCreatePayload,
+  UserUpdatePayload,
+ } from '@/server/types/user.types';
 
 const userRepository = dataSource.getRepository(UserEntity);
 
@@ -17,7 +20,7 @@ export default class UsersService {
     return await userRepository.findOneBy({ id });
   }
 
-  static async createUser(payload: UserPayload) {
+  static async createUser(payload: UserCreatePayload) {
     const { raw: [result] } = await userRepository
       .createQueryBuilder()
       .insert()
@@ -28,7 +31,7 @@ export default class UsersService {
     return result;
   }
 
-  static async updateUser(id: number, payload: UserPayload) {
+  static async updateUser(id: number, payload: UserUpdatePayload) {
     return await userRepository
       .createQueryBuilder()
       .update()

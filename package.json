@@ -106,6 +106,7 @@
     "webpack": "5.88.0",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.9.0",
-    "webpack-node-externals": "3.0.0"
+    "webpack-node-externals": "3.0.0",
+    "zod": "3.21.4"
   }
 }
