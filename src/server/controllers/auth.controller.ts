@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import colors from 'ansi-colors';
+const jwt = require('jsonwebtoken');
 
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
@@ -23,8 +24,7 @@ export default class AuthController {
         payload: result
       });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
+    } catch (err) {
       console.log(colors.red(`registration error: ${err}`));
 
       if (err.code === '23505') {
@@ -58,9 +58,15 @@ export default class AuthController {
         } else {
           await UsersService.updateUserLastLoginAt(user.id);
 
-          response.status(200).json({
-            payload: user
-          });
+          const expiresIn = 7 * 24 * 60 * 60;
+          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: expiresIn });
+
+          response
+            .status(200)
+            .cookie('access_token', token, { maxAge: expiresIn, httpOnly: true })
+            .json({
+              payload: user
+            });
         }
       }
 
