@@ -16,8 +16,12 @@ export default class UsersService {
       .getMany();
   }
 
-  static async getOneUser(id: number) {
+  static async findUserById(id: number) {
     return await userRepository.findOneBy({ id });
+  }
+
+  static async findUserByEmail(email: string) {
+    return await userRepository.findOneBy({ email });
   }
 
   static async createUser(payload: UserCreatePayload) {

@@ -14,7 +14,7 @@ export default class UsersController {
 
   static async getOneUser(request: Request, response: Response) {
     const id = Number(request.params.userSlug);
-    const result = await UsersService.getOneUser(id);
+    const result = await UsersService.findUserById(id);
 
     if (!result) {
       response.status(404).send('User is not found');

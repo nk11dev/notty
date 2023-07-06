@@ -7,7 +7,7 @@ import UsersService from '@/server/services/users.service';
 export default class AuthController {
 
   static async register(request: Request, response: Response) {
-    console.log(colors.blue('\n--- AuthController.registration()'));
+    console.log(colors.blue('\n--- AuthController.register()'));
     console.log('request.body:', request.body);
 
     const { email, password } = request.body;
@@ -35,7 +35,40 @@ export default class AuthController {
         });
       }
     }
+  }
 
+  static async login(request: Request, response: Response) {
+    console.log(colors.blue('\n--- AuthController.login()'));
+    console.log('request.body:', request.body);
+
+    const { email, password } = request.body;
+
+    try {
+      const user = await UsersService.findUserByEmail(email);
+
+      if (!user) {
+        response.status(404).send('User is not found');
+
+      } else {
+        const isPasswordValid: boolean = await AuthService.verify(password, user.password);
+
+        if (!isPasswordValid) {
+          response.status(404).send('Invalid password');
+
+        } else {
+          response.status(200).json({
+            payload: user
+          });
+        }
+      }
+
+    } catch (err) {
+      console.log(colors.red(`login error: ${err}`));
+
+      return response.status(404).json({
+        errors: err
+      });
+    }
   }
 
 }
