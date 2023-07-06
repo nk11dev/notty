@@ -20,7 +20,7 @@ export default class AuthController {
         password: hashedPassword
       });
 
-      response.status(200).json({
+      response.status(201).json({
         payload: result
       });
 
@@ -63,7 +63,7 @@ export default class AuthController {
 
           response
             .status(200)
-            .cookie('access_token', token, { maxAge: expiresIn, httpOnly: true })
+            .cookie('access-token', token, { maxAge: expiresIn, httpOnly: true })
             .json({
               payload: user
             });
