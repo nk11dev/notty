@@ -1,9 +1,9 @@
 import dataSource from '@/server/orm/datasource';
 import UserEntity from '@/server/orm/entities/user.entity';
-import type { 
+import type {
   UserCreatePayload,
   UserUpdatePayload,
- } from '@/server/types/user.types';
+} from '@/server/types/user.types';
 
 const userRepository = dataSource.getRepository(UserEntity);
 
@@ -35,12 +35,25 @@ export default class UsersService {
     return result;
   }
 
-  static async updateUser(id: number, payload: UserUpdatePayload) {
+  static async updateUserData(id: number, payload: UserUpdatePayload) {
     return await userRepository
       .createQueryBuilder()
       .update()
       .set({
         ...payload,
+        updated_at: new Date(),
+      })
+      .where('id = :id', { id })
+      .returning('*')
+      .execute();
+  }
+
+  static async updateUserLastLoginAt(id: number) {
+    return await userRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        last_login_at: new Date(),
         updated_at: new Date(),
       })
       .where('id = :id', { id })

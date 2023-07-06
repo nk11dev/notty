@@ -56,6 +56,8 @@ export default class AuthController {
           response.status(404).send('Invalid password');
 
         } else {
+          await UsersService.updateUserLastLoginAt(user.id);
+
           response.status(200).json({
             payload: user
           });

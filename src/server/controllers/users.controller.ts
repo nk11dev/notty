@@ -29,7 +29,7 @@ export default class UsersController {
   static async updateUser(request: Request, response: Response) {
     const id = Number(request.params.userSlug);
 
-    const result = await UsersService.updateUser(id, request.body);
+    const result = await UsersService.updateUserData(id, request.body);
     const { raw, affected } = result || {};
 
     response.status(200).json({
