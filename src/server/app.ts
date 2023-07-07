@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import { setAccessHeaders } from '@/server/middlewares';
@@ -12,8 +13,9 @@ import notesRoutes from '@/server/routes/notes.routes';
 const app = express();
 
 app.use(logger('dev'));
-app.use(setAccessHeaders);
+app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(setAccessHeaders);
 app.use(express.static('dist/client'));
 
 app.use('/auth', authRoutes);
