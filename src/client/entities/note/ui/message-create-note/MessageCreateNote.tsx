@@ -1,5 +1,6 @@
 import styles from './MessageCreateNote.module.scss';
 
+import type { FolderRouteSlugs } from '@/app/routing/types';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
@@ -9,7 +10,7 @@ import {
 } from '@/entities/note/hooks';
 
 const MessageCreateNote = () => {
-  const { folderSlug } = useParams();
+  const { folderSlug } = useParams() as FolderRouteSlugs;
   const [onCreateNote] = useHandleCreateNote();
 
   return (

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 
+import type { NoteRouteSlugs } from '@/app/routing/types';
 import { notesApi } from '@/entities/note/api-slices';
 import type { NoteUpdateEndpointArg } from '@/entities/note/types';
 
@@ -18,7 +19,7 @@ type Result = [
 ];
 
 export const useNoteData = (): Result => {
-  const { noteSlug } = useParams();
+  const { noteSlug } = useParams() as NoteRouteSlugs;
 
   const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);
 

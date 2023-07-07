@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 
+import type { NoteRouteSlugs } from '@/app/routing/types';
 import {
   notesApi,
   useUpdateNoteMutation
@@ -16,7 +17,7 @@ type Result = [
 ];
 
 export const useUpdateNoteField = (fieldName: string): Result => {
-  const { noteSlug } = useParams();
+  const { noteSlug } = useParams() as NoteRouteSlugs;
 
   const [updateNote] = useUpdateNoteMutation();
   const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);

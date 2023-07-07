@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import type { Editor } from '@tiptap/core';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
+import type { NoteRouteSlugs } from '@/app/routing/types';
 import {
   notesApi,
   useUpdateNoteMutation
@@ -15,7 +16,7 @@ const PM_PARSE_OPTIONS = {
 };
 
 export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
-  const { noteSlug } = useParams();
+  const { noteSlug } = useParams() as NoteRouteSlugs;
 
   const [updateNote] = useUpdateNoteMutation();
   const { currentData } = notesApi.endpoints.getNote.useQueryState(noteSlug);

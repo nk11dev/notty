@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom'
 
+import type { FolderRouteSlugs } from '@/app/routing/types';
 import { useGetFolderQuery } from '@/entities/folder/api-slices';
 import { useSelectDefaultNote } from '@/entities/folder/hooks';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
@@ -9,7 +10,7 @@ import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 
 const FolderPage = () => {
-  const { folderSlug } = useParams();
+  const { folderSlug } = useParams() as FolderRouteSlugs;
 
   const {
     currentData,
