@@ -18,7 +18,7 @@ type Props = {
 const FolderModal = (props: Props) => {
   const { folderId, onHide } = props;
 
-  const titleRef = useRef(null);
+  const titleRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState(null);
 
   const [updateFolder] = useUpdateFolderMutation();
@@ -34,7 +34,7 @@ const FolderModal = (props: Props) => {
   const onSave = () => {
     updateFolder({
       id: Number(folderId),
-      title: titleRef.current.value,
+      title: titleRef.current?.value,
     });
     onHide();
   };

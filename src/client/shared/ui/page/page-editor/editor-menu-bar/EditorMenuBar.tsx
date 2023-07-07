@@ -9,7 +9,7 @@ import { BiCodeBlock } from 'react-icons/bi';
 import Icon from '@/shared/ui/controls/icon';
 
 type Props = {
-  editor: Editor
+  editor: Editor | null
 };
 
 const EditorMenuBar = ({ editor }: Props) => {
@@ -80,7 +80,7 @@ const EditorMenuBar = ({ editor }: Props) => {
         <Icon icon={faTextSlash} />
       </button>
 
-      <span className={styles.separator}/>
+      <span className={styles.separator} />
 
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
@@ -142,7 +142,7 @@ const EditorMenuBar = ({ editor }: Props) => {
         <Icon icon={faBroom} />
       </button>
 
-      <span className={styles.separator}/>
+      <span className={styles.separator} />
 
       <button
         onClick={() => editor.chain().focus().undo().run()}

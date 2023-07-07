@@ -14,7 +14,7 @@ const PM_PARSE_OPTIONS = {
   preserveWhitespace: true
 };
 
-export const useUpdateNoteWithEditor = (editor: Editor): void => {
+export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
   const { noteSlug } = useParams();
 
   const [updateNote] = useUpdateNoteMutation();
@@ -32,7 +32,7 @@ export const useUpdateNoteWithEditor = (editor: Editor): void => {
         (noteData.id !== currentData.id)
       ) {
         editor.commands.setContent(currentData.body, false, PM_PARSE_OPTIONS);
-      } 
+      }
     }
 
   }, [currentData, editor, noteData])

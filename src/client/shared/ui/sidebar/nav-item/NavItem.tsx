@@ -14,8 +14,8 @@ import type { SearchParamsOptions } from '@/shared/types';
 type Props = {
   url: string,
   children: React.ReactNode,
-  id?: number,
-  contextMenuId?: string
+  id: number,
+  contextMenuId: string
   searchParamsOptions?: SearchParamsOptions
 };
 

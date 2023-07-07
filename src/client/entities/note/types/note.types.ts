@@ -9,7 +9,7 @@ export type NoteDto = {
   updated_at: string | null,
   folder_id: number,
   folder_info?: FolderDto,
-  [key: string]: number | string | boolean | undefined | FolderDto
+  [key: string]: number | string | boolean | FolderDto | undefined | null
 };
 
 export type NoteUpdateEndpointArg = {

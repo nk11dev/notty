@@ -8,7 +8,7 @@ import type { BaseQueryError } from '@/shared/types';
 
 const axiosBaseQuery =
   (
-    { baseUrl }: { baseUrl: string } = { baseUrl: API_BASE_URL }
+    { baseUrl }: { baseUrl: string } = { baseUrl: API_BASE_URL as string }
   ): BaseQueryFn<
     {
       url: string
