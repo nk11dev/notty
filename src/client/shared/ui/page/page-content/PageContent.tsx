@@ -10,7 +10,7 @@ type Props = {
 
 const PageContent = (props: Props) => (
   <div className={cn(styles.element, {
-    [styles.isFlex]: (props.isFlex === true)
+    [styles.isFlex as string]: (props.isFlex === true)
   })}>
     {props.children}
   </div>

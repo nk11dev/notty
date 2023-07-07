@@ -26,7 +26,7 @@ const BookmarkButton = () => {
     <HeaderButton
       clickHandler={toggleIsBookmark}
       cls={cn({
-        [styles.isBookmark]: isBookmark
+        [styles.isBookmark as string]: isBookmark
       })}
     >
       {isBookmark

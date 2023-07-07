@@ -12,8 +12,8 @@ const SidebarWidget = (props: Props) => {
   const { isScrollable = false } = props;
   return (
     <div className={cn(styles.element, {
-      [styles.isScrollable]: isScrollable,
-      [styles.isNotScrollable]: !isScrollable,
+      [styles.isScrollable as string]: isScrollable,
+      [styles.isNotScrollable as string]: !isScrollable,
     })}>
       {props.children}
     </div>

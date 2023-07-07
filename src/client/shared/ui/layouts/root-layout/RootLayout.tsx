@@ -24,8 +24,8 @@ const RootLayout = (props: Props) => {
     <div className={cn(styles.layout, {
       'single-column-layout': !isDoubleColumnLayout,
       'double-column-layout': isDoubleColumnLayout,
-      [styles['sidebar-is-visible']]: isSidebarVisible,
-      [styles['sidebar-is-hidden']]: !isSidebarVisible,
+      [styles['sidebar-is-visible'] as string]: isSidebarVisible,
+      [styles['sidebar-is-hidden'] as string]: !isSidebarVisible,
     })}>
       <SidebarControls />
 

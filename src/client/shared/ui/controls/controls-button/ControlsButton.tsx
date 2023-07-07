@@ -18,8 +18,8 @@ const ControlsButton = (props: Props) => (
   <ButtonIcon
     clickHandler={props.clickHandler}
     cls={cn(styles.controlsBtn, {
-      [styles.isActive]: props.clsIsActive,
-      [styles.isDisabled]: (props.isDisabled === true)
+      [styles.isActive as string]: props.clsIsActive,
+      [styles.isDisabled as string]: (props.isDisabled === true)
     })}
     tooltip={props.tooltip}
   >

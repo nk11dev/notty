@@ -18,7 +18,7 @@ const HeaderButton = (props: Props) => (
   <ButtonIcon
     clickHandler={props.clickHandler}
     cls={cn(styles.headerBtn, props.cls, {
-      [styles.isDisabled]: (props.isDisabled === true)
+      [styles.isDisabled as string]: (props.isDisabled === true)
     })}
     tooltip={props.tooltip}
   >

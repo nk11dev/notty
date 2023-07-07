@@ -13,7 +13,7 @@ type Props = {
 const SidebarColumn = (props: Props) => (
   <div
     className={cn(styles.element, {
-      [styles['is-hidden']]: (props.isHidden === true)
+      [styles['is-hidden'] as string]: (props.isHidden === true)
     })}
     style={props.style}
   >
