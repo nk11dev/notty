@@ -16,6 +16,7 @@ router
   .post('/login',
     validateUserLogin,
     AuthController.login
-  );
+  )
+  .get('/logout', AuthController.logout);
 
 export default router;

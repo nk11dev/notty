@@ -91,4 +91,9 @@ export default class AuthController {
     }
   }
 
+  static logout(_request: Request, response: Response) {
+    response.clearCookie('access-token');
+    response.status(204).end();
+  }
+
 }
