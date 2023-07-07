@@ -17,7 +17,7 @@ const migrationsExt = (process.env.NODE_ENV === 'migration')
 const dataSource = new DataSource({
   type: 'postgres',
   host: env.PG_HOST,
-  port: parseInt(env.PG_PORT, 10),
+  port: Number(env.PG_PORT),
   username: env.PG_USER,
   password: env.PG_PASS,
   database: env.PG_DATABASE,
