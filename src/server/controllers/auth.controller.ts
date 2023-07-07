@@ -47,23 +47,35 @@ export default class AuthController {
       const user = await UsersService.findUserByEmail(email);
 
       if (!user) {
-        response.status(404).send('User is not found');
+        response.status(404).send({
+          message: 'User is not found'
+        });
 
       } else {
         const isPasswordValid: boolean = await AuthService.verify(password, user.password);
 
         if (!isPasswordValid) {
-          response.status(404).send('Invalid password');
+          response.status(404).send({
+            message: 'Invalid password'
+          });
 
         } else {
           await UsersService.updateUserLastLoginAt(user.id);
 
-          const expiresIn = 7 * 24 * 60 * 60;
-          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: expiresIn });
+          const tokenPayload = { id: user.id, email: user.email };
+          const expiresIn = 172800;
+
+          const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
 
           response
             .status(200)
-            .cookie('access-token', token, { maxAge: expiresIn, httpOnly: true })
+            .cookie('access-token', token, {
+              expires: new Date(
+                Date.now() + expiresIn * 1000
+              ),
+              maxAge: expiresIn * 1000,
+              httpOnly: true
+            })
             .json({
               payload: user
             });
