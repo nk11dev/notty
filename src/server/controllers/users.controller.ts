@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 
 import UsersService from '@/server/services/users.service';
+import type { TokenData } from '@/server/types/token.types';
 
 export default class UsersController {
 
@@ -24,6 +25,15 @@ export default class UsersController {
         payload: result
       });
     }
+  }
+
+  static async getCurrentUser(request: Request, response: Response) {
+    const { id } = request.tokenData as TokenData;
+    const result = await UsersService.getUserProfile(id);
+
+    response.status(200).json({
+      payload: result
+    });
   }
 
   static async updateUser(request: Request, response: Response) {

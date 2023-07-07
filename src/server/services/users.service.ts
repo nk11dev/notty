@@ -16,6 +16,14 @@ export default class UsersService {
       .getMany();
   }
 
+  static async getUserProfile(id: number) {
+    return await userRepository
+      .createQueryBuilder('u')
+      .select(['u.id', 'u.email', 'u.username'])
+      .where('u.id = :id', { id })
+      .getOne();
+  }
+
   static async findUserById(id: number) {
     return await userRepository.findOneBy({ id });
   }
