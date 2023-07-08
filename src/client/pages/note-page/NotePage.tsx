@@ -4,7 +4,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 import type { NoteRouteSlugs } from '@/app/routing/types';
 import { useGetNoteQuery } from '@/entities/note/api-slices';
-import PageHeader from '@/features/page-header';
+import NoteHeader from '@/entities/note/ui/note-header';
 import NoteTitleInput from '@/entities/note/ui/note-title-input';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
@@ -29,7 +29,7 @@ const NotePage = () => {
 
   return (
     <>
-      <PageHeader />
+      <NoteHeader />
 
       <PageContent isFlex>
         <NoteTitleInput />

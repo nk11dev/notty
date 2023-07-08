@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 import type { FolderRouteSlugs } from '@/app/routing/types';
 import { useGetFolderQuery } from '@/entities/folder/api-slices';
 import { useSelectDefaultNote } from '@/entities/folder/hooks';
+import FolderHeader from '@/entities/folder/ui/folder-header';
 import MessageCreateNote from '@/entities/note/ui/message-create-note';
-import PageHeader from '@/features/page-header';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 
@@ -33,7 +33,8 @@ const FolderPage = () => {
 
   return (
     <>
-      <PageHeader />
+      <FolderHeader />
+
       <PageContent>
         <h1>It&rsquo;s an empty folder</h1>
         <MessageCreateNote />
