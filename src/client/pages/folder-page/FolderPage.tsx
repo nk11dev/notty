@@ -24,7 +24,12 @@ const FolderPage = () => {
 
   if (isError) return <PageError {...error} />;
 
-  if (!currentData || currentData?.notes?.length > 0) return null;
+  if (!currentData || (
+    Array.isArray(currentData.notes) &&
+    currentData.notes.length > 0
+  )) {
+    return null;
+  }
 
   return (
     <>

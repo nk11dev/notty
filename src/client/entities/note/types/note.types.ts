@@ -13,11 +13,11 @@ export type NoteDto = {
 };
 
 export type NoteUpdateEndpointArg = {
-  id: number,
+  id: number | null,
   title?: string,
-  body?: string,
+  body?: string | null,
   is_bookmark?: boolean,
-  [key: string]: number | string | boolean | undefined
+  [key: string]: number | string | boolean | undefined | null
 };
 
 export type NoteDeleteResponse = {

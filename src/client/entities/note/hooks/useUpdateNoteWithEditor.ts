@@ -39,18 +39,16 @@ export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
   }, [currentData, editor, noteData])
 
   useEffect(() => {
+    const { id, body } = currentData || {};
     const text = editor?.getText();
     const html = editor?.getHTML();
 
-    if (
-      (noteData.id === currentData.id) &&
-      (
-        (text && ![text, html].includes(currentData.body)) ||
-        ((text === '') && !['', null].includes(currentData.body))
-      )
-    ) {
+    if ((noteData.id === id) && (
+      (text && [text, html].every(val => val !== body)) ||
+      ((text === '') && body)
+    )) {
       updateNote({
-        id: currentData.id,
+        id,
         body: text ? html : '',
       });
     }

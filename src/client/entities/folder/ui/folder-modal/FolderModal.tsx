@@ -9,6 +9,7 @@ import {
   useGetFolderQuery,
   useUpdateFolderMutation
 } from '@/entities/folder/api-slices';
+import type { FolderDto } from '@/entities/folder/types';
 
 type Props = {
   folderId: string,
@@ -19,7 +20,7 @@ const FolderModal = (props: Props) => {
   const { folderId, onHide } = props;
 
   const titleRef = useRef<HTMLInputElement>(null);
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState<FolderDto | null>(null);
 
   const [updateFolder] = useUpdateFolderMutation();
 
@@ -28,7 +29,9 @@ const FolderModal = (props: Props) => {
   });
 
   useEffect(() => {
-    setFormData(folderData);
+    if (folderData) {
+      setFormData(folderData);
+    }
   }, [folderData]);
 
   const onSave = () => {

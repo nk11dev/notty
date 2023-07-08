@@ -48,12 +48,14 @@ const FolderContextMenu = () => {
         onItemClick={onItemClick}
       />
 
-      {isShowingModal && (
-        <FolderModal
-          folderId={folderId}
-          onHide={() => toggleModal(false)}
-        />
-      )}
+      {(folderId !== null && isShowingModal)
+        ? (
+          <FolderModal
+            folderId={folderId}
+            onHide={() => toggleModal(false)}
+          />
+        )
+        : null}
     </>
   );
 };
