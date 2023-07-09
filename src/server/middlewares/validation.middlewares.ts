@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
+import type { ZodIssue } from 'zod';
 import colors from 'ansi-colors';
 
 import {
@@ -25,11 +26,14 @@ const validate = (schema: z.AnyZodObject) =>
       let err = error;
 
       if (err instanceof z.ZodError) {
-        err = err.issues.map((e) => ({ path: e.path[1], message: e.message }));
+        err = error.issues.map((e: ZodIssue) => (
+          { path: e.path[1], message: e.message })
+        );
       }
 
-      return res.status(400).json({
-        errors: err,
+      res.sendError(422, {
+        message: 'Validation error',
+        data: err
       });
     }
   };

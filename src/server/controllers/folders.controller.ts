@@ -3,64 +3,56 @@ import type { Request, Response } from 'express';
 import FoldersService from '@/server/services/folders.service';
 
 export default class FoldersController {
-  
-  static async getAllFolders(_request: Request, response: Response) {
+
+  static async getAllFolders(_req: Request, res: Response) {
     const result = await FoldersService.getAllFolders();
 
-    response.status(200).json({
-      payload: result
-    });
+    res.sendSuccess(200, result);
   }
 
-  static async getOneFolder(request: Request, response: Response) {
-    const id = Number(request.params.folderSlug);
+  static async getOneFolder(req: Request, res: Response) {
+    const id = Number(req.params.folderSlug);
     const result = await FoldersService.getOneFolder(id);
 
     if (!result) {
-      response.status(404).send('Folder is not found');
+      res.sendError(404, {
+        message: 'Folder not found'
+      });
 
     } else {
-      response.status(200).json({
-        payload: result
-      });
+      res.sendSuccess(200, result);
     }
   }
 
-  static async createFolder(request: Request, response: Response) {
-    const result = await FoldersService.createFolder(request.body);
+  static async createFolder(req: Request, res: Response) {
+    const result = await FoldersService.createFolder(req.body);
 
-    response.status(201).json({
-      payload: result
-    });
+    res.sendSuccess(201, result);
   }
 
-  static async updateFolder(request: Request, response: Response) {
-    const id = Number(request.params.folderSlug);
-    
+  static async updateFolder(req: Request, res: Response) {
+    const id = Number(req.params.folderSlug);
+
     const [affectedRows, affectedCount] = await FoldersService.updateFolder(
-      id, request.body
+      id, req.body
     );
 
-    response.status(200).json({
-      payload: {
-        affectedRows,
-        affectedCount
-      }
+    res.sendSuccess(200, {
+      affectedRows,
+      affectedCount
     });
   }
 
-  static async deleteFolder(request: Request, response: Response) {
-    const id = Number(request.params.folderSlug);
+  static async deleteFolder(req: Request, res: Response) {
+    const id = Number(req.params.folderSlug);
 
     const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
     const lastRow = await FoldersService.getLastFolder();
 
-    response.status(200).json({
-      payload: {
-        affectedRows,
-        affectedCount,
-        lastRow
-      }
+    res.sendSuccess(200, {
+      affectedRows,
+      affectedCount,
+      lastRow
     });
   }
 }

@@ -17,8 +17,8 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
   const accessToken = req.cookies['access-token'];
 
   if (!accessToken) {
-    return res.status(401).send({
-      message: 'Token is not provided or cookie expired'
+    return res.sendError(401, {
+      message: 'Authentication error: token is not provided or cookie expired'
     });
 
   } else {
@@ -27,10 +27,12 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET_KEY, (err: any, decoded: any) => {
 
       if (err) {
-        return res.status(401).send({
-          message: (err instanceof jwt.TokenExpiredError)
-            ? 'JWT expired'
-            : 'Unauthorized'
+        const details = (err instanceof jwt.TokenExpiredError)
+          ? 'JWT expired'
+          : 'token is not verified';
+
+        return res.sendError(401, {
+          message: `Authentication error: ${details}`
         });
 
       } else {

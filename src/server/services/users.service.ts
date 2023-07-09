@@ -1,3 +1,4 @@
+import { sqlDateTranformer } from '@/server/helpers/orm.helpers';
 import dataSource from '@/server/orm/datasource';
 import UserEntity from '@/server/orm/entities/user.entity';
 import type {
@@ -37,7 +38,7 @@ export default class UsersService {
       .createQueryBuilder()
       .insert()
       .values(payload)
-      .returning('*')
+      .returning(['id', 'email', 'username'])
       .execute();
 
     return result;
@@ -57,16 +58,18 @@ export default class UsersService {
   }
 
   static async updateUserLastLoginAt(id: number) {
-    return await userRepository
-      .createQueryBuilder()
-      .update()
-      .set({
-        last_login_at: new Date(),
-        updated_at: new Date(),
-      })
-      .where('id = :id', { id })
-      .returning('*')
-      .execute();
+    const [affectedRows] = await userRepository.manager.query(`
+      UPDATE ${userRepository.metadata.tableName}
+      SET 
+        last_login_at = CURRENT_TIMESTAMP,
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $1
+      RETURNING 
+        id, email, username, 
+        ${sqlDateTranformer('last_login_at')}
+    `, [id]);
+
+    return affectedRows[0];
   }
 
   static async deleteUser(id: number) {

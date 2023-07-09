@@ -1,6 +1,6 @@
 import { Column, PrimaryGeneratedColumn } from 'typeorm';
 
-import { dateTranformer } from '@/server/helpers/orm.helpers';
+import { entityDateTranformer } from '@/server/helpers/orm.helpers';
 
 export default abstract class BaseEntity {
   @PrimaryGeneratedColumn('identity', {
@@ -11,7 +11,7 @@ export default abstract class BaseEntity {
   @Column({
     type: 'timestamptz',
     nullable: false,
-    transformer: dateTranformer,
+    transformer: entityDateTranformer,
     default: () => 'CURRENT_TIMESTAMP',
   })
   created_at: Date;
@@ -19,7 +19,7 @@ export default abstract class BaseEntity {
   @Column({
     type: 'timestamptz',
     nullable: true,
-    transformer: dateTranformer,
+    transformer: entityDateTranformer,
   })
   updated_at: Date;
 }

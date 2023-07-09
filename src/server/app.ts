@@ -3,7 +3,10 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import { setAccessHeaders } from '@/server/middlewares';
+import { 
+  setAccessHeaders,
+  addResponseFormats,
+ } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import authRoutes from '@/server/routes/auth.routes';
 import usersRoutes from '@/server/routes/users.routes';
@@ -16,6 +19,7 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(setAccessHeaders);
+app.use(addResponseFormats);
 app.use(express.static('dist/client'));
 
 app.use('/auth', authRoutes);

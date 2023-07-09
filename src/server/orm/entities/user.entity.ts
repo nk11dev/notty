@@ -1,7 +1,7 @@
 import { Entity, Column, Index } from 'typeorm';
 
 import BaseEntity from '@/server/orm/entities/base.entity';
-import { dateTranformer } from '@/server/helpers/orm.helpers';
+import { entityDateTranformer } from '@/server/helpers/orm.helpers';
 
 @Entity('users')
 export default class UserEntity extends BaseEntity {
@@ -25,7 +25,7 @@ export default class UserEntity extends BaseEntity {
   @Column({
     type: 'timestamptz',
     nullable: true,
-    transformer: dateTranformer,
+    transformer: entityDateTranformer,
   })
   last_login_at: Date;
 }

@@ -7,68 +7,78 @@ import UsersService from '@/server/services/users.service';
 
 export default class AuthController {
 
-  static async register(request: Request, response: Response) {
-    console.log(colors.blue('\n--- AuthController.register()'));
-    console.log('request.body:', request.body);
+  static async register(req: Request, res: Response) {
+    console.log(colors.blue('\n--- AuthController.register()2'));
+    console.log('req.body:', req.body);
 
-    const { email, password } = request.body;
+    const { email, password } = req.body;
     const hashedPassword = await AuthService.hash(password);
 
     try {
-      const result = await UsersService.createUser({
+      const createdUser = await UsersService.createUser({
         email: email.toLowerCase(),
         password: hashedPassword
       });
 
-      response.status(201).json({
-        payload: result
+      res.sendSuccess(201, {
+        message: 'User registered',
+        user: createdUser
       });
 
     } catch (err) {
       console.log(colors.red(`registration error: ${err}`));
 
       if (err.code === '23505') {
-        return response.status(409).json({
-          errors: [
-            { message: 'User with that email already exist' }
-          ],
+        res.sendError(409, {
+          message: 'Registration error',
+          data: [{
+            'path': 'email',
+            'message': 'Email already registered'
+          }]
         });
       }
     }
   }
 
-  static async login(request: Request, response: Response) {
+  static async login(req: Request, res: Response) {
     console.log(colors.blue('\n--- AuthController.login()'));
-    console.log('request.body:', request.body);
+    console.log('req.body:', req.body);
 
-    const { email, password } = request.body;
+    const { email, password } = req.body;
 
     try {
       const user = await UsersService.findUserByEmail(email);
 
       if (!user) {
-        response.status(404).send({
-          message: 'User is not found'
+        res.sendError(404, {
+          message: 'Login error',
+          data: [{
+            'path': 'email',
+            'message': 'Email not found'
+          }]
         });
 
       } else {
         const isPasswordValid: boolean = await AuthService.verify(password, user.password);
 
         if (!isPasswordValid) {
-          response.status(404).send({
-            message: 'Invalid password'
+          res.sendError(404, {
+            message: 'Login error',
+            data: [{
+              'path': 'password',
+              'message': 'Invalid password'
+            }]
           });
 
         } else {
-          await UsersService.updateUserLastLoginAt(user.id);
+          const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
 
           const tokenPayload = { id: user.id, email: user.email };
           const expiresIn = 172800;
 
           const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
 
-          response
-            .status(200)
+          res
             .cookie('access-token', token, {
               expires: new Date(
                 Date.now() + expiresIn * 1000
@@ -76,24 +86,26 @@ export default class AuthController {
               maxAge: expiresIn * 1000,
               httpOnly: true
             })
-            .json({
-              payload: user
+            .sendSuccess(200, {
+              message: 'User logged in',
+              user: loggedUser
             });
         }
       }
 
-    } catch (err) {
-      console.log(colors.red(`login error: ${err}`));
+    } catch (error) {
+      console.log(colors.red(`login error: ${error}`));
 
-      return response.status(404).json({
-        errors: err
+      res.sendError(404, {
+        message: 'Login error',
+        data: error
       });
     }
   }
 
-  static logout(_request: Request, response: Response) {
-    response.clearCookie('access-token');
-    response.status(204).end();
+  static logout(_req: Request, res: Response) {
+    res.clearCookie('access-token');
+    res.sendSuccess(204);
   }
 
 }

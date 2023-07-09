@@ -5,61 +5,53 @@ import type { TokenData } from '@/server/types/token.types';
 
 export default class UsersController {
 
-  static async getAllUsers(_request: Request, response: Response) {
+  static async getAllUsers(_req: Request, res: Response) {
     const result = await UsersService.getAllUsers();
 
-    response.status(200).json({
-      payload: result
-    });
+    res.sendSuccess(200, result);
   }
 
-  static async getOneUser(request: Request, response: Response) {
-    const id = Number(request.params.userSlug);
+  static async getOneUser(req: Request, res: Response) {
+    const id = Number(req.params.userSlug);
     const result = await UsersService.findUserById(id);
 
     if (!result) {
-      response.status(404).send('User is not found');
+      res.sendError(404, {
+        message: 'User not found'
+      });
 
     } else {
-      response.status(200).json({
-        payload: result
-      });
+      res.sendSuccess(200, result);
     }
   }
 
-  static async getCurrentUser(request: Request, response: Response) {
-    const { id } = request.tokenData as TokenData;
+  static async getCurrentUser(req: Request, res: Response) {
+    const { id } = req.tokenData as TokenData;
     const result = await UsersService.getUserProfile(id);
 
-    response.status(200).json({
-      payload: result
-    });
+    res.sendSuccess(200, result);
   }
 
-  static async updateUser(request: Request, response: Response) {
-    const id = Number(request.params.userSlug);
+  static async updateUser(req: Request, res: Response) {
+    const id = Number(req.params.userSlug);
 
-    const result = await UsersService.updateUserData(id, request.body);
+    const result = await UsersService.updateUserData(id, req.body);
     const { raw, affected } = result || {};
 
-    response.status(200).json({
-      payload: {
-        affectedRows: raw[0] || null,
-        affectedCount: affected
-      }
+    res.sendSuccess(200, {
+      affectedRows: raw[0] || null,
+      affectedCount: affected
     });
   }
 
-  static async deleteUser(request: Request, response: Response) {
-    const id = Number(request.params.userSlug);
+  static async deleteUser(req: Request, res: Response) {
+    const id = Number(req.params.userSlug);
 
     const [affectedRows, affectedCount] = await UsersService.deleteUser(id);
 
-    response.status(200).json({
-      payload: {
-        affectedRows,
-        affectedCount,
-      }
+    res.sendSuccess(200, {
+      affectedRows,
+      affectedCount,
     });
   }
 

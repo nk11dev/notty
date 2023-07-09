@@ -5,64 +5,57 @@ import FoldersService from '@/server/services/folders.service';
 
 export default class NotesController {
 
-  static async getAllNotes(request: Request, response: Response) {
-    const folderId = Number(request.params.folderSlug);
-    const result = await NotesService.getAllNotes(folderId, request.query);
+  static async getAllNotes(req: Request, res: Response) {
+    const folderId = Number(req.params.folderSlug);
+    const result = await NotesService.getAllNotes(folderId, req.query);
 
-    response.status(200).json({
-      payload: result
-    });
+    res.sendSuccess(200, result);
   }
 
-  static async getOneNote(request: Request, response: Response) {
-    const noteId = Number(request.params.noteSlug);
+  static async getOneNote(req: Request, res: Response) {
+    const noteId = Number(req.params.noteSlug);
     const result = await NotesService.getOneNote(noteId);
 
     if (!result) {
-      response.status(404).send('Note is not found');
+      res.sendError(404, {
+        message: 'Note not found'
+      });
 
     } else {
-      response.status(200).json({
-        payload: result
-      });
+      res.sendSuccess(200, result);
     }
   }
 
-  static async createNote(request: Request, response: Response) {
-    const folderId = Number(request.params.folderSlug);
+  static async createNote(req: Request, res: Response) {
+    const folderId = Number(req.params.folderSlug);
     const relatedFolder = await FoldersService.findFolder(folderId);
 
     if (!relatedFolder) {
-      response.status(400).json({
-        error: 'Cannot create note.',
-        message: `Foreign key constraint preasumable violation: Folder with 'id' = '${folderId}' doesn't exist in 'folders' table.`
+      res.sendError(400, {
+        message: `Note not created: foreign key constraint preasumable violation. Folder with 'id' = '${folderId}' doesn't exist in 'folders' table.`
       });
 
     } else {
-      const result = await NotesService.createNote(folderId, request.body);
+      const result = await NotesService.createNote(folderId, req.body);
 
-      response.status(201).json({
-        payload: result
-      });
+      res.sendSuccess(201, result);
     }
   }
 
-  static async updateNote(request: Request, response: Response) {
-    const noteId = Number(request.params.noteSlug);
+  static async updateNote(req: Request, res: Response) {
+    const noteId = Number(req.params.noteSlug);
 
-    const result = await NotesService.updateNote(noteId, request.body);
+    const result = await NotesService.updateNote(noteId, req.body);
     const { raw, affected } = result || {};
 
-    response.status(200).json({
-      payload: {
-        affectedRows: raw[0] || null,
-        affectedCount: affected
-      }
+    res.sendSuccess(200, {
+      affectedRows: raw[0] || null,
+      affectedCount: affected
     });
   }
 
-  static async deleteNote(request: Request, response: Response) {
-    const noteId = Number(request.params.noteSlug);
+  static async deleteNote(req: Request, res: Response) {
+    const noteId = Number(req.params.noteSlug);
 
     const [affectedRows, affectedCount] = await NotesService.deleteNote(noteId);
 
@@ -76,12 +69,10 @@ export default class NotesController {
       }
     }
 
-    response.status(200).json({
-      payload: {
-        affectedCount,
-        affectedRow: affectedRows[0] || null,
-        lastRow
-      }
+    res.sendSuccess(200, {
+      affectedCount,
+      affectedRow: affectedRows[0] || null,
+      lastRow
     });
   }
 }
