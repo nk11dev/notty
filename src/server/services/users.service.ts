@@ -4,7 +4,7 @@ import UserEntity from '@/server/orm/entities/user.entity';
 import type {
   UserCreatePayload,
   UserUpdatePayload,
-} from '@/server/types/user.types';
+} from '@/common/types/user.types';
 
 const userRepository = dataSource.getRepository(UserEntity);
 

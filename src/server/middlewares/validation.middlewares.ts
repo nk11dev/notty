@@ -7,7 +7,7 @@ import {
   userCreateRequestSchema,
   userUpdateRequestSchema,
   userLoginRequestSchema,
-} from '@/server/schemas';
+} from '@/common/schemas';
 
 const validate = (schema: z.AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import {
   userCreatePayloadSchema,
   userUpdatePayloadSchema,
-} from '@/server/schemas';
+} from '@/common/schemas';
 
 export type UserCreatePayload = z.infer<typeof userCreatePayloadSchema>;
 

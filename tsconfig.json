@@ -50,6 +50,9 @@
       "@/server/*": [
         "src/server/*"
       ],
+      "@/common/*": [
+        "src/common/*"
+      ],
     }
   },
   "include": [
