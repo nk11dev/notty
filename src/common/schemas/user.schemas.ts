@@ -1,30 +1,32 @@
 import { z } from 'zod';
 
 const messages = {
-  required: (text: string) => `${text} is required`,
-  nonempty: (text: string) => `${text} can not be empty`
+  required: 'Required',
+  min: (val: number) => `Must be more than ${val} characters`,
+  max: (val: number) => `Must be less than ${val} characters`,
+  invalidType: (validType: string) => `Must be a ${validType}`,
 };
 
 const userEmailSchema = z.string({
-  required_error: messages.required('Email address'),
+  required_error: messages.required,
 })
-  .nonempty(messages.nonempty('Email address'))
-  .email('Invalid email address format');
+  .nonempty(messages.required)
+  .email('Invalid email format');
 
 const userPasswordSchemaDefault = z.string({
-  required_error: messages.required('Password'),
-  invalid_type_error: "Password must be a string"
+  required_error: messages.required,
+  invalid_type_error: messages.invalidType('string')
 })
-  .nonempty(messages.nonempty('Password'));
+  .nonempty(messages.required);
 
 const userPasswordSchemaMinMax = userPasswordSchemaDefault
-  .min(8, 'Password must be more than 8 characters')
-  .max(32, 'Password must be less than 32 characters');
+  .min(6, messages.min(6))
+  .max(20, messages.max(20));
 
 const userUsernameSchema = z.string({
-  invalid_type_error: "Username must be a string"
+  invalid_type_error: messages.invalidType('string')
 })
-  .max(20, 'Username must be less than 20 characters');
+  .max(20, messages.max(20));
 
 export const userCreatePayloadSchema = z.object({
   email: userEmailSchema,
