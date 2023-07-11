@@ -14,6 +14,7 @@ const aliases = {
   '@/fonts': 'assets/fonts',
   '@/data': 'data',
   '@/server': 'server',
+  '@/common': 'common',
 };
 
 Object.keys(aliases).forEach(
