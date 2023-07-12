@@ -1,23 +1,46 @@
+import styles from './UserFormField.module.scss';
+
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import { useFormContext } from 'react-hook-form';
 
 type Props = {
+  name: string;
   label: string,
   placeholder?: string,
 };
 
-const UserFormField = (props: Props) => (
-  <>
-    <Form.Label>
-      {props.label}
-    </Form.Label>
+const UserFormField = (props: Props) => {
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext();
 
-    <Form.Control
-      className="mb-3"
-      type="text"
-      placeholder={props.placeholder}
-    />
-  </>
-);
+  const { name } = props;
+  const error = errors[name];
+
+  return (
+    <div>
+      <Form.Label>
+        {props.label}
+      </Form.Label>
+
+      <Form.Control
+        {...register(name)}
+        type="text"
+        className={styles.control}
+        placeholder={props.placeholder}
+        isInvalid={!!error?.message}
+      />
+
+      <Form.Control.Feedback
+        type="invalid"
+        className={styles.controlFeedback}
+      >
+        {error?.message && (error.message as string)}
+      </Form.Control.Feedback>
+    </div>
+  );
+}
 
 export default UserFormField;

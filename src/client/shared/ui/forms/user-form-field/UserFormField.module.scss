@@ -1,0 +1,17 @@
+.field {
+  margin-bottom: 5px;
+}
+
+.control {
+  margin-bottom: 5px;
+
+  &:global(.is-invalid) {
+    background: none;
+  }
+}
+
+.controlFeedback {
+  display: block;
+  height: 20px;
+  text-align: right;
+}

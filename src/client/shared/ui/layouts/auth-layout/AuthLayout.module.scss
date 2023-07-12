@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+  max-width: 384px;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+
+  @media (max-height: 400px) {
+    display: block;
+    overflow: scroll;
+    margin: auto;
+    max-width: initial;
+  }
+}
+
+.inner {
+  @media (max-height: 400px) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 384px;
+  }
+}

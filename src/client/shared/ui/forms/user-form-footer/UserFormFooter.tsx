@@ -8,7 +8,7 @@ type Props = {
 };
 
 const UserFormFooter = (props: Props) => (
-  <div className="mb-4 text-center">
+  <div className="text-center">
     <div>
       <span className="me-2">
         {props.text}
