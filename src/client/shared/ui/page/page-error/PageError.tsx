@@ -5,15 +5,15 @@ import PageContent from '@/shared/ui/page/page-content';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
 
 const PageError = (props: Partial<BaseQueryError>) => {
-  const { error } = props.data || {};
+  const { status, data } = props;
 
   if (
-    (props.status === 404) &&
-    (typeof error?.message === 'string')
+    (status === 404) &&
+    (typeof data?.message === 'string')
   ) {
     return (
       <PageContent>
-        <h1>{error.message}</h1>
+        <h1>{data.message}</h1>
       </PageContent>
     );
   }

@@ -4,7 +4,10 @@ import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
 import { log } from '@/shared/utils/log.utils';
-import type { BaseQueryError } from '@/shared/types';
+import type {
+  BaseQueryError,
+  ErrorResponse,
+} from '@/shared/types';
 
 const axiosBaseQuery =
   (
@@ -48,11 +51,14 @@ const axiosBaseQuery =
 
       } catch (axiosError) {
         const err = axiosError as AxiosError;
+        const data = err?.response?.data as ErrorResponse;
 
         return {
           error: {
             status: err.response?.status,
-            data: err.response?.data || err.message,
+            data: data?.error
+            ? data.error
+            : (data || err.message),
           },
         };
       }

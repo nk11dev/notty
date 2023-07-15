@@ -6,10 +6,9 @@ import type { BaseQueryError } from '@/shared/types';
 
 const ErrorMsg = (props: Partial<BaseQueryError>) => {
   const { status, data } = props;
-  const { error } = data || {};
 
-  const message = error?.message
-    ? error.message
+  const message = data?.message
+    ? data.message
     : data;
 
   const details = [

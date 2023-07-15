@@ -7,3 +7,8 @@ export type BaseQueryError = {
   stack?: string,
   code?: string,
 };
+
+export type ErrorResponse = {
+  message: string,
+  error: unknown
+}
