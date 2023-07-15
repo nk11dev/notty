@@ -54,7 +54,7 @@ export default class AuthController {
           message: 'Login error',
           data: [{
             'path': 'email',
-            'message': 'Email not found'
+            'message': 'Email not registered'
           }]
         });
 
