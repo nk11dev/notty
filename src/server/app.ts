@@ -1,4 +1,5 @@
 import express from 'express';
+import type { Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -39,13 +40,13 @@ if (process.env.NODE_ENV == 'production') {
   const flatRoutes = collectNestedRoutes(appRoutes);
 
   for (const route of flatRoutes) {
-    app.get(route, (_req, res) => {
+    app.get(route, (_req: Request, res: Response) => {
       res.sendFile('dist/client/index.html', { root: '.' });
     });
   }
 
   // 404 route
-  app.use((_req, res) => {
+  app.use((_req: Request, res: Response) => {
     res.status(404);
     res.sendFile('dist/client/index.html', { root: '.' });
   });
