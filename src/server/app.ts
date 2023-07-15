@@ -1,12 +1,10 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
 
-import { 
-  setAccessHeaders,
-  addResponseFormats,
- } from '@/server/middlewares';
+import { addResponseFormats } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import authRoutes from '@/server/routes/auth.routes';
 import usersRoutes from '@/server/routes/users.routes';
@@ -18,19 +16,25 @@ const app = express();
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(setAccessHeaders);
 app.use(addResponseFormats);
 app.use(express.static('dist/client'));
+
+// CORS settings are used for correct sending of cookies to client dev server
+if (process.env.NODE_ENV == 'development') {
+  app.use(cors({
+    origin: `http://127.0.0.1:${process.env.PORT_CLIENT}`,
+    credentials: true,
+  }));
+}
 
 app.use('/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/folders', foldersRoutes);
 app.use('/api/notes', notesRoutes);
 
-// App routes (used only for "production" mode for correct HMR working with client "development" mode).
 if (process.env.NODE_ENV == 'production') {
 
-  // Domain routes
+  // Client app routes
   const appRoutes = require('@/app/routing/Router').appRoutes;
   const flatRoutes = collectNestedRoutes(appRoutes);
 

@@ -40,7 +40,8 @@ const axiosBaseQuery =
           url: baseUrl + url,
           method,
           data,
-          params
+          params,
+          withCredentials: true,
         });
 
         return { data: result.data.payload };
