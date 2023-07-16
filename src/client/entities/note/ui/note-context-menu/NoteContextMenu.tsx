@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ItemParams } from 'react-contexify';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { PiTrash } from 'react-icons/pi';
 
 import { NOTE_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import { useHandleDeleteNote } from '@/entities/note/hooks';
@@ -15,7 +15,14 @@ const NoteContextMenu = () => {
   }
 
   const menuItems = [
-    { id: 'delete', text: 'Delete note', icon: faTrash },
+    {
+      id: 'delete',
+      text: 'Delete note',
+      icon: <PiTrash style={{
+        width: '22px',
+        height: '22px',
+      }} />
+    },
   ];
 
   return (

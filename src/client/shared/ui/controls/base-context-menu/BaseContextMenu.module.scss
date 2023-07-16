@@ -21,8 +21,29 @@
     }
   }
 
+  > div:only-child {
+    :global(.contexify_itemContent) {
+      padding: 4px;
+    }
+  }
+
   // disables default feddback animation when item is clicked
   .contexify_item-feedback {
     animation: contexify_feedback 0s both;
   }
+}
+
+.itemIconWrapper {
+  display: flex;
+  width: 24px;
+}
+
+.itemIcon {
+  vertical-align: sub;
+}
+
+.itemText {
+  margin-left: 5px;
+  margin-right: 3px;
+  line-height: 1px;
 }

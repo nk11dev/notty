@@ -1,15 +1,14 @@
 import styles from './BaseContextMenu.module.scss';
 
-import React from 'react';
+import React, { cloneElement } from 'react';
+import type { ReactNode, ReactElement } from 'react';
 import { Menu, Item } from 'react-contexify';
 import type { MenuId, ItemParams } from 'react-contexify';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type MenuItem = {
   id: string,
   text: string,
-  icon: IconDefinition,
+  icon: ReactNode,
 };
 
 type Props = {
@@ -33,13 +32,13 @@ const BaseContextMenu = (props: Props) => {
           id={item.id}
           onClick={onItemClick}
         >
-          <span>
-            <FontAwesomeIcon
-              icon={item.icon}
-              style={{ width: 16, height: 16 }}
-            />
+          <span className={styles.itemIconWrapper}>
+            {cloneElement(item.icon as ReactElement, {
+              className: styles.itemIcon,
+            })}
           </span>
-          <span className="mx-1">
+
+          <span className={styles.itemText}>
             {item.text}
           </span>
         </Item>

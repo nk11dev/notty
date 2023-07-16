@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { ItemParams } from 'react-contexify';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { PiTrash } from 'react-icons/pi';
+import { GoPencil } from 'react-icons/go';
 
 import { FOLDER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import FolderModal from '@/entities/folder/ui/folder-modal';
@@ -36,8 +37,22 @@ const FolderContextMenu = () => {
   }
 
   const menuItems = [
-    { icon: faPen, id: 'edit', text: 'Edit folder' },
-    { id: 'delete', text: 'Delete folder', icon: faTrash },
+    {
+      id: 'edit',
+      text: 'Edit folder',
+      icon: <GoPencil style={{
+        width: '20px',
+        height: '20px',
+      }} />
+    },
+    {
+      id: 'delete',
+      text: 'Delete folder',
+      icon: <PiTrash style={{
+        width: '22px',
+        height: '22px',
+      }} />
+    },
   ];
 
   return (
