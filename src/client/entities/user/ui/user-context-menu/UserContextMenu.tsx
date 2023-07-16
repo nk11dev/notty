@@ -1,18 +1,32 @@
+import styles from './UserContextMenu.module.scss';
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoExitOutline } from 'react-icons/io5';
+import type { ItemParams } from 'react-contexify';
 
 import { USER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
+import { USER_CONTEXT_MENU_EL_CLASSNAME } from '@/app/constants/elements.constants';
+import UserPanel from '@/entities/user/ui/user-panel';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const UserContextMenu = () => {
   const navigate = useNavigate();
 
-  const onLogout = () => {
-    navigate('/login')
+  const onItemClick = (args: ItemParams) => {
+    switch (args.id) {
+      case 'logout':
+        navigate('/login')
+        break;
+    }
   }
 
   const menuItems = [
+    {
+      id: 'info',
+      component: <UserPanel />,
+      isDisabled: true
+    },
     {
       id: 'logout',
       text: 'Log out',
@@ -27,7 +41,8 @@ const UserContextMenu = () => {
     <BaseContextMenu
       menuId={USER_CONTEXT_MENU_ID}
       menuItems={menuItems}
-      onItemClick={onLogout}
+      onItemClick={onItemClick}
+      cls={`${USER_CONTEXT_MENU_EL_CLASSNAME} ${styles.element}`}
     />
   );
 };

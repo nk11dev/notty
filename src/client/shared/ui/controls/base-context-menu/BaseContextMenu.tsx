@@ -4,26 +4,30 @@ import React, { cloneElement } from 'react';
 import type { ReactNode, ReactElement } from 'react';
 import { Menu, Item } from 'react-contexify';
 import type { MenuId, ItemParams } from 'react-contexify';
+import cn from 'classnames';
 
 type MenuItem = {
   id: string,
-  text: string,
-  icon: ReactNode,
+  text?: string,
+  icon?: ReactNode,
+  component?: ReactNode,
+  isDisabled?: boolean,
 };
 
 type Props = {
   menuId: MenuId,
   menuItems: MenuItem[],
   onItemClick: (args: ItemParams) => void;
+  cls?: string,
 };
 
 const BaseContextMenu = (props: Props) => {
-  const { menuId, menuItems, onItemClick } = props;
+  const { menuId, menuItems, onItemClick, cls } = props;
 
   return (
     <Menu
       id={menuId}
-      className={styles.contextMenu}
+      className={cn(styles.contextMenu, cls)}
       animation="fade"
     >
       {menuItems.map((item: MenuItem, index: number) => (
@@ -31,16 +35,23 @@ const BaseContextMenu = (props: Props) => {
           key={index}
           id={item.id}
           onClick={onItemClick}
+          disabled={!!item.isDisabled}
         >
-          <span className={styles.itemIconWrapper}>
-            {cloneElement(item.icon as ReactElement, {
-              className: styles.itemIcon,
-            })}
-          </span>
+          {(item.text && item.icon) && <>
+            <span className={styles.itemIconWrapper}>
+              {cloneElement(item.icon as ReactElement, {
+                className: styles.itemIcon,
+              })}
+            </span>
 
-          <span className={styles.itemText}>
-            {item.text}
-          </span>
+            <span className={styles.itemText}>
+              {item.text}
+            </span>
+          </>}
+
+          {item.component && cloneElement(
+            item.component as ReactElement
+          )}
         </Item>
       ))}
     </Menu>
