@@ -6,6 +6,7 @@ import cn from 'classnames';
 
 import FolderContextMenu from '@/entities/folder/ui/folder-context-menu';
 import NoteContextMenu from '@/entities/note/ui/note-context-menu';
+import UserContextMenu from '@/entities/user/ui/user-context-menu';
 import { useSidebarMode } from '@/shared/hooks';
 import SidebarControls from '@/shared/ui/sidebar/sidebar-controls';
 import SidebarLayout from '@/shared/ui/layouts/sidebar-layout';
@@ -43,6 +44,7 @@ const RootLayout = (props: Props) => {
 
       <FolderContextMenu />
       <NoteContextMenu />
+      <UserContextMenu />
     </div>
   );
 };
