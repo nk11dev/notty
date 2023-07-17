@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
+import type { TokenData } from '@/server/types/token.types';
 
 export default class AuthController {
 
@@ -101,6 +102,13 @@ export default class AuthController {
         data: error
       });
     }
+  }
+
+  static async profile(req: Request, res: Response) {
+    const { id } = req.tokenData as TokenData;
+    const result = await UsersService.getUserProfile(id);
+
+    res.sendSuccess(200, result);
   }
 
   static logout(_req: Request, res: Response) {

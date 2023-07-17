@@ -28,7 +28,7 @@ if (process.env.NODE_ENV == 'development') {
   }));
 }
 
-app.use('/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/folders', foldersRoutes);
 app.use('/api/notes', notesRoutes);
