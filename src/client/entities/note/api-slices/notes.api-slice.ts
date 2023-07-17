@@ -47,8 +47,8 @@ export const notesApi = createApi({
         invalidatesTags: ['NotesTag'],
 
         // Wait until the query is completed and refetch related data (to get current notes count)
-        onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
-          await cacheDataLoaded;
+        onQueryStarted: async (_args, { queryFulfilled, dispatch, }) => {
+          await queryFulfilled;
           dispatch(foldersApi.util.invalidateTags(
             ['FoldersTag']
           ));
@@ -75,8 +75,8 @@ export const notesApi = createApi({
         invalidatesTags: ['NotesTag'],
 
         // Wait until the query is completed and refetch related data (to get current notes count)
-        onCacheEntryAdded: async (_args, { cacheDataLoaded, dispatch }) => {
-          await cacheDataLoaded;
+        onQueryStarted: async (_args, { queryFulfilled, dispatch }) => {
+          await queryFulfilled;
           dispatch(foldersApi.util.invalidateTags(
             ['FoldersTag', 'FolderTag']
           ));
