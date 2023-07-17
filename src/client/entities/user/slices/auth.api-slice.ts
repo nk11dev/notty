@@ -1,11 +1,17 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import axiosBaseQuery from '@/shared/api/base-query';
-import type { UserDto } from '@/entities/user/types';
 import type {
   UserCreatePayload,
   UserLoginPayload,
 } from '@/common/types/user.types';
+
+import {
+  setUserData,
+  setUserError,
+  resetUser,
+} from '@/entities/user/slices/user.slice';
+import type { UserDto } from '@/entities/user/types';
+import axiosBaseQuery from '@/shared/api/base-query';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -26,6 +32,16 @@ export const authApi = createApi({
           method: 'POST',
           data,
         }),
+        transformResponse: (result: { user: UserDto }) => result.user,
+        async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(setUserData(data));
+
+          } catch (error) {
+            dispatch(setUserError(error));
+          }
+        },
       }),
 
       logoutUser: build.mutation<void, void>({
@@ -33,6 +49,15 @@ export const authApi = createApi({
           url: '/auth/logout',
           method: 'GET',
         }),
+        async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+          try {
+            await queryFulfilled;
+            dispatch(resetUser());
+
+          } catch (error) {
+            dispatch(setUserError(error));
+          }
+        },
       }),
     }
   },

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 
+import userReducer from '@/entities/user/slices/user.slice';
 import { authApi } from '@/entities/user/slices';
 import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
@@ -14,6 +15,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [foldersApi.reducerPath]: foldersApi.reducer,
     [notesApi.reducerPath]: notesApi.reducer,
+    userState: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([

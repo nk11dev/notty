@@ -2,28 +2,27 @@ import styles from './UserPanel.module.scss';
 
 import React from 'react';
 
+import { useUserState } from '@/entities/user/hooks';
+
 type RowProps = {
   label: string,
-  value: string
+  value: string | undefined
 };
 
 const UserPanel = () => {
-  const userName = 'John Doe';
-  const userEmail = 'john.doe@gmail.com';
+  const { data } = useUserState();
 
   const Row = ({ label, value }: RowProps) => (
     <div className={styles.row}>
       <span className={styles.label}>{label}:</span>
-      <span>{value}</span>
+      {value && <span>{value}</span>}
     </div>
   );
 
   return (
     <div className={styles.element}>
-      {userName && (
-        <Row label="Name" value={userName} />
-      )}
-      <Row label="Email" value={userEmail} />
+      <Row label="Name" value={data?.username} />
+      <Row label="Email" value={data?.email} />
       <div className={styles.separator} />
     </div>
   )
