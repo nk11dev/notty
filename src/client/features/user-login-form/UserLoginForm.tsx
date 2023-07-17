@@ -1,14 +1,21 @@
-import React from 'react';
-import Form from 'react-bootstrap/Form';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Form from 'react-bootstrap/Form';
 
 import { userLoginPayloadSchema } from '@/common/schemas';
 import type { UserLoginPayload } from '@/common/types/user.types';
+
+import { useLoginUserMutation } from '@/entities/user/slices';
+import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
 
 const UserLoginForm = () => {
+  const navigate = useNavigate();
+  const [loginUser, result] = useLoginUserMutation();
+
   const methods = useForm<UserLoginPayload>({
     resolver: zodResolver(userLoginPayloadSchema),
     mode: 'onTouched',
@@ -18,13 +25,34 @@ const UserLoginForm = () => {
     },
   });
 
-  const onSubmit = (data: unknown) => {
-    console.log('UserLoginForm.onSubmit(), data:', data);
+  const { handleSubmit, setError } = methods;
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      navigate('/');
+
+    } else {
+      const error = (result.error as BaseQueryError)?.data as BaseQueryError;
+      const { data: errors } = error || {};
+
+      if (Array.isArray(errors) && errors.length > 0) {
+        errors.forEach(item => setError(
+          item.path, {
+          type: 'server',
+          message: item.message,
+        }));
+      }
+
+    }
+  }, [result, navigate, setError]);
+
+  const onSubmit = (data: UserLoginPayload) => {
+    loginUser(data)
   }
 
   return (
     <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
 
           <UserFormField
