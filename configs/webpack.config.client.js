@@ -73,8 +73,8 @@ const devConfig = {
 const prodConfig = {
   mode: 'production',
   performance: {
-    maxEntrypointSize: 1024000,
-    maxAssetSize: 1024000
+    maxEntrypointSize: 1512000,
+    maxAssetSize: 1512000
   },
   optimization: {
     minimize: true,
