@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
+import PrivateRoute from '@/app/auth/private-route';
 import HomePage from '@/pages/home-page';
 import UserRegPage from '@/pages/user-reg-page';
 import UserLoginPage from '@/pages/user-login-page';
@@ -12,10 +13,6 @@ import RootLayout from '@/shared/ui/layouts/root-layout';
 
 export const appRoutes = [
   {
-    path: '/',
-    element: <HomePage />,
-  },
-  {
     path: '/registration',
     element: <UserRegPage />,
   },
@@ -24,18 +21,28 @@ export const appRoutes = [
     element: <UserLoginPage />,
   },
   {
-    element: <RootLayout />,
+    element: <PrivateRoute />,
     children: [
       {
-        path: '/folders/:folderSlug',
-        element: <FolderPage />,
-      },
-      {
-        path: '/folders/:folderSlug/notes/:noteSlug',
-        element: <NotePage />,
+        element: <RootLayout />,
+        children: [
+          {
+            path: '/',
+            element: <HomePage />,
+          },
+          {
+            path: '/folders/:folderSlug',
+            element: <FolderPage />,
+          },
+          {
+            path: '/folders/:folderSlug/notes/:noteSlug',
+            element: <NotePage />,
+          },
+        ]
       },
     ]
   },
+
 ];
 
 const Router = () => useRoutes([

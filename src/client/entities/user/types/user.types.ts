@@ -10,5 +10,6 @@ export type UserState = {
   data: UserDto | null,
   error: unknown,
   isAuthenticated: boolean,
+  isUpdating: boolean,
   isError: boolean,
 }

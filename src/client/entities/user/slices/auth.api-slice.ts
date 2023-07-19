@@ -5,11 +5,6 @@ import type {
   UserLoginPayload,
 } from '@/common/types/user.types';
 
-import {
-  setUserData,
-  setUserError,
-  resetUser,
-} from '@/entities/user/slices/user.slice';
 import type { UserDto } from '@/entities/user/types';
 import axiosBaseQuery from '@/shared/api/base-query';
 
@@ -33,15 +28,6 @@ export const authApi = createApi({
           data,
         }),
         transformResponse: (result: { user: UserDto }) => result.user,
-        async onQueryStarted(_args, { dispatch, queryFulfilled }) {
-          try {
-            const { data } = await queryFulfilled;
-            dispatch(setUserData(data));
-
-          } catch (error) {
-            dispatch(setUserError(error));
-          }
-        },
       }),
 
       logoutUser: build.mutation<void, void>({
@@ -49,21 +35,20 @@ export const authApi = createApi({
           url: '/auth/logout',
           method: 'GET',
         }),
-        async onQueryStarted(_args, { dispatch, queryFulfilled }) {
-          try {
-            await queryFulfilled;
-            dispatch(resetUser());
+      }),
 
-          } catch (error) {
-            dispatch(setUserError(error));
-          }
-        },
+      getUserProfile: build.query<UserDto, void>({
+        query: () => ({
+          url: '/auth/profile',
+          method: 'GET',
+        }),
       }),
     }
   },
 });
 
 export const {
+  useGetUserProfileQuery,
   useRegisterUserMutation,
   useLoginUserMutation,
   useLogoutUserMutation,

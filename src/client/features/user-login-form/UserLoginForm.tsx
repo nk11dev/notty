@@ -8,12 +8,14 @@ import { userLoginPayloadSchema } from '@/common/schemas';
 import type { UserLoginPayload } from '@/common/types/user.types';
 
 import { useLoginUserMutation } from '@/entities/user/slices';
+import { useUserState } from '@/entities/user/hooks';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useUserState();
   const [loginUser, result] = useLoginUserMutation();
 
   const methods = useForm<UserLoginPayload>({
@@ -29,7 +31,7 @@ const UserLoginForm = () => {
 
   useEffect(() => {
     if (result.isSuccess) {
-      navigate('/');
+      isAuthenticated && navigate('/');
 
     } else {
       const error = (result.error as BaseQueryError)?.data as BaseQueryError;
@@ -44,7 +46,7 @@ const UserLoginForm = () => {
       }
 
     }
-  }, [result, navigate, setError]);
+  }, [result, isAuthenticated, navigate, setError]);
 
   const onSubmit = (data: UserLoginPayload) => {
     loginUser(data)

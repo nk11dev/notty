@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, CookieOptions } from 'express';
 import colors from 'ansi-colors';
 const jwt = require('jsonwebtoken');
 
@@ -79,18 +79,24 @@ export default class AuthController {
 
           const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
 
-          res
-            .cookie('access-token', token, {
-              expires: new Date(
-                Date.now() + expiresIn * 1000
-              ),
-              maxAge: expiresIn * 1000,
-              httpOnly: true
-            })
-            .sendSuccess(200, {
-              message: 'User logged in',
-              user: loggedUser
-            });
+          const cookieOptions: CookieOptions = {
+            expires: new Date(
+              Date.now() + expiresIn * 1000
+            ),
+            maxAge: expiresIn * 1000,
+          };
+
+          res.cookie('access-token', token, {
+            ...cookieOptions,
+            httpOnly: true
+          });
+
+          res.cookie('has-access-token', true, cookieOptions);
+
+          res.sendSuccess(200, {
+            message: 'User logged in',
+            user: loggedUser
+          });
         }
       }
 
@@ -113,6 +119,7 @@ export default class AuthController {
 
   static logout(_req: Request, res: Response) {
     res.clearCookie('access-token');
+    res.clearCookie('has-access-token');
     res.sendSuccess(204);
   }
 

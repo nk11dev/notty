@@ -8,31 +8,42 @@ const initialState: UserState = {
   data: null,
   error: null,
   isAuthenticated: false,
+  isUpdating: false,
   isError: false,
 }
 
+function getInitialState() {
+  const data = localStorage.getItem('userProfile');
+
+  return data
+    ? {
+      ...initialState,
+      isAuthenticated: true,
+      data: JSON.parse(data),
+    }
+    : initialState
+}
+
 const userSlice = createSlice({
-  initialState,
+  initialState: getInitialState(),
   name: 'userSlice',
   reducers: {
-    setUserData: (_state, action: PayloadAction<UserDto>) => ({
+    setAuthUpdating: () => ({
+      ...initialState,
+      isUpdating: true,
+    }),
+    setAuthSuccess: (_state, action: PayloadAction<UserDto>) => ({
       ...initialState,
       isAuthenticated: true,
       data: action.payload,
     }),
-    setUserError: (_state, action: PayloadAction<BaseQueryError>) => ({
+    setAuthError: (_state, action: PayloadAction<BaseQueryError>) => ({
       ...initialState,
       isError: true,
       error: action.payload,
     }),
-    resetUser: () => initialState,
+    resetAuth: () => initialState,
   },
 });
 
-export default userSlice.reducer;
-
-export const {
-  setUserData,
-  setUserError,
-  resetUser,
-} = userSlice.actions;
+export default userSlice;
