@@ -7,7 +7,7 @@ import UserFormFooter from '@/shared/ui/forms/user-form-footer';
 
 const UserRegPage = () => (
   <AuthLayout>
-    <UserFormHeader text="Sign up for Notty" />
+    <UserFormHeader text="Sign up to get started!" />
 
     <UserRegForm />
     

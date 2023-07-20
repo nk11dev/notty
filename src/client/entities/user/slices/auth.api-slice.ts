@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import type {
-  UserCreatePayload,
+  UserRegisterPayload,
   UserLoginPayload,
 } from '@/common/types/user.types';
 
@@ -13,7 +13,7 @@ export const authApi = createApi({
   baseQuery: axiosBaseQuery(),
   endpoints(build) {
     return {
-      registerUser: build.mutation<UserDto, UserCreatePayload>({
+      registerUser: build.mutation<UserDto, UserRegisterPayload>({
         query: (data) => ({
           url: '/auth/register',
           method: 'POST',

@@ -4,7 +4,7 @@ import type { ZodIssue } from 'zod';
 import colors from 'ansi-colors';
 
 import {
-  userCreateRequestSchema,
+  userRegisterRequestSchema,
   userUpdateRequestSchema,
   userLoginRequestSchema,
 } from '@/common/schemas';
@@ -38,7 +38,7 @@ const validate = (schema: z.AnyZodObject) =>
     }
   };
 
-export const validateUserCreate = validate(userCreateRequestSchema);
+export const validateUserRegister = validate(userRegisterRequestSchema);
 
 export const validateUserUpdate = validate(userUpdateRequestSchema);
 

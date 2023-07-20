@@ -12,11 +12,12 @@ export default class AuthController {
     console.log(colors.blue('\n--- AuthController.register()2'));
     console.log('req.body:', req.body);
 
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
     const hashedPassword = await AuthService.hash(password);
 
     try {
       const createdUser = await UsersService.createUser({
+        username,
         email: email.toLowerCase(),
         password: hashedPassword
       });

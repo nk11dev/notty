@@ -7,42 +7,67 @@ const messages = {
   invalidType: (validType: string) => `Must be a ${validType}`,
 };
 
-const userEmailSchema = z.string({
+// Fields schemas
+const usernameFieldSchema = z.string({
+  required_error: messages.required,
+  invalid_type_error: messages.invalidType('string')
+})
+  .nonempty(messages.required)
+  .max(30, messages.max(30));
+
+const emailFieldSchema = z.string({
   required_error: messages.required,
 })
   .nonempty(messages.required)
   .email('Invalid email format');
 
-const userPasswordSchemaDefault = z.string({
+const passwordFieldSchemaDefault = z.string({
   required_error: messages.required,
   invalid_type_error: messages.invalidType('string')
 })
   .nonempty(messages.required);
 
-const userPasswordSchemaMinMax = userPasswordSchemaDefault
+const passwordFieldSchemaMinMax = passwordFieldSchemaDefault
   .min(6, messages.min(6))
-  .max(20, messages.max(20));
+  .max(30, messages.max(30));
 
-const userUsernameSchema = z.string({
+const passwordConfirmFieldSchema = z.string({
+  required_error: messages.required,
   invalid_type_error: messages.invalidType('string')
 })
-  .max(20, messages.max(20));
+  .nonempty(messages.required);
+
+// Payload schemas
+export const userRegisterPayloadSchema = z.object({
+  username: usernameFieldSchema,
+  email: emailFieldSchema,
+  password: passwordFieldSchemaMinMax,
+  passwordConfirm: passwordConfirmFieldSchema,
+}).refine((data) => data.password === data.passwordConfirm, {
+  path: ['passwordConfirm'],
+  message: 'Passwords do not match',
+});
 
 export const userCreatePayloadSchema = z.object({
-  email: userEmailSchema,
-  password: userPasswordSchemaMinMax,
-  username: userUsernameSchema.optional(),
+  username: usernameFieldSchema,
+  email: emailFieldSchema,
+  password: passwordFieldSchemaMinMax,
 });
 
 export const userUpdatePayloadSchema = z.object({
-  email: userEmailSchema.optional(),
-  password: userPasswordSchemaMinMax.optional(),
-  username: userUsernameSchema.optional(),
+  username: usernameFieldSchema.optional(),
+  email: emailFieldSchema.optional(),
+  password: passwordFieldSchemaMinMax.optional(),
 });
 
 export const userLoginPayloadSchema = z.object({
-  email: userEmailSchema,
-  password: userPasswordSchemaDefault,
+  email: emailFieldSchema,
+  password: passwordFieldSchemaDefault,
+});
+
+// Request schemas
+export const userRegisterRequestSchema = z.object({
+  body: userRegisterPayloadSchema
 });
 
 export const userCreateRequestSchema = z.object({

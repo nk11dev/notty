@@ -2,7 +2,7 @@ import express from 'express';
 
 import AuthController from '@/server/controllers/auth.controller';
 import {
-  validateUserCreate,
+  validateUserRegister,
   validateUserLogin,
   verifyToken,
 } from '@/server/middlewares';
@@ -11,7 +11,7 @@ const router = express.Router();
 
 router
   .post('/register',
-    validateUserCreate,
+    validateUserRegister,
     AuthController.register
   )
   .post('/login',

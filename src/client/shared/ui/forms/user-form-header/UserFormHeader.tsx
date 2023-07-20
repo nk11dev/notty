@@ -5,9 +5,12 @@ type Props = {
 };
 
 const UserFormHeader = (props: Props) => (
-  <h2 className="mb-4 text-center">
-    <b>{props.text}</b>
-  </h2>
+  <div className="text-center">
+    <h2 className="text-center">
+      <b>Welcome to Notty</b>
+    </h2>
+    <p>{props.text}</p>
+  </div>
 );
 
 export default UserFormHeader;

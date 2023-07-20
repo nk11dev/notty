@@ -4,8 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'react-bootstrap/Form';
 
-import { userCreatePayloadSchema } from '@/common/schemas';
-import type { UserCreatePayload } from '@/common/types/user.types';
+import { userRegisterPayloadSchema } from '@/common/schemas';
+import type { UserRegisterPayload } from '@/common/types/user.types';
 
 import { useRegisterUserMutation } from '@/entities/user/slices';
 import type { BaseQueryError } from '@/shared/types';
@@ -16,12 +16,14 @@ const UserRegForm = () => {
   const navigate = useNavigate();
   const [registerUser, result] = useRegisterUserMutation();
 
-  const methods = useForm<UserCreatePayload>({
-    resolver: zodResolver(userCreatePayloadSchema),
+  const methods = useForm<UserRegisterPayload>({
+    resolver: zodResolver(userRegisterPayloadSchema),
     mode: 'onTouched',
     defaultValues: {
+      username: '',
       email: '',
       password: '',
+      passwordConfirm: '',
     },
   });
 
@@ -45,7 +47,7 @@ const UserRegForm = () => {
     }
   }, [result, navigate, setError]);
 
-  const onSubmit = (data: UserCreatePayload) => {
+  const onSubmit = (data: UserRegisterPayload) => {
     registerUser(data);
   }
 
@@ -55,6 +57,12 @@ const UserRegForm = () => {
         <Form.Group className="mb-3">
 
           <UserFormField
+            label="Name"
+            placeholder="Your Name"
+            name="username"
+          />
+
+          <UserFormField
             label="Email"
             placeholder="your@email.com"
             name="email"
@@ -62,8 +70,14 @@ const UserRegForm = () => {
 
           <UserFormField
             label="Password"
-            placeholder="at least 6 characters"
+            placeholder="your password (at least 6 characters)"
             name="password"
+          />
+
+          <UserFormField
+            label="Confirm password"
+            placeholder="your password (at least 6 characters)"
+            name="passwordConfirm"
           />
 
           <UserFormButton text="COMPLETE SIGN UP" />
