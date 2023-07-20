@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 import { useUserState } from '@/entities/user/hooks';
 import { useGetUserProfileQuery } from '@/entities/user/slices';
+import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const PrivateRoute = () => {
   const { isUpdating, isAuthenticated } = useUserState();
@@ -15,7 +16,7 @@ const PrivateRoute = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  if (isFetching || isUpdating) return null;
+  if (isFetching || isUpdating) return <ProgressBar />;
 
   return isAuthenticated
     ? <Outlet />
