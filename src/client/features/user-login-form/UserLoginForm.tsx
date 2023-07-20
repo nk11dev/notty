@@ -56,21 +56,19 @@ const UserLoginForm = () => {
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
-
           <UserFormField
             label="Email"
             placeholder="your@email.com"
             name="email"
+            type="text"
           />
-
           <UserFormField
             label="Password"
             placeholder="your password"
             name="password"
+            type="password"
           />
-
           <UserFormButton text="SIGN IN" />
-
         </Form.Group>
       </Form>
     </FormProvider>

@@ -55,33 +55,31 @@ const UserRegForm = () => {
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
-
           <UserFormField
             label="Name"
             placeholder="Your Name"
             name="username"
+            type="text"
           />
-
           <UserFormField
             label="Email"
             placeholder="your@email.com"
             name="email"
+            type="text"
           />
-
           <UserFormField
             label="Password"
             placeholder="your password (at least 6 characters)"
             name="password"
+            type="password"
           />
-
           <UserFormField
             label="Confirm password"
             placeholder="your password (at least 6 characters)"
             name="passwordConfirm"
+            type="password"
           />
-
           <UserFormButton text="COMPLETE SIGN UP" />
-
         </Form.Group>
       </Form>
     </FormProvider>

@@ -5,9 +5,10 @@ import Form from 'react-bootstrap/Form';
 import { useFormContext } from 'react-hook-form';
 
 type Props = {
-  name: string;
   label: string,
   placeholder?: string,
+  name: string;
+  type: string;
 };
 
 const UserFormField = (props: Props) => {
@@ -27,7 +28,7 @@ const UserFormField = (props: Props) => {
 
       <Form.Control
         {...register(name)}
-        type="text"
+        type={props.type}
         className={styles.control}
         placeholder={props.placeholder}
         isInvalid={!!error?.message}
