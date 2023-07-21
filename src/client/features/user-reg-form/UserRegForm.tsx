@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'react-bootstrap/Form';
+import { IoPersonOutline, IoMailOutline, IoLockClosedOutline } from 'react-icons/io5';
 
 import { userRegisterPayloadSchema } from '@/common/schemas';
 import type { UserRegisterPayload } from '@/common/types/user.types';
@@ -66,26 +67,26 @@ const UserRegForm = () => {
           <UserFormField
             type="text"
             name="username"
-            label="Name"
-            placeholder="Your Name"
+            placeholder="Name"
+            icon={<IoPersonOutline />}
           />
           <UserFormField
             type="text"
             name="email"
-            label="Email"
-            placeholder="your@email.com"
+            placeholder="E-mail"
+            icon={<IoMailOutline />}
           />
           <UserFormField
             type="password"
             name="password"
-            label="Password"
-            placeholder="your password (at least 6 characters)"
+            placeholder="Password"
+            icon={<IoLockClosedOutline />}
           />
           <UserFormField
             type="password"
             name="passwordConfirm"
-            label="Confirm password"
-            placeholder="your password (at least 6 characters)"
+            placeholder="Confirm password"
+            icon={<IoLockClosedOutline />}
           />
           <UserFormButton
             type="submit"

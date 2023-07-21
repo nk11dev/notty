@@ -1,13 +1,9 @@
 .field {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-.control {
-  margin-bottom: 5px;
-
-  &:global(.is-invalid) {
-    background: none;
-  }
+.control:global(.is-invalid) {
+  background: none;
 }
 
 .controlFeedback {

@@ -1,3 +1,5 @@
+import styles from './UserFormHeader.module.scss';
+
 import React from 'react';
 
 type Props = {
@@ -6,8 +8,8 @@ type Props = {
 };
 
 const UserFormHeader = (props: Props) => (
-  <div className="text-center">
-    <h1 className="text-center">
+  <div className={styles.element}>
+    <h1>
       <b>{props.heading}</b>
     </h1>
     {props.text && (

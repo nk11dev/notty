@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Form from 'react-bootstrap/Form';
+import { IoMailOutline, IoLockClosedOutline } from 'react-icons/io5';
 
 import { userLoginPayloadSchema } from '@/common/schemas';
 import type { UserLoginPayload } from '@/common/types/user.types';
@@ -67,14 +68,14 @@ const UserLoginForm = () => {
           <UserFormField
             type="text"
             name="email"
-            label="Email"
-            placeholder="your@email.com"
+            placeholder="E-mail"
+            icon={<IoMailOutline />}
           />
           <UserFormField
             type="password"
             name="password"
-            label="Password"
-            placeholder="your password"
+            placeholder="Password"
+            icon={<IoLockClosedOutline />}
           />
           <UserFormButton
             type="submit"
