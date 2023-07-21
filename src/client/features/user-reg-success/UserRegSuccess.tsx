@@ -1,4 +1,4 @@
-import styles from './RegSuccessPage.module.scss';
+import styles from './UserRegSuccess.module.scss';
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +6,21 @@ import cn from 'classnames';
 import Alert from 'react-bootstrap/Alert';
 import { IoCheckmarkCircle } from 'react-icons/io5';
 
+import {
+  useRegisterUserMutation,
+  REGISTER_USER_CACHE_KEY,
+} from '@/entities/user/slices';
+import type { UserDto } from '@/entities/user/types';
 import UserFormHeader from '@/shared/ui/forms/user-form-header';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
 
-const RegSuccessPage = () => {
+const UserRegSuccess = () => {
   const navigate = useNavigate();
+  const [, regState] = useRegisterUserMutation({
+    fixedCacheKey: REGISTER_USER_CACHE_KEY,
+  });
+
+  const { email } = regState.data as UserDto;
 
   return (<>
     <UserFormHeader heading="Success!" />
@@ -20,7 +30,7 @@ const RegSuccessPage = () => {
     >
       <IoCheckmarkCircle className={styles.icon} />
       <div className={cn(styles.text, 'ms-1')}>
-        Account created!
+        Account for email <b>{email}</b> is created!
       </div>
       <UserFormButton
         type="button"
@@ -31,4 +41,4 @@ const RegSuccessPage = () => {
   </>);
 }
 
-export default RegSuccessPage;
+export default UserRegSuccess;

@@ -8,6 +8,8 @@ import type {
 import type { UserDto } from '@/entities/user/types';
 import axiosBaseQuery from '@/shared/api/base-query';
 
+export const REGISTER_USER_CACHE_KEY = 'REGISTER_USER_CACHE_KEY';
+
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: axiosBaseQuery(),
@@ -19,6 +21,7 @@ export const authApi = createApi({
           method: 'POST',
           data,
         }),
+        transformResponse: (result: { user: UserDto }) => result.user,
       }),
 
       loginUser: build.mutation<UserDto, UserLoginPayload>({

@@ -3,7 +3,6 @@ import { useRoutes } from 'react-router-dom';
 
 import PrivateRoute from '@/app/auth/private-route';
 import RegPage from '@/pages/reg-page';
-import RegSuccessPage from '@/pages/reg-success-page';
 import LoginPage from '@/pages/login-page';
 import HomePage from '@/pages/home-page';
 import FolderPage from '@/pages/folder-page';
@@ -19,10 +18,6 @@ export const appRoutes = [
       {
         path: '/registration',
         element: <RegPage />,
-      },
-      {
-        path: '/registration-success',
-        element: <RegSuccessPage />,
       },
       {
         path: '/login',

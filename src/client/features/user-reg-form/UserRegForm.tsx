@@ -8,7 +8,10 @@ import { IoPersonOutline, IoMailOutline, IoLockClosedOutline } from 'react-icons
 import { userRegisterPayloadSchema } from '@/common/schemas';
 import type { UserRegisterPayload } from '@/common/types/user.types';
 
-import { useRegisterUserMutation } from '@/entities/user/slices';
+import {
+  useRegisterUserMutation,
+  REGISTER_USER_CACHE_KEY,
+} from '@/entities/user/slices';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
@@ -17,12 +20,15 @@ import ProgressBar from '@/shared/ui/fetching/progress-bar';
 const UserRegForm = () => {
   const navigate = useNavigate();
 
-  const [registerUser, {
-    isSuccess,
-    isError,
+  const [registerUser, regState] = useRegisterUserMutation({
+    fixedCacheKey: REGISTER_USER_CACHE_KEY,
+  });
+
+  const {
     isLoading,
+    isError,
     error: registrationError,
-  }] = useRegisterUserMutation();
+  } = regState;
 
   const methods = useForm<UserRegisterPayload>({
     resolver: zodResolver(userRegisterPayloadSchema),
@@ -38,10 +44,7 @@ const UserRegForm = () => {
   const { handleSubmit, setError } = methods;
 
   useEffect(() => {
-    if (isSuccess) {
-      navigate('/registration-success');
-
-    } else if (isError) {
+    if (isError) {
       const error = (registrationError as BaseQueryError)?.data as BaseQueryError;
       const { data: errors } = error || {};
 
@@ -53,7 +56,7 @@ const UserRegForm = () => {
         }));
       }
     }
-  }, [isSuccess, isError, registrationError, navigate, setError]);
+  }, [isError, registrationError, navigate, setError]);
 
   const onSubmit = (data: UserRegisterPayload) => {
     registerUser(data);
