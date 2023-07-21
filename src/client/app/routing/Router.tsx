@@ -2,23 +2,33 @@ import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
 import PrivateRoute from '@/app/auth/private-route';
+import RegPage from '@/pages/reg-page';
+import RegSuccessPage from '@/pages/reg-success-page';
+import LoginPage from '@/pages/login-page';
 import HomePage from '@/pages/home-page';
-import UserRegPage from '@/pages/user-reg-page';
-import UserLoginPage from '@/pages/user-login-page';
 import FolderPage from '@/pages/folder-page';
 import NotePage from '@/pages/note-page';
 import NotFoundPage from '@/pages/not-found-page';
-
+import AuthLayout from '@/shared/ui/layouts/auth-layout';
 import RootLayout from '@/shared/ui/layouts/root-layout';
 
 export const appRoutes = [
   {
-    path: '/registration',
-    element: <UserRegPage />,
-  },
-  {
-    path: '/login',
-    element: <UserLoginPage />,
+    element: <AuthLayout />,
+    children: [
+      {
+        path: '/registration',
+        element: <RegPage />,
+      },
+      {
+        path: '/registration-success',
+        element: <RegSuccessPage />,
+      },
+      {
+        path: '/login',
+        element: <LoginPage />,
+      },
+    ]
   },
   {
     element: <PrivateRoute />,
@@ -42,7 +52,6 @@ export const appRoutes = [
       },
     ]
   },
-
 ];
 
 const Router = () => useRoutes([

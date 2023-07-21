@@ -12,11 +12,18 @@ import { useUserState } from '@/entities/user/hooks';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
+import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useUserState();
-  const [loginUser, result] = useLoginUserMutation();
+  const { isUpdating, isAuthenticated } = useUserState();
+
+  const [loginUser, {
+    isSuccess,
+    isError,
+    isLoading,
+    error: loginError,
+  }] = useLoginUserMutation();
 
   const methods = useForm<UserLoginPayload>({
     resolver: zodResolver(userLoginPayloadSchema),
@@ -30,11 +37,11 @@ const UserLoginForm = () => {
   const { handleSubmit, setError } = methods;
 
   useEffect(() => {
-    if (result.isSuccess) {
+    if (isSuccess) {
       isAuthenticated && navigate('/');
 
-    } else {
-      const error = (result.error as BaseQueryError)?.data as BaseQueryError;
+    } else if (isError) {
+      const error = (loginError as BaseQueryError)?.data as BaseQueryError;
       const { data: errors } = error || {};
 
       if (Array.isArray(errors) && errors.length > 0) {
@@ -46,33 +53,38 @@ const UserLoginForm = () => {
       }
 
     }
-  }, [result, isAuthenticated, navigate, setError]);
+  }, [isSuccess, isError, loginError, isAuthenticated, navigate, setError]);
 
   const onSubmit = (data: UserLoginPayload) => {
     loginUser(data)
   }
 
-  return (
+  return (<>
+    {(isLoading || isUpdating) && <ProgressBar />}
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
           <UserFormField
+            type="text"
+            name="email"
             label="Email"
             placeholder="your@email.com"
-            name="email"
-            type="text"
           />
           <UserFormField
+            type="password"
+            name="password"
             label="Password"
             placeholder="your password"
-            name="password"
-            type="password"
           />
-          <UserFormButton text="SIGN IN" />
+          <UserFormButton
+            type="submit"
+            text="Sign in"
+            isDisabled={isLoading}
+          />
         </Form.Group>
       </Form>
     </FormProvider>
-  );
+  </>);
 }
 
 export default UserLoginForm;

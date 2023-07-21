@@ -11,10 +11,17 @@ import { useRegisterUserMutation } from '@/entities/user/slices';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
+import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const UserRegForm = () => {
   const navigate = useNavigate();
-  const [registerUser, result] = useRegisterUserMutation();
+
+  const [registerUser, {
+    isSuccess,
+    isError,
+    isLoading,
+    error: registrationError,
+  }] = useRegisterUserMutation();
 
   const methods = useForm<UserRegisterPayload>({
     resolver: zodResolver(userRegisterPayloadSchema),
@@ -30,11 +37,11 @@ const UserRegForm = () => {
   const { handleSubmit, setError } = methods;
 
   useEffect(() => {
-    if (result.isSuccess) {
-      navigate('/login');
+    if (isSuccess) {
+      navigate('/registration-success');
 
-    } else {
-      const error = (result.error as BaseQueryError)?.data as BaseQueryError;
+    } else if (isError) {
+      const error = (registrationError as BaseQueryError)?.data as BaseQueryError;
       const { data: errors } = error || {};
 
       if (Array.isArray(errors) && errors.length > 0) {
@@ -45,45 +52,50 @@ const UserRegForm = () => {
         }));
       }
     }
-  }, [result, navigate, setError]);
+  }, [isSuccess, isError, registrationError, navigate, setError]);
 
   const onSubmit = (data: UserRegisterPayload) => {
     registerUser(data);
   }
 
-  return (
+  return (<>
+    {isLoading && <ProgressBar />}
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3">
           <UserFormField
+            type="text"
+            name="username"
             label="Name"
             placeholder="Your Name"
-            name="username"
-            type="text"
           />
           <UserFormField
+            type="text"
+            name="email"
             label="Email"
             placeholder="your@email.com"
-            name="email"
-            type="text"
           />
           <UserFormField
+            type="password"
+            name="password"
             label="Password"
             placeholder="your password (at least 6 characters)"
-            name="password"
-            type="password"
           />
           <UserFormField
+            type="password"
+            name="passwordConfirm"
             label="Confirm password"
             placeholder="your password (at least 6 characters)"
-            name="passwordConfirm"
-            type="password"
           />
-          <UserFormButton text="COMPLETE SIGN UP" />
+          <UserFormButton
+            type="submit"
+            text="Complete sign up"
+            isDisabled={isLoading}
+          />
         </Form.Group>
       </Form>
     </FormProvider>
-  );
+  </>);
 }
 
 export default UserRegForm;

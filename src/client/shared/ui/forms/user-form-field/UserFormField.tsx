@@ -5,10 +5,10 @@ import Form from 'react-bootstrap/Form';
 import { useFormContext } from 'react-hook-form';
 
 type Props = {
+  type: string;
+  name: string;
   label: string,
   placeholder?: string,
-  name: string;
-  type: string;
 };
 
 const UserFormField = (props: Props) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  text: string,
+  text?: string,
   linkText: string,
   url: string,
 };
@@ -10,19 +10,14 @@ type Props = {
 const UserFormFooter = (props: Props) => (
   <div className="text-center">
     <div>
-      <span className="me-2">
-        {props.text}
-      </span>
+      {props.text && (
+        <span className="me-2">
+          {props.text}
+        </span>
+      )}
 
       <Link to={props.url}>
         {props.linkText}
-      </Link>
-    </div>
-
-    {/* Temporarily link, for debugging purposes only*/}
-    <div>
-      <Link to="/">
-        Enter
       </Link>
     </div>
   </div>
