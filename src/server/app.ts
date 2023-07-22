@@ -7,10 +7,7 @@ import logger from 'morgan';
 
 import { addResponseFormats } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
-import authRoutes from '@/server/routes/auth.routes';
-import usersRoutes from '@/server/routes/users.routes';
-import foldersRoutes from '@/server/routes/folders.routes';
-import notesRoutes from '@/server/routes/notes.routes';
+import apiRoutes from '@/server/routes';
 
 const app = express();
 
@@ -28,10 +25,8 @@ if (process.env.NODE_ENV == 'development') {
   }));
 }
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', usersRoutes);
-app.use('/api/folders', foldersRoutes);
-app.use('/api/notes', notesRoutes);
+// API routes
+app.use('/api', apiRoutes);
 
 if (process.env.NODE_ENV == 'production') {
 
