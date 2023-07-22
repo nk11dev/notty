@@ -1,11 +1,13 @@
-import { Entity, Column, Index } from 'typeorm';
+import { Entity, Column, Index, OneToMany } from 'typeorm';
 
 import BaseEntity from '@/server/orm/entities/base.entity';
+import FolderEntity from '@/server/orm/entities/folder.entity';
+import NoteEntity from '@/server/orm/entities/note.entity';
 import { entityDateTranformer } from '@/server/helpers/orm.helpers';
 
 @Entity('users')
 export default class UserEntity extends BaseEntity {
-  @Index('index_user_email')
+  @Index('index__users__email')
   @Column({
     unique: true,
     nullable: false,
@@ -28,4 +30,16 @@ export default class UserEntity extends BaseEntity {
     transformer: entityDateTranformer,
   })
   last_login_at: Date;
+
+  @OneToMany(
+    () => FolderEntity,
+    (folder) => folder.user_info,
+  )
+  folders: FolderEntity[]
+
+  @OneToMany(
+    () => NoteEntity,
+    (note) => note.user_info,
+  )
+  notes: NoteEntity[]
 }
