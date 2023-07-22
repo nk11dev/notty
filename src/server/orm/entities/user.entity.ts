@@ -5,6 +5,11 @@ import FolderEntity from '@/server/orm/entities/folder.entity';
 import NoteEntity from '@/server/orm/entities/note.entity';
 import { entityDateTranformer } from '@/server/helpers/orm.helpers';
 
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+}
+
 @Entity('users')
 export default class UserEntity extends BaseEntity {
   @Index('index__users__email')
@@ -23,6 +28,13 @@ export default class UserEntity extends BaseEntity {
     nullable: true,
   })
   username: string
+
+  @Column({
+    type: 'enum',
+    enum: UserRole,
+    default: UserRole.USER,
+  })
+  role: UserRole;
 
   @Column({
     type: 'timestamptz',
