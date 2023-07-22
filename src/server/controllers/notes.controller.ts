@@ -2,6 +2,7 @@ import type { Request, Response } from 'express';
 
 import NotesService from '@/server/services/notes.service';
 import FoldersService from '@/server/services/folders.service';
+import type { TokenData } from '@/server/types/token.types';
 
 export default class NotesController {
 
@@ -27,7 +28,9 @@ export default class NotesController {
   }
 
   static async createNote(req: Request, res: Response) {
+    const { id: userId } = req.tokenData as TokenData;
     const folderId = Number(req.params.folderSlug);
+
     const relatedFolder = await FoldersService.findFolder(folderId);
 
     if (!relatedFolder) {
@@ -36,7 +39,11 @@ export default class NotesController {
       });
 
     } else {
-      const result = await NotesService.createNote(folderId, req.body);
+      const result = await NotesService.createNote({
+        ...req.body,
+        user_id: userId,
+        folder_id: folderId,
+      });
 
       res.sendSuccess(201, result);
     }

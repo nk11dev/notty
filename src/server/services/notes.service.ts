@@ -49,14 +49,11 @@ export default class NotesService {
     return result;
   }
 
-  static async createNote(folderId: number, payload: NotePayload) {
+  static async createNote(payload: NotePayload) {
     const { raw: [result] } = await noteRepository
       .createQueryBuilder()
       .insert()
-      .values({
-        ...payload,
-        folder_id: folderId
-      })
+      .values(payload)
       .returning('*')
       .execute();
 

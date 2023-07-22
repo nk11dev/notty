@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 
 import FoldersService from '@/server/services/folders.service';
+import type { TokenData } from '@/server/types/token.types';
 
 export default class FoldersController {
 
@@ -25,7 +26,12 @@ export default class FoldersController {
   }
 
   static async createFolder(req: Request, res: Response) {
-    const result = await FoldersService.createFolder(req.body);
+    const { id } = req.tokenData as TokenData;
+
+    const result = await FoldersService.createFolder({
+      ...req.body,
+      user_id: id
+    });
 
     res.sendSuccess(201, result);
   }

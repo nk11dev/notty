@@ -13,13 +13,14 @@ export default class FoldersService {
   static async getAllFolders() {
     return await folderRepository.manager.query(`
       SELECT
-        s.id,
-        s.title,
+        f.id,
+        f.title,
+        f.user_id,
         count(n.id)::int as notes_count
-      FROM ${folderRepository.metadata.tableName} s
-      LEFT JOIN ${noteRepository.metadata.tableName} n on s.id = n.folder_id
-      GROUP BY s.id
-      ORDER BY s.id ASC
+      FROM ${folderRepository.metadata.tableName} f
+      LEFT JOIN ${noteRepository.metadata.tableName} n on f.id = n.folder_id
+      GROUP BY f.id
+      ORDER BY f.id ASC
     `);
   }
 
