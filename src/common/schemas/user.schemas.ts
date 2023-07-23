@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { UserRole } from '@/server/constants/auth.constants';
+import { UserRole } from '@/common/constants/auth.constants';
 
 const messages = {
   required: 'Required',
