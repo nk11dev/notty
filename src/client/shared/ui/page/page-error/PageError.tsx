@@ -8,12 +8,12 @@ const PageError = (props: Partial<BaseQueryError>) => {
   const { status, data } = props;
 
   if (
-    (status === 404) &&
+    [403, 404].includes(status as number) &&
     (typeof data?.message === 'string')
   ) {
     return (
       <PageContent>
-        <h1>{data.message}</h1>
+        <h1>{status}: {data.message}</h1>
       </PageContent>
     );
   }
