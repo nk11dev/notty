@@ -15,6 +15,8 @@ export default class FoldersController {
   }
 
   static async getOneFolder(req: Request, res: Response) {
+    const { userId } = req.accessConditions as AccessConditions;
+
     const id = Number(req.params.folderSlug);
     const result = await FoldersService.getOneFolder(id);
 
@@ -24,7 +26,14 @@ export default class FoldersController {
       });
 
     } else {
-      res.sendSuccess(200, result);
+      if (userId && (userId !== result.user_id)) {
+        res.sendError(403, {
+          message: 'Access forbidden'
+        });
+
+      } else {
+        res.sendSuccess(200, result);
+      }
     }
   }
 

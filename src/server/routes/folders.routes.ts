@@ -13,7 +13,10 @@ router
     FoldersController.getAllFolders
   )
 
-  .get('/:folderSlug', FoldersController.getOneFolder)
+  .get('/:folderSlug',
+    verifyToken,
+    FoldersController.getOneFolder
+  )
 
   .post('/',
     verifyToken,
