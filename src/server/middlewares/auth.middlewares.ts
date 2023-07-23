@@ -1,6 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 const jwt = require('jsonwebtoken');
 
+import { UserRole } from '@/common/constants/auth.constants';
+
 import AuthService from '@/server/services/auth.service';
 
 export const hashPassword = async (req: Request, res: Response, next: NextFunction) => {
@@ -37,6 +39,12 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 
       } else {
         req.tokenData = decoded;
+
+        req.accessConditions = {
+          userId: (decoded.role === UserRole.ADMIN)
+            ? null
+            : decoded.id
+        };
 
         next();
       }

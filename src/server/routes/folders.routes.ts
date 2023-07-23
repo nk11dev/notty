@@ -8,7 +8,11 @@ const router = express.Router();
 
 router
   // routes for folders
-  .get('/', FoldersController.getAllFolders)
+  .get('/',
+    verifyToken,
+    FoldersController.getAllFolders
+  )
+
   .get('/:folderSlug', FoldersController.getOneFolder)
 
   .post('/',
