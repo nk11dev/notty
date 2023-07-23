@@ -10,7 +10,9 @@ const FoldersFeature = () => {
     data,
     isError,
     error
-  } = useGetAllFoldersQuery();
+  } = useGetAllFoldersQuery(undefined, {
+    refetchOnMountOrArgChange: true
+  });
 
   if (isError) return <ErrorMsg {...error} />;
 
