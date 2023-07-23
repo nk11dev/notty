@@ -6,22 +6,22 @@ import type {
 } from '@/server/types/folder.types';
 
 const folderRepository = dataSource.getRepository(FolderEntity);
-const noteRepository = dataSource.getRepository(NoteEntity);
 
 export default class FoldersService {
 
   static async getAllFolders() {
-    return await folderRepository.manager.query(`
-      SELECT
-        f.id,
-        f.title,
-        f.user_id,
-        count(n.id)::int as notes_count
-      FROM ${folderRepository.metadata.tableName} f
-      LEFT JOIN ${noteRepository.metadata.tableName} n on f.id = n.folder_id
-      GROUP BY f.id
-      ORDER BY f.id ASC
-    `);
+    return await folderRepository
+      .createQueryBuilder('f')
+      .leftJoin('f.notes', 'n')
+      .select([
+        'f.id as id',
+        'f.title as title',
+        'f.user_id as user_id',
+        'count(n.id)::int as notes_count'
+      ])
+      .groupBy('f.id')
+      .orderBy('f.id', 'ASC')
+      .execute();
   }
 
   static async getOneFolder(id: number) {
