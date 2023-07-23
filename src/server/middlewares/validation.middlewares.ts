@@ -5,6 +5,7 @@ import colors from 'ansi-colors';
 
 import {
   userRegisterRequestSchema,
+  userCreateRequestSchema,
   userUpdateRequestSchema,
   userLoginRequestSchema,
 } from '@/common/schemas';
@@ -39,6 +40,8 @@ const validate = (schema: z.AnyZodObject) =>
   };
 
 export const validateUserRegister = validate(userRegisterRequestSchema);
+
+export const validateUserCreate = validate(userCreateRequestSchema);
 
 export const validateUserUpdate = validate(userUpdateRequestSchema);
 

@@ -1,14 +1,10 @@
 import { Entity, Column, Index, OneToMany } from 'typeorm';
 
+import { UserRole } from '@/server/constants/auth.constants';
 import BaseEntity from '@/server/orm/entities/base.entity';
 import FolderEntity from '@/server/orm/entities/folder.entity';
 import NoteEntity from '@/server/orm/entities/note.entity';
 import { entityDateTranformer } from '@/server/helpers/orm.helpers';
-
-export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
-}
 
 @Entity('users')
 export default class UserEntity extends BaseEntity {

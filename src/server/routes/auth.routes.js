@@ -5,6 +5,7 @@ import {
   validateUserRegister,
   validateUserLogin,
   verifyToken,
+  fixUserRoleAsUser,
 } from '@/server/middlewares';
 
 const router = express.Router();
@@ -12,6 +13,7 @@ const router = express.Router();
 router
   .post('/register',
     validateUserRegister,
+    fixUserRoleAsUser,
     AuthController.register
   )
   .post('/login',

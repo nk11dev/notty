@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { UserRole } from '@/server/constants/auth.constants';
+
 const messages = {
   required: 'Required',
   min: (val: number) => `Must be more than ${val} characters`,
@@ -37,12 +39,15 @@ const passwordConfirmFieldSchema = z.string({
 })
   .nonempty(messages.required);
 
+const roleFieldSchema = z.nativeEnum(UserRole);
+
 // Payload schemas
 export const userRegisterPayloadSchema = z.object({
   username: usernameFieldSchema,
   email: emailFieldSchema,
   password: passwordFieldSchemaMinMax,
   passwordConfirm: passwordConfirmFieldSchema,
+  role: roleFieldSchema.optional(),
 }).refine((data) => data.password === data.passwordConfirm, {
   path: ['passwordConfirm'],
   message: 'Passwords do not match',
@@ -52,6 +57,7 @@ export const userCreatePayloadSchema = z.object({
   username: usernameFieldSchema,
   email: emailFieldSchema,
   password: passwordFieldSchemaMinMax,
+  role: roleFieldSchema,
 });
 
 export const userUpdatePayloadSchema = z.object({

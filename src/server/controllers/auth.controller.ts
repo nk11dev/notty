@@ -9,17 +9,18 @@ import type { TokenData } from '@/server/types/token.types';
 export default class AuthController {
 
   static async register(req: Request, res: Response) {
-    console.log(colors.blue('\n--- AuthController.register()2'));
+    console.log(colors.blue('\n--- AuthController.register()'));
     console.log('req.body:', req.body);
 
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     const hashedPassword = await AuthService.hash(password);
 
     try {
       const createdUser = await UsersService.createUser({
         username,
         email: email.toLowerCase(),
-        password: hashedPassword
+        password: hashedPassword,
+        role,
       });
 
       res.sendSuccess(201, {
