@@ -12,20 +12,8 @@ const initialState: UserState = {
   isError: false,
 }
 
-function getInitialState() {
-  const data = localStorage.getItem('userProfile');
-
-  return data
-    ? {
-      ...initialState,
-      isAuthenticated: true,
-      data: JSON.parse(data),
-    }
-    : initialState
-}
-
 const userSlice = createSlice({
-  initialState: getInitialState(),
+  initialState,
   name: 'userSlice',
   reducers: {
     setAuthUpdating: () => ({

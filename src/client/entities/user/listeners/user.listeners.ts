@@ -33,7 +33,6 @@ export const listenAuthSuccess = (startListening: AppStartListening) => startLis
     getUserProfile.matchFulfilled,
   ),
   effect: async ({ payload }, listenerApi) => {
-    localStorage.setItem('userProfile', JSON.stringify(payload));
     listenerApi.dispatch(setAuthSuccess(payload));
   },
 })
@@ -52,7 +51,6 @@ export const listenAuthError = (startListening: AppStartListening) => startListe
 export const listenAuthReset = (startListening: AppStartListening) => startListening({
   matcher: logoutUser.matchFulfilled,
   effect: async (_action, listenerApi) => {
-    localStorage.removeItem('userProfile');
     listenerApi.dispatch(resetAuth());
   },
 })
