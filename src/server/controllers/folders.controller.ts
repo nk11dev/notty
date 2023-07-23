@@ -2,11 +2,14 @@ import type { Request, Response } from 'express';
 
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
+import type { AccessConditions } from '@/server/types/auth.types';
 
 export default class FoldersController {
 
-  static async getAllFolders(_req: Request, res: Response) {
-    const result = await FoldersService.getAllFolders();
+  static async getAllFolders(req: Request, res: Response) {
+    const { userId } = req.accessConditions as AccessConditions;
+
+    const result = await FoldersService.getAllFolders(userId);
 
     res.sendSuccess(200, result);
   }

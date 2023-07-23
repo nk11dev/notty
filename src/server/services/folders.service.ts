@@ -1,6 +1,5 @@
 import dataSource from '@/server/orm/datasource';
 import FolderEntity from '@/server/orm/entities/folder.entity';
-import NoteEntity from '@/server/orm/entities/note.entity';
 import type {
   FolderPayload
 } from '@/server/types/folder.types';
@@ -9,7 +8,7 @@ const folderRepository = dataSource.getRepository(FolderEntity);
 
 export default class FoldersService {
 
-  static async getAllFolders() {
+  static async getAllFolders(userIdCondition: number | null) {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoin('f.notes', 'n')
@@ -19,6 +18,10 @@ export default class FoldersService {
         'f.user_id as user_id',
         'count(n.id)::int as notes_count'
       ])
+      .andWhere(userIdCondition
+        ? `f.user_id = :user_id`
+        : '1=1', { user_id: userIdCondition }
+      )
       .groupBy('f.id')
       .orderBy('f.id', 'ASC')
       .execute();
