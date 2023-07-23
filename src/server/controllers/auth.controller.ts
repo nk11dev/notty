@@ -76,7 +76,13 @@ export default class AuthController {
         } else {
           const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
 
-          const tokenPayload = { id: user.id, email: user.email };
+          const tokenPayload = { 
+            id: user.id, 
+            email: user.email,
+            username: user.username,
+            role: user.role,
+           };
+
           const expiresIn = 172800;
 
           const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });

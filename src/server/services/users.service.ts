@@ -1,4 +1,3 @@
-import { sqlDateTranformer } from '@/server/helpers/orm.helpers';
 import dataSource from '@/server/orm/datasource';
 import UserEntity from '@/server/orm/entities/user.entity';
 import type {
@@ -20,7 +19,7 @@ export default class UsersService {
   static async getUserProfile(id: number) {
     return await userRepository
       .createQueryBuilder('u')
-      .select(['u.id', 'u.email', 'u.username'])
+      .select(['u.id', 'u.email', 'u.username', 'u.role'])
       .where('u.id = :id', { id })
       .getOne();
   }
@@ -34,14 +33,14 @@ export default class UsersService {
   }
 
   static async createUser(payload: UserCreatePayload) {
-    const { raw: [result] } = await userRepository
+    const { raw: [{ id, email, username, role }] } = await userRepository
       .createQueryBuilder()
       .insert()
       .values(payload)
-      .returning(['id', 'email', 'username'])
+      .returning('*')
       .execute();
 
-    return result;
+    return { id, email, username, role };
   }
 
   static async updateUserData(id: number, payload: UserUpdatePayload) {
@@ -57,19 +56,19 @@ export default class UsersService {
       .execute();
   }
 
-  static async updateUserLastLoginAt(id: number) {
-    const [affectedRows] = await userRepository.manager.query(`
-      UPDATE ${userRepository.metadata.tableName}
-      SET 
-        last_login_at = CURRENT_TIMESTAMP,
-        updated_at = CURRENT_TIMESTAMP
-      WHERE id = $1
-      RETURNING 
-        id, email, username, 
-        ${sqlDateTranformer('last_login_at')}
-    `, [id]);
+  static async updateUserLastLoginAt(userId: number) {
+    const { raw: [{ id, email, username, role }] } = await userRepository
+      .createQueryBuilder()
+      .update()
+      .set({
+        last_login_at: new Date(),
+        updated_at: new Date(),
+      })
+      .where('id = :userId', { userId })
+      .returning('*')
+      .execute();
 
-    return affectedRows[0];
+    return { id, email, username, role };
   }
 
   static async deleteUser(id: number) {
