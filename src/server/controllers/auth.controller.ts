@@ -57,7 +57,7 @@ export default class AuthController {
           message: 'Login error',
           data: [{
             'path': 'email',
-            'message': 'Email not registered'
+            'message': `Couldn't find your account`
           }]
         });
 
@@ -76,12 +76,12 @@ export default class AuthController {
         } else {
           const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
 
-          const tokenPayload = { 
-            id: user.id, 
+          const tokenPayload = {
+            id: user.id,
             email: user.email,
             username: user.username,
             role: user.role,
-           };
+          };
 
           const expiresIn = 172800;
 
@@ -122,7 +122,14 @@ export default class AuthController {
     const { id } = req.tokenData as TokenData;
     const result = await UsersService.getUserProfile(id);
 
-    res.sendSuccess(200, result);
+    if (!result) {
+      res.sendError(404, {
+        message: 'User not found'
+      });
+
+    } else {
+      res.sendSuccess(200, result);
+    }
   }
 
   static logout(_req: Request, res: Response) {
