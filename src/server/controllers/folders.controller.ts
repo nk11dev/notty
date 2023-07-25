@@ -27,9 +27,7 @@ export default class FoldersController {
 
     } else {
       if (userId && (userId !== result.user_id)) {
-        res.sendError(403, {
-          message: 'Access forbidden'
-        });
+        res.sendAccessForbidden();
 
       } else {
         res.sendSuccess(200, result);

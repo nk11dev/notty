@@ -18,5 +18,11 @@ export function addResponseFormats(_req: Request, res: Response, next: NextFunct
     });
   };
 
+  res.sendAccessForbidden = function () {
+    return res.sendError(403, {
+      message: 'Access forbidden'
+    });
+  };
+
   return next();
 }

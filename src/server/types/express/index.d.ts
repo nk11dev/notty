@@ -12,5 +12,6 @@ declare module 'express-serve-static-core' {
   interface Response {
     sendSuccess: (statusCode: number, payload?: unknown) => Response;
     sendError: (statusCode: number, error: unknown) => Response;
+    sendAccessForbidden: () => Response;
   }
 }
