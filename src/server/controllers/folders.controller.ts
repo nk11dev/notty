@@ -19,19 +19,19 @@ export default {
     const { userId } = req.accessConditions as AccessConditions;
 
     const id = Number(req.params.folderSlug);
-    const result = await FoldersService.getOneFolder(id);
+    const folder = await FoldersService.getOneFolder(id);
 
-    if (!result) {
+    if (!folder) {
       res.sendError(404, {
         message: 'Folder not found'
       });
 
     } else {
-      if (userId && (userId !== result.user_id)) {
+      if (userId && (userId !== folder.user_id)) {
         res.sendAccessForbidden();
 
       } else {
-        res.sendSuccess(200, result);
+        res.sendSuccess(200, folder);
       }
     }
   }),
@@ -48,30 +48,56 @@ export default {
   }),
 
   updateFolder: catchErrors(async (req: Request, res: Response) => {
+    const { userId } = req.accessConditions as AccessConditions;
+
     const id = Number(req.params.folderSlug);
+    const folder = await FoldersService.findFolder(id);
 
-    const [affectedRows, affectedCount] = await FoldersService.updateFolder(
-      id, req.body
-    );
+    if (!folder) {
+      res.sendError(404, {
+        message: 'Folder not found'
+      });
 
-    res.sendSuccess(200, {
-      affectedRow: affectedRows[0] || null,
-      affectedCount
-    });
+    } else {
+      if (userId && (userId !== folder.user_id)) {
+        res.sendAccessForbidden();
+
+      } else {
+        const [affectedRows, affectedCount] = await FoldersService.updateFolder(id, req.body);
+
+        res.sendSuccess(200, {
+          affectedRow: affectedRows[0] || null,
+          affectedCount
+        });
+      }
+    }
   }),
 
   deleteFolder: catchErrors(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
     const id = Number(req.params.folderSlug);
+    const folder = await FoldersService.findFolder(id);
 
-    const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
-    const lastRow = await FoldersService.getLastFolder(userId);
+    if (!folder) {
+      res.sendError(404, {
+        message: 'Folder not found'
+      });
 
-    res.sendSuccess(200, {
-      affectedRow: affectedRows[0] || null,
-      affectedCount,
-      lastRow: lastRow || null
-    });
+    } else {
+      if (userId && (userId !== folder.user_id)) {
+        res.sendAccessForbidden();
+
+      } else {
+        const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
+        const lastRow = await FoldersService.getLastFolder(userId);
+
+        res.sendSuccess(200, {
+          affectedRow: affectedRows[0] || null,
+          affectedCount,
+          lastRow: lastRow || null
+        });
+      }
+    }
   })
 };

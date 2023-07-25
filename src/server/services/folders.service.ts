@@ -45,7 +45,6 @@ export default class FoldersService {
         : '1=1', { user_id: userIdCondition }
       )
       .getOne();
-
   }
 
   static async findFolder(id: number) {
