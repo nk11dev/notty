@@ -35,6 +35,7 @@ export default class NotesService {
       .createQueryBuilder('n')
       .leftJoinAndSelect('n.folder_info', 'f')
       .where(`n.id = :noteId`, { noteId })
+      .take(1)
       .getOne();
   }
 

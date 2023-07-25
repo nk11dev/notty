@@ -33,6 +33,7 @@ export default class FoldersService {
       .leftJoinAndSelect('f.notes', 'n')
       .orderBy('n.id', 'ASC')
       .where(`f.id = :id`, { id })
+      .take(1)
       .getOne();
   }
 
@@ -44,6 +45,7 @@ export default class FoldersService {
         ? `user_id = :user_id`
         : '1=1', { user_id: userIdCondition }
       )
+      .take(1)
       .getOne();
   }
 

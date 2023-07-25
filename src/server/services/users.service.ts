@@ -21,6 +21,7 @@ export default class UsersService {
       .createQueryBuilder('u')
       .select(['u.id', 'u.email', 'u.username', 'u.role'])
       .where('u.id = :id', { id })
+      .take(1)
       .getOne();
   }
 
