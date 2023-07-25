@@ -36,15 +36,16 @@ export default class FoldersService {
       .getOne();
   }
 
-  static async getLastFolder() {
-    const [result] = await folderRepository.manager.query(`
-      SELECT *
-      FROM ${folderRepository.metadata.tableName}
-      ORDER BY id DESC
-      LIMIT 1
-    `);
+  static async getLastFolder(userIdCondition: number | null) {
+    return await folderRepository
+      .createQueryBuilder()
+      .orderBy('id', 'DESC')
+      .andWhere(userIdCondition
+        ? `user_id = :user_id`
+        : '1=1', { user_id: userIdCondition }
+      )
+      .getOne();
 
-    return result || null;
   }
 
   static async findFolder(id: number) {

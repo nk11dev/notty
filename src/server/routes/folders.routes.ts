@@ -25,7 +25,11 @@ router
   )
 
   .put('/:folderSlug', foldersController.updateFolder)
-  .delete('/:folderSlug', foldersController.deleteFolder)
+
+  .delete('/:folderSlug',
+    verifyToken,
+    foldersController.deleteFolder
+  )
 
   // routes for notes, where specified folder id is required
   .get('/:folderSlug/notes', notesController.getAllNotes)

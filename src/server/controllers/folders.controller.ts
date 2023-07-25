@@ -61,15 +61,17 @@ export default {
   }),
 
   deleteFolder: catchErrors(async (req: Request, res: Response) => {
+    const { userId } = req.accessConditions as AccessConditions;
+
     const id = Number(req.params.folderSlug);
 
     const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
-    const lastRow = await FoldersService.getLastFolder();
+    const lastRow = await FoldersService.getLastFolder(userId);
 
     res.sendSuccess(200, {
       affectedRow: affectedRows[0] || null,
       affectedCount,
-      lastRow
+      lastRow: lastRow || null
     });
   })
 };
