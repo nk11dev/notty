@@ -32,7 +32,7 @@ export default {
     const { raw, affected } = result || {};
 
     res.sendSuccess(200, {
-      affectedRows: raw[0] || null,
+      affectedRow: raw[0] || null,
       affectedCount: affected
     });
   }),
@@ -43,7 +43,7 @@ export default {
     const [affectedRows, affectedCount] = await UsersService.deleteUser(id);
 
     res.sendSuccess(200, {
-      affectedRows,
+      affectedRow: affectedRows[0] || null,
       affectedCount,
     });
   })

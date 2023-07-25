@@ -57,7 +57,7 @@ export default {
     const { raw, affected } = result || {};
 
     res.sendSuccess(200, {
-      affectedRows: raw[0] || null,
+      affectedRow: raw[0] || null,
       affectedCount: affected
     });
   }),
@@ -78,8 +78,8 @@ export default {
     }
 
     res.sendSuccess(200, {
-      affectedCount,
       affectedRow: affectedRows[0] || null,
+      affectedCount,
       lastRow
     });
   })

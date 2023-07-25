@@ -21,7 +21,7 @@ export type NoteUpdateEndpointArg = {
 };
 
 export type NoteDeleteResponse = {
-  affectedCount: number,
   affectedRow: NoteDto | null,
+  affectedCount: number,
   lastRow: NoteDto | null,
 };

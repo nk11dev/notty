@@ -55,7 +55,7 @@ export default {
     );
 
     res.sendSuccess(200, {
-      affectedRows,
+      affectedRow: affectedRows[0] || null,
       affectedCount
     });
   }),
@@ -67,7 +67,7 @@ export default {
     const lastRow = await FoldersService.getLastFolder();
 
     res.sendSuccess(200, {
-      affectedRows,
+      affectedRow: affectedRows[0] || null,
       affectedCount,
       lastRow
     });

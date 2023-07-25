@@ -10,7 +10,7 @@ export type FolderDto = {
 };
 
 export type FolderDeleteResponse = {
-  affectedRows: FolderDto[],
+  affectedRow: FolderDto | null,
   affectedCount: number,
   lastRow: FolderDto | null,
 };
