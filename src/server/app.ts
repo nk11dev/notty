@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
-import { addResponseFormats } from '@/server/middlewares';
+import { addResponseFormats, handleErrors } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import apiRoutes from '@/server/routes';
 
@@ -46,5 +46,7 @@ if (process.env.NODE_ENV == 'production') {
     res.sendFile('dist/client/index.html', { root: '.' });
   });
 }
+
+app.use(handleErrors);
 
 export default app;
