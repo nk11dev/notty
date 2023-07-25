@@ -4,5 +4,16 @@ import type { Request, Response, NextFunction } from 'express';
 type Handler = (req: Request, res: Response, next: NextFunction) => any;
 
 export const catchErrors = (handler: Handler) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      return handler(req, res, next)
+
+    } catch (error) {
+      next(error)
+    }
+  };
+}
+
+export const safeAsync = (handler: Handler) => {
   return (req: Request, res: Response, next: NextFunction) => handler(req, res, next).catch(next);
 };

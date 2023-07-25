@@ -1,13 +1,13 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
-import { catchErrors } from '@/server/helpers/errors.helpers';
+import { catchErrors, safeAsync } from '@/server/helpers/errors.helpers';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 import type { AccessConditions } from '@/server/types/auth.types';
 
 export default {
 
-  getAllFolders: catchErrors(async (req: Request, res: Response) => {
+  getAllFolders: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
     const result = await FoldersService.getAllFolders(userId);
@@ -15,28 +15,7 @@ export default {
     res.sendSuccess(200, result);
   }),
 
-  getOneFolder: catchErrors(async (req: Request, res: Response) => {
-    const { userId } = req.accessConditions as AccessConditions;
-
-    const id = Number(req.params.folderSlug);
-    const folder = await FoldersService.getOneFolder(id);
-
-    if (!folder) {
-      res.sendError(404, {
-        message: 'Folder not found'
-      });
-
-    } else {
-      if (userId && (userId !== folder.user_id)) {
-        res.sendAccessForbidden();
-
-      } else {
-        res.sendSuccess(200, folder);
-      }
-    }
-  }),
-
-  createFolder: catchErrors(async (req: Request, res: Response) => {
+  createFolder: safeAsync(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
 
     const result = await FoldersService.createFolder({
@@ -47,11 +26,9 @@ export default {
     res.sendSuccess(201, result);
   }),
 
-  updateFolder: catchErrors(async (req: Request, res: Response) => {
-    const { userId } = req.accessConditions as AccessConditions;
-
+  checkFolderExisted: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.folderSlug);
-    const folder = await FoldersService.findFolder(id);
+    const folder = await FoldersService.getOneFolder(id);
 
     if (!folder) {
       res.sendError(404, {
@@ -59,45 +36,50 @@ export default {
       });
 
     } else {
-      if (userId && (userId !== folder.user_id)) {
-        res.sendAccessForbidden();
-
-      } else {
-        const [affectedRows, affectedCount] = await FoldersService.updateFolder(id, req.body);
-
-        res.sendSuccess(200, {
-          affectedRow: affectedRows[0] || null,
-          affectedCount
-        });
-      }
+      res.locals.folder = folder;
+      next();
     }
   }),
 
-  deleteFolder: catchErrors(async (req: Request, res: Response) => {
+  checkFolderAccess: catchErrors((req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.accessConditions as AccessConditions;
+    const { folder } = res.locals;
+
+    if (userId && (userId !== folder.user_id)) {
+      res.sendAccessForbidden();
+
+    } else {
+      next();
+    }
+  }),
+
+  getOneFolder: catchErrors((_req: Request, res: Response) => {
+    res.sendSuccess(200, res.locals.folder)
+  }),
+
+  updateFolder: safeAsync(async (req: Request, res: Response) => {
+    const id = Number(req.params.folderSlug);
+
+    const [affectedRows, affectedCount] = await FoldersService.updateFolder(id, req.body);
+
+    res.sendSuccess(200, {
+      affectedRow: affectedRows[0] || null,
+      affectedCount
+    });
+  }),
+
+  deleteFolder: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
     const id = Number(req.params.folderSlug);
-    const folder = await FoldersService.findFolder(id);
 
-    if (!folder) {
-      res.sendError(404, {
-        message: 'Folder not found'
-      });
+    const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
+    const lastRow = await FoldersService.getLastFolder(userId);
 
-    } else {
-      if (userId && (userId !== folder.user_id)) {
-        res.sendAccessForbidden();
-
-      } else {
-        const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
-        const lastRow = await FoldersService.getLastFolder(userId);
-
-        res.sendSuccess(200, {
-          affectedRow: affectedRows[0] || null,
-          affectedCount,
-          lastRow: lastRow || null
-        });
-      }
-    }
+    res.sendSuccess(200, {
+      affectedRow: affectedRows[0] || null,
+      affectedCount,
+      lastRow: lastRow || null
+    });
   })
 };

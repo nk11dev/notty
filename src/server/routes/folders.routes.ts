@@ -9,10 +9,25 @@ router
 
   // routes for folders
   .get('/', foldersController.getAllFolders)
-  .get('/:folderSlug', foldersController.getOneFolder)
   .post('/', foldersController.createFolder)
-  .put('/:folderSlug', foldersController.updateFolder)
-  .delete('/:folderSlug', foldersController.deleteFolder)
+
+  .get('/:folderSlug',
+    foldersController.checkFolderExisted,
+    foldersController.checkFolderAccess,
+    foldersController.getOneFolder,
+  )
+
+  .put('/:folderSlug',
+    foldersController.checkFolderExisted,
+    foldersController.checkFolderAccess,
+    foldersController.updateFolder,
+  )
+
+  .delete('/:folderSlug',
+    foldersController.checkFolderExisted,
+    foldersController.checkFolderAccess,
+    foldersController.deleteFolder,
+  )
 
   // routes for notes, where specified folder id is required
   .get('/:folderSlug/notes', notesController.getAllNotes)
