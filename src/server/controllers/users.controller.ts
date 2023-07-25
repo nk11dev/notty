@@ -1,17 +1,17 @@
 import type { Request, Response } from 'express';
 
-import { catchErrors } from '@/server/helpers/errors.helpers';
+import { safeAsync } from '@/server/helpers/errors.helpers';
 import UsersService from '@/server/services/users.service';
 
 export default {
 
-  getAllUsers: catchErrors(async (_req: Request, res: Response) => {
+  getAllUsers: safeAsync(async (_req: Request, res: Response) => {
     const result = await UsersService.getAllUsers();
 
     res.sendSuccess(200, result);
   }),
 
-  getOneUser: catchErrors(async (req: Request, res: Response) => {
+  getOneUser: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
     const result = await UsersService.findUserById(id);
 
@@ -25,7 +25,7 @@ export default {
     }
   }),
 
-  updateUser: catchErrors(async (req: Request, res: Response) => {
+  updateUser: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
     const result = await UsersService.updateUserData(id, req.body);
@@ -37,7 +37,7 @@ export default {
     });
   }),
 
-  deleteUser: catchErrors(async (req: Request, res: Response) => {
+  deleteUser: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
     const [affectedRows, affectedCount] = await UsersService.deleteUser(id);

@@ -1,20 +1,20 @@
 import type { Request, Response } from 'express';
 
-import { catchErrors } from '@/server/helpers/errors.helpers';
+import { safeAsync } from '@/server/helpers/errors.helpers';
 import NotesService from '@/server/services/notes.service';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 
 export default {
 
-  getAllNotes: catchErrors(async (req: Request, res: Response) => {
+  getAllNotes: safeAsync(async (req: Request, res: Response) => {
     const folderId = Number(req.params.folderSlug);
     const result = await NotesService.getAllNotes(folderId, req.query);
 
     res.sendSuccess(200, result);
   }),
 
-  getOneNote: catchErrors(async (req: Request, res: Response) => {
+  getOneNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
     const result = await NotesService.getOneNote(noteId);
 
@@ -28,7 +28,7 @@ export default {
     }
   }),
 
-  createNote: catchErrors(async (req: Request, res: Response) => {
+  createNote: safeAsync(async (req: Request, res: Response) => {
     const { id: userId } = req.tokenData as TokenData;
     const folderId = Number(req.params.folderSlug);
 
@@ -50,7 +50,7 @@ export default {
     }
   }),
 
-  updateNote: catchErrors(async (req: Request, res: Response) => {
+  updateNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
     const result = await NotesService.updateNote(noteId, req.body);
@@ -62,7 +62,7 @@ export default {
     });
   }),
 
-  deleteNote: catchErrors(async (req: Request, res: Response) => {
+  deleteNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
     const [affectedRows, affectedCount] = await NotesService.deleteNote(noteId);

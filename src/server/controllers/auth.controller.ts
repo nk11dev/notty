@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction, CookieOptions } from 'express';
 const jwt = require('jsonwebtoken');
 
-import { catchErrors } from '@/server/helpers/errors.helpers';
+import { safeAsync } from '@/server/helpers/errors.helpers';
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
 import type { TokenData } from '@/server/types/token.types';
@@ -42,7 +42,7 @@ export default {
     }
   },
 
-  login: catchErrors(async (req: Request, res: Response) => {
+  login: safeAsync(async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const user = await UsersService.findUserByEmail(email);
@@ -104,7 +104,7 @@ export default {
     }
   }),
 
-  profile: catchErrors(async (req: Request, res: Response) => {
+  profile: safeAsync(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
     const result = await UsersService.getUserProfile(id);
 

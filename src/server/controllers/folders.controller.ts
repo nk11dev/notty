@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 
-import { catchErrors, safeAsync } from '@/server/helpers/errors.helpers';
+import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 import type { AccessConditions } from '@/server/types/auth.types';
@@ -41,7 +41,7 @@ export default {
     }
   }),
 
-  checkFolderAccess: catchErrors((req: Request, res: Response, next: NextFunction) => {
+  checkFolderAccess: safeSync((req: Request, res: Response, next: NextFunction) => {
     const { userId } = req.accessConditions as AccessConditions;
     const { folder } = res.locals;
 
@@ -53,7 +53,7 @@ export default {
     }
   }),
 
-  getOneFolder: catchErrors((_req: Request, res: Response) => {
+  getOneFolder: safeSync((_req: Request, res: Response) => {
     res.sendSuccess(200, res.locals.folder)
   }),
 
