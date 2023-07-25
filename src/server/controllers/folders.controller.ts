@@ -1,20 +1,21 @@
 import type { Request, Response } from 'express';
 
+import { catchErrors } from '@/server/helpers/errors.helpers';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 import type { AccessConditions } from '@/server/types/auth.types';
 
-export default class FoldersController {
+export default {
 
-  static async getAllFolders(req: Request, res: Response) {
+  getAllFolders: catchErrors(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
     const result = await FoldersService.getAllFolders(userId);
 
     res.sendSuccess(200, result);
-  }
+  }),
 
-  static async getOneFolder(req: Request, res: Response) {
+  getOneFolder: catchErrors(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
     const id = Number(req.params.folderSlug);
@@ -33,9 +34,9 @@ export default class FoldersController {
         res.sendSuccess(200, result);
       }
     }
-  }
+  }),
 
-  static async createFolder(req: Request, res: Response) {
+  createFolder: catchErrors(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
 
     const result = await FoldersService.createFolder({
@@ -44,9 +45,9 @@ export default class FoldersController {
     });
 
     res.sendSuccess(201, result);
-  }
+  }),
 
-  static async updateFolder(req: Request, res: Response) {
+  updateFolder: catchErrors(async (req: Request, res: Response) => {
     const id = Number(req.params.folderSlug);
 
     const [affectedRows, affectedCount] = await FoldersService.updateFolder(
@@ -57,9 +58,9 @@ export default class FoldersController {
       affectedRows,
       affectedCount
     });
-  }
+  }),
 
-  static async deleteFolder(req: Request, res: Response) {
+  deleteFolder: catchErrors(async (req: Request, res: Response) => {
     const id = Number(req.params.folderSlug);
 
     const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
@@ -70,5 +71,5 @@ export default class FoldersController {
       affectedCount,
       lastRow
     });
-  }
-}
+  })
+};

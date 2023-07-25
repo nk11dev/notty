@@ -1,16 +1,17 @@
 import type { Request, Response } from 'express';
 
+import { catchErrors } from '@/server/helpers/errors.helpers';
 import UsersService from '@/server/services/users.service';
 
-export default class UsersController {
+export default {
 
-  static async getAllUsers(_req: Request, res: Response) {
+  getAllUsers: catchErrors(async (_req: Request, res: Response) => {
     const result = await UsersService.getAllUsers();
 
     res.sendSuccess(200, result);
-  }
+  }),
 
-  static async getOneUser(req: Request, res: Response) {
+  getOneUser: catchErrors(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
     const result = await UsersService.findUserById(id);
 
@@ -22,9 +23,9 @@ export default class UsersController {
     } else {
       res.sendSuccess(200, result);
     }
-  }
+  }),
 
-  static async updateUser(req: Request, res: Response) {
+  updateUser: catchErrors(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
     const result = await UsersService.updateUserData(id, req.body);
@@ -34,9 +35,9 @@ export default class UsersController {
       affectedRows: raw[0] || null,
       affectedCount: affected
     });
-  }
+  }),
 
-  static async deleteUser(req: Request, res: Response) {
+  deleteUser: catchErrors(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
     const [affectedRows, affectedCount] = await UsersService.deleteUser(id);
@@ -45,6 +46,5 @@ export default class UsersController {
       affectedRows,
       affectedCount,
     });
-  }
-
-}
+  })
+};

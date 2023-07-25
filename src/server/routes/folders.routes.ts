@@ -1,37 +1,38 @@
 import express from 'express';
 
-import FoldersController from '@/server/controllers/folders.controller';
-import NotesController from '@/server/controllers/notes.controller';
+import foldersController from '@/server/controllers/folders.controller';
+import notesController from '@/server/controllers/notes.controller';
 import { verifyToken } from '@/server/middlewares';
 
 const router = express.Router();
 
 router
+
   // routes for folders
   .get('/',
     verifyToken,
-    FoldersController.getAllFolders
+    foldersController.getAllFolders
   )
 
   .get('/:folderSlug',
     verifyToken,
-    FoldersController.getOneFolder
+    foldersController.getOneFolder
   )
 
   .post('/',
     verifyToken,
-    FoldersController.createFolder
+    foldersController.createFolder
   )
 
-  .put('/:folderSlug', FoldersController.updateFolder)
-  .delete('/:folderSlug', FoldersController.deleteFolder)
+  .put('/:folderSlug', foldersController.updateFolder)
+  .delete('/:folderSlug', foldersController.deleteFolder)
 
   // routes for notes, where specified folder id is required
-  .get('/:folderSlug/notes', NotesController.getAllNotes)
+  .get('/:folderSlug/notes', notesController.getAllNotes)
 
   .post('/:folderSlug/notes',
     verifyToken,
-    NotesController.createNote
+    notesController.createNote
   );
 
 export default router;

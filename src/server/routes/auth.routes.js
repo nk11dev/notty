@@ -1,6 +1,6 @@
 import express from 'express';
 
-import AuthController from '@/server/controllers/auth.controller';
+import authController from '@/server/controllers/auth.controller';
 import {
   validateUserRegister,
   validateUserLogin,
@@ -14,16 +14,16 @@ router
   .post('/register',
     validateUserRegister,
     fixUserRoleAsUser,
-    AuthController.register
+    authController.register
   )
   .post('/login',
     validateUserLogin,
-    AuthController.login
+    authController.login
   )
   .get('/profile',
     verifyToken,
-    AuthController.profile
+    authController.profile
   )
-  .get('/logout', AuthController.logout);
+  .get('/logout', authController.logout);
 
 export default router;

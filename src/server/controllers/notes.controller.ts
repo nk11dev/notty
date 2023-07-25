@@ -1,19 +1,20 @@
 import type { Request, Response } from 'express';
 
+import { catchErrors } from '@/server/helpers/errors.helpers';
 import NotesService from '@/server/services/notes.service';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 
-export default class NotesController {
+export default {
 
-  static async getAllNotes(req: Request, res: Response) {
+  getAllNotes: catchErrors(async (req: Request, res: Response) => {
     const folderId = Number(req.params.folderSlug);
     const result = await NotesService.getAllNotes(folderId, req.query);
 
     res.sendSuccess(200, result);
-  }
+  }),
 
-  static async getOneNote(req: Request, res: Response) {
+  getOneNote: catchErrors(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
     const result = await NotesService.getOneNote(noteId);
 
@@ -25,9 +26,9 @@ export default class NotesController {
     } else {
       res.sendSuccess(200, result);
     }
-  }
+  }),
 
-  static async createNote(req: Request, res: Response) {
+  createNote: catchErrors(async (req: Request, res: Response) => {
     const { id: userId } = req.tokenData as TokenData;
     const folderId = Number(req.params.folderSlug);
 
@@ -47,9 +48,9 @@ export default class NotesController {
 
       res.sendSuccess(201, result);
     }
-  }
+  }),
 
-  static async updateNote(req: Request, res: Response) {
+  updateNote: catchErrors(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
     const result = await NotesService.updateNote(noteId, req.body);
@@ -59,9 +60,9 @@ export default class NotesController {
       affectedRows: raw[0] || null,
       affectedCount: affected
     });
-  }
+  }),
 
-  static async deleteNote(req: Request, res: Response) {
+  deleteNote: catchErrors(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
     const [affectedRows, affectedCount] = await NotesService.deleteNote(noteId);
@@ -81,5 +82,5 @@ export default class NotesController {
       affectedRow: affectedRows[0] || null,
       lastRow
     });
-  }
-}
+  })
+};

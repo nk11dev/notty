@@ -1,17 +1,14 @@
-import type { Request, Response, CookieOptions } from 'express';
-import colors from 'ansi-colors';
+import type { Request, Response, NextFunction, CookieOptions } from 'express';
 const jwt = require('jsonwebtoken');
 
+import { catchErrors } from '@/server/helpers/errors.helpers';
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
 import type { TokenData } from '@/server/types/token.types';
 
-export default class AuthController {
+export default {
 
-  static async register(req: Request, res: Response) {
-    console.log(colors.blue('\n--- AuthController.register()'));
-    console.log('req.body:', req.body);
-
+  register: async (req: Request, res: Response, next: NextFunction) => {
     const { username, email, password, role } = req.body;
     const hashedPassword = await AuthService.hash(password);
 
@@ -29,7 +26,6 @@ export default class AuthController {
       });
 
     } catch (err) {
-      console.log(colors.red(`registration error: ${err}`));
 
       if (err.code === '23505') {
         res.sendError(409, {
@@ -39,86 +35,76 @@ export default class AuthController {
             'message': 'Email already registered'
           }]
         });
+
+      } else {
+        next(err);
       }
     }
-  }
+  },
 
-  static async login(req: Request, res: Response) {
-    console.log(colors.blue('\n--- AuthController.login()'));
-    console.log('req.body:', req.body);
-
+  login: catchErrors(async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    try {
-      const user = await UsersService.findUserByEmail(email);
+    const user = await UsersService.findUserByEmail(email);
 
-      if (!user) {
+    if (!user) {
+      res.sendError(404, {
+        message: 'Login error',
+        data: [{
+          'path': 'email',
+          'message': `Couldn't find your account`
+        }]
+      });
+
+    } else {
+      const isPasswordValid: boolean = await AuthService.verify(password, user.password);
+
+      if (!isPasswordValid) {
         res.sendError(404, {
           message: 'Login error',
           data: [{
-            'path': 'email',
-            'message': `Couldn't find your account`
+            'path': 'password',
+            'message': 'Invalid password'
           }]
         });
 
       } else {
-        const isPasswordValid: boolean = await AuthService.verify(password, user.password);
+        const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
 
-        if (!isPasswordValid) {
-          res.sendError(404, {
-            message: 'Login error',
-            data: [{
-              'path': 'password',
-              'message': 'Invalid password'
-            }]
-          });
+        const tokenPayload = {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          role: user.role,
+        };
 
-        } else {
-          const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
+        const expiresIn = 172800;
 
-          const tokenPayload = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            role: user.role,
-          };
+        const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
 
-          const expiresIn = 172800;
+        const cookieOptions: CookieOptions = {
+          expires: new Date(
+            Date.now() + expiresIn * 1000
+          ),
+          maxAge: expiresIn * 1000,
+        };
 
-          const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
+        res.cookie('access-token', token, {
+          ...cookieOptions,
+          httpOnly: true
+        });
 
-          const cookieOptions: CookieOptions = {
-            expires: new Date(
-              Date.now() + expiresIn * 1000
-            ),
-            maxAge: expiresIn * 1000,
-          };
+        res.cookie('has-access-token', true, cookieOptions);
 
-          res.cookie('access-token', token, {
-            ...cookieOptions,
-            httpOnly: true
-          });
-
-          res.cookie('has-access-token', true, cookieOptions);
-
-          res.sendSuccess(200, {
-            message: 'User logged in',
-            user: loggedUser
-          });
-        }
+        res.sendSuccess(200, {
+          message: 'User logged in',
+          user: loggedUser
+        });
       }
-
-    } catch (error) {
-      console.log(colors.red(`login error: ${error}`));
-
-      res.sendError(404, {
-        message: 'Login error',
-        data: error
-      });
     }
-  }
+  }),
 
-  static async profile(req: Request, res: Response) {
+  profile: catchErrors(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
     const result = await UsersService.getUserProfile(id);
 
@@ -130,12 +116,11 @@ export default class AuthController {
     } else {
       res.sendSuccess(200, result);
     }
-  }
+  }),
 
-  static logout(_req: Request, res: Response) {
+  logout: (_req: Request, res: Response) => {
     res.clearCookie('access-token');
     res.clearCookie('has-access-token');
     res.sendSuccess(204);
   }
-
-}
+};

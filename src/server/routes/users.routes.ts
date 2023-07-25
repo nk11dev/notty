@@ -1,7 +1,7 @@
 import express from 'express';
 
-import UsersController from '@/server/controllers/users.controller';
-import AuthController from '@/server/controllers/auth.controller';
+import usersController from '@/server/controllers/users.controller';
+import authController from '@/server/controllers/auth.controller';
 import {
   validateUserCreate,
   validateUserUpdate,
@@ -11,21 +11,21 @@ import {
 const router = express.Router();
 
 router
-  .get('/', UsersController.getAllUsers)
+  .get('/', usersController.getAllUsers)
 
   .post('/',
     validateUserCreate,
-    AuthController.register
+    authController.register
   )
 
-  .get('/:userSlug', UsersController.getOneUser)
+  .get('/:userSlug', usersController.getOneUser)
 
   .put('/:userSlug',
     validateUserUpdate,
     hashPassword,
-    UsersController.updateUser
+    usersController.updateUser
   )
 
-  .delete('/:userSlug', UsersController.deleteUser);
+  .delete('/:userSlug', usersController.deleteUser);
 
 export default router;
