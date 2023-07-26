@@ -1,53 +1,93 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
-import { safeAsync } from '@/server/helpers/errors.helpers';
+import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import NotesService from '@/server/services/notes.service';
 import FoldersService from '@/server/services/folders.service';
-import type { TokenData } from '@/server/types/token.types';
+import type { AccessConditions } from '@/server/types/auth.types';
 
 export default {
 
-  getAllNotes: safeAsync(async (req: Request, res: Response) => {
+  // errors handlers (for notes, where specified folder id is required), used before success handlers
+  findParentFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const folderId = Number(req.params.folderSlug);
-    const result = await NotesService.getAllNotes(folderId, req.query);
+    const parentFolder = await FoldersService.findFolder(folderId);
+
+    if (!parentFolder) {
+      res.sendError(400, {
+        message: `Parent folder with 'id' = '${folderId}' not found.`
+      });
+
+    } else {
+      res.locals.parentFolder = parentFolder;
+      next();
+    }
+  }),
+
+  checkParentFolderAccess: safeSync((req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.accessConditions as AccessConditions;
+    const { parentFolder } = res.locals;
+
+    if (userId && (userId !== parentFolder.user_id)) {
+      res.sendAccessForbidden();
+
+    } else {
+      next();
+    }
+  }),
+
+  // success handlers (for notes, where specified folder id is required), used after errors handlers
+  getAllNotes: safeAsync(async (req: Request, res: Response) => {
+    const { userId } = req.accessConditions as AccessConditions;
+
+    const folderId = Number(req.params.folderSlug);
+    const result = await NotesService.getAllNotes(folderId, userId, req.query);
 
     res.sendSuccess(200, result);
   }),
 
-  getNote: safeAsync(async (req: Request, res: Response) => {
-    const noteId = Number(req.params.noteSlug);
-    const result = await NotesService.getNote(noteId);
+  createNote: safeAsync(async (req: Request, res: Response) => {
+    const { parentFolder } = res.locals;
 
-    if (!result) {
+    const result = await NotesService.createNote({
+      ...req.body,
+      user_id: parentFolder.user_id,
+      folder_id: parentFolder.id,
+    });
+
+    res.sendSuccess(201, result);
+  }),
+
+  // errors handlers (for notes without specified folder id), used before success handlers
+  findNote: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const noteId = Number(req.params.noteSlug);
+    const note = await NotesService.getNote(noteId);
+
+    if (!note) {
       res.sendError(404, {
         message: 'Note not found'
       });
 
     } else {
-      res.sendSuccess(200, result);
+      res.locals.note = note;
+      next();
     }
   }),
 
-  createNote: safeAsync(async (req: Request, res: Response) => {
-    const { id: userId } = req.tokenData as TokenData;
-    const folderId = Number(req.params.folderSlug);
+  checkNoteAccess: safeSync((req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.accessConditions as AccessConditions;
+    const { note } = res.locals;
 
-    const relatedFolder = await FoldersService.findFolder(folderId);
-
-    if (!relatedFolder) {
-      res.sendError(400, {
-        message: `Note not created: foreign key constraint preasumable violation. Folder with 'id' = '${folderId}' doesn't exist in 'folders' table.`
-      });
+    if (userId && (userId !== note.user_id)) {
+      res.sendAccessForbidden();
 
     } else {
-      const result = await NotesService.createNote({
-        ...req.body,
-        user_id: userId,
-        folder_id: folderId,
-      });
-
-      res.sendSuccess(201, result);
+      next();
     }
+  }),
+
+  // success handlers (for notes without specified folder id), used after errors handlers 
+  getNote: safeSync((_req: Request, res: Response) => {
+    res.sendSuccess(200, res.locals.note)
   }),
 
   updateNote: safeAsync(async (req: Request, res: Response) => {

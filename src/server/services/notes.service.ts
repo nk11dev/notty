@@ -9,7 +9,11 @@ const noteRepository = dataSource.getRepository(NoteEntity);
 
 export default class NotesService {
 
-  static async getAllNotes(folderId: number, queryParams: unknown) {
+  static async getAllNotes(
+    folderId: number,
+    userIdCondition: number | null,
+    queryParams: unknown
+  ) {
     const { filterByIsBookmark } = queryParams as NotesGetQueryParams;
 
     return await noteRepository
@@ -17,9 +21,14 @@ export default class NotesService {
       .orderBy('id', 'ASC')
 
       .andWhere(folderId
-        ? `folder_id = :folderId`
+        ? 'folder_id = :folderId'
         : '1=1',
         { folderId }
+      )
+
+      .andWhere(userIdCondition
+        ? 'user_id = :user_id'
+        : '1=1', { user_id: userIdCondition }
       )
 
       .andWhere((typeof filterByIsBookmark !== 'undefined')
@@ -34,7 +43,7 @@ export default class NotesService {
     return await noteRepository
       .createQueryBuilder('n')
       .leftJoinAndSelect('n.folder_info', 'f')
-      .where(`n.id = :noteId`, { noteId })
+      .where('n.id = :noteId', { noteId })
       .take(1)
       .getOne();
   }
@@ -42,7 +51,7 @@ export default class NotesService {
   static async getLastNoteInFolder(folderId: number) {
     const [result] = await noteRepository
       .createQueryBuilder()
-      .where(`folder_id = :folderId`, { folderId })
+      .where('folder_id = :folderId', { folderId })
       .orderBy('id', 'DESC')
       .limit(1)
       .getMany();

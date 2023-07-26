@@ -30,7 +30,16 @@ router
   )
 
   // routes for notes, where specified folder id is required
-  .get('/:folderSlug/notes', notesController.getAllNotes)
-  .post('/:folderSlug/notes', notesController.createNote);
+  .get('/:folderSlug/notes',
+    notesController.findParentFolder,
+    notesController.checkParentFolderAccess,
+    notesController.getAllNotes
+  )
+
+  .post('/:folderSlug/notes',
+    notesController.findParentFolder,
+    notesController.checkParentFolderAccess,
+    notesController.createNote
+  );
 
 export default router;

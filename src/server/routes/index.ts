@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use('/auth', auth);
 router.use('/folders', verifyToken, folders);
-router.use('/notes', notes);
+router.use('/notes', verifyToken, notes);
 router.use('/users', users);
 
 export default router;
