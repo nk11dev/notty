@@ -6,7 +6,7 @@ type Handler = (req: Request, res: Response, next: NextFunction) => any;
 export const safeSync = (handler: Handler) => {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
-      return handler(req, res, next)
+      handler(req, res, next)
 
     } catch (error) {
       next(error)

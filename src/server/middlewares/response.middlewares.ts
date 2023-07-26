@@ -24,5 +24,5 @@ export function addResponseFormats(_req: Request, res: Response, next: NextFunct
     });
   };
 
-  return next();
+  next();
 }

@@ -18,7 +18,7 @@ const validate = (schema: z.AnyZodObject) =>
         query: req.query,
         params: req.params,
       });
-      return next();
+      next();
 
     } catch (error) {
       console.log(colors.red('\n--- validation.middleware'));
