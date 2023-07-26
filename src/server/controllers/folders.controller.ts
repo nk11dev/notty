@@ -7,6 +7,7 @@ import type { AccessConditions } from '@/server/types/auth.types';
 
 export default {
 
+  // success handlers, used without 404 and 403 errors handlers
   getAllFolders: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
@@ -26,6 +27,7 @@ export default {
     res.sendSuccess(201, result);
   }),
 
+  // errors handlers, used before success handlers
   findFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.folderSlug);
     const folder = await FoldersService.getFolder(id);
@@ -41,6 +43,7 @@ export default {
     }
   }),
 
+  // success handlers, used after errors handlers
   checkFolderAccess: safeSync((req: Request, res: Response, next: NextFunction) => {
     const { userId } = req.accessConditions as AccessConditions;
     const { folder } = res.locals;
