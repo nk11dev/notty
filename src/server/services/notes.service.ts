@@ -30,7 +30,7 @@ export default class NotesService {
       .getMany();
   }
 
-  static async getOneNote(noteId: number) {
+  static async getNote(noteId: number) {
     return await noteRepository
       .createQueryBuilder('n')
       .leftJoinAndSelect('n.folder_info', 'f')

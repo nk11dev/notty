@@ -26,9 +26,9 @@ export default {
     res.sendSuccess(201, result);
   }),
 
-  checkFolderExisted: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
+  findFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.folderSlug);
-    const folder = await FoldersService.getOneFolder(id);
+    const folder = await FoldersService.getFolder(id);
 
     if (!folder) {
       res.sendError(404, {
@@ -53,7 +53,7 @@ export default {
     }
   }),
 
-  getOneFolder: safeSync((_req: Request, res: Response) => {
+  getFolder: safeSync((_req: Request, res: Response) => {
     res.sendSuccess(200, res.locals.folder)
   }),
 

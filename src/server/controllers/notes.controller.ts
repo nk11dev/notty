@@ -14,9 +14,9 @@ export default {
     res.sendSuccess(200, result);
   }),
 
-  getOneNote: safeAsync(async (req: Request, res: Response) => {
+  getNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
-    const result = await NotesService.getOneNote(noteId);
+    const result = await NotesService.getNote(noteId);
 
     if (!result) {
       res.sendError(404, {

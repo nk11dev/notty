@@ -12,19 +12,19 @@ router
   .post('/', foldersController.createFolder)
 
   .get('/:folderSlug',
-    foldersController.checkFolderExisted,
+    foldersController.findFolder,
     foldersController.checkFolderAccess,
-    foldersController.getOneFolder,
+    foldersController.getFolder,
   )
 
   .put('/:folderSlug',
-    foldersController.checkFolderExisted,
+    foldersController.findFolder,
     foldersController.checkFolderAccess,
     foldersController.updateFolder,
   )
 
   .delete('/:folderSlug',
-    foldersController.checkFolderExisted,
+    foldersController.findFolder,
     foldersController.checkFolderAccess,
     foldersController.deleteFolder,
   )

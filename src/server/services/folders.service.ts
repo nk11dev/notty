@@ -27,7 +27,7 @@ export default class FoldersService {
       .execute();
   }
 
-  static async getOneFolder(id: number) {
+  static async getFolder(id: number) {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoinAndSelect('f.notes', 'n')

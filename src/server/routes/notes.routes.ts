@@ -7,7 +7,7 @@ const router = express.Router();
 router
   // routes for notes without specified folder id
   .get('/', notesController.getAllNotes)
-  .get('/:noteSlug', notesController.getOneNote)
+  .get('/:noteSlug', notesController.getNote)
   .put('/:noteSlug', notesController.updateNote)
   .delete('/:noteSlug', notesController.deleteNote);
 
