@@ -45,7 +45,7 @@ export default {
   login: safeAsync(async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const user = await UsersService.findUserByEmail(email);
+    const user = await UsersService.findUserByEmail(email.toLowerCase());
 
     if (!user) {
       res.sendError(404, {
