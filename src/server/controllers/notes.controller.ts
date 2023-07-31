@@ -13,7 +13,7 @@ export default {
     const parentFolder = await FoldersService.findFolder(folderId);
 
     if (!parentFolder) {
-      res.sendError(400, {
+      res.sendError(404, {
         message: `Parent folder with 'id' = '${folderId}' not found.`
       });
 
