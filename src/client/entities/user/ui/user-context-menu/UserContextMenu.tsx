@@ -1,7 +1,6 @@
 import styles from './UserContextMenu.module.scss';
 
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { IoExitOutline } from 'react-icons/io5';
 import type { ItemParams } from 'react-contexify';
 
@@ -12,14 +11,7 @@ import UserPanel from '@/entities/user/ui/user-panel';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const UserContextMenu = () => {
-  const [logoutUser, { isSuccess }] = useLogoutUserMutation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/login')
-    }
-  }, [isSuccess, navigate]);
+  const [logoutUser] = useLogoutUserMutation();
 
   const onItemClick = (args: ItemParams) => {
     switch (args.id) {
