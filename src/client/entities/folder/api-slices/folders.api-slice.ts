@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import axiosBaseQuery from '@/shared/api/base-query';
+import customBaseQuery from '@/shared/api/base-query';
 import type {
   FolderDto,
   FolderDeleteResponse
@@ -8,7 +8,7 @@ import type {
 
 export const foldersApi = createApi({
   reducerPath: 'foldersApi',
-  baseQuery: axiosBaseQuery(),
+  baseQuery: customBaseQuery,
   tagTypes: ['FoldersTag', 'FolderTag'],
   endpoints(build) {
     return {
@@ -40,7 +40,7 @@ export const foldersApi = createApi({
         query: ({ id, title }) => ({
           url: `/folders/${id}`,
           method: 'PUT',
-          data: {
+          body: {
             title,
           },
           headers: { 'content-type': 'application/json' },

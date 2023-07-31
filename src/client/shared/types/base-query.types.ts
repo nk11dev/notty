@@ -1,5 +1,5 @@
 export type BaseQueryError = {
-  status?: number;
+  status: number| string;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   data: any,
   name?: string,
@@ -8,7 +8,15 @@ export type BaseQueryError = {
   code?: string,
 };
 
-export type ErrorResponse = {
-  message: string,
-  error: unknown
+export type ApiResponseError = {
+  status: 'error',
+  error: {
+    message: string,
+    data?: unknown,
+  }
+}
+
+export type ApiResponseSuccess = {
+  status?: 'success',
+  payload?: unknown
 }

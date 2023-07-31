@@ -6,29 +6,29 @@ import type {
 } from '@/common/types/user.types';
 
 import type { UserDto } from '@/entities/user/types';
-import axiosBaseQuery from '@/shared/api/base-query';
+import customBaseQuery from '@/shared/api/base-query';
 
 export const REGISTER_USER_CACHE_KEY = 'REGISTER_USER_CACHE_KEY';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: axiosBaseQuery(),
+  baseQuery: customBaseQuery,
   endpoints(build) {
     return {
       registerUser: build.mutation<UserDto, UserRegisterPayload>({
-        query: (data) => ({
+        query: (body) => ({
           url: '/auth/register',
           method: 'POST',
-          data,
+          body,
         }),
         transformResponse: (result: { user: UserDto }) => result.user,
       }),
 
       loginUser: build.mutation<UserDto, UserLoginPayload>({
-        query: (data) => ({
+        query: (body) => ({
           url: '/auth/login',
           method: 'POST',
-          data,
+          body,
         }),
         transformResponse: (result: { user: UserDto }) => result.user,
       }),

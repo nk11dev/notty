@@ -1,67 +1,53 @@
-import axios from 'axios';
-import type { AxiosRequestConfig, AxiosError } from 'axios';
-import type { BaseQueryFn } from '@reduxjs/toolkit/query';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query'
+import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query'
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
+import type { BaseQueryError, ApiResponseError, ApiResponseSuccess } from '@/shared/types';
 import { log } from '@/shared/utils/log.utils';
-import type {
-  BaseQueryError,
-  ErrorResponse,
-} from '@/shared/types';
 
-const axiosBaseQuery =
-  (
-    { baseUrl }: { baseUrl: string } = { baseUrl: API_BASE_URL as string }
-  ): BaseQueryFn<
-    {
-      url: string
-      method: AxiosRequestConfig['method']
-      data?: AxiosRequestConfig['data']
-      params?: AxiosRequestConfig['params']
-    },
-    unknown,
-    BaseQueryError
-  > =>
-    async (args) => {
-      const { url, method, data, params } = args;
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: API_BASE_URL as string,
+  credentials: 'include',
+});
 
-      log({
-        msg: '--- axiosBaseQuery()',
-        data: `${args.method} ${args.url}`,
-        theme: 'violet',
-      });
+const customBaseQuery: BaseQueryFn<
+  FetchArgs,
+  unknown,
+  BaseQueryError
+> = async (args, api, extraOptions) => {
 
-      log({
-        msg: 'data',
-        data: data,
-        theme: 'gray',
-        isDisabled: !data
-      });
+  log({
+    msg: `--- ${args.method} ${args.url}`,
+    theme: 'violet',
+  });
 
-      try {
-        const result = await axios({
-          url: baseUrl + url,
-          method,
-          data,
-          params,
-          withCredentials: true,
-        });
+  const result = await rawBaseQuery(args, api, extraOptions);
 
-        return { data: result.data.payload };
+  log({
+    msg: `--- ${args.method} ${args.url}`,
+    data: result,
+    theme: result.error ? 'salmon' : 'green',
+  });
 
-      } catch (axiosError) {
-        const err = axiosError as AxiosError;
-        const data = err?.response?.data as ErrorResponse;
+  if (result.error) {
+    const { error } = result;
+    const responseError = error?.data as ApiResponseError;
 
-        return {
-          error: {
-            status: err.response?.status,
-            data: data?.error
-            ? data.error
-            : (data || err.message),
-          },
-        };
-      }
-    }
+    return {
+      error: {
+        status: error.status,
+        data: responseError?.error || responseError,
+      },
+    };
 
-export default axiosBaseQuery;
+  } else {
+    const responseSuccess = result.data as ApiResponseSuccess;
+
+    return {
+      data: responseSuccess?.payload || responseSuccess
+    };
+  }
+
+};
+
+export default customBaseQuery;

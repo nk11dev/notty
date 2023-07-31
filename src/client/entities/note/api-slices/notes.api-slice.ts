@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import axiosBaseQuery from '@/shared/api/base-query';
+import customBaseQuery from '@/shared/api/base-query';
 import type {
   NoteDto,
   NoteUpdateEndpointArg,
@@ -11,7 +11,7 @@ import { foldersApi } from '@/entities/folder/api-slices';
 
 export const notesApi = createApi({
   reducerPath: 'notesApi',
-  baseQuery: axiosBaseQuery(),
+  baseQuery: customBaseQuery,
   tagTypes: ['NoteTag', 'NotesTag'],
   endpoints(build) {
     return {
@@ -59,7 +59,7 @@ export const notesApi = createApi({
         query: ({ id, ...fields }) => ({
           url: `/notes/${id}`,
           method: 'PUT',
-          data: {
+          body: {
             ...fields,
           },
           headers: { 'content-type': 'application/json' },
