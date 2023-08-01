@@ -31,6 +31,7 @@ const dataSource = new DataSource({
   migrations: [
     `./src/server/orm/migrations/**/*.${migrationsExt}`,
   ],
+  migrationsTransactionMode: 'each',
 });
 
 dataSource

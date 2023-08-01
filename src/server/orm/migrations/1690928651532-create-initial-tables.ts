@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Initial1690044044410 implements MigrationInterface {
-  name = 'Initial1690044044410'
+export class CreateInitialTables1690928651532 implements MigrationInterface {
+  name = 'CreateInitialTables1690928651532'
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
       CREATE TABLE "notes" (
-        "id" integer GENERATED ALWAYS AS IDENTITY NOT NULL,  
+        "id" integer GENERATED ALWAYS AS IDENTITY NOT NULL, 
         "title" character varying(30) NOT NULL DEFAULT 'Untitled note', 
         "body" text, 
         "is_bookmark" boolean NOT NULL DEFAULT false, 
@@ -30,7 +30,7 @@ export class Initial1690044044410 implements MigrationInterface {
         "role" "public"."users_role_enum" NOT NULL DEFAULT 'user', 
         "last_login_at" TIMESTAMP WITH TIME ZONE, 
         "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), 
-        "updated_at" TIMESTAMP WITH TIME ZONE, 
+        "updated_at" TIMESTAMP WITH TIME ZONE,
         CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), 
         CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id")
       )
@@ -50,12 +50,12 @@ export class Initial1690044044410 implements MigrationInterface {
       )
     `);
     await queryRunner.query(`
-        ALTER TABLE "notes" 
-          ADD CONSTRAINT "fk__notes__user_id" 
-            FOREIGN KEY ("user_id") 
-            REFERENCES "users"("id") 
-            ON DELETE CASCADE ON UPDATE NO ACTION
-        `);
+      ALTER TABLE "notes" 
+        ADD CONSTRAINT "fk__notes__user_id" 
+          FOREIGN KEY ("user_id") 
+          REFERENCES "users"("id") 
+          ON DELETE CASCADE ON UPDATE NO ACTION
+    `);
     await queryRunner.query(`
       ALTER TABLE "notes" 
         ADD CONSTRAINT "fk__notes__folder_id" 

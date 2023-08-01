@@ -10,7 +10,7 @@
     "typeorm:cli": "cross-env NODE_ENV=migration npx ts-node -r dotenv-defaults/config -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "typeorm:cli:ds": "npm run typeorm:cli -- -d ./src/server/orm/datasource.ts",
     "migr:gen": "npm run typeorm:cli:ds migration:generate",
-    "migr:gen:initial": "npm run migr:gen ./src/server/orm/migrations/initial",
+    "migr:gen:initial": "npm run migr:gen ./src/server/orm/migrations/create-initial-tables",
     "migr:create": "npm run typeorm:cli migration:create",
     "migr:run": "npm run typeorm:cli:ds migration:run",
     "migr:revert": "npm run typeorm:cli:ds migration:revert",
