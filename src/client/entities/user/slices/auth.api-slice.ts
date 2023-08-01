@@ -33,13 +33,6 @@ export const authApi = createApi({
         transformResponse: (result: { user: UserDto }) => result.user,
       }),
 
-      logoutUser: build.mutation<void, void>({
-        query: () => ({
-          url: '/auth/logout',
-          method: 'GET',
-        }),
-      }),
-
       getUserProfile: build.query<UserDto, void>({
         query: () => ({
           url: '/auth/profile',
@@ -54,5 +47,4 @@ export const {
   useGetUserProfileQuery,
   useRegisterUserMutation,
   useLoginUserMutation,
-  useLogoutUserMutation,
 } = authApi;

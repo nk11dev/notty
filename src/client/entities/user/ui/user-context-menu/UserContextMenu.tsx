@@ -1,22 +1,23 @@
 import styles from './UserContextMenu.module.scss';
 
 import React from 'react';
+import { useAppDispatch } from '@/app/redux/store';
 import { IoExitOutline } from 'react-icons/io5';
 import type { ItemParams } from 'react-contexify';
 
 import { USER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import { USER_CONTEXT_MENU_EL_CLASSNAME } from '@/app/constants/elements.constants';
-import { useLogoutUserMutation } from '@/entities/user/slices';
+import { logoutUser } from '@/entities/user/slices/user.slice';
 import UserPanel from '@/entities/user/ui/user-panel';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const UserContextMenu = () => {
-  const [logoutUser] = useLogoutUserMutation();
+  const dispatch = useAppDispatch()
 
   const onItemClick = (args: ItemParams) => {
     switch (args.id) {
       case 'logout':
-        logoutUser();
+        dispatch(logoutUser());
         break;
     }
   }

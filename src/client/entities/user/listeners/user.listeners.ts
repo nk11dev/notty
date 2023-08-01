@@ -1,7 +1,7 @@
 import { isAnyOf } from '@reduxjs/toolkit';
 
 import type { AppStartListening } from '@/app/redux/middlewares/listener.middleware';
-import userSlice from '@/entities/user/slices/user.slice';
+import userSlice, { logoutUser } from '@/entities/user/slices/user.slice';
 import { authApi } from '@/entities/user/slices';
 import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
@@ -16,7 +16,6 @@ const {
 const {
   getUserProfile,
   loginUser,
-  logoutUser,
 } = authApi.endpoints;
 
 export const listenAuthUpdating = (startListening: AppStartListening) => startListening({
@@ -42,7 +41,7 @@ export const listenAuthSuccess = (startListening: AppStartListening) => startLis
 export const listenAuthError = (startListening: AppStartListening) => startListening({
   matcher: isAnyOf(
     loginUser.matchRejected,
-    logoutUser.matchRejected,
+    logoutUser.rejected,
     getUserProfile.matchRejected,
   ),
   effect: async (action, listenerApi) => {
@@ -51,7 +50,7 @@ export const listenAuthError = (startListening: AppStartListening) => startListe
 })
 
 export const listenAuthReset = (startListening: AppStartListening) => startListening({
-  matcher: logoutUser.matchFulfilled,
+  actionCreator: logoutUser.fulfilled,
   effect: async (_action, listenerApi) => {
     listenerApi.dispatch(resetAuth());
     listenerApi.dispatch(authApi.util.resetApiState());
