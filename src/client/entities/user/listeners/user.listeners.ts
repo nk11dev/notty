@@ -22,6 +22,7 @@ export const listenAuthUpdating = (startListening: AppStartListening) => startLi
   matcher: isAnyOf(
     loginUser.matchPending,
     getUserProfile.matchPending,
+    logoutUser.pending,
   ),
   effect: async (_action, listenerApi) => {
     listenerApi.dispatch(setAuthUpdating());

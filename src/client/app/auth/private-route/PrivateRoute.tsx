@@ -12,7 +12,7 @@ const PrivateRoute = () => {
   const {
     isFetching,
   } = useGetUserProfileQuery(undefined, {
-    skip: isAuthenticated || !Cookies.get('has-access-token'),
+    skip: isUpdating || isAuthenticated || !Cookies.get('has-access-token'),
     refetchOnMountOrArgChange: true,
   });
 

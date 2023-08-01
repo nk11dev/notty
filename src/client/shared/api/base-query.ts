@@ -1,7 +1,9 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query'
 
+import type { RootState } from '@/app/redux/store';
 import { API_BASE_URL } from '@/app/constants/api.constants';
+import { logoutUser } from '@/entities/user/slices/user.slice';
 import type { BaseQueryError, ApiResponseError, ApiResponseSuccess } from '@/shared/types';
 import { log } from '@/shared/utils/log.utils';
 
@@ -32,6 +34,14 @@ const customBaseQuery: BaseQueryFn<
   if (result.error) {
     const { error } = result;
     const responseError = error?.data as ApiResponseError;
+
+    if (error.status === 401) {
+      const { userState } = <RootState>api.getState();
+
+      if (userState.isAuthenticated) {
+        api.dispatch(logoutUser());
+      }
+    }
 
     return {
       error: {
