@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
-import { addResponseFormats, handleErrors } from '@/server/middlewares';
+import { ignoreFavicon, addResponseFormats, handleErrors } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import apiRoutes from '@/server/routes';
 
@@ -14,6 +14,7 @@ const app = express();
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(ignoreFavicon);
 app.use(addResponseFormats);
 app.use(express.static('dist/client'));
 
