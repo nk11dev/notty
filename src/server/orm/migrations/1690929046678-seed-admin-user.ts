@@ -9,7 +9,7 @@ export class SeedAdminUser1690929046678 implements MigrationInterface {
   name = 'SeedAdminUser1690929046678'
 
   public async up(): Promise<void> {
-    const [username, email, password] = (process.env.ADMIN_USER_CREDENTIALS as string).split('|');
+    const [username, email, password] = (process.env.MIGRATION_SEED_ADMIN_USER as string).split('|');
 
     const hashedPassword = await AuthService.hash(password);
 
