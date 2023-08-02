@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 import { UserRole } from '@/common/constants/auth.constants';
 
 import AuthService from '@/server/services/auth.service';
+import type { TokenData } from '@/server/types/token.types';
 
 export const hashPassword = async (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
@@ -51,3 +52,16 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
     });
   }
 }
+
+export const authorizeByRole = (roles: UserRole[]) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const { role } = req.tokenData as TokenData;
+
+    if (roles.includes(role)) {
+      next();
+
+    } else {
+      res.sendAccessForbidden();
+    }
+  };
+};
