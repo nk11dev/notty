@@ -87,11 +87,13 @@ export default {
             Date.now() + expiresIn * 1000
           ),
           maxAge: expiresIn * 1000,
+          sameSite: 'strict',
+          secure: true,
         };
 
         res.cookie('access-token', token, {
           ...cookieOptions,
-          httpOnly: true
+          httpOnly: true,
         });
 
         res.cookie('has-access-token', true, cookieOptions);
