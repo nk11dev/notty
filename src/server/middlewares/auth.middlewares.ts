@@ -16,12 +16,12 @@ export const hashPassword = async (req: Request, res: Response, next: NextFuncti
   next();
 }
 
-export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+export const verifyAccessToken = async (req: Request, res: Response, next: NextFunction) => {
   const accessToken = req.cookies['access-token'];
 
   if (!accessToken) {
     return res.sendError(401, {
-      message: 'Authentication error: token is not provided or cookie expired'
+      message: 'Authentication error: access token is not provided or cookie expired'
     });
 
   } else {
@@ -31,8 +31,8 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 
       if (err) {
         const details = (err instanceof jwt.TokenExpiredError)
-          ? 'JWT expired'
-          : 'token is not verified';
+          ? 'access token expired'
+          : 'access token is not verified';
 
         return res.sendError(401, {
           message: `Authentication error: ${details}`

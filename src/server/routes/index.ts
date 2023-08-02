@@ -6,22 +6,19 @@ import auth from '@/server/routes/auth.routes';
 import users from '@/server/routes/users.routes';
 import folders from '@/server/routes/folders.routes';
 import notes from '@/server/routes/notes.routes';
-import { verifyToken, authorizeByRole } from '@/server/middlewares';
+import { verifyAccessToken, authorizeByRole } from '@/server/middlewares';
 
 const router = express.Router();
 
 router
 
-  // routes with custom token verification
   .use('/auth', auth)
 
-  // routes with full token verification
-  .use('/folders', verifyToken, folders)
-  .use('/notes', verifyToken, notes)
+  .use('/folders', verifyAccessToken, folders)
+  .use('/notes', verifyAccessToken, notes)
 
-  // routes with full token verification and authorization by role
   .use('/users',
-    verifyToken,
+    verifyAccessToken,
     authorizeByRole([UserRole.ADMIN]),
     users
   );

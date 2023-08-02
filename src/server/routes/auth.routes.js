@@ -4,7 +4,7 @@ import authController from '@/server/controllers/auth.controller';
 import {
   validateUserRegister,
   validateUserLogin,
-  verifyToken,
+  verifyAccessToken,
   fixUserRoleAsUser,
 } from '@/server/middlewares';
 
@@ -16,14 +16,17 @@ router
     fixUserRoleAsUser,
     authController.register
   )
+
   .post('/login',
     validateUserLogin,
     authController.login
   )
+
   .get('/profile',
-    verifyToken,
+    verifyAccessToken,
     authController.profile
   )
+
   .get('/logout', authController.logout);
 
 export default router;

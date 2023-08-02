@@ -1,5 +1,4 @@
 import type { Request, Response, NextFunction, CookieOptions } from 'express';
-const jwt = require('jsonwebtoken');
 
 import { safeAsync } from '@/server/helpers/errors.helpers';
 import AuthService from '@/server/services/auth.service';
@@ -71,27 +70,21 @@ export default {
       } else {
         const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
 
-        const tokenPayload = {
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          role: user.role,
-        };
-
-        const expiresIn = 172800;
-
-        const token = jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: expiresIn });
+        const {
+          accessToken,
+          atExpiresIn,
+        } = AuthService.signJwt(user);
 
         const cookieOptions: CookieOptions = {
           expires: new Date(
-            Date.now() + expiresIn * 1000
+            Date.now() + atExpiresIn * 1000
           ),
-          maxAge: expiresIn * 1000,
+          maxAge: atExpiresIn * 1000,
           sameSite: 'strict',
           secure: true,
         };
 
-        res.cookie('access-token', token, {
+        res.cookie('access-token', accessToken, {
           ...cookieOptions,
           httpOnly: true,
         });
