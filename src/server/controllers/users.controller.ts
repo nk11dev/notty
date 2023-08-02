@@ -1,28 +1,36 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
-import { safeAsync } from '@/server/helpers/errors.helpers';
+import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import UsersService from '@/server/services/users.service';
 
 export default {
 
+  // success handler, used without 404 handler
   getAllUsers: safeAsync(async (_req: Request, res: Response) => {
     const result = await UsersService.getAllUsers();
 
     res.sendSuccess(200, result);
   }),
 
-  getOneUser: safeAsync(async (req: Request, res: Response) => {
+  // 404 handler, used before other success handlers
+  findUser: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.userSlug);
-    const result = await UsersService.findUserById(id);
+    const user = await UsersService.findUserById(id);
 
-    if (!result) {
+    if (!user) {
       res.sendError(404, {
         message: 'User not found'
       });
 
     } else {
-      res.sendSuccess(200, result);
+      res.locals.user = user;
+      next();
     }
+  }),
+
+  // success handlers, used after 404 handler
+  getUser: safeSync(async (_req: Request, res: Response) => {
+    res.sendSuccess(200, res.locals.user)
   }),
 
   updateUser: safeAsync(async (req: Request, res: Response) => {

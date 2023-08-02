@@ -18,14 +18,21 @@ router
     authController.register
   )
 
-  .get('/:userSlug', usersController.getOneUser)
+  .get('/:userSlug',
+    usersController.findUser,
+    usersController.getUser
+  )
 
   .put('/:userSlug',
     validateUserUpdate,
     hashPassword,
+    usersController.findUser,
     usersController.updateUser
   )
 
-  .delete('/:userSlug', usersController.deleteUser);
+  .delete('/:userSlug',
+    usersController.findUser,
+    usersController.deleteUser
+  );
 
 export default router;
