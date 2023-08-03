@@ -28,29 +28,36 @@ export default class AuthService {
   }
 
   static signJwt(user: UserEntity) {
-    const payload = {
+    const {
+      ACCESS_TOKEN_EXPIRES_IN,
+      REFRESH_TOKEN_EXPIRES_IN,
+      ACCESS_TOKEN_SECRET_KEY,
+      REFRESH_TOKEN_SECRET_KEY,
+    } = process.env;
+
+    const atExpiresIn = Number(ACCESS_TOKEN_EXPIRES_IN);
+    const rtExpiresIn = Number(REFRESH_TOKEN_EXPIRES_IN);
+
+    const accessToken = jwt.sign({
       id: user.id,
       email: user.email,
       username: user.username,
       role: user.role,
-    };
+    }, ACCESS_TOKEN_SECRET_KEY, {
+      expiresIn: atExpiresIn
+    });
 
-    const {
-      ACCESS_TOKEN_SECRET_KEY,
-      ACCESS_TOKEN_EXPIRES_IN,
-    } = process.env;
-
-    const atExpiresIn = Number(ACCESS_TOKEN_EXPIRES_IN);
-
-    const accessToken = jwt.sign(
-      payload,
-      ACCESS_TOKEN_SECRET_KEY, {
-      expiresIn: Number(ACCESS_TOKEN_EXPIRES_IN)
+    const refreshToken = jwt.sign({
+      id: user.id,
+    }, REFRESH_TOKEN_SECRET_KEY, {
+      expiresIn: rtExpiresIn
     });
 
     return {
       accessToken,
+      refreshToken,
       atExpiresIn,
+      rtExpiresIn,
     };
   }
 }

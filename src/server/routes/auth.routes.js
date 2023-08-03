@@ -5,6 +5,7 @@ import {
   validateUserRegister,
   validateUserLogin,
   verifyAccessToken,
+  verifyRefreshToken,
   fixUserRoleAsUser,
 } from '@/server/middlewares';
 
@@ -25,6 +26,11 @@ router
   .get('/profile',
     verifyAccessToken,
     authController.profile
+  )
+
+  .get('/refresh',
+    verifyRefreshToken,
+    authController.refresh
   )
 
   .get('/logout', authController.logout);

@@ -53,6 +53,37 @@ export const verifyAccessToken = async (req: Request, res: Response, next: NextF
   }
 }
 
+export const verifyRefreshToken = async (req: Request, res: Response, next: NextFunction) => {
+  const refreshToken = req.cookies['refresh-token'];
+
+  if (!refreshToken) {
+    return res.sendError(401, {
+      message: 'Authentication error: refresh token is not provided or cookie expired'
+    });
+
+  } else {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET_KEY, (err: any, decoded: any) => {
+
+      if (err) {
+        const details = (err instanceof jwt.TokenExpiredError)
+          ? 'refresh token expired'
+          : 'refresh token is not verified';
+
+        return res.sendError(401, {
+          message: `Authentication error: ${details}`
+        });
+
+      } else {
+        res.locals.refreshTokenData = decoded;
+
+        next();
+      }
+    });
+  }
+}
+
 export const authorizeByRole = (roles: UserRole[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const { role } = req.tokenData as TokenData;

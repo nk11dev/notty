@@ -5,6 +5,11 @@ import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
 import type { TokenData } from '@/server/types/token.types';
 
+const cookieOptions: CookieOptions = {
+  sameSite: 'strict',
+  secure: true,
+};
+
 export default {
 
   register: async (req: Request, res: Response, next: NextFunction) => {
@@ -48,7 +53,7 @@ export default {
 
     if (!user) {
       res.sendError(404, {
-        message: 'Login error',
+        message: 'Authentication error',
         data: [{
           'path': 'email',
           'message': `Couldn't find your account`
@@ -59,8 +64,8 @@ export default {
       const isPasswordValid: boolean = await AuthService.verify(password, user.password);
 
       if (!isPasswordValid) {
-        res.sendError(404, {
-          message: 'Login error',
+        res.sendError(401, {
+          message: 'Authentication error',
           data: [{
             'path': 'password',
             'message': 'Invalid password'
@@ -72,20 +77,26 @@ export default {
 
         const {
           accessToken,
+          refreshToken,
           atExpiresIn,
+          rtExpiresIn,
         } = AuthService.signJwt(user);
 
-        const cookieOptions: CookieOptions = {
+        res.cookie('access-token', accessToken, {
+          ...cookieOptions,
           expires: new Date(
             Date.now() + atExpiresIn * 1000
           ),
           maxAge: atExpiresIn * 1000,
-          sameSite: 'strict',
-          secure: true,
-        };
+          httpOnly: true,
+        });
 
-        res.cookie('access-token', accessToken, {
+        res.cookie('refresh-token', refreshToken, {
           ...cookieOptions,
+          expires: new Date(
+            Date.now() + rtExpiresIn * 1000
+          ),
+          maxAge: rtExpiresIn * 1000,
           httpOnly: true,
         });
 
@@ -113,8 +124,41 @@ export default {
     }
   }),
 
+  refresh: safeAsync(async (_req: Request, res: Response) => {
+    const { refreshTokenData } = res.locals;
+    const { id: userId } = refreshTokenData;
+
+    const user = await UsersService.findUserById(userId);
+
+    if (!user) {
+      res.sendError(404, {
+        message: 'Authentication error: user nod found'
+      });
+
+    } else {
+      const {
+        accessToken,
+        atExpiresIn,
+      } = AuthService.signJwt(user);
+
+      res.cookie('access-token', accessToken, {
+        ...cookieOptions,
+        expires: new Date(
+          Date.now() + atExpiresIn * 1000
+        ),
+        maxAge: atExpiresIn * 1000,
+        httpOnly: true,
+      });
+
+      res.cookie('has-access-token', true, cookieOptions);
+
+      res.sendSuccess(204);
+    }
+  }),
+
   logout: (_req: Request, res: Response) => {
     res.clearCookie('access-token');
+    res.clearCookie('refresh-token');
     res.clearCookie('has-access-token');
     res.sendSuccess(204);
   }
