@@ -10,10 +10,14 @@ import type {
   RefreshTokenPayload,
 } from '@/server/types/token.types';
 
-const cookieOptions: CookieOptions = {
+const getCookieOptions = (expiresIn: number): CookieOptions => ({
   sameSite: 'strict',
   secure: true,
-};
+  expires: new Date(
+    Date.now() + expiresIn * 1000
+  ),
+  maxAge: expiresIn * 1000,
+});
 
 export default {
 
@@ -88,24 +92,18 @@ export default {
         } = authService.signJwt(user);
 
         res.cookie('access-token', accessToken, {
-          ...cookieOptions,
-          expires: new Date(
-            Date.now() + atExpiresIn * 1000
-          ),
-          maxAge: atExpiresIn * 1000,
+          ...getCookieOptions(atExpiresIn),
           httpOnly: true,
         });
 
         res.cookie('refresh-token', refreshToken, {
-          ...cookieOptions,
-          expires: new Date(
-            Date.now() + rtExpiresIn * 1000
-          ),
-          maxAge: rtExpiresIn * 1000,
+          ...getCookieOptions(rtExpiresIn),
           httpOnly: true,
         });
 
-        res.cookie('has-access-token', true, cookieOptions);
+        res.cookie('has-access-token', true,
+          getCookieOptions(atExpiresIn)
+        );
 
         res.sendSuccess(HttpStatus.OK, {
           message: 'User logged in',
@@ -146,15 +144,13 @@ export default {
       } = authService.signJwt(user);
 
       res.cookie('access-token', accessToken, {
-        ...cookieOptions,
-        expires: new Date(
-          Date.now() + atExpiresIn * 1000
-        ),
-        maxAge: atExpiresIn * 1000,
+        ...getCookieOptions(atExpiresIn),
         httpOnly: true,
       });
 
-      res.cookie('has-access-token', true, cookieOptions);
+      res.cookie('has-access-token', true,
+        getCookieOptions(atExpiresIn)
+      );
 
       res.sendSuccess(HttpStatus.NO_CONTENT);
     }
