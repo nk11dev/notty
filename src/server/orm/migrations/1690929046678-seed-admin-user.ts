@@ -2,8 +2,8 @@ import { MigrationInterface } from 'typeorm';
 
 import { UserRole } from '@/common/constants';
 
-import AuthService from '@/server/services/auth.service';
-import UsersService from '@/server/services/users.service';
+import authService from '@/server/services/auth.service';
+import usersService from '@/server/services/users.service';
 
 export class SeedAdminUser1690929046678 implements MigrationInterface {
   name = 'SeedAdminUser1690929046678'
@@ -11,9 +11,9 @@ export class SeedAdminUser1690929046678 implements MigrationInterface {
   public async up(): Promise<void> {
     const [username, email, password] = (process.env.MIGRATION_SEED_ADMIN_USER as string).split('|');
 
-    const hashedPassword = await AuthService.hash(password);
+    const hashedPassword = await authService.hash(password);
 
-    await UsersService.createUser({
+    await usersService.createUser({
       username,
       email: email.toLowerCase(),
       password: hashedPassword,

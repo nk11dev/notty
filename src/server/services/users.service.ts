@@ -1,39 +1,40 @@
-import dataSource from '@/server/orm/datasource';
-import UserEntity from '@/server/orm/entities/user.entity';
 import type {
   UserCreatePayload,
   UserUpdatePayload,
 } from '@/common/types/user.types';
 
+import dataSource from '@/server/orm/datasource';
+import UserEntity from '@/server/orm/entities/user.entity';
+
 const userRepository = dataSource.getRepository(UserEntity);
 
-export default class UsersService {
+export default {
 
-  static async getAllUsers() {
+  getAllUsers: async () => {
     return await userRepository
       .createQueryBuilder()
       .orderBy('id', 'ASC')
       .getMany();
-  }
+  },
 
-  static async getUserProfile(id: number) {
+  getUserProfile: async (id: number) => {
     return await userRepository
       .createQueryBuilder('u')
       .select(['u.id', 'u.email', 'u.username', 'u.role'])
       .where('u.id = :id', { id })
       .take(1)
       .getOne();
-  }
+  },
 
-  static async findUserById(id: number) {
+  findUserById: async (id: number) => {
     return await userRepository.findOneBy({ id });
-  }
+  },
 
-  static async findUserByEmail(email: string) {
+  findUserByEmail: async (email: string) => {
     return await userRepository.findOneBy({ email });
-  }
+  },
 
-  static async createUser(payload: UserCreatePayload) {
+  createUser: async (payload: UserCreatePayload) => {
     const { raw: [{ id, email, username, role }] } = await userRepository
       .createQueryBuilder()
       .insert()
@@ -42,9 +43,9 @@ export default class UsersService {
       .execute();
 
     return { id, email, username, role };
-  }
+  },
 
-  static async updateUserData(id: number, payload: UserUpdatePayload) {
+  updateUserData: async (id: number, payload: UserUpdatePayload) => {
     return await userRepository
       .createQueryBuilder()
       .update()
@@ -55,9 +56,9 @@ export default class UsersService {
       .where('id = :id', { id })
       .returning('*')
       .execute();
-  }
+  },
 
-  static async updateUserLastLoginAt(userId: number) {
+  updateUserLastLoginAt: async (userId: number) => {
     const { raw: [{ id, email, username, role }] } = await userRepository
       .createQueryBuilder()
       .update()
@@ -70,9 +71,9 @@ export default class UsersService {
       .execute();
 
     return { id, email, username, role };
-  }
+  },
 
-  static async deleteUser(id: number) {
+  deleteUser: async (id: number) => {
     return await userRepository.manager.query(`
       DELETE 
       FROM ${userRepository.metadata.tableName} 
@@ -80,4 +81,4 @@ export default class UsersService {
       RETURNING *
     `, [id]);
   }
-}
+};

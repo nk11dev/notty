@@ -3,13 +3,13 @@ import type { Request, Response, NextFunction } from 'express';
 import { HttpStatus } from '@/common/constants';
 
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
-import UsersService from '@/server/services/users.service';
+import usersService from '@/server/services/users.service';
 
 export default {
 
   // success handler, used without 404 handler
   getAllUsers: safeAsync(async (_req: Request, res: Response) => {
-    const result = await UsersService.getAllUsers();
+    const result = await usersService.getAllUsers();
 
     res.sendSuccess(HttpStatus.OK, result);
   }),
@@ -17,7 +17,7 @@ export default {
   // 404 handler, used before other success handlers
   findUser: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.userSlug);
-    const user = await UsersService.findUserById(id);
+    const user = await usersService.findUserById(id);
 
     if (!user) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -38,7 +38,7 @@ export default {
   updateUser: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
-    const result = await UsersService.updateUserData(id, req.body);
+    const result = await usersService.updateUserData(id, req.body);
     const { raw, affected } = result || {};
 
     res.sendSuccess(HttpStatus.OK, {
@@ -50,7 +50,7 @@ export default {
   deleteUser: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.userSlug);
 
-    const [affectedRows, affectedCount] = await UsersService.deleteUser(id);
+    const [affectedRows, affectedCount] = await usersService.deleteUser(id);
 
     res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,

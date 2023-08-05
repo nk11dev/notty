@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 
 import UserEntity from '@/server/orm/entities/user.entity';
 
-export default class AuthService {
+export default {
 
-  static async hash(password: string) {
+  hash: async (password: string) => {
     return new Promise<string>((resolve, reject) => {
       const salt = crypto.randomBytes(16).toString('hex');
 
@@ -14,9 +14,9 @@ export default class AuthService {
         resolve(salt + ':' + derivedKey.toString('hex'));
       });
     })
-  }
+  },
 
-  static async verify(password: string, hash: string) {
+  verify: async (password: string, hash: string) => {
     return new Promise<boolean>((resolve, reject) => {
       const [salt, key] = hash.split(':');
 
@@ -25,9 +25,9 @@ export default class AuthService {
         resolve(key == derivedKey.toString('hex'))
       });
     })
-  }
+  },
 
-  static signJwt(user: UserEntity) {
+  signJwt: (user: UserEntity) => {
     const {
       ACCESS_TOKEN_EXPIRES_IN,
       REFRESH_TOKEN_EXPIRES_IN,
@@ -60,4 +60,4 @@ export default class AuthService {
       rtExpiresIn,
     };
   }
-}
+};

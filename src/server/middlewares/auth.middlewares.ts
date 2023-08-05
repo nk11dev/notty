@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken');
 
 import { HttpStatus, UserRole } from '@/common/constants';
 
-import AuthService from '@/server/services/auth.service';
+import authService from '@/server/services/auth.service';
 import type { TokenData } from '@/server/types/token.types';
 
 export const hashPassword = async (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
 
   if (password) {
-    req.body.password = await AuthService.hash(password);
+    req.body.password = await authService.hash(password);
   }
 
   next();

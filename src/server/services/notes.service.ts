@@ -7,13 +7,13 @@ import type {
 
 const noteRepository = dataSource.getRepository(NoteEntity);
 
-export default class NotesService {
+export default {
 
-  static async getAllNotes(
+  getAllNotes: async (
     folderId: number,
     userIdCondition: number | null,
     queryParams: unknown
-  ) {
+  ) => {
     const { filterByIsBookmark } = queryParams as NotesGetQueryParams;
 
     return await noteRepository
@@ -37,18 +37,18 @@ export default class NotesService {
         { value: filterByIsBookmark })
 
       .getMany();
-  }
+  },
 
-  static async getNote(noteId: number) {
+  getNote: async (noteId: number) => {
     return await noteRepository
       .createQueryBuilder('n')
       .leftJoinAndSelect('n.folder_info', 'f')
       .where('n.id = :noteId', { noteId })
       .take(1)
       .getOne();
-  }
+  },
 
-  static async getLastNoteInFolder(folderId: number) {
+  getLastNoteInFolder: async (folderId: number) => {
     const [result] = await noteRepository
       .createQueryBuilder()
       .where('folder_id = :folderId', { folderId })
@@ -57,9 +57,9 @@ export default class NotesService {
       .getMany();
 
     return result;
-  }
+  },
 
-  static async createNote(payload: NotePayload) {
+  createNote: async (payload: NotePayload) => {
     const { raw: [result] } = await noteRepository
       .createQueryBuilder()
       .insert()
@@ -68,9 +68,9 @@ export default class NotesService {
       .execute();
 
     return result;
-  }
+  },
 
-  static async updateNote(noteId: number, payload: NotePayload) {
+  updateNote: async (noteId: number, payload: NotePayload) => {
     return await noteRepository
       .createQueryBuilder()
       .update()
@@ -81,9 +81,9 @@ export default class NotesService {
       .where('id = :noteId', { noteId })
       .returning('*')
       .execute();
-  }
+  },
 
-  static async deleteNote(noteId: number) {
+  deleteNote: async (noteId: number) => {
     return await noteRepository.manager.query(`
       DELETE 
       FROM ${noteRepository.metadata.tableName} 
@@ -91,4 +91,4 @@ export default class NotesService {
       RETURNING *
     `, [noteId]);
   }
-}
+};

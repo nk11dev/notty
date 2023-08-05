@@ -3,8 +3,8 @@ import type { Request, Response, NextFunction } from 'express';
 import { HttpStatus } from '@/common/constants';
 
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
-import NotesService from '@/server/services/notes.service';
-import FoldersService from '@/server/services/folders.service';
+import notesService from '@/server/services/notes.service';
+import foldersService from '@/server/services/folders.service';
 import type { AccessConditions } from '@/server/types/auth.types';
 
 export default {
@@ -12,7 +12,7 @@ export default {
   // errors handlers (for notes, where specified folder id is required), used before success handlers
   findParentFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const folderId = Number(req.params.folderSlug);
-    const parentFolder = await FoldersService.findFolder(folderId);
+    const parentFolder = await foldersService.findFolder(folderId);
 
     if (!parentFolder) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -42,7 +42,7 @@ export default {
     const { userId } = req.accessConditions as AccessConditions;
 
     const folderId = Number(req.params.folderSlug);
-    const result = await NotesService.getAllNotes(folderId, userId, req.query);
+    const result = await notesService.getAllNotes(folderId, userId, req.query);
 
     res.sendSuccess(HttpStatus.OK, result);
   }),
@@ -50,7 +50,7 @@ export default {
   createNote: safeAsync(async (req: Request, res: Response) => {
     const { parentFolder } = res.locals;
 
-    const result = await NotesService.createNote({
+    const result = await notesService.createNote({
       ...req.body,
       user_id: parentFolder.user_id,
       folder_id: parentFolder.id,
@@ -62,7 +62,7 @@ export default {
   // errors handlers (for notes without specified folder id), used before success handlers
   findNote: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const noteId = Number(req.params.noteSlug);
-    const note = await NotesService.getNote(noteId);
+    const note = await notesService.getNote(noteId);
 
     if (!note) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -95,7 +95,7 @@ export default {
   updateNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
-    const result = await NotesService.updateNote(noteId, req.body);
+    const result = await notesService.updateNote(noteId, req.body);
     const { raw, affected } = result || {};
 
     res.sendSuccess(HttpStatus.OK, {
@@ -107,12 +107,12 @@ export default {
   deleteNote: safeAsync(async (req: Request, res: Response) => {
     const noteId = Number(req.params.noteSlug);
 
-    const [affectedRows, affectedCount] = await NotesService.deleteNote(noteId);
+    const [affectedRows, affectedCount] = await notesService.deleteNote(noteId);
 
     let lastRow = null;
 
     if (affectedCount > 0) {
-      const lastNote = await NotesService.getLastNoteInFolder(affectedRows[0].folder_id);
+      const lastNote = await notesService.getLastNoteInFolder(affectedRows[0].folder_id);
 
       if (lastNote) {
         lastRow = lastNote;

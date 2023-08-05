@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { HttpStatus } from '@/common/constants';
 
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
-import FoldersService from '@/server/services/folders.service';
+import foldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
 import type { AccessConditions } from '@/server/types/auth.types';
 
@@ -13,7 +13,7 @@ export default {
   getAllFolders: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
-    const result = await FoldersService.getAllFolders(userId);
+    const result = await foldersService.getAllFolders(userId);
 
     res.sendSuccess(HttpStatus.OK, result);
   }),
@@ -21,7 +21,7 @@ export default {
   createFolder: safeAsync(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
 
-    const result = await FoldersService.createFolder({
+    const result = await foldersService.createFolder({
       ...req.body,
       user_id: id
     });
@@ -32,7 +32,7 @@ export default {
   // errors handlers, used before success handlers
   findFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const id = Number(req.params.folderSlug);
-    const folder = await FoldersService.getFolder(id);
+    const folder = await foldersService.getFolder(id);
 
     if (!folder) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -65,7 +65,7 @@ export default {
   updateFolder: safeAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.folderSlug);
 
-    const [affectedRows, affectedCount] = await FoldersService.updateFolder(id, req.body);
+    const [affectedRows, affectedCount] = await foldersService.updateFolder(id, req.body);
 
     res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,
@@ -78,8 +78,8 @@ export default {
 
     const id = Number(req.params.folderSlug);
 
-    const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
-    const lastRow = await FoldersService.getLastFolder(userId);
+    const [affectedRows, affectedCount] = await foldersService.deleteFolder(id);
+    const lastRow = await foldersService.getLastFolder(userId);
 
     res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,

@@ -3,8 +3,8 @@ import type { Request, Response, NextFunction, CookieOptions } from 'express';
 import { HttpStatus } from '@/common/constants';
 
 import { safeAsync } from '@/server/helpers/errors.helpers';
-import AuthService from '@/server/services/auth.service';
-import UsersService from '@/server/services/users.service';
+import authService from '@/server/services/auth.service';
+import usersService from '@/server/services/users.service';
 import type { TokenData } from '@/server/types/token.types';
 
 const cookieOptions: CookieOptions = {
@@ -16,10 +16,10 @@ export default {
 
   register: async (req: Request, res: Response, next: NextFunction) => {
     const { username, email, password, role } = req.body;
-    const hashedPassword = await AuthService.hash(password);
+    const hashedPassword = await authService.hash(password);
 
     try {
-      const createdUser = await UsersService.createUser({
+      const createdUser = await usersService.createUser({
         username,
         email: email.toLowerCase(),
         password: hashedPassword,
@@ -51,7 +51,7 @@ export default {
   login: safeAsync(async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const user = await UsersService.findUserByEmail(email.toLowerCase());
+    const user = await usersService.findUserByEmail(email.toLowerCase());
 
     if (!user) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -63,7 +63,7 @@ export default {
       });
 
     } else {
-      const isPasswordValid: boolean = await AuthService.verify(password, user.password);
+      const isPasswordValid: boolean = await authService.verify(password, user.password);
 
       if (!isPasswordValid) {
         res.sendError(HttpStatus.UNAUTHORIZED, {
@@ -75,14 +75,14 @@ export default {
         });
 
       } else {
-        const loggedUser = await UsersService.updateUserLastLoginAt(user.id);
+        const loggedUser = await usersService.updateUserLastLoginAt(user.id);
 
         const {
           accessToken,
           refreshToken,
           atExpiresIn,
           rtExpiresIn,
-        } = AuthService.signJwt(user);
+        } = authService.signJwt(user);
 
         res.cookie('access-token', accessToken, {
           ...cookieOptions,
@@ -114,7 +114,7 @@ export default {
 
   profile: safeAsync(async (req: Request, res: Response) => {
     const { id } = req.tokenData as TokenData;
-    const result = await UsersService.getUserProfile(id);
+    const result = await usersService.getUserProfile(id);
 
     if (!result) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -130,7 +130,7 @@ export default {
     const { refreshTokenData } = res.locals;
     const { id: userId } = refreshTokenData;
 
-    const user = await UsersService.findUserById(userId);
+    const user = await usersService.findUserById(userId);
 
     if (!user) {
       res.sendError(HttpStatus.NOT_FOUND, {
@@ -141,7 +141,7 @@ export default {
       const {
         accessToken,
         atExpiresIn,
-      } = AuthService.signJwt(user);
+      } = authService.signJwt(user);
 
       res.cookie('access-token', accessToken, {
         ...cookieOptions,

@@ -6,9 +6,9 @@ import type {
 
 const folderRepository = dataSource.getRepository(FolderEntity);
 
-export default class FoldersService {
+export default {
 
-  static async getAllFolders(userIdCondition: number | null) {
+  getAllFolders: async (userIdCondition: number | null) => {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoin('f.notes', 'n')
@@ -25,9 +25,9 @@ export default class FoldersService {
       .groupBy('f.id')
       .orderBy('f.id', 'ASC')
       .execute();
-  }
+  },
 
-  static async getFolder(id: number) {
+  getFolder: async (id: number) => {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoinAndSelect('f.notes', 'n')
@@ -35,9 +35,9 @@ export default class FoldersService {
       .where(`f.id = :id`, { id })
       .take(1)
       .getOne();
-  }
+  },
 
-  static async getLastFolder(userIdCondition: number | null) {
+  getLastFolder: async (userIdCondition: number | null) => {
     return await folderRepository
       .createQueryBuilder()
       .orderBy('id', 'DESC')
@@ -47,13 +47,13 @@ export default class FoldersService {
       )
       .take(1)
       .getOne();
-  }
+  },
 
-  static async findFolder(id: number) {
+  findFolder: async (id: number) => {
     return await folderRepository.findOneBy({ id });
-  }
+  },
 
-  static async createFolder(payload: FolderPayload) {
+  createFolder: async (payload: FolderPayload) => {
     const { raw: [result] } = await folderRepository
       .createQueryBuilder()
       .insert()
@@ -62,9 +62,9 @@ export default class FoldersService {
       .execute();
 
     return result;
-  }
+  },
 
-  static async updateFolder(id: number, payload: FolderPayload) {
+  updateFolder: async (id: number, payload: FolderPayload) => {
     const { title } = payload;
 
     return await folderRepository.manager.query(`
@@ -75,9 +75,9 @@ export default class FoldersService {
       WHERE id = $2
       RETURNING *
     `, [title, id]);
-  }
+  },
 
-  static async deleteFolder(id: number) {
+  deleteFolder: async (id: number) => {
     return await folderRepository.manager.query(`
       DELETE 
       FROM ${folderRepository.metadata.tableName} 
@@ -85,4 +85,4 @@ export default class FoldersService {
       RETURNING *
     `, [id]);
   }
-}
+};
