@@ -11,7 +11,7 @@ import type { UserRegisterPayload } from '@/common/types/user.types';
 import {
   useRegisterUserMutation,
   REGISTER_USER_CACHE_KEY,
-} from '@/entities/user/slices';
+} from '@/app/auth/slices';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';

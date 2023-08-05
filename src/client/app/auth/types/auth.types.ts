@@ -7,8 +7,8 @@ export type UserDto = {
   role: UserRole,
 };
 
-export type UserState = {
-  data: UserDto | null,
+export type AuthState = {
+  user: UserDto | null,
   error: unknown,
   isAuthenticated: boolean,
   isUpdating: boolean,

@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createLogger } from 'redux-logger';
 
 import { listenerMiddleware } from '@/app/redux/middlewares';
-import userSlice from '@/entities/user/slices/user.slice';
-import { authApi } from '@/entities/user/slices';
+import { authApi, authSlice } from '@/app/auth/slices';
 import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
 
@@ -17,7 +16,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [foldersApi.reducerPath]: foldersApi.reducer,
     [notesApi.reducerPath]: notesApi.reducer,
-    userState: userSlice.reducer,
+    authState: authSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

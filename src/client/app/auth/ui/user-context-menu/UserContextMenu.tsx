@@ -5,10 +5,10 @@ import { useAppDispatch } from '@/app/redux/store';
 import { IoExitOutline } from 'react-icons/io5';
 import type { ItemParams } from 'react-contexify';
 
+import { logoutUser } from '@/app/auth/slices';
 import { USER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
 import { USER_CONTEXT_MENU_EL_CLASSNAME } from '@/app/constants/elements.constants';
-import { logoutUser } from '@/entities/user/slices/user.slice';
-import UserPanel from '@/entities/user/ui/user-panel';
+import UserPanel from '@/app/auth/ui/user-panel';
 import BaseContextMenu from '@/shared/ui/controls/base-context-menu';
 
 const UserContextMenu = () => {

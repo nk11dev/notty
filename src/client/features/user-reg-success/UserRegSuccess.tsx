@@ -9,8 +9,8 @@ import { IoCheckmarkCircle } from 'react-icons/io5';
 import {
   useRegisterUserMutation,
   REGISTER_USER_CACHE_KEY,
-} from '@/entities/user/slices';
-import type { UserDto } from '@/entities/user/types';
+} from '@/app/auth/slices';
+import type { UserDto } from '@/app/auth/types';
 import UserFormHeader from '@/shared/ui/forms/user-form-header';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
 

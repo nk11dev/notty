@@ -2,7 +2,7 @@ import styles from './UserPanel.module.scss';
 
 import React from 'react';
 
-import { useUserState } from '@/entities/user/hooks';
+import { useAuth } from '@/app/auth/hooks';
 
 type RowProps = {
   label: string,
@@ -10,7 +10,7 @@ type RowProps = {
 };
 
 const UserPanel = () => {
-  const { data } = useUserState();
+  const { user } = useAuth();
 
   const Row = ({ label, value }: RowProps) => (
     <div className={styles.row}>
@@ -21,8 +21,8 @@ const UserPanel = () => {
 
   return (
     <div className={styles.element}>
-      <Row label="Name" value={data?.username} />
-      <Row label="Email" value={data?.email} />
+      <Row label="Name" value={user?.username} />
+      <Row label="Email" value={user?.email} />
       <div className={styles.separator} />
     </div>
   )

@@ -4,9 +4,9 @@ import { Mutex } from 'async-mutex';
 
 import { HttpStatus } from '@/common/constants';
 
-import type { RootState } from '@/app/redux/store';
+import { logoutUser } from '@/app/auth/slices';
 import { API_BASE_URL } from '@/app/constants/api.constants';
-import { logoutUser } from '@/entities/user/slices/user.slice';
+import type { RootState } from '@/app/redux/store';
 import type { BaseQueryError, ApiResponseError, ApiResponseSuccess } from '@/shared/types';
 import { log } from '@/shared/utils/log.utils';
 
@@ -64,9 +64,9 @@ const customBaseQuery: BaseQueryFn<
           result = await rawBaseQuery(args, api, extraOptions);
 
         } else {
-          const { userState } = <RootState>api.getState();
+          const { authState } = <RootState>api.getState();
 
-          if (userState.isAuthenticated) {
+          if (authState.isAuthenticated) {
             api.dispatch(logoutUser());
           }
         }

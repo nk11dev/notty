@@ -1,8 +1,7 @@
 import { isAnyOf } from '@reduxjs/toolkit';
 
 import type { AppStartListening } from '@/app/redux/middlewares/listener.middleware';
-import userSlice, { logoutUser } from '@/entities/user/slices/user.slice';
-import { authApi } from '@/entities/user/slices';
+import { authApi, authSlice, logoutUser } from '@/app/auth/slices';
 import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
 
@@ -11,7 +10,7 @@ const {
   setAuthSuccess,
   setAuthError,
   resetAuth,
-} = userSlice.actions;
+} = authSlice.actions;
 
 const {
   getUserProfile,

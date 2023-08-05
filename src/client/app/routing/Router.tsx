@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 
-import PrivateRoute from '@/app/auth/private-route';
+import PrivateRoute from '@/app/auth/routing';
 import RegPage from '@/pages/reg-page';
 import LoginPage from '@/pages/login-page';
 import HomePage from '@/pages/home-page';

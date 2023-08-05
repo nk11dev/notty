@@ -2,12 +2,12 @@ import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import { useUserState } from '@/entities/user/hooks';
-import { useGetUserProfileQuery } from '@/entities/user/slices';
+import { useAuth } from '@/app/auth/hooks';
+import { useGetUserProfileQuery } from '@/app/auth/slices';
 import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const PrivateRoute = () => {
-  const { isUpdating, isAuthenticated } = useUserState();
+  const { isUpdating, isAuthenticated } = useAuth();
 
   const {
     isFetching,

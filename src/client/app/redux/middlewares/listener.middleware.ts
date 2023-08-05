@@ -1,7 +1,7 @@
 import { TypedStartListening, createListenerMiddleware } from '@reduxjs/toolkit';
 
+import * as userListeners from '@/app/auth/listeners';
 import type { RootState, AppDispatch } from '@/app/redux/store';
-import * as userListeners from '@/entities/user/listeners';
 
 export const listenerMiddleware = createListenerMiddleware();
 

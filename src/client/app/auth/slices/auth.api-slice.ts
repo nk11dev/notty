@@ -5,7 +5,7 @@ import type {
   UserLoginPayload,
 } from '@/common/types/user.types';
 
-import type { UserDto } from '@/entities/user/types';
+import type { UserDto } from '@/app/auth/types';
 import customBaseQuery from '@/shared/api/base-query';
 
 export const REGISTER_USER_CACHE_KEY = 'REGISTER_USER_CACHE_KEY';

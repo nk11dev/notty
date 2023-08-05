@@ -8,8 +8,8 @@ import { IoMailOutline, IoLockClosedOutline } from 'react-icons/io5';
 import { userLoginPayloadSchema } from '@/common/schemas';
 import type { UserLoginPayload } from '@/common/types/user.types';
 
-import { useLoginUserMutation } from '@/entities/user/slices';
-import { useUserState } from '@/entities/user/hooks';
+import { useAuth } from '@/app/auth/hooks';
+import { useLoginUserMutation } from '@/app/auth/slices';
 import type { BaseQueryError } from '@/shared/types';
 import UserFormField from '@/shared/ui/forms/user-form-field';
 import UserFormButton from '@/shared/ui/forms/user-form-button';
@@ -17,7 +17,7 @@ import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
-  const { isUpdating, isAuthenticated } = useUserState();
+  const { isUpdating, isAuthenticated } = useAuth();
 
   const [loginUser, {
     isSuccess,

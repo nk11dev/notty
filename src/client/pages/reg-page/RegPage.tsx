@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import {
   useRegisterUserMutation,
   REGISTER_USER_CACHE_KEY,
-} from '@/entities/user/slices';
+} from '@/app/auth/slices';
 import UserRegForm from '@/features/user-reg-form';
 import UserRegSuccess from '@/features/user-reg-success';
 import UserFormHeader from '@/shared/ui/forms/user-form-header';

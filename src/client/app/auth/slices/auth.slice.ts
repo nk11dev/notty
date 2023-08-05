@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { API_BASE_URL } from '@/app/constants/api.constants';
-import type { UserState, UserDto, } from '@/entities/user/types';
+import type { AuthState, UserDto } from '@/app/auth/types';
 import type { BaseQueryError } from '@/shared/types';
 
 export const logoutUser = createAsyncThunk(
@@ -19,17 +19,17 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-const initialState: UserState = {
-  data: null,
+const initialState: AuthState = {
+  user: null,
   error: null,
   isAuthenticated: false,
   isUpdating: false,
   isError: false,
 }
 
-const userSlice = createSlice({
+export const authSlice = createSlice({
   initialState,
-  name: 'userSlice',
+  name: 'authSlice',
   reducers: {
     setAuthUpdating: () => ({
       ...initialState,
@@ -38,7 +38,7 @@ const userSlice = createSlice({
     setAuthSuccess: (_state, action: PayloadAction<UserDto>) => ({
       ...initialState,
       isAuthenticated: true,
-      data: action.payload,
+      user: action.payload,
     }),
     setAuthError: (_state, action: PayloadAction<BaseQueryError>) => ({
       ...initialState,
@@ -48,5 +48,3 @@ const userSlice = createSlice({
     resetAuth: () => initialState,
   },
 });
-
-export default userSlice;
