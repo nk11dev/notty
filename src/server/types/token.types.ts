@@ -1,10 +1,14 @@
 import { UserRole } from '@/common/constants';
 
-export type TokenData = {
+export type AccessTokenPayload = {
   id: number;
-  email: string;
-  username: string;
   role: UserRole;
+  iat: number;
+  exp: number;
+}
+
+export type RefreshTokenPayload = {
+  id: number;
   iat: number;
   exp: number;
 }

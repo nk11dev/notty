@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 import { HttpStatus, UserRole } from '@/common/constants';
 
 import authService from '@/server/services/auth.service';
-import type { TokenData } from '@/server/types/token.types';
+import type { AccessTokenPayload } from '@/server/types/token.types';
 
 export const hashPassword = async (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
@@ -39,7 +39,7 @@ export const verifyAccessToken = async (req: Request, res: Response, next: NextF
         });
 
       } else {
-        req.tokenData = decoded;
+        req.accessTokenPayload = decoded;
 
         req.accessConditions = {
           userId: (decoded.role === UserRole.ADMIN)
@@ -76,7 +76,7 @@ export const verifyRefreshToken = async (req: Request, res: Response, next: Next
         });
 
       } else {
-        res.locals.refreshTokenData = decoded;
+        req.refreshTokenPayload = decoded;
 
         next();
       }
@@ -86,7 +86,7 @@ export const verifyRefreshToken = async (req: Request, res: Response, next: Next
 
 export const authorizeByRole = (roles: UserRole[]) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const { role } = req.tokenData as TokenData;
+    const { role } = req.accessTokenPayload as AccessTokenPayload;
 
     if (roles.includes(role)) {
       next();

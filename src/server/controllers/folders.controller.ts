@@ -4,7 +4,7 @@ import { HttpStatus } from '@/common/constants';
 
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import foldersService from '@/server/services/folders.service';
-import type { TokenData } from '@/server/types/token.types';
+import type { AccessTokenPayload } from '@/server/types/token.types';
 import type { AccessConditions } from '@/server/types/auth.types';
 
 export default {
@@ -19,7 +19,7 @@ export default {
   }),
 
   createFolder: safeAsync(async (req: Request, res: Response) => {
-    const { id } = req.tokenData as TokenData;
+    const { id } = req.accessTokenPayload as AccessTokenPayload;
 
     const result = await foldersService.createFolder({
       ...req.body,

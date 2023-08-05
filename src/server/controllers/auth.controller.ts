@@ -5,7 +5,10 @@ import { HttpStatus } from '@/common/constants';
 import { safeAsync } from '@/server/helpers/errors.helpers';
 import authService from '@/server/services/auth.service';
 import usersService from '@/server/services/users.service';
-import type { TokenData } from '@/server/types/token.types';
+import type {
+  AccessTokenPayload,
+  RefreshTokenPayload,
+} from '@/server/types/token.types';
 
 const cookieOptions: CookieOptions = {
   sameSite: 'strict',
@@ -113,7 +116,7 @@ export default {
   }),
 
   profile: safeAsync(async (req: Request, res: Response) => {
-    const { id } = req.tokenData as TokenData;
+    const { id } = req.accessTokenPayload as AccessTokenPayload;
     const result = await usersService.getUserProfile(id);
 
     if (!result) {
@@ -126,11 +129,10 @@ export default {
     }
   }),
 
-  refresh: safeAsync(async (_req: Request, res: Response) => {
-    const { refreshTokenData } = res.locals;
-    const { id: userId } = refreshTokenData;
+  refresh: safeAsync(async (req: Request, res: Response) => {
+    const { id } = req.refreshTokenPayload as RefreshTokenPayload;
 
-    const user = await usersService.findUserById(userId);
+    const user = await usersService.findUserById(id);
 
     if (!user) {
       res.sendError(HttpStatus.NOT_FOUND, {

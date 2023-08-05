@@ -40,8 +40,6 @@ export default {
 
     const accessToken = jwt.sign({
       id: user.id,
-      email: user.email,
-      username: user.username,
       role: user.role,
     }, ACCESS_TOKEN_SECRET_KEY, {
       expiresIn: atExpiresIn
