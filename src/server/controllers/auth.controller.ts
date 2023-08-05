@@ -14,7 +14,7 @@ const cookieOptions: CookieOptions = {
 
 export default {
 
-  register: async (req: Request, res: Response, next: NextFunction) => {
+  register: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { username, email, password, role } = req.body;
     const hashedPassword = await authService.hash(password);
 
@@ -46,7 +46,7 @@ export default {
         next(err);
       }
     }
-  },
+  }),
 
   login: safeAsync(async (req: Request, res: Response) => {
     const { email, password } = req.body;
