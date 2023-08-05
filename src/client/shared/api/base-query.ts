@@ -2,6 +2,8 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import type { BaseQueryFn, FetchArgs } from '@reduxjs/toolkit/query';
 import { Mutex } from 'async-mutex';
 
+import { HttpStatus } from '@/common/constants';
+
 import type { RootState } from '@/app/redux/store';
 import { API_BASE_URL } from '@/app/constants/api.constants';
 import { logoutUser } from '@/entities/user/slices/user.slice';
@@ -33,7 +35,10 @@ const customBaseQuery: BaseQueryFn<
   let result = await rawBaseQuery(args, api, extraOptions);
 
   // check for 401 Unauthorized errors
-  if (result.error && (result.error.status === 401)) {
+  if (
+    result.error &&
+    result.error.status === HttpStatus.UNAUTHORIZED
+  ) {
 
     // checking whether the mutex is already locked
     if (!mutex.isLocked()) {
@@ -48,7 +53,7 @@ const customBaseQuery: BaseQueryFn<
         }, api, extraOptions);
 
         log({
-          msg: `--- access token refresh`,
+          msg: `--- GET /auth/refresh, result:`,
           data: refreshResult,
           theme: refreshResult.error ? 'salmon' : 'blue',
         });
@@ -88,14 +93,6 @@ const customBaseQuery: BaseQueryFn<
   if (result.error) {
     const { error } = result;
     const responseError = error?.data as ApiResponseError;
-
-    if (error.status === 401) {
-      const { userState } = <RootState>api.getState();
-
-      if (userState.isAuthenticated) {
-        api.dispatch(logoutUser());
-      }
-    }
 
     return {
       error: {

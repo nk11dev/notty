@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
+import { HttpStatus } from '@/common/constants';
+
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import FoldersService from '@/server/services/folders.service';
 import type { TokenData } from '@/server/types/token.types';
@@ -13,7 +15,7 @@ export default {
 
     const result = await FoldersService.getAllFolders(userId);
 
-    res.sendSuccess(200, result);
+    res.sendSuccess(HttpStatus.OK, result);
   }),
 
   createFolder: safeAsync(async (req: Request, res: Response) => {
@@ -24,7 +26,7 @@ export default {
       user_id: id
     });
 
-    res.sendSuccess(201, result);
+    res.sendSuccess(HttpStatus.CREATED, result);
   }),
 
   // errors handlers, used before success handlers
@@ -33,7 +35,7 @@ export default {
     const folder = await FoldersService.getFolder(id);
 
     if (!folder) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'Folder not found'
       });
 
@@ -57,7 +59,7 @@ export default {
   }),
 
   getFolder: safeSync((_req: Request, res: Response) => {
-    res.sendSuccess(200, res.locals.folder)
+    res.sendSuccess(HttpStatus.OK, res.locals.folder)
   }),
 
   updateFolder: safeAsync(async (req: Request, res: Response) => {
@@ -65,7 +67,7 @@ export default {
 
     const [affectedRows, affectedCount] = await FoldersService.updateFolder(id, req.body);
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,
       affectedCount
     });
@@ -79,7 +81,7 @@ export default {
     const [affectedRows, affectedCount] = await FoldersService.deleteFolder(id);
     const lastRow = await FoldersService.getLastFolder(userId);
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,
       affectedCount,
       lastRow: lastRow || null

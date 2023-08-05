@@ -1,8 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import { z } from 'zod';
 import type { ZodIssue } from 'zod';
-import colors from 'ansi-colors';
 
+import { HttpStatus } from '@/common/constants';
 import {
   userRegisterRequestSchema,
   userCreateRequestSchema,
@@ -21,9 +21,6 @@ const validate = (schema: z.AnyZodObject) =>
       next();
 
     } catch (error) {
-      console.log(colors.red('\n--- validation.middleware'));
-      console.log('error.issues:', error.issues);
-
       let err = error;
 
       if (err instanceof z.ZodError) {
@@ -32,7 +29,7 @@ const validate = (schema: z.AnyZodObject) =>
         );
       }
 
-      res.sendError(422, {
+      res.sendError(HttpStatus.UNPROCESSABLE_ENTITY, {
         message: 'Validation error',
         data: err
       });

@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
+import { HttpStatus } from '@/common/constants';
+
 export function addResponseFormats(_req: Request, res: Response, next: NextFunction) {
 
   res.sendSuccess = function (statusCode: number, payload?: unknown) {
@@ -19,7 +21,7 @@ export function addResponseFormats(_req: Request, res: Response, next: NextFunct
   };
 
   res.sendAccessForbidden = function () {
-    return res.sendError(403, {
+    return res.sendError(HttpStatus.FORBIDDEN, {
       message: 'Access forbidden'
     });
   };

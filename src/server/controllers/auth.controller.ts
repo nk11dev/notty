@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction, CookieOptions } from 'express';
 
+import { HttpStatus } from '@/common/constants';
+
 import { safeAsync } from '@/server/helpers/errors.helpers';
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';
@@ -24,7 +26,7 @@ export default {
         role,
       });
 
-      res.sendSuccess(201, {
+      res.sendSuccess(HttpStatus.CREATED, {
         message: 'User registered',
         user: createdUser
       });
@@ -32,7 +34,7 @@ export default {
     } catch (err) {
 
       if (err.code === '23505') {
-        res.sendError(409, {
+        res.sendError(HttpStatus.CONFLICT, {
           message: 'Registration error',
           data: [{
             'path': 'email',
@@ -52,7 +54,7 @@ export default {
     const user = await UsersService.findUserByEmail(email.toLowerCase());
 
     if (!user) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'Authentication error',
         data: [{
           'path': 'email',
@@ -64,7 +66,7 @@ export default {
       const isPasswordValid: boolean = await AuthService.verify(password, user.password);
 
       if (!isPasswordValid) {
-        res.sendError(401, {
+        res.sendError(HttpStatus.UNAUTHORIZED, {
           message: 'Authentication error',
           data: [{
             'path': 'password',
@@ -102,7 +104,7 @@ export default {
 
         res.cookie('has-access-token', true, cookieOptions);
 
-        res.sendSuccess(200, {
+        res.sendSuccess(HttpStatus.OK, {
           message: 'User logged in',
           user: loggedUser
         });
@@ -115,12 +117,12 @@ export default {
     const result = await UsersService.getUserProfile(id);
 
     if (!result) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'User not found'
       });
 
     } else {
-      res.sendSuccess(200, result);
+      res.sendSuccess(HttpStatus.OK, result);
     }
   }),
 
@@ -131,7 +133,7 @@ export default {
     const user = await UsersService.findUserById(userId);
 
     if (!user) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'Authentication error: user nod found'
       });
 
@@ -152,7 +154,7 @@ export default {
 
       res.cookie('has-access-token', true, cookieOptions);
 
-      res.sendSuccess(204);
+      res.sendSuccess(HttpStatus.NO_CONTENT);
     }
   }),
 
@@ -160,6 +162,6 @@ export default {
     res.clearCookie('access-token');
     res.clearCookie('refresh-token');
     res.clearCookie('has-access-token');
-    res.sendSuccess(204);
+    res.sendSuccess(HttpStatus.NO_CONTENT);
   }
 };

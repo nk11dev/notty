@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
+import { HttpStatus } from '@/common/constants';
+
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import NotesService from '@/server/services/notes.service';
 import FoldersService from '@/server/services/folders.service';
@@ -13,7 +15,7 @@ export default {
     const parentFolder = await FoldersService.findFolder(folderId);
 
     if (!parentFolder) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: `Parent folder with 'id' = '${folderId}' not found.`
       });
 
@@ -42,7 +44,7 @@ export default {
     const folderId = Number(req.params.folderSlug);
     const result = await NotesService.getAllNotes(folderId, userId, req.query);
 
-    res.sendSuccess(200, result);
+    res.sendSuccess(HttpStatus.OK, result);
   }),
 
   createNote: safeAsync(async (req: Request, res: Response) => {
@@ -54,7 +56,7 @@ export default {
       folder_id: parentFolder.id,
     });
 
-    res.sendSuccess(201, result);
+    res.sendSuccess(HttpStatus.CREATED, result);
   }),
 
   // errors handlers (for notes without specified folder id), used before success handlers
@@ -63,7 +65,7 @@ export default {
     const note = await NotesService.getNote(noteId);
 
     if (!note) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'Note not found'
       });
 
@@ -87,7 +89,7 @@ export default {
 
   // success handlers (for notes without specified folder id), used after errors handlers 
   getNote: safeSync((_req: Request, res: Response) => {
-    res.sendSuccess(200, res.locals.note)
+    res.sendSuccess(HttpStatus.OK, res.locals.note)
   }),
 
   updateNote: safeAsync(async (req: Request, res: Response) => {
@@ -96,7 +98,7 @@ export default {
     const result = await NotesService.updateNote(noteId, req.body);
     const { raw, affected } = result || {};
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: raw[0] || null,
       affectedCount: affected
     });
@@ -117,7 +119,7 @@ export default {
       }
     }
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,
       affectedCount,
       lastRow

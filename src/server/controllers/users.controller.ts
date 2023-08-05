@@ -1,5 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 
+import { HttpStatus } from '@/common/constants';
+
 import { safeSync, safeAsync } from '@/server/helpers/errors.helpers';
 import UsersService from '@/server/services/users.service';
 
@@ -9,7 +11,7 @@ export default {
   getAllUsers: safeAsync(async (_req: Request, res: Response) => {
     const result = await UsersService.getAllUsers();
 
-    res.sendSuccess(200, result);
+    res.sendSuccess(HttpStatus.OK, result);
   }),
 
   // 404 handler, used before other success handlers
@@ -18,7 +20,7 @@ export default {
     const user = await UsersService.findUserById(id);
 
     if (!user) {
-      res.sendError(404, {
+      res.sendError(HttpStatus.NOT_FOUND, {
         message: 'User not found'
       });
 
@@ -30,7 +32,7 @@ export default {
 
   // success handlers, used after 404 handler
   getUser: safeSync(async (_req: Request, res: Response) => {
-    res.sendSuccess(200, res.locals.user)
+    res.sendSuccess(HttpStatus.OK, res.locals.user)
   }),
 
   updateUser: safeAsync(async (req: Request, res: Response) => {
@@ -39,7 +41,7 @@ export default {
     const result = await UsersService.updateUserData(id, req.body);
     const { raw, affected } = result || {};
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: raw[0] || null,
       affectedCount: affected
     });
@@ -50,7 +52,7 @@ export default {
 
     const [affectedRows, affectedCount] = await UsersService.deleteUser(id);
 
-    res.sendSuccess(200, {
+    res.sendSuccess(HttpStatus.OK, {
       affectedRow: affectedRows[0] || null,
       affectedCount,
     });

@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 
+import { HttpStatus } from '@/common/constants';
+
 import { ignoreFavicon, addResponseFormats, handleErrors } from '@/server/middlewares';
 import collectNestedRoutes from '@/server/helpers/routing.helpers';
 import apiRoutes from '@/server/routes';
@@ -43,7 +45,7 @@ if (process.env.NODE_ENV == 'production') {
 
   // 404 route
   app.use((_req: Request, res: Response) => {
-    res.status(404);
+    res.status(HttpStatus.NOT_FOUND);
     res.sendFile('dist/client/index.html', { root: '.' });
   });
 }

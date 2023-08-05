@@ -1,6 +1,6 @@
 import { MigrationInterface } from 'typeorm';
 
-import { UserRole } from '@/common/constants/auth.constants';
+import { UserRole } from '@/common/constants';
 
 import AuthService from '@/server/services/auth.service';
 import UsersService from '@/server/services/users.service';

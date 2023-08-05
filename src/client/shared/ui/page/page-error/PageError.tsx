@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { HttpStatus } from '@/common/constants';
+
 import type { BaseQueryError } from '@/shared/types';
 import PageContent from '@/shared/ui/page/page-content';
 import ErrorMsg from '@/shared/ui/fetching/error-msg';
@@ -8,7 +10,10 @@ const PageError = (props: Partial<BaseQueryError>) => {
   const { status, data } = props;
 
   if (
-    [403, 404].includes(status as number) &&
+    [
+      HttpStatus.FORBIDDEN,
+      HttpStatus.NOT_FOUND
+    ].includes(status as number) &&
     (typeof data?.message === 'string')
   ) {
     return (

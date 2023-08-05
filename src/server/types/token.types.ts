@@ -1,4 +1,4 @@
-import { UserRole } from '@/common/constants/auth.constants';
+import { UserRole } from '@/common/constants';
 
 export type TokenData = {
   id: number;

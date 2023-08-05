@@ -1,6 +1,6 @@
 import { Entity, Column, Index, OneToMany } from 'typeorm';
 
-import { UserRole } from '@/common/constants/auth.constants';
+import { UserRole } from '@/common/constants';
 
 import BaseEntity from '@/server/orm/entities/base.entity';
 import FolderEntity from '@/server/orm/entities/folder.entity';

@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { UserRole } from '@/common/constants/auth.constants';
+import { UserRole } from '@/common/constants';
 
 import auth from '@/server/routes/auth.routes';
 import users from '@/server/routes/users.routes';

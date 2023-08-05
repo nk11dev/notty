@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 const jwt = require('jsonwebtoken');
 
-import { UserRole } from '@/common/constants/auth.constants';
+import { HttpStatus, UserRole } from '@/common/constants';
 
 import AuthService from '@/server/services/auth.service';
 import type { TokenData } from '@/server/types/token.types';
@@ -20,7 +20,7 @@ export const verifyAccessToken = async (req: Request, res: Response, next: NextF
   const accessToken = req.cookies['access-token'];
 
   if (!accessToken) {
-    return res.sendError(401, {
+    return res.sendError(HttpStatus.UNAUTHORIZED, {
       message: 'Authentication error: access token is not provided or cookie expired'
     });
 
@@ -34,7 +34,7 @@ export const verifyAccessToken = async (req: Request, res: Response, next: NextF
           ? 'access token expired'
           : 'access token is not verified';
 
-        return res.sendError(401, {
+        return res.sendError(HttpStatus.UNAUTHORIZED, {
           message: `Authentication error: ${details}`
         });
 
@@ -57,7 +57,7 @@ export const verifyRefreshToken = async (req: Request, res: Response, next: Next
   const refreshToken = req.cookies['refresh-token'];
 
   if (!refreshToken) {
-    return res.sendError(401, {
+    return res.sendError(HttpStatus.UNAUTHORIZED, {
       message: 'Authentication error: refresh token is not provided or cookie expired'
     });
 
@@ -71,7 +71,7 @@ export const verifyRefreshToken = async (req: Request, res: Response, next: Next
           ? 'refresh token expired'
           : 'refresh token is not verified';
 
-        return res.sendError(401, {
+        return res.sendError(HttpStatus.UNAUTHORIZED, {
           message: `Authentication error: ${details}`
         });
 
