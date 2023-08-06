@@ -1,28 +1,28 @@
 import styles from './UserPanel.module.scss';
 
 import React from 'react';
+import cn from 'classnames';
 
 import { useAuth } from '@/app/auth/hooks';
 
 type RowProps = {
-  label: string,
-  value: string | undefined
+  value: string | undefined,
+  cls?: string,
 };
 
 const UserPanel = () => {
   const { user } = useAuth();
 
-  const Row = ({ label, value }: RowProps) => (
-    <div className={styles.row}>
-      <span className={styles.label}>{label}:</span>
-      {value && <span>{value}</span>}
+  const Row = ({ value, cls }: RowProps) => value && (
+    <div className={cn(styles.row, cls)}>
+      {value}
     </div>
   );
 
   return (
     <div className={styles.element}>
-      <Row label="Name" value={user?.username} />
-      <Row label="Email" value={user?.email} />
+      <Row value={user?.username} />
+      <Row value={user?.email} cls={styles.email} />
       <div className={styles.separator} />
     </div>
   )
