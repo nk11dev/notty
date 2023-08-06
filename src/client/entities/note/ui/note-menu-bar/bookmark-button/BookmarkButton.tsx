@@ -28,6 +28,10 @@ const BookmarkButton = () => {
       cls={cn({
         [styles.isBookmark as string]: isBookmark
       })}
+      tooltip={isBookmark
+        ? 'Remove note from bookmarks'
+        : 'Add note to bookmarks'
+      }
     >
       {isBookmark
         ? <IoBookmark />

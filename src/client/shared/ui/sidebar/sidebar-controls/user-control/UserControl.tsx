@@ -3,8 +3,10 @@ import type { MouseEvent } from 'react';
 import { IoPersonOutline } from 'react-icons/io5';
 import { useContextMenu } from 'react-contexify';
 
-import { USER_CONTEXT_MENU_ID } from '@/app/constants/context-menu.constants';
-import { USER_CONTEXT_MENU_EL_CLASSNAME } from '@/app/constants/elements.constants';
+import {
+  USER_CONTEXT_MENU_ID,
+  USER_CONTEXT_MENU_EL_CLASSNAME,
+} from '@/app/constants/context-menu.constants';
 import ControlsButton from '@/shared/ui/controls/controls-button';
 
 const UserControl = () => {
