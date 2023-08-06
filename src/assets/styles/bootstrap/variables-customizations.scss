@@ -1,0 +1,19 @@
+@import '/src/assets/styles/theme/colors';
+@import '/src/assets/styles/theme/shapes';
+
+// Colors
+$custom-colors: (
+  'brand-primary': $brand-color
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+$form-invalid-color: $invalid-color;
+$form-invalid-border-color: $invalid-color;
+
+$min-contrast-ratio: 2.75;
+
+// Shapes
+$input-border-radius: $border-radius-shape;
+$btn-border-radius: $border-radius-shape;
+$modal-content-border-radius: $border-radius-shape;

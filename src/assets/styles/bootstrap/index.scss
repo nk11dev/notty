@@ -9,6 +9,7 @@
 @import '~bootstrap/scss/_variables-dark.scss';
 
 // 4. Include any default map overrides here
+@import '/src/assets/styles/bootstrap/variables-customizations';
 
 // 5. Include remainder of required parts
 @import '~bootstrap/scss/_maps.scss';

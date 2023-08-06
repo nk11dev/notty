@@ -1,4 +1,4 @@
-import styles from './UserContextMenu.module.scss';
+import styles from '@/app/auth/ui/user-panel/UserPanel.module.scss';
 
 import React from 'react';
 import { useAppDispatch } from '@/app/redux/store';
@@ -26,7 +26,8 @@ const UserContextMenu = () => {
     {
       id: 'info',
       component: <UserPanel />,
-      isDisabled: true
+      isDisabled: true,
+      cls: styles.item
     },
     {
       id: 'logout',
@@ -43,7 +44,7 @@ const UserContextMenu = () => {
       menuId={USER_CONTEXT_MENU_ID}
       menuItems={menuItems}
       onItemClick={onItemClick}
-      cls={`${USER_CONTEXT_MENU_EL_CLASSNAME} ${styles.element}`}
+      cls={USER_CONTEXT_MENU_EL_CLASSNAME}
     />
   );
 };

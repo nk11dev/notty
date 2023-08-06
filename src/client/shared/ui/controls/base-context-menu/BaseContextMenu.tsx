@@ -12,6 +12,7 @@ type MenuItem = {
   icon?: ReactNode,
   component?: ReactNode,
   isDisabled?: boolean,
+  cls?: string,
 };
 
 type Props = {
@@ -34,6 +35,7 @@ const BaseContextMenu = (props: Props) => {
         <Item
           key={index}
           id={item.id}
+          className={item.cls}
           onClick={onItemClick}
           disabled={!!item.isDisabled}
         >

@@ -20,9 +20,15 @@ const UserPanel = () => {
   );
 
   return (
-    <div className={styles.element}>
-      <Row value={user?.username} />
-      <Row value={user?.email} cls={styles.email} />
+    <div className={styles.itemContent}>
+      <Row
+        value={user?.username}
+        cls={styles.mainText}
+      />
+      <Row
+        value={user?.email}
+        cls={styles.secondaryText}
+      />
       <div className={styles.separator} />
     </div>
   )

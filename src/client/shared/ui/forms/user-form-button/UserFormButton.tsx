@@ -16,7 +16,7 @@ const UserFormButton = (props: Props) => (
   <div className={cn(styles.wrapper, 'd-grid')}>
     <Button
       type={props.type}
-      variant="primary"
+      variant="brand-primary"
       className={styles.button}
       disabled={!!props.isDisabled}
       onClick={() => props.clickHandler && props.clickHandler()}
