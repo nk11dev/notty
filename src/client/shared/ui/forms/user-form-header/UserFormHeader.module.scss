@@ -1,4 +1,11 @@
 .element {
-  margin-bottom: 35px;
-  text-align: center;
+  margin-bottom: 25px;
+
+  @media (max-height: 400px) {
+    margin: 20px 0px;
+  }
+}
+
+.heading {
+  font-size: calc(1.5rem + 1vw);
 }

@@ -10,18 +10,16 @@ type Props = {
 };
 
 const UserFormFooter = (props: Props) => (
-  <div className="text-center">
-    <div>
-      {props.text && (
-        <span className="me-2">
-          {props.text}
-        </span>
-      )}
+  <div className={styles.element}>
+    {props.text && (
+      <span className={styles.text}>
+        {props.text}
+      </span>
+    )}
 
-      <Link className={styles.link} to={props.url}>
-        {props.linkText}
-      </Link>
-    </div>
+    <Link className={styles.link} to={props.url}>
+      {props.linkText}
+    </Link>
   </div>
 );
 

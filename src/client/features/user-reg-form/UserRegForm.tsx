@@ -66,37 +66,35 @@ const UserRegForm = () => {
     {isLoading && <ProgressBar />}
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3">
-          <UserFormField
-            type="text"
-            name="username"
-            placeholder="Name"
-            icon={<IoPersonOutline />}
-          />
-          <UserFormField
-            type="text"
-            name="email"
-            placeholder="E-mail"
-            icon={<IoMailOutline />}
-          />
-          <UserFormField
-            type="password"
-            name="password"
-            placeholder="Password"
-            icon={<IoLockClosedOutline />}
-          />
-          <UserFormField
-            type="password"
-            name="passwordConfirm"
-            placeholder="Confirm password"
-            icon={<IoLockClosedOutline />}
-          />
-          <UserFormButton
-            type="submit"
-            text="Complete sign up"
-            isDisabled={isLoading}
-          />
-        </Form.Group>
+        <UserFormField
+          type="text"
+          name="username"
+          placeholder="Name"
+          icon={<IoPersonOutline />}
+        />
+        <UserFormField
+          type="text"
+          name="email"
+          placeholder="E-mail"
+          icon={<IoMailOutline />}
+        />
+        <UserFormField
+          type="password"
+          name="password"
+          placeholder="Password"
+          icon={<IoLockClosedOutline />}
+        />
+        <UserFormField
+          type="password"
+          name="passwordConfirm"
+          placeholder="Confirm password"
+          icon={<IoLockClosedOutline />}
+        />
+        <UserFormButton
+          type="submit"
+          text="Complete sign up"
+          isDisabled={isLoading}
+        />
       </Form>
     </FormProvider>
   </>);

@@ -2,8 +2,12 @@
   margin-bottom: 10px;
 }
 
-.control:global(.is-invalid) {
-  background: none;
+.control {
+  padding: 12px;
+
+  &:global(.is-invalid) {
+    background: none;
+  }
 }
 
 .controlFeedback {

@@ -9,7 +9,7 @@ type Props = {
 
 const UserFormHeader = (props: Props) => (
   <div className={styles.element}>
-    <h1>
+    <h1 className={styles.heading}>
       <b>{props.heading}</b>
     </h1>
     {props.text && (

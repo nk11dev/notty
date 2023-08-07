@@ -1,15 +1,18 @@
 import React from 'react';
 
-import UserFormHeader from '@/shared/ui/forms/user-form-header';
 import UserLoginForm from '@/features/user-login-form';
+import AuthMainContent from '@/shared/ui/forms/auth-main-content';
+import UserFormHeader from '@/shared/ui/forms/user-form-header';
 import UserFormFooter from '@/shared/ui/forms/user-form-footer';
 
 const LoginPage = () => (<>
-  <UserFormHeader
-    heading="Welcome to Notty"
-    text="Sign in to have access!"
-  />
-  <UserLoginForm />
+  <AuthMainContent>
+    <UserFormHeader
+      heading="Welcome to Notty"
+      text="Sign in to have access!"
+    />
+    <UserLoginForm />
+  </AuthMainContent>
   <UserFormFooter
     text="Need an account?"
     linkText="Sign up"

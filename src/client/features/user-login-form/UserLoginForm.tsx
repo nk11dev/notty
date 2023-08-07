@@ -64,25 +64,23 @@ const UserLoginForm = () => {
     {(isLoading || isUpdating) && <ProgressBar />}
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3">
-          <UserFormField
-            type="text"
-            name="email"
-            placeholder="E-mail"
-            icon={<IoMailOutline />}
-          />
-          <UserFormField
-            type="password"
-            name="password"
-            placeholder="Password"
-            icon={<IoLockClosedOutline />}
-          />
-          <UserFormButton
-            type="submit"
-            text="Sign in"
-            isDisabled={isLoading}
-          />
-        </Form.Group>
+        <UserFormField
+          type="text"
+          name="email"
+          placeholder="E-mail"
+          icon={<IoMailOutline />}
+        />
+        <UserFormField
+          type="password"
+          name="password"
+          placeholder="Password"
+          icon={<IoLockClosedOutline />}
+        />
+        <UserFormButton
+          type="submit"
+          text="Sign in"
+          isDisabled={isLoading}
+        />
       </Form>
     </FormProvider>
   </>);

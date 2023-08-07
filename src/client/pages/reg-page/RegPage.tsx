@@ -6,6 +6,7 @@ import {
 } from '@/app/auth/slices';
 import UserRegForm from '@/features/user-reg-form';
 import UserRegSuccess from '@/features/user-reg-success';
+import AuthMainContent from '@/shared/ui/forms/auth-main-content';
 import UserFormHeader from '@/shared/ui/forms/user-form-header';
 import UserFormFooter from '@/shared/ui/forms/user-form-footer';
 
@@ -23,11 +24,13 @@ const RegPage = () => {
   return isSuccess
     ? <UserRegSuccess />
     : <>
-      <UserFormHeader
-        heading="Welcome to Notty"
-        text="Sign up to get started!"
-      />
-      <UserRegForm />
+      <AuthMainContent>
+        <UserFormHeader
+          heading="Welcome to Notty"
+          text="Sign up to get started!"
+        />
+        <UserRegForm />
+      </AuthMainContent>
       <UserFormFooter
         text="Already have an account?"
         linkText="Sign in"

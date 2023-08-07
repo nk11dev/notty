@@ -1,5 +1,14 @@
 @import '/src/assets/styles/theme/colors';
 
+.element {
+  margin-top: 25px;
+}
+
+.text {
+  margin-right: 8px;
+  color: $common-color-suffix-text;
+}
+
 .link {
   text-decoration: none;
   color: $brand-color;
