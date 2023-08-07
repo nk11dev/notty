@@ -1,0 +1,10 @@
+@import '/src/assets/styles/theme/colors';
+
+.link {
+  text-decoration: none;
+  color: $brand-color;
+
+  &:hover {
+    color: $brand-color-darker-10;
+  }
+}

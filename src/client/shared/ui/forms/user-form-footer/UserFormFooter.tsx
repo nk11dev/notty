@@ -1,3 +1,5 @@
+import styles from './UserFormFooter.module.scss';
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +18,7 @@ const UserFormFooter = (props: Props) => (
         </span>
       )}
 
-      <Link to={props.url}>
+      <Link className={styles.link} to={props.url}>
         {props.linkText}
       </Link>
     </div>
