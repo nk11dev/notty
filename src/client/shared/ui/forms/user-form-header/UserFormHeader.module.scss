@@ -1,9 +1,11 @@
+@import '/src/assets/styles/theme/sizings';
+
 .element {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 30px;
 
-  @media (max-height: 600px) {
+  @media (max-height: $auth-form-height) {
     margin: 20px 0px;
   }
 }
