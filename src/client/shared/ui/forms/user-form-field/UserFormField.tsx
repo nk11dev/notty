@@ -25,7 +25,7 @@ const UserFormField = (props: Props) => {
   return (
     <div className={styles.field}>
       <InputGroup>
-        <InputGroup.Text>
+        <InputGroup.Text className={styles.icon}>
           {props.icon}
         </InputGroup.Text>
         <Form.Control

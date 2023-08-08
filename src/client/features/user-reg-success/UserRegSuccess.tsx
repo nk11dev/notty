@@ -24,7 +24,7 @@ const UserRegSuccess = () => {
 
   return (
     <AuthMainContent>
-      <UserFormHeader heading="Success!" />
+      <UserFormHeader>Success!</UserFormHeader>
       <IoCheckmarkCircle className={styles.icon} />
       <div className={cn(styles.text, 'ms-1')}>
         Your account for email <b>{email}</b> has been created. Sign in to start using app.

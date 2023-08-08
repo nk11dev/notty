@@ -7,10 +7,7 @@ import UserFormFooter from '@/shared/ui/forms/user-form-footer';
 
 const LoginPage = () => (<>
   <AuthMainContent>
-    <UserFormHeader
-      heading="Welcome to Notty"
-      text="Sign in to have access!"
-    />
+    <UserFormHeader>Sign in to Notty</UserFormHeader>
     <UserLoginForm />
   </AuthMainContent>
   <UserFormFooter

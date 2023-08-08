@@ -1,11 +1,9 @@
 .element {
-  margin-bottom: 25px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
 
-  @media (max-height: 400px) {
+  @media (max-height: 600px) {
     margin: 20px 0px;
   }
-}
-
-.heading {
-  font-size: calc(1.5rem + 1vw);
 }

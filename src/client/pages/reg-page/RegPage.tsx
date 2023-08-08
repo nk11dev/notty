@@ -25,10 +25,7 @@ const RegPage = () => {
     ? <UserRegSuccess />
     : <>
       <AuthMainContent>
-        <UserFormHeader
-          heading="Welcome to Notty"
-          text="Sign up to get started!"
-        />
+        <UserFormHeader>Sign up for Notty</UserFormHeader>
         <UserRegForm />
       </AuthMainContent>
       <UserFormFooter
