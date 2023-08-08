@@ -10,9 +10,9 @@ import {
   REGISTER_USER_CACHE_KEY,
 } from '@/app/auth/slices';
 import type { UserDto } from '@/app/auth/types';
-import AuthMainContent from '@/shared/ui/forms/auth-main-content';
-import UserFormHeader from '@/shared/ui/forms/user-form-header';
-import UserFormButton from '@/shared/ui/forms/user-form-button';
+import AuthMain from '@/shared/ui/auth/auth-main';
+import AuthTitle from '@/shared/ui/auth/auth-title';
+import AuthButton from '@/shared/ui/auth/auth-button';
 
 const UserRegSuccess = () => {
   const navigate = useNavigate();
@@ -23,18 +23,18 @@ const UserRegSuccess = () => {
   const { email } = regState.data as UserDto || {};
 
   return (
-    <AuthMainContent>
-      <UserFormHeader>Success!</UserFormHeader>
+    <AuthMain>
+      <AuthTitle>Success!</AuthTitle>
       <IoCheckmarkCircle className={styles.icon} />
       <div className={cn(styles.text, 'ms-1')}>
         Your account for email <b>{email}</b> has been created. Sign in to start using app.
       </div>
-      <UserFormButton
+      <AuthButton
         type="button"
         text="Continue"
         clickHandler={() => navigate('/login')}
       />
-    </AuthMainContent>
+    </AuthMain>
   );
 }
 

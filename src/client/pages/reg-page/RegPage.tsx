@@ -6,9 +6,9 @@ import {
 } from '@/app/auth/slices';
 import UserRegForm from '@/features/user-reg-form';
 import UserRegSuccess from '@/features/user-reg-success';
-import AuthMainContent from '@/shared/ui/forms/auth-main-content';
-import UserFormHeader from '@/shared/ui/forms/user-form-header';
-import UserFormFooter from '@/shared/ui/forms/user-form-footer';
+import AuthMain from '@/shared/ui/auth/auth-main';
+import AuthTitle from '@/shared/ui/auth/auth-title';
+import AuthFooter from '@/shared/ui/auth/auth-footer';
 
 const RegPage = () => {
   const [, {
@@ -24,11 +24,11 @@ const RegPage = () => {
   return isSuccess
     ? <UserRegSuccess />
     : <>
-      <AuthMainContent>
-        <UserFormHeader>Sign up for Notty</UserFormHeader>
+      <AuthMain>
+        <AuthTitle>Sign up for Notty</AuthTitle>
         <UserRegForm />
-      </AuthMainContent>
-      <UserFormFooter
+      </AuthMain>
+      <AuthFooter
         text="Already have an account?"
         linkText="Sign in"
         url="/login"

@@ -11,8 +11,8 @@ import type { UserLoginPayload } from '@/common/types/user.types';
 import { useAuth } from '@/app/auth/hooks';
 import { useLoginUserMutation } from '@/app/auth/slices';
 import type { BaseQueryError } from '@/shared/types';
-import UserFormField from '@/shared/ui/forms/user-form-field';
-import UserFormButton from '@/shared/ui/forms/user-form-button';
+import AuthFormField from '@/shared/ui/auth/auth-form-field';
+import AuthButton from '@/shared/ui/auth/auth-button';
 import ProgressBar from '@/shared/ui/fetching/progress-bar';
 
 const UserLoginForm = () => {
@@ -64,19 +64,19 @@ const UserLoginForm = () => {
     {(isLoading || isUpdating) && <ProgressBar />}
     <FormProvider {...methods}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <UserFormField
+        <AuthFormField
           type="text"
           name="email"
           placeholder="E-mail"
           icon={<IoMailOutline />}
         />
-        <UserFormField
+        <AuthFormField
           type="password"
           name="password"
           placeholder="Password"
           icon={<IoLockClosedOutline />}
         />
-        <UserFormButton
+        <AuthButton
           type="submit"
           text="Sign in"
           isDisabled={isLoading}

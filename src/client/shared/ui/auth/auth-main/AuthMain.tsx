@@ -1,4 +1,4 @@
-import styles from './AuthMainContent.module.scss';
+import styles from './AuthMain.module.scss';
 
 import React from 'react';
 
@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode,
 };
 
-const AuthMainContent = (props: Props) => (
+const AuthMain = (props: Props) => (
   <div className={styles.outer}>
     <div className={styles.inner}>
       {props.children}
@@ -14,4 +14,4 @@ const AuthMainContent = (props: Props) => (
   </div>
 );
 
-export default AuthMainContent;
+export default AuthMain;

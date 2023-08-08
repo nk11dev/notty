@@ -1,26 +1,23 @@
-import styles from './UserFormFooter.module.scss';
+import styles from './AuthFooter.module.scss';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  text?: string,
+  text: string,
   linkText: string,
   url: string,
 };
 
-const UserFormFooter = (props: Props) => (
+const AuthFooter = (props: Props) => (
   <div className={styles.element}>
-    {props.text && (
-      <span className={styles.text}>
-        {props.text}
-      </span>
-    )}
-
+    <span className={styles.text}>
+      {props.text}
+    </span>
     <Link className={styles.link} to={props.url}>
       {props.linkText}
     </Link>
   </div>
 );
 
-export default UserFormFooter;
+export default AuthFooter;

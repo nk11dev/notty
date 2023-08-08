@@ -1,4 +1,4 @@
-import styles from './UserFormField.module.scss';
+import styles from './AuthFormField.module.scss';
 
 import React from 'react';
 import type { ReactNode } from 'react';
@@ -13,7 +13,7 @@ type Props = {
   icon: ReactNode,
 };
 
-const UserFormField = (props: Props) => {
+const AuthFormField = (props: Props) => {
   const {
     register,
     formState: { errors }
@@ -47,4 +47,4 @@ const UserFormField = (props: Props) => {
   );
 }
 
-export default UserFormField;
+export default AuthFormField;

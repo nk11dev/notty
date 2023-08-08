@@ -1,4 +1,4 @@
-import styles from './UserFormButton.module.scss';
+import styles from './AuthButton.module.scss';
 
 import React from 'react';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +12,7 @@ type Props = {
   clickHandler?: () => void;
 };
 
-const UserFormButton = (props: Props) => (
+const AuthButton = (props: Props) => (
   <div className={cn(styles.wrapper, 'd-grid')}>
     <Button
       type={props.type}
@@ -26,4 +26,4 @@ const UserFormButton = (props: Props) => (
   </div>
 );
 
-export default UserFormButton;
+export default AuthButton;
