@@ -1,31 +1,14 @@
 import styles from './LoadingSpinner.module.scss';
 
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { IoSync } from 'react-icons/io5';
 
-type Props = {
-  icon: IconDefinition,
-  size?: number,
-};
+import HeaderButton from '@/shared/ui/controls/header-button';
 
-const LoadingSpinner = (props: Props) => {
-  const { icon, size } = props;
-
-  if (!icon) return null;
-
-  return (
-    <span className={styles.spinnerWrapper}>
-      <FontAwesomeIcon
-        icon={icon}
-        className="fa-spin-pulse"
-        style={{
-          width: size,
-          height: size
-        }}
-      />
-    </span>
-  );
-};
+const LoadingSpinner = () => (
+  <HeaderButton>
+    <IoSync className={styles.spinner} />
+  </HeaderButton>
+);
 
 export default LoadingSpinner;

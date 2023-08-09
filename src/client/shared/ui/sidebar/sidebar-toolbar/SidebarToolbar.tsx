@@ -1,7 +1,6 @@
 import styles from './SidebarToolbar.module.scss';
 
 import React from 'react';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import LoadingSpinner from '@/shared/ui/fetching/loading-spinner';
 
@@ -22,15 +21,7 @@ const SidebarToolbar = (props: Props) => {
         </b>
         {children}
       </span>
-
-      {showLoader && (
-        <span>
-          <LoadingSpinner
-            icon={faSpinner}
-            size={16}
-          />
-        </span>
-      )}
+      {showLoader && <LoadingSpinner/>}
     </div>
   );
 }
