@@ -1,0 +1,25 @@
+@import '~overlayscrollbars/overlayscrollbars.css';
+
+.element {
+  :global {
+    .os-scrollbar {
+      width: 7px;
+
+      &.os-scrollbar-handle-interactive {
+        .os-scrollbar-handle {
+          background: #a8a8a8;
+        }
+      }
+
+      &.os-scrollbar-interaction {
+        .os-scrollbar-handle {
+          background: #8e8e8e;
+        }
+      }
+
+      .os-scrollbar-handle {
+        border-radius: 2px;
+      }
+    }
+  }
+}

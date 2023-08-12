@@ -1,11 +1,7 @@
 @import '/src/assets/styles/common/breakpoints';
 
 .element {
-  flex: 1 1 auto;
-  height: 100%;
-  margin: 2px 0px;
   padding: 10px 25px;
-  overflow: auto;
 
   @media (max-width: $small-breakpoint) {
     padding: 5px 15px;
