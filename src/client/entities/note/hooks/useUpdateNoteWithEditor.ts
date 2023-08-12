@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import type { Editor } from '@tiptap/core';
 
-import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import type { NoteRouteSlugs } from '@/app/routing/types';
 import {
   notesApi,
@@ -10,10 +9,7 @@ import {
 } from '@/entities/note/api-slices';
 import { useNoteData } from '@/entities/note/hooks/useNoteData';
 import { useDebounce } from '@/shared/hooks';
-
-const PM_PARSE_OPTIONS = {
-  preserveWhitespace: true
-};
+import { resetEditorContent } from '@/shared/utils/editor.utils';
 
 export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
   const { noteSlug } = useParams() as NoteRouteSlugs;
@@ -26,13 +22,14 @@ export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
 
   useEffect(() => {
     if (currentData && editor) {
+      const { id, body } = currentData;
       const text = editor.getText();
+      const html = editor.getHTML();
 
-      if (
-        (text === EDITOR_DEFAULT_CONTENT) ||
-        (noteData.id !== currentData.id)
+      if ((noteData.id === id) &&
+        [text, html].every(val => val !== body)
       ) {
-        editor.commands.setContent(currentData.body, false, PM_PARSE_OPTIONS);
+        resetEditorContent(editor, body);
       }
     }
 
