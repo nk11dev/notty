@@ -1,7 +1,6 @@
 import styles from './PageContent.module.scss';
 
 import React from 'react';
-import cn from 'classnames';
 
 import Scrollbar from '@/shared/ui/controls/scrollbar';
 
@@ -12,9 +11,7 @@ type Props = {
 
 const PageContent = (props: Props) => (
   <Scrollbar>
-    <div className={cn(styles.element, {
-      [styles.isFlex as string]: (props.isFlex === true)
-    })}>
+    <div className={styles.element}>
       {props.children}
     </div>
   </Scrollbar>

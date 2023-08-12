@@ -31,7 +31,7 @@ const NotePage = () => {
     <>
       <NoteHeader />
 
-      <PageContent isFlex>
+      <PageContent>
         <NoteTitleInput />
 
         <PageField
