@@ -101,8 +101,8 @@ export default {
           httpOnly: true,
         });
 
-        res.cookie('has-access-token', true,
-          getCookieOptions(atExpiresIn)
+        res.cookie('has-refresh-token', true,
+          getCookieOptions(rtExpiresIn)
         );
 
         res.sendSuccess(HttpStatus.OK, {
@@ -148,10 +148,6 @@ export default {
         httpOnly: true,
       });
 
-      res.cookie('has-access-token', true,
-        getCookieOptions(atExpiresIn)
-      );
-
       res.sendSuccess(HttpStatus.NO_CONTENT);
     }
   }),
@@ -159,7 +155,7 @@ export default {
   logout: (_req: Request, res: Response) => {
     res.clearCookie('access-token');
     res.clearCookie('refresh-token');
-    res.clearCookie('has-access-token');
+    res.clearCookie('has-refresh-token');
     res.sendSuccess(HttpStatus.NO_CONTENT);
   }
 };
