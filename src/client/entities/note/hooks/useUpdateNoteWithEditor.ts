@@ -9,7 +9,7 @@ import {
 } from '@/entities/note/api-slices';
 import { useNoteData } from '@/entities/note/hooks/useNoteData';
 import { useDebounce } from '@/shared/hooks';
-import { resetEditorContent } from '@/shared/utils/editor.utils';
+import { updateEditor } from '@/shared/utils/editor.utils';
 
 export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
   const { noteSlug } = useParams() as NoteRouteSlugs;
@@ -29,7 +29,7 @@ export const useUpdateNoteWithEditor = (editor: Editor | null): void => {
       if ((noteData.id === id) &&
         [text, html].every(val => val !== body)
       ) {
-        resetEditorContent(editor, body);
+        updateEditor(editor, body);
       }
     }
 
