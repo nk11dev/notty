@@ -37,6 +37,9 @@ export const notesApi = createApi({
           method: 'GET'
         }),
         providesTags: ['NoteTag'],
+
+        // Clear cached data after the last related component unsubscribes
+        keepUnusedDataFor: 0,
       }),
 
       createNote: build.mutation<NoteDto, string>({

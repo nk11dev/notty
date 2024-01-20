@@ -1,16 +1,24 @@
 import { Editor } from '@tiptap/core';
+import { EditorState } from 'prosemirror-state';
 
 // Prose mirror parse options
 const PM_PARSE_OPTIONS = {
   preserveWhitespace: true
 };
 
-export function updateEditor(editor: Editor, newContent: string | null) {
-  const { from, to } = editor.state.selection;
+export function setEditorState(editor: Editor, newContent: string | null) {
 
-  editor
-    .chain()
-    .setContent(newContent, false, PM_PARSE_OPTIONS)
-    .setTextSelection({ from, to })
-    .run();
+  // Set intial content
+  editor.commands.setContent(newContent, false, PM_PARSE_OPTIONS)
+
+  // Create a new editor state for clearing the changes history and preserving the old selection
+  const newEditorState = EditorState.create({
+    doc: editor.state.doc,
+    schema: editor.state.schema,
+    plugins: editor.state.plugins,
+    selection: editor.state.selection,
+  });
+
+  // Update the editor state
+  editor.view.updateState(newEditorState);
 }

@@ -10,7 +10,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import type { TextStyleOptions } from '@tiptap/extension-text-style';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
-import { useUpdateNoteWithEditor } from '@/entities/note/hooks';
+import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
 import { useSidebarMode, useDeviceMatch } from '@/shared/hooks';
 import EditorMenuBar from '@/shared/ui/page/page-editor/editor-menu-bar';
 
@@ -45,9 +45,13 @@ const PageEditor = () => {
     content: EDITOR_DEFAULT_CONTENT,
   });
 
-  useUpdateNoteWithEditor(editor);
+  // Reset note in editor if user switched to different note
+  useResetNoteEditor(editor);
 
-  // remove focus from editor if user's device is mobile (to hide blue cursor under caret on touch devices)
+  // Make API request to update note's body if user edited note's content
+  useUpdateNoteBody(editor);
+
+  // Remove focus from editor if user's device is mobile (to hide blue cursor under caret on touch devices)
   useEffect(() => {
     if (isMobile && isSidebarVisible && editor) {
       editor.commands.blur();
