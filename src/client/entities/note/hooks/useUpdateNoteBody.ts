@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import type { Editor } from '@tiptap/core';
 
 import type { NoteRouteSlugs } from '@/app/routing/types';
 import {
@@ -8,8 +7,9 @@ import {
   useUpdateNoteMutation
 } from '@/entities/note/api-slices';
 import { useDebounce } from '@/shared/hooks';
+import type { NullableEditor } from '@/shared/types';
 
-export const useUpdateNoteBody = (editor: Editor | null): void => {
+export const useUpdateNoteBody = (editor: NullableEditor): void => {
   const { noteSlug } = useParams() as NoteRouteSlugs;
 
   const [updateNote] = useUpdateNoteMutation();

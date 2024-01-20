@@ -12,7 +12,7 @@ import type { TextStyleOptions } from '@tiptap/extension-text-style';
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
 import { useSidebarMode, useDeviceMatch } from '@/shared/hooks';
-import EditorMenuBar from '@/shared/ui/page/page-editor/editor-menu-bar';
+import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
 
 interface ExtendedTextStyleOptions extends TextStyleOptions {
   types: string[];
@@ -58,15 +58,13 @@ const PageEditor = () => {
     }
   }, [isMobile, isSidebarVisible, editor]);
 
-  return (
-    <>
-      <EditorMenuBar editor={editor} />
-      <EditorContent
-        className={styles.editor}
-        editor={editor}
-      />
-    </>
-  );
+  return (<>
+    <EditorMenu editor={editor} />
+    <EditorContent
+      className={styles.editor}
+      editor={editor}
+    />
+  </>);
 };
 
 export default PageEditor;
