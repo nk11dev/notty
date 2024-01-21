@@ -8,8 +8,9 @@ export type EditorProps = {
 };
 
 export type EditorButtonProps = {
-  renderIcon: () => ReactElement | string,
+  tooltip: string,
+  icon: ReactElement,
   onClick: () => void,
-  isDisabled: boolean,
+  isDisabled?: boolean,
   isActive?: boolean,
 };

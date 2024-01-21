@@ -1,9 +1,11 @@
+import styles from './EditorButton.module.scss';
+
 import React from 'react';
 import cn from 'classnames';
 
 import type { EditorButtonProps, EditorProps } from '@/shared/types';
 
-const EditorButton = ({ editor, renderIcon, onClick, isDisabled, isActive }: EditorButtonProps & EditorProps) => {
+const EditorButton = ({ editor, tooltip, icon, onClick, isDisabled, isActive }: EditorButtonProps & EditorProps) => {
 
   if (!editor) {
     return null;
@@ -13,9 +15,13 @@ const EditorButton = ({ editor, renderIcon, onClick, isDisabled, isActive }: Edi
     <button
       onClick={onClick}
       disabled={!editor.can().focus() || isDisabled}
-      className={cn({ 'is-active': isActive })}
+      className={cn(styles.btn, {
+        [styles.isActive as string]: isActive
+      })}
     >
-      {renderIcon()}
+      <span title={tooltip}>
+        {icon}
+      </span>
     </button>
   );
 };
