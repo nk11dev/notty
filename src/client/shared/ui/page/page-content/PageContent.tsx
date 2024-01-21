@@ -10,7 +10,7 @@ type Props = {
 };
 
 const PageContent = (props: Props) => (
-  <Scrollbar>
+  <Scrollbar cls={styles.scroll}>
     <div className={styles.element}>
       {props.children}
     </div>
