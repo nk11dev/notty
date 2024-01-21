@@ -9,6 +9,7 @@
   font-size: 32px;
   color: #2d3b4a;
   text-overflow: ellipsis;
+  line-height: 1.2;
 
   &:focus {
     outline: none;
@@ -16,5 +17,6 @@
 
   @media (max-width: $small-breakpoint) {
     font-size: 28px;
+    line-height: 1.5;
   }
 }

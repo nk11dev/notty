@@ -8,6 +8,8 @@ import NoteHeader from '@/entities/note/ui/note-header';
 import NoteTitleInput from '@/entities/note/ui/note-title-input';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
+import ContentHeader from '@/shared/ui/page/page-content/content-header';
+import ContentBody from '@/shared/ui/page/page-content/content-body';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
@@ -30,16 +32,20 @@ const NotePage = () => {
   return (
     <>
       <NoteHeader />
-
       <PageContent>
-        <NoteTitleInput />
 
-        <PageField
-          icon={faFloppyDisk}
-          data={currentData.updated_at || currentData.created_at}
-        />
+        <ContentHeader>
+          <NoteTitleInput />
+          <PageField
+            icon={faFloppyDisk}
+            data={currentData.updated_at || currentData.created_at}
+          />
+        </ContentHeader>
 
-        <PageEditor />
+        <ContentBody>
+          <PageEditor />
+        </ContentBody>
+
       </PageContent>
     </>
   );
