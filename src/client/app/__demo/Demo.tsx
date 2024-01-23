@@ -4,9 +4,13 @@ import styles from './Demo.module.scss';
 import React, { useEffect } from 'react';
 
 const Demo = () => {
-  const content = Array(80)
-    .fill('lorem ipsum dolor')
-    .map((t, i) => <div key={i}>{t}</div>);
+  const description = Array(2)
+    .fill('description')
+    .map((t, i) => <p key={i} className={styles.description}>{i + 1} {t}</p>);
+
+  const text = Array(40)
+    .fill('text')
+    .map((t, i) => <p key={i}>{i + 1} {t}</p>);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,11 +41,20 @@ const Demo = () => {
     </aside>
 
     <main className={styles.main}>
-      <div className={styles.mainHeader}>
+      <div className={styles.title}>
         Title
       </div>
+
       <div className={styles.content}>
-        {content}
+        {description}
+
+        <div className={styles.toolbar}>
+          Toolbar
+        </div>
+
+        <input className={styles.input} />
+        {text}
+        <input className={styles.input} />
       </div>
     </main>
   </>);

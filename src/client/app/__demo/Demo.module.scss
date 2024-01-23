@@ -7,20 +7,20 @@ $headerColor: green;
   flex-direction: column;
   width: $asideWidth;
   justify-content: space-between;
-  background: #f8f6f5;
   border-right: 1px solid #e8e6e4;
+  background-color: #f8f6f5;
 }
 
 .asideHeader {
   height: $headerHeight;
   width: $asideWidth;
-  background: $headerColor;
+  background-color: $headerColor;
 }
 
 .asideFooter {
   height: $headerHeight;
   width: $asideWidth;
-  background: burlywood;
+  background-color: burlywood;
 }
 
 .main {
@@ -30,12 +30,28 @@ $headerColor: green;
   overflow: hidden;
 }
 
-.mainHeader {
+.title {
   padding-left: 15px;
   font-size: 24px;
   line-height: 1.4;
   color: purple;
   border-bottom: 2px solid $headerColor;
+}
+
+.description {
+  margin-top: 0px;
+}
+
+.toolbar {
+  position: sticky;
+  top:0px;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  font-size: 20px;
+  color: blue;
+  border-top: 2px solid #e8e6e4;
+  border-bottom: 2px solid #e8e6e4;
+  background-color: white;
 }
 
 .content {
