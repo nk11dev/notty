@@ -1,0 +1,51 @@
+$asideWidth: 80px;
+$headerHeight: 35px;
+$headerColor: green;
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  width: $asideWidth;
+  justify-content: space-between;
+  background: #f8f6f5;
+  border-right: 1px solid #e8e6e4;
+}
+
+.asideHeader {
+  height: $headerHeight;
+  width: $asideWidth;
+  background: $headerColor;
+}
+
+.asideFooter {
+  height: $headerHeight;
+  width: $asideWidth;
+  background: burlywood;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mainHeader {
+  padding-left: 15px;
+  font-size: 24px;
+  line-height: 1.4;
+  color: purple;
+  border-bottom: 2px solid $headerColor;
+}
+
+.content {
+  padding: 15px 15px;
+  overflow-y: scroll;
+}
+
+.input {
+  width: calc(100% - 6px);
+  padding: 2px;
+  box-sizing: border-box;
+  margin: 3px;
+}

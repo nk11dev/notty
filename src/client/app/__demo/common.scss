@@ -1,0 +1,17 @@
+html {
+  font-family: monospace;
+  overflow: auto;
+  height: 100%;
+}
+
+body{
+  margin: 0px;
+  overflow: auto;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  overflow: auto;
+  height: 100%;
+}
