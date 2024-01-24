@@ -66,6 +66,7 @@ const FolderModal = (props: Props) => {
               type="text"
               defaultValue={formData?.title}
               disabled={formData === null}
+              maxLength={30}
             />
           </Form.Group>
         </Form>

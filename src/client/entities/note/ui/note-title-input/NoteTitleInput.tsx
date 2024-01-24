@@ -23,6 +23,7 @@ const NoteTitleInput = () => {
       type="text"
       value={noteData.title}
       onChange={onInputChange}
+      maxLength={30}
     />
   );
 };
