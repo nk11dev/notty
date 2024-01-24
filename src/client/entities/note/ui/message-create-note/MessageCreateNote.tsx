@@ -14,13 +14,15 @@ const MessageCreateNote = () => {
   const [onCreateNote] = useHandleCreateNote();
 
   return (
-    <button
-      type="button"
-      className={cn(styles.element, 'btn btn-link')}
-      onClick={() => onCreateNote(folderSlug)}
-    >
-      Create new note
-    </button>
+    <div>
+      <button
+        type="button"
+        className={cn(styles.element, 'btn btn-link')}
+        onClick={() => onCreateNote(folderSlug)}
+      >
+        Create new note
+      </button>
+    </div>
   );
 }
 
