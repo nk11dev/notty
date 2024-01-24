@@ -63,6 +63,7 @@ const PageEditor = () => {
     <EditorContent
       className={styles.editor}
       editor={editor}
+      spellCheck="false"
     />
   </>);
 };
