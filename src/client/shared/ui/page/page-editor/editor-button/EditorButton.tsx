@@ -1,11 +1,21 @@
 import styles from './EditorButton.module.scss';
 
-import React from 'react';
+import React, { useContext } from 'react';
+import type { ReactElement } from 'react';
 import cn from 'classnames';
 
-import type { EditorButtonProps, EditorProps } from '@/shared/types';
+import EditorContext from '@/shared/contexts/editor-context';
 
-const EditorButton = ({ editor, tooltip, icon, onClick, isDisabled, isActive }: EditorButtonProps & EditorProps) => {
+type EditorButtonProps = {
+  tooltip: string,
+  icon: ReactElement,
+  onClick: () => void,
+  isDisabled?: boolean,
+  isActive?: boolean,
+};
+
+const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: EditorButtonProps) => {
+  const editor = useContext(EditorContext);
 
   if (!editor) {
     return null;

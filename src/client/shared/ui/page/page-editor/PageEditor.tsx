@@ -11,6 +11,7 @@ import type { TextStyleOptions } from '@tiptap/extension-text-style';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
+import EditorContext from '@/shared/contexts/editor-context';
 import { useSidebarMode, useDeviceMatch } from '@/shared/hooks';
 import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
 
@@ -58,14 +59,16 @@ const PageEditor = () => {
     }
   }, [isMobile, isSidebarVisible, editor]);
 
-  return (<>
-    <EditorMenu editor={editor} />
-    <EditorContent
-      className={styles.editor}
-      editor={editor}
-      spellCheck="false"
-    />
-  </>);
+  return (
+    <EditorContext.Provider value={editor}>
+      <EditorMenu />
+      <EditorContent
+        className={styles.editor}
+        editor={editor}
+        spellCheck="false"
+      />
+    </EditorContext.Provider>
+  );
 };
 
 export default PageEditor;
