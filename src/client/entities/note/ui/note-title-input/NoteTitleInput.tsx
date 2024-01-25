@@ -1,14 +1,15 @@
 import styles from './NoteTitleInput.module.scss';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import type { ChangeEvent } from 'react';
 
-import {
-  useUpdateNoteField
-} from '@/entities/note/hooks';
+import { useUpdateNoteField } from '@/entities/note/hooks';
+import { ContentContext } from '@/shared/contexts/content-context';
 
 const NoteTitleInput = () => {
   const [noteData, setNoteData] = useUpdateNoteField('title');
+
+  const { setTitleFocus } = useContext(ContentContext);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNoteData(prevValue => ({
@@ -23,6 +24,8 @@ const NoteTitleInput = () => {
       type="text"
       value={noteData.title}
       onChange={onInputChange}
+      onFocus={() => setTitleFocus(true)}
+      onBlur={() => setTitleFocus(false)}
       maxLength={30}
     />
   );
