@@ -2,6 +2,7 @@ import './ProseMirror.scss';
 import styles from './PageEditor.module.scss';
 
 import React, { useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ListItem from '@tiptap/extension-list-item';
@@ -13,13 +14,16 @@ import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
 import EditorContext from '@/shared/contexts/editor-context';
 import { useSidebarMode, useDeviceMatch } from '@/shared/hooks';
-import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
 
 interface ExtendedTextStyleOptions extends TextStyleOptions {
   types: string[];
 }
 
-const PageEditor = () => {
+type Props = {
+  render: (editorContent: ReactNode) => ReactNode
+};
+
+const PageEditor = ({ render }: Props) => {
   const { isMobile } = useDeviceMatch();
   const { isSidebarVisible } = useSidebarMode();
 
@@ -61,12 +65,13 @@ const PageEditor = () => {
 
   return (
     <EditorContext.Provider value={editor}>
-      <EditorMenu />
-      <EditorContent
-        className={styles.editor}
-        editor={editor}
-        spellCheck="false"
-      />
+      {render(
+        <EditorContent
+          className={styles.editor}
+          editor={editor}
+          spellCheck="false"
+        />
+      )}
     </EditorContext.Provider>
   );
 };

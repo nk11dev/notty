@@ -1,13 +1,12 @@
 .btn {
   width: 28px;
   height: 28px;
-  margin: 2px 4px 2px 0px;
+  margin: 2px 4px 5px 0px;
   padding: 2px;
-  font-size: 16px;
   line-height: 1;
-  vertical-align: middle;
-  border: 1px solid darkgray;
-  border-radius: 3px;
+  background: none;
+  border: none;
+  border-radius: 1px;
 }
 
 .isActive {

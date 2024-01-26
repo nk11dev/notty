@@ -3,8 +3,6 @@
 .element {
   :global {
     .os-scrollbar {
-      width: 7px;
-
       &.os-scrollbar-handle-interactive {
         .os-scrollbar-handle {
           background: #a8a8a8;
@@ -18,8 +16,16 @@
       }
 
       .os-scrollbar-handle {
-        border-radius: 2px;
+        border-radius: 1px;
       }
+    }
+
+    .os-scrollbar-vertical {
+      width: 7px;
+    }
+
+    .os-scrollbar-horizontal {
+      height: 7px;
     }
   }
 }

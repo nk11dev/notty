@@ -9,8 +9,7 @@ import NoteTitleInput from '@/entities/note/ui/note-title-input';
 import { ContentContextProvider } from '@/shared/contexts/content-context';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
-import ContentHeader from '@/shared/ui/page/page-content/content-header';
-import ContentBody from '@/shared/ui/page/page-content/content-body';
+import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
 import PageField from '@/shared/ui/page/page-field';
 import PageEditor from '@/shared/ui/page/page-editor';
 
@@ -31,26 +30,22 @@ const NotePage = () => {
   if (!currentData) return null;
 
   return (
-    <>
-      <NoteHeader />
-      <PageContent>
-        <ContentContextProvider>
+    <PageEditor render={(editorContent) => (<>
+      <ContentContextProvider>
+        <NoteHeader />
+        <EditorMenu />
 
-          <ContentHeader>
-            <NoteTitleInput />
-            <PageField
-              icon={faFloppyDisk}
-              data={currentData.updated_at || currentData.created_at}
-            />
-          </ContentHeader>
+        <PageContent>
+          <NoteTitleInput />
+          <PageField
+            icon={faFloppyDisk}
+            data={currentData?.updated_at || (currentData?.created_at as string)}
+          />
+          {editorContent}
+        </PageContent>
 
-          <ContentBody>
-            <PageEditor />
-          </ContentBody>
-
-        </ContentContextProvider>
-      </PageContent>
-    </>
+      </ContentContextProvider>
+    </>)} />
   );
 };
 
