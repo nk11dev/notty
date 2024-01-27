@@ -9,7 +9,7 @@ import { EditorContext } from '@/shared/contexts/editor-context';
 const NoteTitleInput = () => {
   const [noteData, setNoteData] = useUpdateNoteField('title');
 
-  const { setTitleFocus } = useContext(EditorContext);
+  const { disableEditorMenu } = useContext(EditorContext);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNoteData(prevValue => ({
@@ -24,8 +24,8 @@ const NoteTitleInput = () => {
       type="text"
       value={noteData.title}
       onChange={onInputChange}
-      onFocus={() => setTitleFocus(true)}
-      onBlur={() => setTitleFocus(false)}
+      onFocus={() => disableEditorMenu(true)}
+      onBlur={() => disableEditorMenu(false)}
       maxLength={30}
     />
   );

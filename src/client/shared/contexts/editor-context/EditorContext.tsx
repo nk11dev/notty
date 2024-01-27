@@ -10,27 +10,27 @@ type Props = {
 
 type ContextType = {
   editor: NullableEditor,
-  isTitleFocused: boolean,
-  setTitleFocus: (value: boolean) => void,
+  isEditorMenuDisabled: boolean,
+  disableEditorMenu: (value: boolean) => void,
 };
 
 const ContextDefault = {
   editor: null,
-  isTitleFocused: false,
+  isEditorMenuDisabled: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTitleFocus: () => { }
+  disableEditorMenu: () => { }
 }
 
 export const EditorContext = createContext<ContextType>(ContextDefault);
 
 export const EditorContextProvider = ({ editor, children }: Props) => {
-  const [isTitleFocused, setTitleFocus] = useState<boolean>(false);
+  const [isEditorMenuDisabled, disableEditorMenu] = useState<boolean>(false);
 
   return (
     <EditorContext.Provider value={{
       editor,
-      isTitleFocused,
-      setTitleFocus
+      isEditorMenuDisabled,
+      disableEditorMenu
     }}>
       {children}
     </EditorContext.Provider>

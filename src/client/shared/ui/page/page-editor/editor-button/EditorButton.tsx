@@ -15,7 +15,7 @@ type Props = {
 };
 
 const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) => {
-  const { editor, isTitleFocused } = useContext(EditorContext);
+  const { editor, isEditorMenuDisabled } = useContext(EditorContext);
 
   if (!editor) {
     return null;
@@ -30,11 +30,11 @@ const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) =
       }}
       disabled={
         !editor.can().focus() ||
-        isTitleFocused ||
+        isEditorMenuDisabled ||
         isDisabled
       }
       className={cn(styles.btn, {
-        [styles.isActive as string]: isActive && !isTitleFocused
+        [styles.isActive as string]: isActive && !isEditorMenuDisabled
       })}
     >
       <span title={tooltip}>
