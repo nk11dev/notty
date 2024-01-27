@@ -20,7 +20,24 @@ const EditorMenu = () => {
 
   return (
     <div className={styles.menu}>
-      <Scrollbar>
+      <Scrollbar options={{ visibility: 'hidden' }}>
+  
+        <EditorButton
+          tooltip="Undo changes"
+          icon={<LuUndo2 size={20} />}
+          onClick={() => editor.chain().focus().undo().run()}
+          isDisabled={!editor.can().undo()}
+        />
+
+        <EditorButton
+          tooltip="Redo changes"
+          icon={<LuRedo2 size={20} />}
+          onClick={() => editor.chain().focus().redo().run()}
+          isDisabled={!editor.can().redo()}
+        />
+
+        <span className={styles.separator} />
+
         <EditorButton
           tooltip="Bold"
           icon={<LuBold size={18} />}
@@ -127,21 +144,6 @@ const EditorMenu = () => {
           isDisabled={!editor.can().clearNodes()}
         />
   
-        <span className={styles.separator} />
-  
-        <EditorButton
-          tooltip="Undo changes"
-          icon={<LuUndo2 size={20} />}
-          onClick={() => editor.chain().focus().undo().run()}
-          isDisabled={!editor.can().undo()}
-        />
-  
-        <EditorButton
-          tooltip="Redo changes"
-          icon={<LuRedo2 size={20} />}
-          onClick={() => editor.chain().focus().redo().run()}
-          isDisabled={!editor.can().redo()}
-        />
       </Scrollbar>
     </div>
   )
