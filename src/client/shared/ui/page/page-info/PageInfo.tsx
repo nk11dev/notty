@@ -1,31 +1,25 @@
 import styles from './PageInfo.module.scss';
 
-import React from 'react';
+import React, { cloneElement } from 'react';
+import type { ReactElement } from 'react';
 import cn from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type Props = {
+  icon: ReactElement,
   text: string,
   prefix?: string,
-  icon?: IconDefinition,
 };
 
-const PageInfo = (props: Props) => {
-  const { text, prefix, icon } = props;
+const PageInfo = ({ icon, text, prefix }: Props) => {
+  if (!icon || !text) return null;
 
-  if (!text) return null;
+  const iconEl = icon as ReactElement;
 
   return (
     <div className={cn(styles.element, 'me-3')}>
-      {icon && <FontAwesomeIcon
-        icon={icon}
-        className="me-1"
-        style={{
-          width: 16,
-          height: 16
-        }}
-      />}
+      {cloneElement(iconEl, {
+        className: cn('me-1', iconEl.props.className, styles.icon)
+      })}
 
       {prefix && <span className="me-1">
         {prefix}:

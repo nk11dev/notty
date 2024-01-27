@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { FaSave } from 'react-icons/fa';
 
 import type { NoteRouteSlugs } from '@/app/routing/types';
 import { useGetNoteQuery } from '@/entities/note/api-slices';
@@ -36,7 +36,7 @@ const NotePage = () => {
       <PageContent>
         <NoteTitleInput />
         <PageInfo
-          icon={faFloppyDisk}
+          icon={<FaSave size={16} />}
           text={currentData?.updated_at || (currentData?.created_at as string)}
         />
         {editorContent}
