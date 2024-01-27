@@ -36,7 +36,7 @@ const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) =
         isDisabled
       }
       className={cn(styles.btn, {
-        [styles.isActive as string]: isActive
+        [styles.isActive as string]: isActive && !isTitleFocused
       })}
     >
       <span title={tooltip}>
