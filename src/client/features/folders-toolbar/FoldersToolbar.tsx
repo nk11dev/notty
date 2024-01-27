@@ -1,5 +1,6 @@
 import React from 'react';
-import { faRotate, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { IoSync } from 'react-icons/io5';
+import { BsPlusLg } from 'react-icons/bs';
 
 import { useLazyGetAllFoldersQuery } from '@/entities/folder/api-slices';
 import {
@@ -7,7 +8,7 @@ import {
   useHandleCreateFolder
 } from '@/entities/folder/hooks';
 import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
-import ToolbarButton from '@/shared/ui/controls/toolbar-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const FoldersToolbar = () => {
   const { isFetching } = useFoldersState();
@@ -18,17 +19,20 @@ const FoldersToolbar = () => {
     <SidebarToolbar
       title="Folders"
       showLoader={isFetching}
+      refetchButton={
+        <IconButton
+          buttonType="toolbar"
+          tooltip="Refetch folders"
+          icon={<IoSync />}
+          onClick={() => onRefetch()}
+        />
+      }
     >
-      <ToolbarButton
-        icon={faPlus}
-        clickHandler={onCreate}
+      <IconButton
+        buttonType="toolbar"
         tooltip="Create new folder"
-      />
-
-      <ToolbarButton
-        icon={faRotate}
-        clickHandler={() => onRefetch()}
-        tooltip="Refetch folders"
+        icon={<BsPlusLg />}
+        onClick={onCreate}
       />
     </SidebarToolbar>
   );

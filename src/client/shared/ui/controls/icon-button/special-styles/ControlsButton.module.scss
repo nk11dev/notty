@@ -2,15 +2,15 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-.controlsBtn {
+.btn {
   display: flex;
   width: $sidebar-controls-width;
   color: $brand-color;
 }
 
-.controlsIcon {
+.icon {
   width: 100%;
-  height: $sidebar-item-height;
+  height: 100%;
   padding: 7px;
 }
 

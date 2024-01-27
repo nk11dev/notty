@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { faPlus, faRotate } from '@fortawesome/free-solid-svg-icons';
+import { IoSync } from 'react-icons/io5';
+import { BsPlusLg } from 'react-icons/bs';
 
 import type { NoteOptionalRouteSlugs } from '@/app/routing/types';
 import { useLazyGetNotesByFolderQuery } from '@/entities/note/api-slices';
@@ -9,7 +10,7 @@ import {
   useHandleCreateNote
 } from '@/entities/note/hooks';
 import SidebarToolbar from '@/shared/ui/sidebar/sidebar-toolbar';
-import ToolbarButton from '@/shared/ui/controls/toolbar-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const NotesToolbar = () => {
   const { folderSlug } = useParams() as NoteOptionalRouteSlugs;
@@ -22,21 +23,23 @@ const NotesToolbar = () => {
     <SidebarToolbar
       title="Notes"
       showLoader={isFetching}
+      refetchButton={folderSlug
+        ? <IconButton
+          buttonType="toolbar"
+          tooltip="Refetch notes"
+          icon={<IoSync />}
+          onClick={() => onRefetch(folderSlug)}
+        />
+        : null
+      }
     >
       {folderSlug && (
-        <>
-          <ToolbarButton
-            icon={faPlus}
-            clickHandler={() => onCreate(folderSlug)}
-            tooltip="Create new note"
-          />
-
-          <ToolbarButton
-            icon={faRotate}
-            clickHandler={() => onRefetch(folderSlug)}
-            tooltip="Refetch notes"
-          />
-        </>
+        <IconButton
+          buttonType="toolbar"
+          tooltip="Create new note"
+          icon={<BsPlusLg />}
+          onClick={() => onCreate(folderSlug)}
+        />
       )}
     </SidebarToolbar>
   );

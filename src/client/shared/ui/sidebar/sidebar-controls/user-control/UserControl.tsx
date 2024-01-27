@@ -7,7 +7,7 @@ import {
   USER_CONTEXT_MENU_ID,
   USER_CONTEXT_MENU_EL_CLASSNAME,
 } from '@/app/constants/context-menu.constants';
-import ControlsButton from '@/shared/ui/controls/controls-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const UserControl = () => {
   const { show, hideAll } = useContextMenu({
@@ -35,12 +35,12 @@ const UserControl = () => {
   }
 
   return (
-    <ControlsButton
-      clickHandler={onClick}
+    <IconButton
+      buttonType="control"
       tooltip="User"
-    >
-      <IoPersonOutline />
-    </ControlsButton>
+      icon={<IoPersonOutline />}
+      onClick={onClick}
+    />
   );
 }
 

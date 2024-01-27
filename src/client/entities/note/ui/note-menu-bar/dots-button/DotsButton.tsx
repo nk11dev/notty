@@ -8,7 +8,7 @@ import {
   NOTE_CONTEXT_MENU_ID,
   NOTE_CONTEXT_MENU_EL_CLASSNAME,
 } from '@/app/constants/context-menu.constants';
-import HeaderButton from '@/shared/ui/controls/header-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const DotsButton = () => {
   const { noteSlug } = useParams();
@@ -53,16 +53,15 @@ const DotsButton = () => {
       hideAll();
       controlEl.setAttribute('title', tooltips.menuHidden);
     }
-
   }
 
   return (
-    <HeaderButton
-      clickHandler={onClick}
+    <IconButton
+      buttonType="toolbar"
       tooltip={tooltips.menuHidden}
-    >
-      <IoEllipsisHorizontal />
-    </HeaderButton>
+      icon={<IoEllipsisHorizontal />}
+      onClick={onClick}
+    />
   );
 }
 

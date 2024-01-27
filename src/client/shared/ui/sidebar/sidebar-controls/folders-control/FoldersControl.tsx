@@ -1,14 +1,14 @@
 import React from 'react';
-import { IoFolderOutline} from 'react-icons/io5';
+import { IoFolderOutline } from 'react-icons/io5';
 
 import { SidebarModesMap } from '@/app/enums/query-params.enums';
 import { useSidebarMode } from '@/shared/hooks';
-import ControlsButton from '@/shared/ui/controls/controls-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const FoldersControl = () => {
   const { isFoldersModeOrNull, isSidebarVisible, setSidebarMode } = useSidebarMode();
 
-  const toggleSidebarMode = () => {
+  const onClick = () => {
     const newMode = isFoldersModeOrNull
       ? SidebarModesMap.HIDDEN
       : SidebarModesMap.FOLDERS;
@@ -17,13 +17,13 @@ const FoldersControl = () => {
   };
 
   return (
-    <ControlsButton
-      clickHandler={toggleSidebarMode}
-      clsIsActive={isFoldersModeOrNull}
+    <IconButton
+      buttonType="control"
       tooltip={`${isSidebarVisible ? 'Hide' : 'Show'} folders`}
-    >
-      <IoFolderOutline/>
-    </ControlsButton>
+      icon={<IoFolderOutline />}
+      onClick={onClick}
+      isActive={isFoldersModeOrNull}
+    />
   );
 };
 

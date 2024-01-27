@@ -1,17 +1,17 @@
 import React from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 
-import ControlsButton from '@/shared/ui/controls/controls-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const SearchControl = () => (
-  <ControlsButton
+  <IconButton
+    buttonType="control"
     tooltip="Show search"
-    isDisabled
-  >
-    <IoSearchOutline style={{
+    icon={<IoSearchOutline style={{
       padding: '6px'
-    }}/>
-  </ControlsButton>
+    }} />}
+    isDisabled
+  />
 );
 
 export default SearchControl;

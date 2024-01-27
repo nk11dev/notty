@@ -1,9 +1,14 @@
 @import '/src/assets/styles/theme/sizings';
 
-.element {
+.outer {
   display: flex;
   height: $sidebar-item-height;
-  justify-content: space-between;
+  justify-content: stretch;
   margin-left: 10px;
   line-height: 2.3;
+}
+
+.inner {
+  flex: 1 1 0;
+  display: flex;
 }

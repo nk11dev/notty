@@ -1,17 +1,17 @@
 import React from 'react';
 import { IoTimeOutline } from 'react-icons/io5';
 
-import ControlsButton from '@/shared/ui/controls/controls-button';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 const RecentControl = () => (
-  <ControlsButton
+  <IconButton
+    buttonType="control"
     tooltip="Show recent notes"
-    isDisabled
-  >
-    <IoTimeOutline style={{
+    icon={<IoTimeOutline style={{
       padding: '6px'
-    }} />
-  </ControlsButton>
+    }} />}
+    isDisabled
+  />
 );
 
 export default RecentControl;
