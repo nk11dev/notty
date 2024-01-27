@@ -7,7 +7,7 @@ import cn from 'classnames';
 import { ContentContext } from '@/shared/contexts/content-context';
 import EditorContext from '@/shared/contexts/editor-context';
 
-type EditorButtonProps = {
+type Props = {
   tooltip: string,
   icon: ReactElement,
   onClick: () => void,
@@ -15,7 +15,7 @@ type EditorButtonProps = {
   isActive?: boolean,
 };
 
-const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: EditorButtonProps) => {
+const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) => {
   const { isTitleFocused } = useContext(ContentContext);
   const editor = useContext(EditorContext);
 
@@ -25,7 +25,11 @@ const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: EditorBu
 
   return (
     <button
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        editor.view.focus();
+        onClick();
+      }}
       disabled={
         !editor.can().focus() ||
         isTitleFocused ||
