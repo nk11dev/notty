@@ -4,12 +4,12 @@ import React, { useContext } from 'react';
 import type { ChangeEvent } from 'react';
 
 import { useUpdateNoteField } from '@/entities/note/hooks';
-import { ContentContext } from '@/shared/contexts/content-context';
+import { EditorContext } from '@/shared/contexts/editor-context';
 
 const NoteTitleInput = () => {
   const [noteData, setNoteData] = useUpdateNoteField('title');
 
-  const { setTitleFocus } = useContext(ContentContext);
+  const { setTitleFocus } = useContext(EditorContext);
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNoteData(prevValue => ({

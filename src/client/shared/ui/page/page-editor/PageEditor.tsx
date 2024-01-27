@@ -12,7 +12,7 @@ import type { TextStyleOptions } from '@tiptap/extension-text-style';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
-import EditorContext from '@/shared/contexts/editor-context';
+import { EditorContextProvider } from '@/shared/contexts/editor-context';
 import { useSidebarMode, useDeviceMatch } from '@/shared/hooks';
 
 interface ExtendedTextStyleOptions extends TextStyleOptions {
@@ -64,7 +64,7 @@ const PageEditor = ({ render }: Props) => {
   }, [isMobile, isSidebarVisible, editor]);
 
   return (
-    <EditorContext.Provider value={editor}>
+    <EditorContextProvider editor={editor}>
       {render(
         <EditorContent
           className={styles.editor}
@@ -72,7 +72,7 @@ const PageEditor = ({ render }: Props) => {
           spellCheck="false"
         />
       )}
-    </EditorContext.Provider>
+    </EditorContextProvider>
   );
 };
 

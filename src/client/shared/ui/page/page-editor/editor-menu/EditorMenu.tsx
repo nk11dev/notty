@@ -7,12 +7,12 @@ import { LiaBroomSolid } from 'react-icons/lia';
 import { GoCodeSquare } from 'react-icons/go';
 import { PiEraser } from 'react-icons/pi';
 
-import EditorContext from '@/shared/contexts/editor-context';
+import { EditorContext } from '@/shared/contexts/editor-context';
 import Scrollbar from '@/shared/ui/controls/scrollbar';
 import EditorButton from '@/shared/ui/page/page-editor/editor-button';
 
 const EditorMenu = () => {
-  const editor = useContext(EditorContext);
+  const { editor } = useContext(EditorContext);
 
   if (!editor) {
     return null

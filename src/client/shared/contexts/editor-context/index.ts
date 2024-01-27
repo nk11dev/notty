@@ -1,1 +1,1 @@
-export { default } from './EditorContext';
+export * from './EditorContext';

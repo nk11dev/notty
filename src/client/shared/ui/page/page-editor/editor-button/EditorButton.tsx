@@ -4,8 +4,7 @@ import React, { useContext } from 'react';
 import type { ReactElement } from 'react';
 import cn from 'classnames';
 
-import { ContentContext } from '@/shared/contexts/content-context';
-import EditorContext from '@/shared/contexts/editor-context';
+import { EditorContext } from '@/shared/contexts/editor-context';
 
 type Props = {
   tooltip: string,
@@ -16,8 +15,7 @@ type Props = {
 };
 
 const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) => {
-  const { isTitleFocused } = useContext(ContentContext);
-  const editor = useContext(EditorContext);
+  const { editor, isTitleFocused } = useContext(EditorContext);
 
   if (!editor) {
     return null;

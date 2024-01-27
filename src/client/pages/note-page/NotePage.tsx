@@ -6,7 +6,6 @@ import type { NoteRouteSlugs } from '@/app/routing/types';
 import { useGetNoteQuery } from '@/entities/note/api-slices';
 import NoteHeader from '@/entities/note/ui/note-header';
 import NoteTitleInput from '@/entities/note/ui/note-title-input';
-import { ContentContextProvider } from '@/shared/contexts/content-context';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
 import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
@@ -31,20 +30,17 @@ const NotePage = () => {
 
   return (
     <PageEditor render={(editorContent) => (<>
-      <ContentContextProvider>
-        <NoteHeader />
-        <EditorMenu />
+      <NoteHeader />
+      <EditorMenu />
 
-        <PageContent>
-          <NoteTitleInput />
-          <PageField
-            icon={faFloppyDisk}
-            data={currentData?.updated_at || (currentData?.created_at as string)}
-          />
-          {editorContent}
-        </PageContent>
-
-      </ContentContextProvider>
+      <PageContent>
+        <NoteTitleInput />
+        <PageField
+          icon={faFloppyDisk}
+          data={currentData?.updated_at || (currentData?.created_at as string)}
+        />
+        {editorContent}
+      </PageContent>
     </>)} />
   );
 };
