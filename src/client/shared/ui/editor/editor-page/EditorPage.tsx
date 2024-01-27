@@ -1,5 +1,5 @@
 import './ProseMirror.scss';
-import styles from './PageEditor.module.scss';
+import styles from './EditorPage.module.scss';
 
 import React, { useEffect } from 'react';
 import type { ReactNode } from 'react';
@@ -23,7 +23,7 @@ type Props = {
   render: (editorContent: ReactNode) => ReactNode
 };
 
-const PageEditor = ({ render }: Props) => {
+const EditorPage = ({ render }: Props) => {
   const { isMobile } = useDeviceMatch();
   const { isSidebarVisible } = useSidebarMode();
 
@@ -76,4 +76,4 @@ const PageEditor = ({ render }: Props) => {
   );
 };
 
-export default PageEditor;
+export default EditorPage;

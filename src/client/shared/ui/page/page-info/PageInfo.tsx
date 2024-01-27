@@ -1,4 +1,4 @@
-import styles from './PageField.module.scss';
+import styles from './PageInfo.module.scss';
 
 import React from 'react';
 import cn from 'classnames';
@@ -6,18 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 type Props = {
-  data: string | number,
-  text?: string,
+  text: string,
+  prefix?: string,
   icon?: IconDefinition,
 };
 
-const PageField = (props: Props) => {
-  const { data, text, icon } = props;
+const PageInfo = (props: Props) => {
+  const { text, prefix, icon } = props;
 
-  if (!data) return null;
+  if (!text) return null;
 
   return (
-    <div className={cn(styles.field, 'me-3')}>
+    <div className={cn(styles.element, 'me-3')}>
       {icon && <FontAwesomeIcon
         icon={icon}
         className="me-1"
@@ -27,13 +27,13 @@ const PageField = (props: Props) => {
         }}
       />}
 
-      {text && <span className="me-1">
-        {text}:
+      {prefix && <span className="me-1">
+        {prefix}:
       </span>}
 
-      <span>{data}</span>
+      <span>{text}</span>
     </div>
   );
 };
 
-export default PageField;
+export default PageInfo;

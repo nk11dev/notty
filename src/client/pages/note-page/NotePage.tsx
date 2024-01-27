@@ -6,11 +6,11 @@ import type { NoteRouteSlugs } from '@/app/routing/types';
 import { useGetNoteQuery } from '@/entities/note/api-slices';
 import NoteHeader from '@/entities/note/ui/note-header';
 import NoteTitleInput from '@/entities/note/ui/note-title-input';
+import EditorPage from '@/shared/ui/editor/editor-page';
+import EditorMenu from '@/shared/ui/editor/editor-menu';
 import PageError from '@/shared/ui/page/page-error';
 import PageContent from '@/shared/ui/page/page-content';
-import EditorMenu from '@/shared/ui/page/page-editor/editor-menu';
-import PageField from '@/shared/ui/page/page-field';
-import PageEditor from '@/shared/ui/page/page-editor';
+import PageInfo from '@/shared/ui/page/page-info';
 
 const NotePage = () => {
   const { noteSlug } = useParams() as NoteRouteSlugs;
@@ -29,15 +29,15 @@ const NotePage = () => {
   if (!currentData) return null;
 
   return (
-    <PageEditor render={(editorContent) => (<>
+    <EditorPage render={(editorContent) => (<>
       <NoteHeader />
       <EditorMenu />
 
       <PageContent>
         <NoteTitleInput />
-        <PageField
+        <PageInfo
           icon={faFloppyDisk}
-          data={currentData?.updated_at || (currentData?.created_at as string)}
+          text={currentData?.updated_at || (currentData?.created_at as string)}
         />
         {editorContent}
       </PageContent>

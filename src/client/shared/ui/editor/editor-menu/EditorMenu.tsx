@@ -9,7 +9,7 @@ import { PiEraser } from 'react-icons/pi';
 
 import { EditorContext } from '@/shared/contexts/editor-context';
 import Scrollbar from '@/shared/ui/controls/scrollbar';
-import EditorButton from '@/shared/ui/page/page-editor/editor-button';
+import EditorButton from '@/shared/ui/editor/editor-button';
 
 const EditorMenu = () => {
   const { editor } = useContext(EditorContext);
