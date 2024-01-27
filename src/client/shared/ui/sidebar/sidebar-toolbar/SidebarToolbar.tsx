@@ -3,6 +3,8 @@ import styles from './SidebarToolbar.module.scss';
 import React from 'react';
 import LoadingSpinner from '@/shared/ui/fetching/loading-spinner';
 
+const { SETTINGS_SHOW_DEBUG_UI } = process.env;
+
 type Props = {
   title: string,
   showLoader?: boolean,
@@ -23,7 +25,9 @@ const SidebarToolbar = (props: Props) => {
       </div>
       {showLoader
         ? <LoadingSpinner />
-        : refetchButton
+        : Number(SETTINGS_SHOW_DEBUG_UI)
+          ? refetchButton
+          : null
       }
     </div>
   );
