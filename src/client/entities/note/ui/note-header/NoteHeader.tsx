@@ -17,7 +17,7 @@ const NoteHeader = () => {
   ].filter(item => !!item).join(' / ');
 
   return (
-    <PageHeader>
+    <PageHeader showBoxShadow={false}>
       <PageBreadcrumbs>
         {breadcrumbs}
       </PageBreadcrumbs>

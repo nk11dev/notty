@@ -1,7 +1,10 @@
+@import '/src/assets/styles/common/mixins';
+
 .menu {
+  @include bottomBoxShadow;
+
   white-space: nowrap;
   padding: 0px 15px;
-  box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.1);
 }
 
 .separator {

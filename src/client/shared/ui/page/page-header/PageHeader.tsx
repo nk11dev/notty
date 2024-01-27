@@ -1,14 +1,18 @@
 import styles from './PageHeader.module.scss';
 
 import React from 'react';
+import cn from 'classnames';
 
 type Props = {
+  showBoxShadow?: boolean,
   children: React.ReactNode,
 };
 
-const PageHeader = (props: Props) => (
-  <div className={styles.element}>
-    {props.children}
+const PageHeader = ({ showBoxShadow = true, children }: Props) => (
+  <div className={cn(styles.element, {
+    [styles.showBoxShadow as string]: showBoxShadow
+  })}>
+    {children}
   </div>
 );
 
