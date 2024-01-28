@@ -7,9 +7,7 @@ const RecentControl = () => (
   <IconButton
     buttonType="control"
     tooltip="Show recent notes"
-    icon={<IoTimeOutline style={{
-      padding: '6px'
-    }} />}
+    icon={<IoTimeOutline />}
     isDisabled
   />
 );

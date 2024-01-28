@@ -12,7 +12,9 @@
   padding: 0px 15px;
   line-height: 2.2;
   z-index: inherit;
-  color: $common-color-suffix-text;
+  background: $common-color-layout-bg;
+  color: $common-color-dark-text;
+  text-decoration: underline;
 
   @media (max-width: $small-breakpoint) {
     line-height: 2.4;
@@ -20,5 +22,5 @@
 }
 
 .showBoxShadow {
-  @include bottomBoxShadow;
+  @include boxShadowPageHeader;
 }

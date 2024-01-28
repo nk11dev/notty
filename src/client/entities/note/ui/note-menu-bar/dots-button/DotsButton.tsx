@@ -26,7 +26,7 @@ const DotsButton = () => {
     const finded = document.getElementsByClassName(NOTE_CONTEXT_MENU_EL_CLASSNAME);
     const [menuEl] = [].slice.call(finded);
 
-    const controlEl = (event.target as Element).closest('span') as Element;
+    const controlEl = (event.target as Element).closest('button') as Element;
 
     const menuCurrentPos = (menuEl as Element)?.getBoundingClientRect();
     const controlPosition = controlEl.getBoundingClientRect();

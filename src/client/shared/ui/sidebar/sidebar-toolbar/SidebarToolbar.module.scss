@@ -1,4 +1,5 @@
 @import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
 
 .outer {
   display: flex;
@@ -11,4 +12,8 @@
 .inner {
   flex: 1 1 0;
   display: flex;
+}
+
+.title {
+  color: $common-color-dark-text;
 }

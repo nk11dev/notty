@@ -24,14 +24,14 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Undo changes"
-          icon={<LuUndo2 size={20} />}
+          icon={<LuUndo2 size={31} />}
           onClick={() => editor.commands.undo()}
           isDisabled={!editor.can().undo()}
         />
 
         <EditorButton
           tooltip="Redo changes"
-          icon={<LuRedo2 size={20} />}
+          icon={<LuRedo2 size={32} />}
           onClick={() => editor.commands.redo()}
           isDisabled={!editor.can().redo()}
         />
@@ -40,7 +40,7 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Bold"
-          icon={<LuBold size={18} />}
+          icon={<LuBold size={31} />}
           onClick={() => editor.commands.toggleBold()}
           isDisabled={!editor.can().toggleBold()}
           isActive={editor.isActive('bold')}
@@ -48,7 +48,7 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Italic"
-          icon={<LuItalic size={18} />}
+          icon={<LuItalic size={31} />}
           onClick={() => editor.commands.toggleItalic()}
           isDisabled={!editor.can().toggleItalic()}
           isActive={editor.isActive('italic')}
@@ -56,7 +56,7 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Strikethrough"
-          icon={<LuStrikethrough size={18} />}
+          icon={<LuStrikethrough size={31} />}
           onClick={() => editor.commands.toggleStrike()}
           isDisabled={!editor.can().toggleStrike()}
           isActive={editor.isActive('strike')}
@@ -64,7 +64,7 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Code"
-          icon={<LuCode size={20} />}
+          icon={<LuCode size={33} />}
           onClick={() => editor.commands.toggleCode()}
           isDisabled={!editor.can().toggleCode()}
           isActive={editor.isActive('code')}
@@ -72,7 +72,7 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Clear style formatting"
-          icon={<PiEraser size={20} />}
+          icon={<PiEraser size={33} />}
           onClick={() => editor.commands.unsetAllMarks()}
           isDisabled={!editor.can().unsetAllMarks()}
         />
@@ -81,50 +81,49 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Paragraph"
-          icon={<LuPilcrow size={18} />}
+          icon={<LuPilcrow size={31} />}
           onClick={() => editor.commands.setParagraph()}
-          isDisabled={!editor.can().setParagraph()}
           isActive={editor.isActive('paragraph')}
         />
 
         <EditorButton
           tooltip="Heading 1"
-          icon={<LuHeading1 size={20} />}
+          icon={<LuHeading1 size={35} />}
           onClick={() => editor.commands.toggleHeading({ level: 1 })}
           isActive={editor.isActive('heading', { level: 1 })}
         />
 
         <EditorButton
           tooltip="Heading 2"
-          icon={<LuHeading2 size={20} />}
+          icon={<LuHeading2 size={35} />}
           onClick={() => editor.commands.toggleHeading({ level: 2 })}
           isActive={editor.isActive('heading', { level: 2 })}
         />
 
         <EditorButton
           tooltip="Heading 3"
-          icon={<LuHeading3 size={20} />}
+          icon={<LuHeading3 size={35} />}
           onClick={() => editor.commands.toggleHeading({ level: 3 })}
           isActive={editor.isActive('heading', { level: 3 })}
         />
 
         <EditorButton
           tooltip="Bullet list"
-          icon={<LuList size={20} />}
+          icon={<LuList size={35} />}
           onClick={() => editor.commands.toggleBulletList()}
           isActive={editor.isActive('bulletList')}
         />
 
         <EditorButton
           tooltip="Number list"
-          icon={<LuListOrdered size={20} />}
+          icon={<LuListOrdered size={35} />}
           onClick={() => editor.commands.toggleOrderedList()}
           isActive={editor.isActive('orderedList')}
         />
 
         <EditorButton
           tooltip="Blockquote"
-          icon={<LuQuote size={18} />}
+          icon={<LuQuote size={31} />}
           onClick={() => editor.commands.toggleBlockquote()}
           isDisabled={!editor.can().toggleBlockquote()}
           isActive={editor.isFocused && editor.isActive('blockquote')}
@@ -132,14 +131,14 @@ const EditorMenu = () => {
 
         <EditorButton
           tooltip="Code block"
-          icon={<GoCodeSquare size={22} />}
+          icon={<GoCodeSquare size={33} />}
           onClick={() => editor.commands.toggleCodeBlock()}
           isActive={editor.isActive('codeBlock')}
         />
 
         <EditorButton
           tooltip="Reset nodes formatting to paragraph"
-          icon={<LiaBroomSolid size={22} />}
+          icon={<LiaBroomSolid size={33} />}
           onClick={() => editor.commands.clearNodes()}
           isDisabled={!editor.can().clearNodes()}
         />

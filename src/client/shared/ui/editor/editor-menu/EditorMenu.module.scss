@@ -1,10 +1,12 @@
 @import '/src/assets/styles/common/mixins';
+@import '/src/assets/styles/theme/colors';
 
 .menu {
-  @include bottomBoxShadow;
+  @include boxShadowPageHeader;
 
   white-space: nowrap;
   padding: 0px 15px;
+  background: $common-color-layout-bg;
 }
 
 .separator {

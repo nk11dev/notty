@@ -5,7 +5,7 @@
 .element {
   display: flex;
   flex-direction: column;
-  background: $sidebar-color-bg;
+  background: $common-color-layout-bg;
   border-right: 1px solid $sidebar-border-color;
 
   @media (min-width: $small-breakpoint) {

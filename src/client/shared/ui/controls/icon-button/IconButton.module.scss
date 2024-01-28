@@ -1,7 +1,26 @@
-.btn {
-  line-height: 1;
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
 
-  &:hover {
-    cursor: pointer;
+.btn {
+  width: $sidebar-controls-width;
+  height: $sidebar-controls-width;
+  padding: 0px;
+  border: none;
+  line-height: 1;
+  color: $common-color-dark-text;
+  background-color: transparent;
+
+  &:focus-visible {
+    outline: none;
   }
+
+  &:disabled {
+    color: $common-color-suffix-text;
+  }
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  padding: 7px;
 }

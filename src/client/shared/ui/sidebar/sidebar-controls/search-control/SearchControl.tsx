@@ -7,9 +7,7 @@ const SearchControl = () => (
   <IconButton
     buttonType="control"
     tooltip="Show search"
-    icon={<IoSearchOutline style={{
-      padding: '6px'
-    }} />}
+    icon={<IoSearchOutline />}
     isDisabled
   />
 );

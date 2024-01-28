@@ -1,17 +1,15 @@
 @import '/src/assets/styles/common/mixins';
+@import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
 .btn {
-  color: $brand-color;
-
   @media (hover: hover) {
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled):not(.isActive) {
       @include bgButtonHover;
-      @include boxShadowSidebar;
     }
   }
 }
 
 .isActive {
-  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2) inset;
+  background: #e1dfdd;
 }

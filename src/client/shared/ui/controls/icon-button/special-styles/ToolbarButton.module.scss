@@ -1,20 +1,9 @@
-@import '/src/assets/styles/theme/sizings';
-@import '/src/assets/styles/theme/colors';
+@import '/src/assets/styles/common/mixins';
 
 .btn {
-  width: $sidebar-controls-width;
-
-  &:hover {
-    background: $sidebar-link-active-color-bg;
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      @include bgButtonHover;
+    }
   }
-}
-
-.icon {
-  width: 100%;
-  height: 100%;
-  padding: 6px;
-}
-
-.isDisabled {
-  color: $common-color-suffix-text;
 }

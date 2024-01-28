@@ -20,7 +20,7 @@ const UserControl = () => {
     const [menuEl] = [].slice.call(finded);
 
     if (!menuEl) {
-      const controlEl = (event.target as Element).closest('span');
+      const controlEl = (event.target as Element).closest('button');
 
       const { y } = (controlEl as Element).getBoundingClientRect();
 

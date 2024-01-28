@@ -1,10 +1,8 @@
-import styles from './EditorButton.module.scss';
-
 import React, { useContext } from 'react';
 import type { ReactElement } from 'react';
-import cn from 'classnames';
 
 import { EditorContext } from '@/shared/contexts/editor-context';
+import IconButton from '@/shared/ui/controls/icon-button';
 
 type Props = {
   tooltip: string,
@@ -14,7 +12,7 @@ type Props = {
   isActive?: boolean,
 };
 
-const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) => {
+const EditorButton = ({ onClick, isDisabled, isActive, ...restProps }: Props) => {
   const { editor, isEditorMenuDisabled } = useContext(EditorContext);
 
   if (!editor) {
@@ -22,25 +20,21 @@ const EditorButton = ({ tooltip, icon, onClick, isDisabled, isActive }: Props) =
   }
 
   return (
-    <button
+    <IconButton
+      buttonType="editor"
       onClick={(e) => {
         e.preventDefault();
         editor.view.focus();
         onClick();
       }}
-      disabled={
+      isDisabled={
         !editor.can().focus() ||
         isEditorMenuDisabled ||
         isDisabled
       }
-      className={cn(styles.btn, {
-        [styles.isActive as string]: isActive && !isEditorMenuDisabled
-      })}
-    >
-      <span title={tooltip}>
-        {icon}
-      </span>
-    </button>
+      isActive={isActive && !isEditorMenuDisabled}
+      {...restProps}
+    />
   );
 };
 

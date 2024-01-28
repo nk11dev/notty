@@ -1,6 +1,8 @@
 import styles from './SidebarToolbar.module.scss';
 
 import React from 'react';
+import cn from 'classnames';
+
 import LoadingSpinner from '@/shared/ui/fetching/loading-spinner';
 
 const { SETTINGS_SHOW_DEBUG_UI } = process.env;
@@ -18,7 +20,7 @@ const SidebarToolbar = (props: Props) => {
   return (
     <div className={styles.outer}>
       <div className={styles.inner}>
-        <b className='me-1'>
+        <b className={cn(styles.title, 'me-1')}>
           {title}
         </b>
         {children}
