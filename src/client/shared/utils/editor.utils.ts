@@ -19,6 +19,11 @@ export function setEditorState(editor: Editor, newContent: string | null) {
     selection: editor.state.selection,
   });
 
+  // Set cursor position at the start on content (only for empty content)
+  if (newContent === null) {
+    editor.commands.focus('start');
+  }
+
   // Update the editor state
   editor.view.updateState(newEditorState);
 }

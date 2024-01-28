@@ -7,7 +7,6 @@ import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
-import Placeholder from '@tiptap/extension-placeholder'
 import type { TextStyleOptions } from '@tiptap/extension-text-style';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
@@ -42,9 +41,6 @@ const EditorPage = ({ render }: Props) => {
           keepMarks: true,
           keepAttributes: false,
         },
-      }),
-      Placeholder.configure({
-        placeholder: 'Write something …',
       }),
     ],
     content: EDITOR_DEFAULT_CONTENT,
