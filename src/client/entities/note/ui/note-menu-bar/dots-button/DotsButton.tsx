@@ -8,11 +8,13 @@ import {
   NOTE_CONTEXT_MENU_ID,
   NOTE_CONTEXT_MENU_EL_CLASSNAME,
 } from '@/app/constants/context-menu.constants';
+import { useVirtualKeyboard } from '@/shared/hooks';
 import IconButton from '@/shared/ui/controls/icon-button';
 
 const DotsButton = () => {
   const { noteSlug } = useParams();
 
+  const [hideVirtualKeyboard] = useVirtualKeyboard();
   const { show, hideAll } = useContextMenu({
     id: NOTE_CONTEXT_MENU_ID,
   });
@@ -23,36 +25,38 @@ const DotsButton = () => {
   };
 
   const onClick = (event: MouseEvent) => {
-    const finded = document.getElementsByClassName(NOTE_CONTEXT_MENU_EL_CLASSNAME);
-    const [menuEl] = [].slice.call(finded);
+    hideVirtualKeyboard(() => {
+      const finded = document.getElementsByClassName(NOTE_CONTEXT_MENU_EL_CLASSNAME);
+      const [menuEl] = [].slice.call(finded);
 
-    const controlEl = (event.target as Element).closest('button') as Element;
+      const controlEl = (event.target as Element).closest('button') as Element;
 
-    const menuCurrentPos = (menuEl as Element)?.getBoundingClientRect();
-    const controlPosition = controlEl.getBoundingClientRect();
+      const menuCurrentPos = (menuEl as Element)?.getBoundingClientRect();
+      const controlPosition = controlEl.getBoundingClientRect();
 
-    const menuNewPos = {
-      x: (controlPosition.x - 107),
-      y: 45
-    };
+      const menuNewPos = {
+        x: (controlPosition.x - 107),
+        y: 45
+      };
 
-    if (!menuEl || (
-      (menuCurrentPos?.x !== menuNewPos.x) &&
-      (menuCurrentPos?.y !== menuNewPos.y)
-    )) {
-      show({
-        event,
-        position: menuNewPos,
-        props: {
-          id: noteSlug
-        }
-      });
-      controlEl.setAttribute('title', tooltips.menuVisible);
+      if (!menuEl || (
+        (menuCurrentPos?.x !== menuNewPos.x) &&
+        (menuCurrentPos?.y !== menuNewPos.y)
+      )) {
+        show({
+          event,
+          position: menuNewPos,
+          props: {
+            id: noteSlug
+          }
+        });
+        controlEl.setAttribute('title', tooltips.menuVisible);
 
-    } else {
-      hideAll();
-      controlEl.setAttribute('title', tooltips.menuHidden);
-    }
+      } else {
+        hideAll();
+        controlEl.setAttribute('title', tooltips.menuHidden);
+      }
+    }, 100);
   }
 
   return (
