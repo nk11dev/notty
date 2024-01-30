@@ -23,7 +23,6 @@ const SidebarToolbar = (props: Props) => {
         <b className={cn(styles.title, 'me-1')}>
           {title}
         </b>
-        {children}
       </div>
       {showLoader
         ? <LoadingSpinner />

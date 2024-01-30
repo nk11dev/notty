@@ -20,7 +20,7 @@ const MessageCreateNote = () => {
         className={cn(styles.element, 'btn btn-link')}
         onClick={() => onCreateNote(folderSlug)}
       >
-        Create new note
+        Create note
       </button>
     </div>
   );

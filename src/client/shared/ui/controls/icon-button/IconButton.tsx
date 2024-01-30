@@ -12,7 +12,7 @@ type Props = {
   buttonType: 'control' | 'toolbar' | 'editor',
   tooltip: string,
   icon: ReactElement,
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent) => void,
   cls?: string,
   isDisabled?: boolean,
   isActive?: boolean,

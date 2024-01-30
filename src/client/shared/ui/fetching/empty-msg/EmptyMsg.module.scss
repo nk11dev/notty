@@ -5,6 +5,7 @@
   @include fontSizeForMobile(15px);
 
   display: block;
+  flex-grow: 1;
   padding: 8px 20px;
   color: $common-color-suffix-text;
 }

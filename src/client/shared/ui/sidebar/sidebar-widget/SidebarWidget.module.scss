@@ -1,12 +1,11 @@
 .element {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .isScrollable {
   flex: 1 1 auto;
-  overflow-y: auto;
 }
 
 .isNotScrollable {

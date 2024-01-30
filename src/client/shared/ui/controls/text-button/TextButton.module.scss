@@ -1,0 +1,24 @@
+@import '/src/assets/styles/common/mixins';
+@import '/src/assets/styles/theme/colors';
+
+.btn {
+  @include fontSizeForMobile(15px);
+
+  height: 100%;
+  width: 100%;
+  padding: 0px 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  color: $brand-color;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      @include bgButtonHover;
+    }
+  }
+}
+
+.text {
+  vertical-align: middle;
+}

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const SidebarList = (props: Props) => (
-  <Scrollbar>
+  <Scrollbar cls="flex-grow-1">
     <ul className={styles.list}>
       {props.children}
     </ul>

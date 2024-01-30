@@ -1,3 +1,4 @@
+@import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
@@ -5,7 +6,7 @@
   display: flex;
   height: $sidebar-item-height;
   justify-content: stretch;
-  margin-left: 10px;
+  padding-left: 10px;
   line-height: 2.3;
 }
 

@@ -1,0 +1,7 @@
+@import '/src/assets/styles/theme/sizings';
+@import '/src/assets/styles/theme/colors';
+
+.element {
+  flex: 0 0 auto;
+  height: $sidebar-item-height;
+}
