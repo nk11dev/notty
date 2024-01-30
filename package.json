@@ -1,7 +1,7 @@
 {
-  "name": "sandbox-express",
+  "name": "notty",
   "version": "0.0.1",
-  "description": "Sandbox project for playing with Express",
+  "description": "Notty is a demo application for online notes",
   "main": "index.client.js",
   "scripts": {
     "lint": "npx eslint ./** --ext .js,.jsx,.ts,.tsx",
@@ -34,9 +34,9 @@
   "author": "nk11dev",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nk11dev/sandbox-express/issues"
+    "url": "https://github.com/nk11dev/notty/issues"
   },
-  "homepage": "https://github.com/nk11dev/sandbox-express#readme",
+  "homepage": "https://github.com/nk11dev/notty",
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "7.22.5",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.10",
