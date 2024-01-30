@@ -3,9 +3,10 @@ import styles from './EditorMenu.module.scss';
 import React, { useContext } from 'react';
 
 import { LuBold, LuItalic, LuStrikethrough, LuCode, LuPilcrow, LuHeading1, LuHeading2, LuHeading3, LuList, LuListOrdered, LuQuote, LuUndo2, LuRedo2 } from 'react-icons/lu';
-import { LiaBroomSolid } from 'react-icons/lia';
-import { GoCodeSquare } from 'react-icons/go';
+import { RiUnderline } from 'react-icons/ri';
 import { PiEraser } from 'react-icons/pi';
+import { GoCodeSquare } from 'react-icons/go';
+import { LiaBroomSolid } from 'react-icons/lia';
 
 import { EditorContext } from '@/shared/contexts/editor-context';
 import Scrollbar from '@/shared/ui/controls/scrollbar';
@@ -52,6 +53,14 @@ const EditorMenu = () => {
           onClick={() => editor.commands.toggleItalic()}
           isDisabled={!editor.can().toggleItalic()}
           isActive={editor.isActive('italic')}
+        />
+
+        <EditorButton
+          tooltip="Underline"
+          icon={<RiUnderline size={32} />}
+          onClick={() => editor.commands.toggleUnderline()}
+          isDisabled={!editor.can().toggleUnderline()}
+          isActive={editor.isActive('underline')}
         />
 
         <EditorButton

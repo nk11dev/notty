@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import type { TextStyleOptions } from '@tiptap/extension-text-style';
@@ -28,6 +29,7 @@ const EditorPage = ({ render }: Props) => {
 
   const editor = useEditor({
     extensions: [
+      Underline.configure(),
       TextStyle.configure({ types: [ListItem.name] } as ExtendedTextStyleOptions),
       StarterKit.configure({
         heading: {
