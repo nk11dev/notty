@@ -7,7 +7,7 @@ import AuthFooter from '@/shared/ui/auth/auth-footer';
 
 const LoginPage = () => (<>
   <AuthMain>
-    <AuthTitle>Sign in to Notty</AuthTitle>
+    <AuthTitle>Welcome to Notty</AuthTitle>
     <UserLoginForm />
   </AuthMain>
   <AuthFooter

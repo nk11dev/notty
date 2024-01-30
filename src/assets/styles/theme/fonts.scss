@@ -1,9 +1,19 @@
 $robotoPath: '~@/fonts/Roboto/roboto-v30-latin_cyrillic-regular';
 
+$lobsterPath: '~@/fonts/Lobster/lobster-v30-latin-regular';
+
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('#{$robotoPath}.woff2'), url('#{$robotoPath}.woff'), url('#{$robotoPath}.ttf'), url('#{$robotoPath}.svg');
+}
+
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('#{$lobsterPath}.woff2'), url('#{$lobsterPath}.woff'), url('#{$lobsterPath}.ttf'), url('#{$lobsterPath}.svg');
 }
