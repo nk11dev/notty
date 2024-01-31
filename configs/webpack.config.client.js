@@ -48,7 +48,7 @@ const commonConfig = {
       inject: 'body',
       template: path.resolve(__dirname, '../src/client/app/templates/index.html'),
       filename: 'index.html',
-      favicon: path.resolve(__dirname, '../src/assets/images/favicon.ico'),
+      favicon: path.resolve(__dirname, `../src/assets/images/${process.env.NODE_ENV === 'production' ? 'favicon-prod' : 'favicon-dev'}/favicon.ico`),
     }),
   ]
 };
