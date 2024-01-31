@@ -11,11 +11,10 @@ type Props = {
   title: string,
   showLoader?: boolean,
   refetchButton?: React.ReactNode
-  children?: React.ReactNode
 };
 
 const SidebarToolbar = (props: Props) => {
-  const { title, refetchButton, children, showLoader = false } = props;
+  const { title, refetchButton, showLoader = false } = props;
 
   return (
     <div className={styles.outer}>
