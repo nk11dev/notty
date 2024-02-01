@@ -37,6 +37,10 @@
     "url": "https://github.com/nk11dev/notty/issues"
   },
   "homepage": "https://github.com/nk11dev/notty",
+  "engines": {
+    "npm": ">=8.19.2",
+    "node": ">=18.12.0"
+  },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "7.23.9",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.11",
