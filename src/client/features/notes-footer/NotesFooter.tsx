@@ -4,15 +4,21 @@ import { BsPlusLg } from 'react-icons/bs';
 
 import type { NoteOptionalRouteSlugs } from '@/app/routing/types';
 import { useHandleCreateNote } from '@/entities/note/hooks';
+import { useFolderState } from '@/entities/folder/hooks';
 import TextButton from '@/shared/ui/controls/text-button';
 import SidebarFooter from '@/shared/ui/sidebar/sidebar-footer';
 
 const NotesFooter = () => {
   const { folderSlug } = useParams() as NoteOptionalRouteSlugs;
 
+  const { isError } = useFolderState(folderSlug);
   const [onCreate] = useHandleCreateNote();
 
-  return (!!folderSlug && (
+  if (isError || !folderSlug) {
+    return null;
+  }
+
+  return (
     <SidebarFooter>
       <TextButton
         text="Add note"
@@ -20,7 +26,7 @@ const NotesFooter = () => {
         onClick={() => onCreate(folderSlug)}
       />
     </SidebarFooter>
-  ));
+  )
 };
 
 export default NotesFooter;
