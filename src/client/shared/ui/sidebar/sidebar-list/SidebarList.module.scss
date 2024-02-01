@@ -2,12 +2,6 @@
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
-:global {
-  .flex-grow-1 {
-    flex-grow: 1;
-  }
-}
-
 .list {
   padding: 0;
   margin: 0;
