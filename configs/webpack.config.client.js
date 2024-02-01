@@ -4,6 +4,7 @@ const webpack = require('webpack');
 // webpack plugins and well-known modules
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -87,6 +88,9 @@ const prodConfig = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[fullhash].css'
+    }),
+    new CompressionPlugin({
+      algorithm: 'gzip'
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: (process.env.BUNDLE_ANALYZER === 'true' ? 'server' : 'disabled'),

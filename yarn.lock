@@ -2671,6 +2671,14 @@ compressible@~2.0.16:
   dependencies:
     mime-db ">= 1.43.0 < 2"
 
+compression-webpack-plugin@11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-11.0.0.tgz#d8dfe6a446fb15a8bb7d78da6494098cdae605a7"
+  integrity sha512-Nz9dMiu0sag+mgJ5QTkRx0+vwrDZPU/gps7IdrkFE+oRSkgyoX4wbMol7QnXjI5/TEWx8yEwew9MiMjZgdLtjg==
+  dependencies:
+    schema-utils "^4.2.0"
+    serialize-javascript "^6.0.2"
+
 compression@^1.7.4:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/compression/-/compression-1.7.4.tgz#95523eff170ca57c29a0ca41e6fe131f41e5bb8f"
@@ -3399,6 +3407,13 @@ execa@^5.0.0:
     onetime "^5.1.2"
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
+
+express-static-gzip@2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/express-static-gzip/-/express-static-gzip-2.1.7.tgz#5904824a07950ba741ec3a23a21839dd04c63506"
+  integrity sha512-QOCZUC+lhPPCjIJKpQGu1Oa61Axg9Mq09Qvit8Of7kzpMuwDeMSqjjQteQS3OVw/GkENBoSBheuQDWPlngImvw==
+  dependencies:
+    serve-static "^1.14.1"
 
 express@4.18.2, express@^4.17.3:
   version "4.18.2"
@@ -6071,7 +6086,7 @@ schema-utils@^3.0.0, schema-utils@^3.1.1, schema-utils@^3.2.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-schema-utils@^4.0.0:
+schema-utils@^4.0.0, schema-utils@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-4.2.0.tgz#70d7c93e153a273a805801882ebd3bff20d89c8b"
   integrity sha512-L0jRsrPpjdckP3oPug3/VxNKt2trR8TcabrM6FOAAlvC/9Phcmm+cuAgTlxBqdBR1WJx7Naj9WHw+aOmheSVbw==
@@ -6130,7 +6145,7 @@ send@0.18.0:
     range-parser "~1.2.1"
     statuses "2.0.1"
 
-serialize-javascript@^6.0.1:
+serialize-javascript@^6.0.1, serialize-javascript@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-6.0.2.tgz#defa1e055c83bf6d59ea805d8da862254eb6a6c2"
   integrity sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==
@@ -6161,7 +6176,7 @@ serve-index@^1.9.1:
     mime-types "~2.1.17"
     parseurl "~1.3.2"
 
-serve-static@1.15.0:
+serve-static@1.15.0, serve-static@^1.14.1:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/serve-static/-/serve-static-1.15.0.tgz#faaef08cffe0a1a62f60cad0c4e513cff0ac9540"
   integrity sha512-XGuRDNjXUijsUL0vl6nSD7cwURuzEgglbOaFuZM9g3kwDXOWVTck0jLzjPzGD+TazWbboZYu52/9/XPdUgne9g==

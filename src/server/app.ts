@@ -6,6 +6,8 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import favicon from 'serve-favicon';
 
+const expressStaticGzip = require('express-static-gzip');
+
 import { HttpStatus } from '@/common/constants';
 
 import { skipFaviconRequest, addResponseFormats, handleErrors } from '@/server/middlewares';
@@ -24,7 +26,7 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(addResponseFormats);
-app.use(express.static('dist/client'));
+app.use(expressStaticGzip('dist/client'));
 
 // CORS settings are used for correct sending of cookies to client dev server
 if (process.env.NODE_ENV === 'development') {
