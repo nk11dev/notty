@@ -3,7 +3,6 @@ const webpack = require('webpack');
 
 // webpack plugins and well-known modules
 const nodeExternals = require('webpack-node-externals');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodemonPlugin = require('nodemon-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -29,7 +28,10 @@ const commonConfig = {
   entry: './src/server/index.server.ts',
   output: {
     filename: OUTPUT_FILENAME,
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    clean: {
+      keep: (asset) => !asset.includes(OUTPUT_FILENAME),
+    }
   },
   module: {
     rules: [
@@ -40,11 +42,6 @@ const commonConfig = {
   },
   stats: 'minimal',
   plugins: [
-    new CleanWebpackPlugin({
-      verbose: true,
-      cleanOnceBeforeBuildPatterns: [OUTPUT_FILENAME],
-      cleanAfterEveryBuildPatterns: [OUTPUT_FILENAME]
-    }),
     new webpack.DefinePlugin({
       ...Object.keys(envConfig).reduce(
         (acc, key) => {

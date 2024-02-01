@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
@@ -21,7 +20,8 @@ const commonConfig = {
   output: {
     path: path.resolve(__dirname, '../dist/client'),
     filename: 'js/[name].[fullhash].js',
-    publicPath: '/'
+    publicPath: '/',
+    clean: true
   },
   stats: 'minimal',
   resolve: {
@@ -38,7 +38,6 @@ const commonConfig = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(envConfig)
     }),
