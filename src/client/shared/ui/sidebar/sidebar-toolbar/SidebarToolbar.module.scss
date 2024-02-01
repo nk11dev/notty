@@ -3,6 +3,8 @@
 @import '/src/assets/styles/theme/colors';
 
 .outer {
+  @include borderLayout('bottom');
+
   display: flex;
   height: $sidebar-item-height;
   justify-content: stretch;

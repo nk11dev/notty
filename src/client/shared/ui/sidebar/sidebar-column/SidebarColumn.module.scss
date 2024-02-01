@@ -1,12 +1,14 @@
 @import '/src/assets/styles/common/breakpoints';
+@import '/src/assets/styles/common/mixins';
 @import '/src/assets/styles/theme/sizings';
 @import '/src/assets/styles/theme/colors';
 
 .element {
+  @include borderLayout('right');
+
   display: flex;
   flex-direction: column;
   background: $common-color-layout-bg;
-  border-right: 1px solid $sidebar-border-color;
 
   @media (min-width: $small-breakpoint) {
     width: $sidebar-width;

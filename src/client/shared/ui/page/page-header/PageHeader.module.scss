@@ -22,5 +22,5 @@
 }
 
 .showBoxShadow {
-  @include boxShadowPageHeader;
+  @include borderLayout('bottom');
 }

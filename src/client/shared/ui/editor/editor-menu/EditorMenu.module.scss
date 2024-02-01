@@ -2,7 +2,7 @@
 @import '/src/assets/styles/theme/colors';
 
 .menu {
-  @include boxShadowPageHeader;
+  @include borderLayout('bottom');
 
   white-space: nowrap;
   padding: 0px 15px;
