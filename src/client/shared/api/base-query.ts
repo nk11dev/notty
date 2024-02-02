@@ -4,7 +4,7 @@ import { Mutex } from 'async-mutex';
 
 import { HttpStatus } from '@/common/constants';
 
-import { logoutUser } from '@/app/auth/slices';
+import { logoutUser } from '@/app/auth/slices/auth.slice';
 import { API_BASE_URL } from '@/app/constants/api.constants';
 import type { RootState } from '@/app/redux/store';
 import type { BaseQueryError, ApiResponseError, ApiResponseSuccess } from '@/shared/types';
