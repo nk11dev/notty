@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import LoadingSpinner from '@/shared/ui/fetching/loading-spinner';
 
-const { SETTINGS_SHOW_DEBUG_UI } = process.env;
+const { SHOW_DEBUG_UI } = process.env;
 
 type Props = {
   title: string,
@@ -25,7 +25,7 @@ const SidebarToolbar = (props: Props) => {
       </div>
       {showLoader
         ? <LoadingSpinner />
-        : Number(SETTINGS_SHOW_DEBUG_UI)
+        : Number(SHOW_DEBUG_UI)
           ? refetchButton
           : null
       }
