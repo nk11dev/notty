@@ -1,5 +1,7 @@
 import { IMap } from '@/shared/interfaces';
 
+const { SHOW_CLIENT_LOGS } = process.env;
+
 type Options = {
   msg?: string,
   data?: unknown,
@@ -39,7 +41,7 @@ export function log(options: Options) {
   const baseStyles = 'padding: 0 2px;';
   const styles = baseStyles + THEMES_MAP[theme];
 
-  if (!isDisabled) {
+  if (!isDisabled && Number(SHOW_CLIENT_LOGS)) {
     if (msgList.length > 0) {
       msgList.forEach((item: MsgListItem) => {
         console.log(`%c${item.msg}`, styles, item.data);

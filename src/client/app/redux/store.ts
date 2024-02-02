@@ -7,6 +7,8 @@ import { authApi, authSlice } from '@/app/auth/slices';
 import { foldersApi } from '@/entities/folder/api-slices';
 import { notesApi } from '@/entities/note/api-slices';
 
+const { SHOW_CLIENT_LOGS } = process.env;
+
 const logger = createLogger({
   collapsed: (_getState, action) => !action.error
 });
@@ -25,7 +27,9 @@ export const store = configureStore({
         authApi.middleware,
         foldersApi.middleware,
         notesApi.middleware,
-        logger
+        ...Number(SHOW_CLIENT_LOGS)
+          ? [logger]
+          : []
       ]),
 });
 
