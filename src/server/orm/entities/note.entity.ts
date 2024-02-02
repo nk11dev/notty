@@ -30,7 +30,7 @@ export default class NoteEntity extends BaseEntity {
     name: 'user_id',
     nullable: false,
   })
-  user_id: number;
+  user_id: string;
 
   @ManyToOne(
     () => UserEntity,
@@ -52,7 +52,7 @@ export default class NoteEntity extends BaseEntity {
     name: 'folder_id',
     nullable: false,
   })
-  folder_id: number;
+  folder_id: string;
 
   @ManyToOne(
     () => FolderEntity,

@@ -11,7 +11,7 @@ export default {
 
   // errors handlers (for notes, where specified folder id is required), used before success handlers
   findParentFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const folderId = Number(req.params.folderSlug);
+    const folderId = req.params.folderSlug;
     const parentFolder = await foldersService.findFolder(folderId);
 
     if (!parentFolder) {
@@ -41,7 +41,7 @@ export default {
   getAllNotes: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
-    const folderId = Number(req.params.folderSlug);
+    const folderId = req.params.folderSlug;
     const result = await notesService.getAllNotes(folderId, userId, req.query);
 
     res.sendSuccess(HttpStatus.OK, result);
@@ -61,7 +61,7 @@ export default {
 
   // errors handlers (for notes without specified folder id), used before success handlers
   findNote: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const noteId = Number(req.params.noteSlug);
+    const noteId = req.params.noteSlug;
     const note = await notesService.getNote(noteId);
 
     if (!note) {
@@ -93,7 +93,7 @@ export default {
   }),
 
   updateNote: safeAsync(async (req: Request, res: Response) => {
-    const noteId = Number(req.params.noteSlug);
+    const noteId = req.params.noteSlug;
 
     const result = await notesService.updateNote(noteId, req.body);
     const { raw, affected } = result || {};
@@ -105,7 +105,7 @@ export default {
   }),
 
   deleteNote: safeAsync(async (req: Request, res: Response) => {
-    const noteId = Number(req.params.noteSlug);
+    const noteId = req.params.noteSlug;
 
     const [affectedRows, affectedCount] = await notesService.deleteNote(noteId);
 

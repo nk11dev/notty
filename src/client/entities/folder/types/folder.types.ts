@@ -1,7 +1,7 @@
 import type { NoteDto } from '@/entities/note/types';
 
 export type FolderDto = {
-  id: number,
+  id: string,
   title: string,
   created_at?: string,
   updated_at?: string,

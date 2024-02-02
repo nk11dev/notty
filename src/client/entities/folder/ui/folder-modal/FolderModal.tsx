@@ -36,7 +36,7 @@ const FolderModal = (props: Props) => {
 
   const onSave = () => {
     updateFolder({
-      id: Number(folderId),
+      id: folderId,
       title: titleRef.current?.value,
     });
     onHide();

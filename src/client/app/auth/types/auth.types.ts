@@ -1,7 +1,7 @@
 import { UserRole } from '@/common/constants/auth.constants';
 
 export type UserDto = {
-  id: number,
+  id: string,
   email: string,
   username: string,
   role: UserRole,

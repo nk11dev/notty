@@ -13,11 +13,11 @@ export default {
   getAllUsers: async () => {
     return await userRepository
       .createQueryBuilder()
-      .orderBy('id', 'ASC')
+      .orderBy('created_at', 'ASC')
       .getMany();
   },
 
-  getUserProfile: async (id: number) => {
+  getUserProfile: async (id: string) => {
     return await userRepository
       .createQueryBuilder('u')
       .select(['u.id', 'u.email', 'u.username', 'u.role'])
@@ -26,7 +26,7 @@ export default {
       .getOne();
   },
 
-  findUserById: async (id: number) => {
+  findUserById: async (id: string) => {
     return await userRepository.findOneBy({ id });
   },
 
@@ -45,7 +45,7 @@ export default {
     return { id, email, username, role };
   },
 
-  updateUserData: async (id: number, payload: UserUpdatePayload) => {
+  updateUserData: async (id: string, payload: UserUpdatePayload) => {
     return await userRepository
       .createQueryBuilder()
       .update()
@@ -58,7 +58,7 @@ export default {
       .execute();
   },
 
-  updateUserLastLoginAt: async (userId: number) => {
+  updateUserLastLoginAt: async (userId: string) => {
     const { raw: [{ id, email, username, role }] } = await userRepository
       .createQueryBuilder()
       .update()
@@ -73,7 +73,7 @@ export default {
     return { id, email, username, role };
   },
 
-  deleteUser: async (id: number) => {
+  deleteUser: async (id: string) => {
     return await userRepository.manager.query(`
       DELETE 
       FROM ${userRepository.metadata.tableName} 

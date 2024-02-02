@@ -18,7 +18,7 @@ export default class FolderEntity extends BaseEntity {
     name: 'user_id',
     nullable: false,
   })
-  user_id: number;
+  user_id: string;
 
   @ManyToOne(
     () => UserEntity,

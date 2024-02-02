@@ -10,15 +10,15 @@ const noteRepository = dataSource.getRepository(NoteEntity);
 export default {
 
   getAllNotes: async (
-    folderId: number,
-    userIdCondition: number | null,
+    folderId: string,
+    userIdCondition: string | null,
     queryParams: unknown
   ) => {
     const { filterByIsBookmark } = queryParams as NotesGetQueryParams;
 
     return await noteRepository
       .createQueryBuilder()
-      .orderBy('id', 'ASC')
+      .orderBy('created_at', 'ASC')
 
       .andWhere(folderId
         ? 'folder_id = :folderId'
@@ -39,7 +39,7 @@ export default {
       .getMany();
   },
 
-  getNote: async (noteId: number) => {
+  getNote: async (noteId: string) => {
     return await noteRepository
       .createQueryBuilder('n')
       .leftJoinAndSelect('n.folder_info', 'f')
@@ -48,11 +48,11 @@ export default {
       .getOne();
   },
 
-  getLastNoteInFolder: async (folderId: number) => {
+  getLastNoteInFolder: async (folderId: string) => {
     const [result] = await noteRepository
       .createQueryBuilder()
       .where('folder_id = :folderId', { folderId })
-      .orderBy('id', 'DESC')
+      .orderBy('created_at', 'DESC')
       .limit(1)
       .getMany();
 
@@ -70,7 +70,7 @@ export default {
     return result;
   },
 
-  updateNote: async (noteId: number, payload: NotePayload) => {
+  updateNote: async (noteId: string, payload: NotePayload) => {
     return await noteRepository
       .createQueryBuilder()
       .update()
@@ -83,7 +83,7 @@ export default {
       .execute();
   },
 
-  deleteNote: async (noteId: number) => {
+  deleteNote: async (noteId: string) => {
     return await noteRepository.manager.query(`
       DELETE 
       FROM ${noteRepository.metadata.tableName} 

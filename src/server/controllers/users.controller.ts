@@ -16,7 +16,7 @@ export default {
 
   // 404 handler, used before other success handlers
   findUser: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const id = Number(req.params.userSlug);
+    const id = req.params.userSlug;
     const user = await usersService.findUserById(id);
 
     if (!user) {
@@ -36,7 +36,7 @@ export default {
   }),
 
   updateUser: safeAsync(async (req: Request, res: Response) => {
-    const id = Number(req.params.userSlug);
+    const id = req.params.userSlug;
 
     const result = await usersService.updateUserData(id, req.body);
     const { raw, affected } = result || {};
@@ -48,7 +48,7 @@ export default {
   }),
 
   deleteUser: safeAsync(async (req: Request, res: Response) => {
-    const id = Number(req.params.userSlug);
+    const id = req.params.userSlug;
 
     const [affectedRows, affectedCount] = await usersService.deleteUser(id);
 

@@ -3,10 +3,8 @@ import { Column, PrimaryGeneratedColumn } from 'typeorm';
 import { entityDateTranformer } from '@/server/helpers/orm.helpers';
 
 export default abstract class BaseEntity {
-  @PrimaryGeneratedColumn('identity', {
-    generatedIdentity: 'ALWAYS',
-  })
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     type: 'timestamptz',

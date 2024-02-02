@@ -8,7 +8,7 @@ const folderRepository = dataSource.getRepository(FolderEntity);
 
 export default {
 
-  getAllFolders: async (userIdCondition: number | null) => {
+  getAllFolders: async (userIdCondition: string | null) => {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoin('f.notes', 'n')
@@ -23,11 +23,11 @@ export default {
         : '1=1', { user_id: userIdCondition }
       )
       .groupBy('f.id')
-      .orderBy('f.id', 'ASC')
+      .orderBy('f.created_at', 'ASC')
       .execute();
   },
 
-  getFolder: async (id: number) => {
+  getFolder: async (id: string) => {
     return await folderRepository
       .createQueryBuilder('f')
       .leftJoinAndSelect('f.notes', 'n')
@@ -37,10 +37,10 @@ export default {
       .getOne();
   },
 
-  getLastFolder: async (userIdCondition: number | null) => {
+  getLastFolder: async (userIdCondition: string | null) => {
     return await folderRepository
       .createQueryBuilder()
-      .orderBy('id', 'DESC')
+      .orderBy('created_at', 'DESC')
       .andWhere(userIdCondition
         ? `user_id = :user_id`
         : '1=1', { user_id: userIdCondition }
@@ -49,7 +49,7 @@ export default {
       .getOne();
   },
 
-  findFolder: async (id: number) => {
+  findFolder: async (id: string) => {
     return await folderRepository.findOneBy({ id });
   },
 
@@ -64,7 +64,7 @@ export default {
     return result;
   },
 
-  updateFolder: async (id: number, payload: FolderPayload) => {
+  updateFolder: async (id: string, payload: FolderPayload) => {
     const { title } = payload;
 
     return await folderRepository.manager.query(`
@@ -77,7 +77,7 @@ export default {
     `, [title, id]);
   },
 
-  deleteFolder: async (id: number) => {
+  deleteFolder: async (id: string) => {
     return await folderRepository.manager.query(`
       DELETE 
       FROM ${folderRepository.metadata.tableName} 

@@ -31,7 +31,7 @@ export default {
 
   // errors handlers, used before success handlers
   findFolder: safeAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const id = Number(req.params.folderSlug);
+    const id = req.params.folderSlug;
     const folder = await foldersService.getFolder(id);
 
     if (!folder) {
@@ -63,7 +63,7 @@ export default {
   }),
 
   updateFolder: safeAsync(async (req: Request, res: Response) => {
-    const id = Number(req.params.folderSlug);
+    const id = req.params.folderSlug;
 
     const [affectedRows, affectedCount] = await foldersService.updateFolder(id, req.body);
 
@@ -76,7 +76,7 @@ export default {
   deleteFolder: safeAsync(async (req: Request, res: Response) => {
     const { userId } = req.accessConditions as AccessConditions;
 
-    const id = Number(req.params.folderSlug);
+    const id = req.params.folderSlug;
 
     const [affectedRows, affectedCount] = await foldersService.deleteFolder(id);
     const lastRow = await foldersService.getLastFolder(userId);
