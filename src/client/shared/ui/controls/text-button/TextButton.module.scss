@@ -12,6 +12,10 @@
   background: none;
   color: $brand-color;
 
+  &:focus-visible {
+    outline: none;
+  }
+
   @media (hover: hover) {
     &:hover:not(:disabled) {
       @include bgButtonHover;
