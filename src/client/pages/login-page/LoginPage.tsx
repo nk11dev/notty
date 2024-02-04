@@ -12,7 +12,7 @@ const LoginPage = () => (<>
   </AuthMain>
   <AuthFooter
     text="Need an account?"
-    linkText="Sign up"
+    linkText="Create"
     url="/registration"
   />
 </>);

@@ -78,7 +78,7 @@ const UserLoginForm = () => {
         />
         <AuthButton
           type="submit"
-          text="Sign in"
+          text="Log in"
           isDisabled={isLoading}
         />
       </Form>

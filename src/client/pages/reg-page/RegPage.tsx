@@ -25,12 +25,12 @@ const RegPage = () => {
     ? <UserRegSuccess />
     : <>
       <AuthMain>
-        <AuthTitle>Sign up for Notty</AuthTitle>
+        <AuthTitle>Create your account</AuthTitle>
         <UserRegForm />
       </AuthMain>
       <AuthFooter
         text="Already have an account?"
-        linkText="Sign in"
+        linkText="Log in"
         url="/login"
       />
     </>;

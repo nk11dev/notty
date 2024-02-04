@@ -92,7 +92,7 @@ const UserRegForm = () => {
         />
         <AuthButton
           type="submit"
-          text="Complete sign up"
+          text="Register now"
           isDisabled={isLoading}
         />
       </Form>
