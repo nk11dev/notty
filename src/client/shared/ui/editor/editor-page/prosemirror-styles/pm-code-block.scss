@@ -1,0 +1,14 @@
+// ProseMirror - code block styles
+.ProseMirror {
+  pre {
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+}

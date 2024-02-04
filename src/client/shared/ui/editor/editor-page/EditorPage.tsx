@@ -1,4 +1,7 @@
-import './ProseMirror.scss';
+import './prosemirror-styles/pm-common.scss';
+import './prosemirror-styles/pm-code-block.scss';
+import './prosemirror-styles/atom-one-dark.theme.scss';
+
 import styles from './EditorPage.module.scss';
 
 import React, { useEffect } from 'react';
@@ -9,6 +12,8 @@ import Underline from '@tiptap/extension-underline';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import type { TextStyleOptions } from '@tiptap/extension-text-style';
+import { CodeBlockLowlight } from '@tiptap/extension-code-block-lowlight';
+import { common, createLowlight } from 'lowlight';
 
 import { EDITOR_DEFAULT_CONTENT } from '@/app/constants/editor.constants';
 import { useResetNoteEditor, useUpdateNoteBody } from '@/entities/note/hooks';
@@ -43,7 +48,14 @@ const EditorPage = ({ render }: Props) => {
           keepMarks: true,
           keepAttributes: false,
         },
+        codeBlock: false
       }),
+      CodeBlockLowlight.configure({
+        lowlight: createLowlight(common),
+        HTMLAttributes: {
+          class: 'hljs',
+        },
+      })
     ],
     content: EDITOR_DEFAULT_CONTENT,
   });
