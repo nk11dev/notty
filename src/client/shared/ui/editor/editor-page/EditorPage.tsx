@@ -9,6 +9,7 @@ import type { ReactNode } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
+import Link from '@tiptap/extension-link';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
 import type { TextStyleOptions } from '@tiptap/extension-text-style';
@@ -50,6 +51,7 @@ const EditorPage = ({ render }: Props) => {
         },
         codeBlock: false
       }),
+      Link.configure({}),
       CodeBlockLowlight.configure({
         lowlight: createLowlight(common),
         HTMLAttributes: {

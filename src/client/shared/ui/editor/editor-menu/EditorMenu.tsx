@@ -11,6 +11,7 @@ import { LiaBroomSolid } from 'react-icons/lia';
 import { EditorContext } from '@/shared/contexts/editor-context';
 import Scrollbar from '@/shared/ui/controls/scrollbar';
 import EditorButton from '@/shared/ui/editor/editor-button';
+import EditorLinkButton from '@/shared/ui/editor/editor-link-button';
 
 const EditorMenu = () => {
   const { editor } = useContext(EditorContext);
@@ -115,6 +116,8 @@ const EditorMenu = () => {
           onClick={() => editor.commands.toggleHeading({ level: 3 })}
           isActive={editor.isActive('heading', { level: 3 })}
         />
+
+        <EditorLinkButton />
 
         <EditorButton
           tooltip="Bullet list"

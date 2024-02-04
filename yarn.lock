@@ -1408,6 +1408,13 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-italic/-/extension-italic-2.2.1.tgz#fdc1b5329d8d5783ce45ee138f732e62dc43ff21"
   integrity sha512-x3cWWgup7SZIq8ugfJ8IFpvOROwU0KuAZFJlSk9eL9Qszff2ZG8kPUuQ8HklSdmoafSluv0mUhDSFTc52E/Yzg==
 
+"@tiptap/extension-link@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-link/-/extension-link-2.2.0.tgz#c277096854443802ea32e31a8568392ee69bc6af"
+  integrity sha512-1evYv5Fjod47kobd/0RsHYyCFWrkU5IYZSIBC7bAGsnzG4fId2O5SEyn9SPsMYOVtEL2EIhiqb0i+wcwXf6jOQ==
+  dependencies:
+    linkifyjs "^4.1.0"
+
 "@tiptap/extension-list-item@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-list-item/-/extension-list-item-2.2.0.tgz#3c3bf819ac4063ff10dac80cb097725fcc21d542"
@@ -4535,6 +4542,11 @@ linkify-it@^5.0.0:
   integrity sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==
   dependencies:
     uc.micro "^2.0.0"
+
+linkifyjs@^4.1.0:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-4.1.3.tgz#0edbc346428a7390a23ea2e5939f76112c9ae07f"
+  integrity sha512-auMesunaJ8yfkHvK4gfg1K0SaKX/6Wn9g2Aac/NwX+l5VdmFZzo/hdPGxEOETj+ryRa4/fiOPjeeKURSAJx1sg==
 
 loader-runner@^4.2.0:
   version "4.3.0"

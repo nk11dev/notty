@@ -79,6 +79,7 @@
     "@hookform/resolvers": "3.3.4",
     "@reduxjs/toolkit": "1.9.5",
     "@tiptap/extension-code-block-lowlight": "2.2.0",
+    "@tiptap/extension-link": "2.2.0",
     "@tiptap/extension-list-item": "2.2.0",
     "@tiptap/extension-text-style": "2.2.0",
     "@tiptap/extension-underline": "2.2.0",
