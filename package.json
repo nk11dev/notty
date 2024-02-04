@@ -1,7 +1,7 @@
 {
   "name": "notty",
   "version": "0.0.1",
-  "description": "Notty is a demo application for online notes",
+  "description": "Notty is a web application for creating notes and organizing information.",
   "main": "index.client.js",
   "scripts": {
     "lint": "npx eslint ./** --ext .js,.jsx,.ts,.tsx",
