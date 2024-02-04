@@ -12,8 +12,13 @@
 - Folders
 - Bookmarks
 - Rich text editor
-- Autosave
+- Code highlighting
+- Autosaving
 - Mobile-friendly UI
+
+<p align="center">
+  <img src="/src/assets/images/screenshots/example.png">
+</p>
 
 ## 🚀 Tech Stack
 - Languages: [TypeScript](https://www.typescriptlang.org/), [SASS](https://sass-lang.com/)
