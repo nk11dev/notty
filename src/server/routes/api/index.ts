@@ -2,10 +2,10 @@ import express from 'express';
 
 import { UserRole } from '@/common/constants';
 
-import auth from '@/server/routes/auth.routes';
-import users from '@/server/routes/users.routes';
-import folders from '@/server/routes/folders.routes';
-import notes from '@/server/routes/notes.routes';
+import auth from '@/server/routes/api/auth.routes';
+import users from '@/server/routes/api/users.routes';
+import folders from '@/server/routes/api/folders.routes';
+import notes from '@/server/routes/api/notes.routes';
 import { verifyAccessToken, authorizeByRole } from '@/server/middlewares';
 
 const router = express.Router();

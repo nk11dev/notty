@@ -11,8 +11,8 @@ const expressStaticGzip = require('express-static-gzip');
 import { HttpStatus } from '@/common/constants';
 
 import { skipFaviconRequest, addResponseFormats, handleErrors } from '@/server/middlewares';
-import collectNestedRoutes from '@/server/helpers/routing.helpers';
-import apiRoutes from '@/server/routes';
+import apiRoutes from '@/server/routes/api';
+import clientRoutes from '@/server/routes/client';
 
 const app = express();
 
@@ -39,24 +39,18 @@ if (process.env.NODE_ENV === 'development') {
 // API routes
 app.use('/api', apiRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-
-  // Client app routes
-  const appRoutes = require('@/app/routing/Router').appRoutes;
-  const flatRoutes = collectNestedRoutes(appRoutes);
-
-  for (const route of flatRoutes) {
-    app.get(route, (_req: Request, res: Response) => {
-      res.sendFile('dist/client/index.html', { root: '.' });
-    });
-  }
-
-  // 404 route
-  app.use((_req: Request, res: Response) => {
-    res.status(HttpStatus.NOT_FOUND);
+//  Client routes
+for (const route of clientRoutes) {
+  app.get(route, (_req: Request, res: Response) => {
     res.sendFile('dist/client/index.html', { root: '.' });
   });
 }
+
+// 404 route
+app.use((_req: Request, res: Response) => {
+  res.status(HttpStatus.NOT_FOUND);
+  res.sendFile('dist/client/index.html', { root: '.' });
+});
 
 app.use(handleErrors);
 
